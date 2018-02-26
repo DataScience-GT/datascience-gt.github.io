@@ -50,7 +50,7 @@ section h3.section-subheading {
 
 @media (min-width: 768px) {
   section {
-    padding: 0px 0;
+    padding: 100px 0;
   }
 }
 
@@ -169,9 +169,9 @@ img::-moz-selection {
 
 header.masthead {
   text-align: center;
-  color: white;
+  color: black;
   max-width: 100%;
-  background-image: url("../img/dsgt-bg.png");
+  background-image: url("../img/dsgt-bg.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -183,43 +183,51 @@ header.masthead {
 
 header.masthead .intro-text {
   padding-top: 150px;
-  padding-bottom: 100px;
+  padding-bottom: 150px;
 }
 
 header.masthead .intro-text .intro-lead-in {
   font-size: 22px;
   font-style: italic;
   line-height: 22px;
-  margin-bottom: 25px;
+  /*margin-bottom: 25px;*/
   font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #ffffff;
+  opacity: 0.6;
 }
 
 header.masthead .intro-text .intro-heading {
   font-size: 50px;
   font-weight: 700;
   line-height: 50px;
-  margin-bottom: 25px;
+  /*margin-bottom: 25px;*/
   font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #ffffff;
+  opacity: 0.6;
 }
 
 @media (min-width: 768px) {
   header.masthead .intro-text {
-    padding-top: 500px;
+  /*  padding-top: 500px;*/
     padding-bottom: 200px;
   }
   header.masthead .intro-text .intro-lead-in {
     font-size: 40px;
     font-style: italic;
     line-height: 40px;
-    margin-bottom: 25px;
+    /*margin-bottom: 25px;*/
     font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: #ffffff;
+    opacity: 0.6;
   }
   header.masthead .intro-text .intro-heading {
     font-size: 75px;
     font-weight: 700;
     line-height: 75px;
-    margin-bottom: 50px;
+    /*margin-bottom: 50px;*/
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: #ffffff;
+    opacity: 0.6;
   }
 }
 
