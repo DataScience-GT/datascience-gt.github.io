@@ -105,7 +105,7 @@ img::-moz-selection{
     color:#e77
 }
 .first-button {
-    top: 150px;
+    top: 100px;
     position: relative;
 }
 @media (min-width:992px){
@@ -142,6 +142,7 @@ header.masthead{
     text-align:center;
     color:#fff;
     /*opacity:0.7;*/
+    max-width: 100%;
     background-image:url(../img/dsgt-bg.png);
     background-repeat:no-repeat;
     background-attachment:scroll;
@@ -524,7 +525,7 @@ section#contact .form-group input.form-control{
     height:auto
 }
 section#contact .form-group textarea.form-control{
-    height:248px
+    height:158px
 }
 section#contact .form-control:focus{
     border-color:#e77;
