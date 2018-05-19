@@ -5,6 +5,15 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "redirects": [
+        {
+            "source": "**/AtlMap", 
+            "destination": "https://atlcrime.datasciencegt.org", 
+            "type": 302
+        },
+        {
+            "source": "**/AtlCrime", "destination": "https://atlcrime.datasciencegt.org", "type": 302 }
     ]
   }
 }
