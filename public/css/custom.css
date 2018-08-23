@@ -52,7 +52,7 @@ header, section {
 
 nav {
   font-family: "Montserrat";
-  height: 4vh;
+  min-height: 4vh;
 }
 
 .navbar-brand img {
