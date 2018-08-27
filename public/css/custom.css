@@ -57,7 +57,13 @@ nav {
 
 .navbar-brand img {
   padding: 0.5vh;
-  max-height: 4vh;
+  max-height: 7vh;
+  filter: invert(1);
+  -webkit-filter: invert(1);
+}
+
+.nav-item.nav-link.active {
+  color: #4267b2 !important;
 }
 
 .navbar-nav.d-flex {
@@ -77,10 +83,6 @@ nav {
 
 .light {
   background-color: white;
-}
-
-.bg-dark {
-  background-color: #4267b2 !important;
 }
 
 .carousel-indicators li {
@@ -157,6 +159,21 @@ nav {
 footer {
   max-height: 4vh;
   font-size: 6px;
+}
+
+.social-buttons {
+  font-size: 2vw;
+}
+
+#welcomebutton {
+  color: #4267b2;
+  font-size: 2vw;
+  background-color: white;
+}
+
+#welcomebutton:hover {
+  background-color: #343a40;
+  transition: all 0.2s ease-in-out;
 }
 
 /*# sourceMappingURL=custom.css.map */

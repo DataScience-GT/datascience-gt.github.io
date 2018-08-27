@@ -57,8 +57,14 @@ nav {
 .navbar-brand {
     img {
         padding: 0.5vh; 
-        max-height: $nav-height; 
+        max-height: $nav-height + 3vh; 
+        filter: invert(1); 
+        -webkit-filter: invert(1); 
     }
+}
+
+.nav-item.nav-link.active {
+    color: $general-color !important; 
 }
 
 .navbar-nav.d-flex{
@@ -79,9 +85,9 @@ nav {
     background-color: $background-color; 
 }
 
-.bg-dark {
-    background-color: $general-color !important;
-}
+// .bg-dark {
+//     background-color: $general-color !important;
+// }
 
 .carousel-indicators {
     li {
@@ -157,4 +163,18 @@ nav {
 footer {
     max-height: $nav-height; 
     font-size: 6px; 
+}
+
+.social-buttons {
+    font-size: 2vw; 
+}
+
+#welcomebutton {
+    color: $general-color;
+    font-size: 2vw; 
+    background-color: white; 
+}
+#welcomebutton:hover {
+    background-color: #343a40; 
+    transition: all 0.2s ease-in-out;
 }
