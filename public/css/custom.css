@@ -35,14 +35,14 @@ header, section {
 }
 
 .intro-heading {
-  font-size: 8vw;
+  font-size: 4vw;
   font-weight: 800;
   font-family: "Montserrat";
 }
 
 .intro-subtext {
   font-size: 2vw;
-  font-family: "Roboto";
+  font-family: "Montserrat";
   text-shadow: 5px;
 }
 
@@ -167,7 +167,7 @@ footer {
 
 #welcomebutton {
   color: #4267b2;
-  font-size: 2vw;
+  font-size: 1vw;
   background-color: white;
 }
 
