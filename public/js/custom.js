@@ -1,4 +1,4 @@
-$(".nav-item").on("click", function(event) {
+$(".nav-item.ani-link").on("click", function(event) {
     event.preventDefault(); 
     $("html, body").animate({
         scrollTop: $($(event.target).attr("href")).offset().top - $("nav").height()
