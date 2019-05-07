@@ -12,7 +12,7 @@
   "engines": {
     "node": "8"
   },
-  "main": "lib/index.js",
+  "main": "lib/app.js",
   "dependencies": {
     "express": "^4.16.4",
     "firebase-admin": "~7.0.0",

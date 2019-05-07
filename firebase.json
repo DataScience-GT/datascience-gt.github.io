@@ -17,6 +17,12 @@
         "destination": "https://atlcrime.datasciencegt.org",
         "type": 302
       }
+    ], 
+    "rewrites": [
+      {
+        "source": "/api/user", 
+        "function": "user"
+      }
     ]
   },
   "functions": {
