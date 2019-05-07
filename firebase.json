@@ -20,7 +20,7 @@
     ], 
     "rewrites": [
       {
-        "source": "/api/user", 
+        "source": "**/api/user", 
         "function": "user"
       }
     ]

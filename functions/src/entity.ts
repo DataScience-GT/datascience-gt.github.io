@@ -18,7 +18,7 @@
  *   - `suspended` Taking a break for the semester/left the club 
  *   - `unpaid` Returning members who have yet to pay dues 
  */
-enum MembershipStatus {
+export enum MembershipStatus {
     pending, 
     active_semester, 
     active_year, 
@@ -31,7 +31,7 @@ enum MembershipStatus {
  *  - `name`: name of group 
  *  - `gid`: group's ID number. 
  */
-interface Group {
+export interface Group {
     name: string, 
     gid: number
 }
@@ -59,7 +59,7 @@ interface Group {
  * `membership_status` Status of membership, due to the different stages a single user might be at. See [[MembershipStatus]]
  * `short_title` A short description of what they do in the club (for leadership)
  */
-interface User {
+export interface User {
     uid: number, 
     first_name: string, 
     last_name: string, 
@@ -86,7 +86,7 @@ interface User {
 /**
  * Each type of event we may have. 
  */
-enum EventType {
+export enum EventType {
     workshop, 
     project, 
     gm,
@@ -96,7 +96,7 @@ enum EventType {
 /**
  * Generic type to support counting attendance. 
  */
-interface Attendance {
+export interface Attendance {
     uid: number, 
     ts: number
 }
@@ -104,7 +104,7 @@ interface Attendance {
 /**
  * Special things required for a workshop event. 
  */
-interface WorkshopEvent {
+export interface WorkshopEvent {
     ppt_uri: string, 
     ipynb: string
 }
@@ -112,7 +112,7 @@ interface WorkshopEvent {
 /**
  * Special things that represent a sponsor. 
  */
-interface Sponsor {
+export interface Sponsor {
     name: string, 
     logo: string, 
     blurb: string
@@ -121,7 +121,7 @@ interface Sponsor {
 /**
  * Special things that are required for a sponsored event. 
  */
-interface OtherEvent {
+export interface OtherEvent {
     sponsors: Array<Sponsor>, 
     logo: string
 }
@@ -129,7 +129,7 @@ interface OtherEvent {
 /**
  * Special things required for a group meeting. 
  */
-interface GMEvent {
+export interface GMEvent {
     slides: string
 }
 
@@ -149,7 +149,7 @@ interface GMEvent {
  * `other`: Info for a special event. See [[OtherEvent]]. Optional
  * `gm`: Info for a general meeting. See [[GMEvent]]. Optional
  */
-interface Event {
+export interface Event {
     eid: number, 
     name: string,
     date: string,
@@ -170,7 +170,7 @@ interface Event {
  * `group`: the "PK" for this group. See [[Group]] 
  * `members`: A list of members and when they joined. See [[Attendance]]
  */
-interface UserGroup {
+export interface UserGroup {
     group: Group, 
     members: Array<Attendance>
 }
