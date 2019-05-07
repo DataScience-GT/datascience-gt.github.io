@@ -11,5 +11,9 @@
   "compileOnSave": true,
   "include": [
     "src"
-  ]
+  ],
+  "typedocOptions": {
+    "mode": "modules", 
+    "out": "docs"
+  }
 }
