@@ -9,7 +9,7 @@ import {AuthUserContext} from "../Session";
 class Dashboard extends React.Component {
     constructor(props, authUser) {
         super(props)
-        console.log(authUser); 
+        console.log(this.props.firebase.user.get_user(props.authUser.uid));
     }
 
     render() {
@@ -25,8 +25,7 @@ export default class DashboardPage extends React.Component{
             <div className="dashboard">
                 <Container> 
                     <AuthUserContext.Consumer>
-                        {authUser => authUser? "Yes" : "No"}
-                        {/* {authUser => <DashboardWithFirebase authUser={authUser}/>} */}
+                        {authUser => authUser? <DashboardWithFirebase authUser={authUser} />: "Loading..."}
                     </AuthUserContext.Consumer> 
                 </Container>
             </div>

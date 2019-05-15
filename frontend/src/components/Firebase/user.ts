@@ -28,17 +28,10 @@ class UserApi {
         }
         return current_user_uid.uid; 
     }
-    onAuthUserListener(next:any, fallback:any) {
-        this.auth.onAuthStateChanged(authUser => {
-            if (authUser) {
-                next(); 
-            } else {
-                fallback(); 
-            }
-        })
-    }
-    async get_current_user(){
-        return await this.db.collection("users").doc(this.get_current_uid()).get(); 
+   
+    async get_user(uid:string){
+        let doc = await this.db.collection("users").doc(uid).get(); 
+        return await doc.data(); 
     }
     async sign_in(email:string, password:string) {
         return await this.auth.signInWithEmailAndPassword(email, password); 
@@ -83,7 +76,7 @@ class UserApi {
                 short_title: ""
             }; 
             // Upload to db. 
-            return this.db.collection('users').add(user); 
+            return this.db.collection('users').doc(res.user.uid).set(user); 
         } finally {
             return null;
         }
