@@ -28,7 +28,11 @@ class UserApi {
     async sign_in(email:string, password:string) {
         return await this.firebase.auth().signInWithEmailAndPassword(email, password); 
     }
-    async createUser(email: string, password: string, data: entity.User) {
+    async createUser(email: string, password: string, 
+        first_name: string, 
+        last_name: string, 
+        alt_email: string, 
+        phone_number: string) {
         //create firebase user 
         //check string 
         if (email.slice(-11) !== '@gatech.edu') {
@@ -42,11 +46,11 @@ class UserApi {
         try {
             let user:entity.User = {
                 uid: res.user.uid, 
-                first_name: data.first_name,
-                last_name: data.last_name,
+                first_name: first_name,
+                last_name: last_name,
                 gt_email: email,
-                alt_email: data.alt_email, 
-                phone_number: data.phone_number, 
+                alt_email: alt_email, 
+                phone_number: phone_number, 
                 slack_id: "", 
                 XP: 0, 
                 resume_uri: "", 
@@ -124,7 +128,7 @@ class UserApi {
          * 3. Disable account on Firebase.
          */
         let current_user_uid = this.get_current_uid(); 
-        let snapshot = await this.db.collection('usergroups').doc('finance').collection('members').doc(current_user_uid).get()
+        let snapshot = await this.db.collection('usergroups').doc('membership').collection('members').doc(current_user_uid).get()
         if (snapshot.exists) {
             try {
                 let res1 = this.call_cloud_disable_function(user); 
