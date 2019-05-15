@@ -1,7 +1,10 @@
 import React from 'react';
-import MenuBar from '../shared/MenuBar';
 import { Button, Form, Container } from "react-bootstrap";
 import { withFirebase } from '../Firebase';
+import * as ROUTES from "../../constants/routes"; 
+import { compose } from 'recompose'
+import {Link, withRouter} from 'react-router-dom'; 
+import { withAuthentication } from '../Session';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -29,8 +32,8 @@ class LoginForm extends React.Component {
   async handleSubmit(event) {
     // sign user in 
     event.preventDefault(); 
-    let res = await this.props.firebase.user.sign_in(this.state.email_addr, this.state.password); 
-    console.log(res); 
+    await this.props.firebase.user.sign_in(this.state.email_addr, this.state.password); 
+    this.props.history.push(ROUTES.DASHBOARD); 
   }
   render() {
     return (
@@ -56,12 +59,11 @@ class LoginForm extends React.Component {
     </Form>)
   }
 }
-const LoginWithFirebase = withFirebase(LoginForm); 
+const LoginWithFirebase = compose(withRouter, withFirebase)(LoginForm); 
 export default class LoginPage extends React.Component {
     render() {
         return (
           <div className="Login">
-            <MenuBar />
             <Container>
             <LoginWithFirebase />
             </Container>

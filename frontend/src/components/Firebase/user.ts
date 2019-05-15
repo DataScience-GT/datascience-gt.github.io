@@ -4,8 +4,8 @@
  * Instantiate with a firebase app instance - will use that 
  */
 import Firebase from "./firebase"; 
-import * as firebase from 'firebase'; 
 import * as entity from "./entity"; 
+import firebase from "firebase";
 
 /**
  * New User Creation 
@@ -14,19 +14,34 @@ import * as entity from "./entity";
 class UserApi {
     firebase: Firebase["app"];
     db: Firebase["db"];  
+    auth: firebase.auth.Auth;
     constructor(firebaseApp: Firebase) {
         this.firebase = firebaseApp.app; 
         this.db = firebaseApp.db; 
+        this.auth = this.firebase.auth(); 
+        this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
     }
     get_current_uid() {
-        let current_user_uid = this.firebase.auth().currentUser; 
+        let current_user_uid = this.auth.currentUser; 
         if (current_user_uid === null) {
             throw new Error("must be signed in"); 
         }
         return current_user_uid.uid; 
     }
+    onAuthUserListener(next:any, fallback:any) {
+        this.auth.onAuthStateChanged(authUser => {
+            if (authUser) {
+                next(); 
+            } else {
+                fallback(); 
+            }
+        })
+    }
+    async get_current_user(){
+        return await this.db.collection("users").doc(this.get_current_uid()).get(); 
+    }
     async sign_in(email:string, password:string) {
-        return await this.firebase.auth().signInWithEmailAndPassword(email, password); 
+        return await this.auth.signInWithEmailAndPassword(email, password); 
     }
     async createUser(email: string, password: string, 
         first_name: string, 
@@ -38,7 +53,7 @@ class UserApi {
         if (email.slice(-11) !== '@gatech.edu') {
             throw new Error("Email validation failed"); 
         }
-        let res = await firebase.auth().createUserWithEmailAndPassword(email, password); 
+        let res = await this.auth.createUserWithEmailAndPassword(email, password); 
         // build it in database 
         if (res.user === null) {
             return null; 

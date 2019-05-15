@@ -1,5 +1,4 @@
 import React from 'react';
-import MenuBar from '../shared/MenuBar';
 
 export default class HomePage extends React.Component {
 
@@ -7,7 +6,6 @@ export default class HomePage extends React.Component {
 
         return (
             <div>
-                <MenuBar />
             </div>
         );
     }

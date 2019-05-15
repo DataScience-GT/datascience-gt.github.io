@@ -1,4 +1,7 @@
 import app from 'firebase/app';
+import 'firebase/firestore'; 
+import 'firebase/auth'
+// import '@google-cloud/storage';
 import UserApi from "./user";  
 import FileApi from "./file"; 
 
@@ -17,9 +20,9 @@ class Firebase {
         app.initializeApp(firebaseConfig); 
         this.app = app; 
         this.db = this.app.firestore(); 
-        this.storage = this.app.storage(); 
+        // this.storage = this.app.storage(); 
         this.user = new UserApi(this); 
-        this.file = new FileApi(this); 
+        // this.file = new FileApi(this); 
     }
 }
 

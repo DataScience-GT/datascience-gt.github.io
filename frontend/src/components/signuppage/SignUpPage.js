@@ -1,5 +1,4 @@
 import React from 'react';
-import MenuBar from '../shared/MenuBar';
 import { Button, Form, Container } from "react-bootstrap";
 import { withFirebase } from '../Firebase';
 
@@ -83,7 +82,6 @@ export default class SignUpPage extends React.Component {
     render() {
         return (
             <div className="Login"> 
-            <MenuBar /> 
             <Container> 
                 <SignUpWithFirebase /> 
             </Container>
