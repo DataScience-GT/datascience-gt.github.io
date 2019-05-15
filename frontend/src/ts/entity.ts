@@ -38,29 +38,44 @@ export interface Group {
 
 /**
  * Primary User Interface. Contains: 
+ * 
  * `uid` Auto-generated UID. Acts as a global PK. 
- *
+ * 
  * `first_name` User's preferred first name 
+ * 
  * `last_name` User's preferred last name 
+ * 
  * `gt_email` User's Georgia Tech email. Acts as a PK, and prevents duplicate account creation. 
+ *
  * `alt_email` User's preferred alternate email, if any. 
+ *
  * `phone_number` User's preferred contact phone number. 
+ * 
  * `slack_id` User's ID on slack, for integration purposes 
+ * 
  * `XP` An integer value of the user's experience points, calculated by whatever formula we use. 
+ * 
  * `resume_uri` A URI for the Resume. Allows one preferred resume. More explanation for URI scheme below. 
+ * 
  * `event_history` Array of event histories, split up by name.  This includes: 
  *  - `workshops` The user's history of attended workshops 
  *  - `project_meetings` The user's history of project meetings 
  *  - `other_events` All other events (including special events) 
+ * 
  * `groups` The list of user's group memberships. Groups act as our primary permission control mechanism. See [[UserGroup]]. 
+ * 
  * `qr_code` Reference to the member's QR code. More details in URI section; encodes user's ID 
+ * 
  * `creation_ts` Account creation date (when they submit the membership form) 
+ * 
  * `verified_ts` date of latest verification 
+ * 
  * `membership_status` Status of membership, due to the different stages a single user might be at. See [[MembershipStatus]]
+ * 
  * `short_title` A short description of what they do in the club (for leadership)
  */
 export interface User {
-    uid: number, 
+    uid: number|string, 
     first_name: string, 
     last_name: string, 
     gt_email: string, 
@@ -171,6 +186,7 @@ export interface Event {
  * `members`: A list of members and when they joined. See [[Attendance]]
  */
 export interface UserGroup {
+    name: string,
     group: Group, 
     members: Array<Attendance>
 }

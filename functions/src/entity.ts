@@ -60,7 +60,7 @@ export interface Group {
  * `short_title` A short description of what they do in the club (for leadership)
  */
 export interface User {
-    uid: number, 
+    uid: number|string, 
     first_name: string, 
     last_name: string, 
     gt_email: string, 
@@ -171,6 +171,7 @@ export interface Event {
  * `members`: A list of members and when they joined. See [[Attendance]]
  */
 export interface UserGroup {
+    name: string, 
     group: Group, 
     members: Array<Attendance>
 }
