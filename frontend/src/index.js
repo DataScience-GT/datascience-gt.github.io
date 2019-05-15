@@ -6,8 +6,11 @@ import HomePage from './components/homepage/HomePage';
 import LoginPage from './components/loginpage/LoginPage';
 import * as serviceWorker from './serviceWorker';
 
+import Firebase, { FirebaseContext } from "./components/Firebase"; 
+
 const Routes = (
-    <Router>
+    <FirebaseContext.Provider value={new Firebase()}>
+        <Router>
         <div>
             <Switch>
                 <Route exact path='/' component={HomePage}/>
@@ -15,9 +18,12 @@ const Routes = (
             </Switch>
         </div>
     </Router>
+    </FirebaseContext.Provider>
 );
 
-ReactDOM.render(Routes, document.getElementById('root'));
+ReactDOM.render( 
+    Routes, document.getElementById('root')
+    );
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
