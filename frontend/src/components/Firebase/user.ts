@@ -8,9 +8,8 @@ import * as entity from "./entity";
 import firebase from "firebase";
 
 /**
- * New User Creation 
+ * Provides the entirety of the User API Functionality  
  */
-
 class UserApi {
     firebase: Firebase["app"];
     db: Firebase["db"];  
@@ -21,6 +20,9 @@ class UserApi {
         this.auth = this.firebase.auth(); 
         this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
     }
+    /**
+     * Gets the UID of the user who is currently authenticated 
+     */
     get_current_uid() {
         let current_user_uid = this.auth.currentUser; 
         if (current_user_uid === null) {
@@ -29,13 +31,33 @@ class UserApi {
         return current_user_uid.uid; 
     }
    
+    /**
+     * Returns the data file for a specific user. 
+     * @param uid The user ID to request 
+     */
     async get_user(uid:string){
         let doc = await this.db.collection("users").doc(uid).get(); 
         return await doc.data(); 
     }
+    /**
+     * Performs a sign-in procedure and returns the result of the promise 
+     * @param email The sign-up email
+     * @param password The password 
+     */
     async sign_in(email:string, password:string) {
         return await this.auth.signInWithEmailAndPassword(email, password); 
     }
+
+    /**
+     * Creates a user by first signing up with firebase, and upon success, 
+     * creating a [[entity.User]] entry in our database at the /users endpoint. 
+     * @param email GT Email
+     * @param password password
+     * @param first_name First Name
+     * @param last_name Last Name
+     * @param alt_email Alternative Email (i.e. Gmail, etc)
+     * @param phone_number Phone number 
+     */
     async createUser(email: string, password: string, 
         first_name: string, 
         last_name: string, 
@@ -83,9 +105,14 @@ class UserApi {
     }
 
     /**
-     * Verify user's payment status 
+     * Verify user's payment status. Only allows people within Finance to do this action. 
+     * @param user The string UID 
+     * @param status: Whether or not to verify. 
+     *   0. Mark as suspended 
+     *   1. Mark as active-semester 
+     *   2. Mark as active-year 
      */
-    async verifyUserPayment(user: string, status: number, context: any) {
+    async verifyUserPayment(user: string, status: number) {
         // verify whether or not user has paid 
         /**
          * 0. Only proceed if context.auth.uid is in the Finance usergroup 
@@ -120,6 +147,14 @@ class UserApi {
         // nothing to do  
         }   
     }
+
+    /**
+     * Calls a cloud fundtion (to be made) that can has 
+     * elevated permissions to disable a user account. This is only done 
+     * All checks are done on the server-side for security; firebase handles
+     * all authentication context transfer. 
+     * @param user The uid for the user to disable
+     */
     private call_cloud_disable_function(user:string) {
         // TODO: Create a cloud function to disable user
     }
@@ -150,7 +185,27 @@ class UserApi {
             }
         }
     }
+    /**
+     * 
+     * @param user The UID of selected user 
+     * @param groups An array of group names to add the user to. Get list ov 
+     * available groups through [[Groups.get_groups]]
+     */
+    async addUserToGroups(user: string, groups: Array<string>) {
+        
+    }
 
+    /**
+     * Removes user from a set of groups. This removal happens in no particular order. 
+     * If the user is not in a group specified in the groups parameter, it ignores it 
+     * silently. Use [[User.get_user]] to get the user doc, which includes a list of groups. 
+     * 
+     * @param user The string of the user 
+     * @param groups The list of groups the user is to be removed from. 
+     */
+    async removeUserFromGroups(user:string, groups: Array<string>) {
+
+    }
 
     takePhotoAndCheckUserIn(event: number, context: any) {
         /**

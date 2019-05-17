@@ -6,16 +6,6 @@ import {withRouter} from "react-router-dom"
 import {compose} from "recompose"; 
 import {AuthUserContext} from "../Session"; 
 
-class Dashboard extends React.Component {
-    constructor(props, authUser) {
-        super(props)
-        console.log(this.props.firebase.user.get_user(props.authUser.uid));
-    }
-
-    render() {
-        return <div><p></p></div>;
-    }
-}
 
 const DashboardWithFirebase = compose(withRouter, withFirebase) (Dashboard); 
 

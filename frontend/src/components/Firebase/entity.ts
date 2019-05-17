@@ -29,11 +29,9 @@ export enum MembershipStatus {
 /**
  * General Group reference. For linking between entities. 
  *  - `name`: name of group 
- *  - `gid`: group's ID number. 
  */
 export interface Group {
     name: string, 
-    gid: number
 }
 
 /**
@@ -181,7 +179,7 @@ export interface Event {
 
 /**
  * Provides a cross-index for our groups. 
- * 
+ * `name`: Identical to the name in [[Group.name]]
  * `group`: the "PK" for this group. See [[Group]] 
  * `members`: A list of members and when they joined. See [[Attendance]]
  */
