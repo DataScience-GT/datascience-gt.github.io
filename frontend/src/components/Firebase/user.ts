@@ -30,7 +30,13 @@ class UserApi {
         }
         return current_user_uid.uid; 
     }
-   
+    async check_perms(uid: string, group: string) {
+        let snapshot = await this.db.collection('usergroups').doc(group).collection('members').doc(uid).get()
+        if (snapshot.exists) {
+            return true; 
+        } 
+        return false; 
+    }
     /**
      * Returns the data file for a specific user. 
      * @param uid The user ID to request 
@@ -192,7 +198,28 @@ class UserApi {
      * available groups through [[Groups.get_groups]]
      */
     async addUserToGroups(user: string, groups: Array<string>) {
-        
+        // first get permission from membership - maybe there should be a group owner eventually 
+        let current_user_id = this.get_current_uid(); 
+        let snapshot = await this.db.collection('usergroups').doc('membership').collection('members').doc(current_user_id).get()
+        if (snapshot.exists) {
+            // add it to the user doc 
+            let user_doc = (await this.get_user(user)) as entity.User; 
+            // convert groups to array format 
+            let promises: Promise<void>[] = []; 
+            groups.forEach(element => {
+                user_doc.groups.push({name: element}); 
+                // update it in the correct group doc 
+                // we don't /need/ to wait for completion. 
+                promises.push(this.db.collection('usergroups').doc(element).collection("members").doc(user).set({})); 
+            });
+            await this.db.collection('users').doc(user).update({groups: user_doc.groups});
+            //wait for completion 
+            promises.forEach(async element => {
+                await element; 
+            })   
+            return true; 
+        }
+        return false; 
     }
 
     /**
@@ -204,8 +231,32 @@ class UserApi {
      * @param groups The list of groups the user is to be removed from. 
      */
     async removeUserFromGroups(user:string, groups: Array<string>) {
+        // check perms 
+        let perm:boolean = await this.check_perms(this.get_current_uid(), "membership"); 
+
+        if (perm) {
+            // start the update operation 
+            let comp_promise = this.get_user(user).then(doc => {
+                let user_doc:entity.User = doc as entity.User; 
+                let group = user_doc.groups; 
+                let new_group = group.filter(group_check => {
+                    return groups.includes(group_check.name); 
+                }); 
+                return this.db.collection('users').doc(user).update({groups: new_group});
+            }); 
+    
+            // delete from groups 
+            groups.forEach(element => {
+                this.db.collection("usergroups").doc(element).collection("members").doc(user).delete(); 
+            })
+
+            await comp_promise; 
+            return true; 
+        }
+        return false; 
 
     }
+
 
     takePhotoAndCheckUserIn(event: number, context: any) {
         /**

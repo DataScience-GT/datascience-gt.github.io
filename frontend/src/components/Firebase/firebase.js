@@ -3,6 +3,7 @@ import 'firebase/firestore';
 import 'firebase/auth'
 import UserApi from "./user";  
 import FileApi from "./file"; 
+import GroupApi from "./groups"; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyD_OKCjgVUePBaR6KmvjCirYEOSyB_8qTg",
@@ -21,7 +22,9 @@ class Firebase {
         this.db = this.app.firestore(); 
         this.user = new UserApi(this); 
         this.file = new FileApi(this); 
+        this.group = new GroupApi(this); 
     }
 }
+
 
 export default Firebase; 
