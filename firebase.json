@@ -7,13 +7,32 @@
       "**/node_modules/**"
     ],
     "redirects": [
-        {
-            "source": "**/AtlMap", 
-            "destination": "https://atlcrime.datasciencegt.org", 
-            "type": 302
-        },
-        {
-            "source": "**/AtlCrime", "destination": "https://atlcrime.datasciencegt.org", "type": 302 }
+      {
+        "source": "**/AtlMap",
+        "destination": "https://atlcrime.datasciencegt.org",
+        "type": 302
+      },
+      {
+        "source": "**/AtlCrime",
+        "destination": "https://atlcrime.datasciencegt.org",
+        "type": 302
+      }
+    ], 
+    "rewrites": [
+      {
+        "source": "**/userCreateAddInfo", 
+        "function": "userCreateAddInfo"
+      }, 
+      {
+        "source": "**/userDeleteTrigger", 
+        "function": "userDeleteTrigger"
+      }
+    ]
+  },
+  "functions": {
+    "predeploy": [
+      "npm --prefix \"$RESOURCE_DIR\" run lint",
+      "npm --prefix \"$RESOURCE_DIR\" run build"
     ]
   }
 }
