@@ -1,5 +1,7 @@
 import * as entity from "./entity"; 
 import Firebase from "./firebase";
+import { firestore } from "firebase";
+
 
 export default class GroupApi {
     db: any;
@@ -22,7 +24,6 @@ export default class GroupApi {
         const documents =  await this.db.collection('usergroups').get(); 
         return documents.docs.map((doc: { data: () => any; }) => doc.data()); 
     }
-
     /**
      * Creates a Group
      * Lets anyone create a group. Adds creating user to it by default. 
@@ -34,13 +35,8 @@ export default class GroupApi {
         this.db.collection('usergroups').doc(name).collection('members').doc(this._fbapp.user.get_current_uid()).set({}) 
         // add user to group 
         const curr_uid = this._fbapp.user.get_current_uid(); 
-        this._fbapp.user.get_user(curr_uid).then((document) => {
-            if (document !== undefined) {
-                document.groups.push(name); 
-                this.db.collection('users').doc(curr_uid).set(document); 
-            }
-        })
-        
+        console.log(name)
+        this.db.collection('users').doc(curr_uid).update({groups: firestore.FieldValue.arrayUnion(name)})
     }
 
     /**
@@ -58,17 +54,8 @@ export default class GroupApi {
             let individualRemovalPromise = this.db.collection('usergroups').doc(name).collection('members').get().then((members: any) => {
                 // for each member in here, update their document to not include this group 
                 members.docs.forEach((memberDocRef:any) => {
-                    this._fbapp.user.get_user(memberDocRef.id).then((newDoc:any) => {
-                        if (document !== undefined) {
-                            const new_groups = newDoc.groups.filter((value:any) => value !== name);
-                            this.db.collection('users').doc(memberDocRef.id).update({groups: new_groups});
-                        }
-                    })
-
-                })
-                //delete each document 
-                members.forEach((querySnapshot:any) => {
-                    querySnapshot.ref.delete(); 
+                    this.db.collection('users').doc(memberDocRef.id).update({groups: firestore.FieldValue.arrayRemove(name)}); 
+                    memberDocRef.ref.delete(); 
                 })
             });
             await individualRemovalPromise; 
@@ -79,4 +66,9 @@ export default class GroupApi {
             return false; 
         }
     }
+
+    getPendingRequests(name: string) {
+        return this.db.collection('usergroups').doc(name).collection('join_requests').get()
+    }
+
 }

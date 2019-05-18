@@ -5,7 +5,7 @@
  */
 import Firebase from "./firebase"; 
 import * as entity from "./entity"; 
-import firebase from "firebase";
+import firebase, { firestore } from "firebase";
 
 /**
  * Provides the entirety of the User API Functionality  
@@ -203,23 +203,56 @@ class UserApi {
         let snapshot = await this.db.collection('usergroups').doc('membership').collection('members').doc(current_user_id).get()
         if (snapshot.exists) {
             // add it to the user doc 
-            let user_doc = (await this.get_user(user)) as entity.User; 
             // convert groups to array format 
             let promises: Promise<void>[] = []; 
             groups.forEach(element => {
-                user_doc.groups.push({name: element}); 
                 // update it in the correct group doc 
                 // we don't /need/ to wait for completion. 
                 promises.push(this.db.collection('usergroups').doc(element).collection("members").doc(user).set({})); 
             });
-            await this.db.collection('users').doc(user).update({groups: user_doc.groups});
+            await this.db.collection('users').doc(user).update({groups: firestore.FieldValue.arrayUnion(groups)});
             //wait for completion 
-            promises.forEach(async element => {
-                await element; 
-            })   
+            await promises; 
             return true; 
         }
         return false; 
+    }
+    /**
+     * Submit a request to join a group. 
+     * 
+     * @param name Name of group to join 
+     * @param reason Reason for joining. 
+     */
+    async requestJoinGroup(name: string, reason: string) {
+        const curr_uid = this.get_current_uid(); 
+        const curr_user = (await this.get_user(curr_uid)) as entity.User; 
+        this.db.collection('usergroups').doc(name).collection('join_requests').doc(curr_uid).set({
+            user: curr_uid, 
+            first_name: curr_user.first_name, 
+            last_name: curr_user.last_name, 
+            reason: reason
+        })
+    }
+
+    /**
+     * 
+     * @param name Name of group 
+     * @param uid Uid of requesting user
+     * @param response 
+     */
+    async respondToJoinRequest(name: string, uid: string, response: number) {
+        // Perms require membership in group, or membership chair 
+        const perm1 = this.check_perms(this.get_current_uid(), "membership"); 
+        const perm2 = this.check_perms(this.get_current_uid(), name); 
+        if (await perm1 || await perm2) {
+            // approve & add 
+            if (response === 1) {
+                this.db.collection('usergroups').doc(name).collection('members').doc(uid).set({}); 
+                this.db.collection('users').doc(this.get_current_uid()).update({groups: firestore.FieldValue.arrayUnion(name)})     
+            }
+            // no matter what, just delete the request 
+            this.db.collection('usergroups').doc(name).collection('join_requests').doc(uid).delete(); 
+        }
     }
 
     /**
@@ -236,20 +269,11 @@ class UserApi {
 
         if (perm) {
             // start the update operation 
-            let comp_promise = this.get_user(user).then(doc => {
-                let user_doc:entity.User = doc as entity.User; 
-                let group = user_doc.groups; 
-                let new_group = group.filter(group_check => {
-                    return groups.includes(group_check.name); 
-                }); 
-                return this.db.collection('users').doc(user).update({groups: new_group});
-            }); 
-    
+            const comp_promise = this.db.collection('users').doc(user).update({groups: firestore.FieldValue.arrayRemove(groups)});
             // delete from groups 
             groups.forEach(element => {
                 this.db.collection("usergroups").doc(element).collection("members").doc(user).delete(); 
             })
-
             await comp_promise; 
             return true; 
         }
