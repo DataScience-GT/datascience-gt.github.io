@@ -5,7 +5,7 @@ import * as ROUTES from "../../constants/routes";
 import {withRouter} from "react-router-dom"
 import {compose} from "recompose"; 
 import {AuthUserContext} from "../Session"; 
-import {CreateGroupAction, DeleteGroupAction} from "./actions"; 
+import {CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction} from "./actions"; 
 
 /**
  * TODO: Build some dashboard here. 
@@ -21,9 +21,12 @@ class Dashboard extends React.Component {
     render() {
         return (
             <Container> 
-                (<CreateGroupAction firebase={this.props.firebase} authUser={this.authUser}/> )
+                <CreateGroupAction firebase={this.props.firebase} authUser={this.authUser}/> 
                 <br/>
-                (<DeleteGroupAction firebase={this.props.firebase} authUser={this.authUser}/>)
+                <DeleteGroupAction firebase={this.props.firebase} authUser={this.authUser}/>
+                <br/>
+                <CreateJoinRequestAction firebase={this.props.firebase} authUser={this.authUser}/>
+                <TakeRequestAction firebase={this.props.firebase} authUser={this.authUser}/>
             </Container>
         )
     }
