@@ -1,5 +1,6 @@
 import React from 'react'; 
 import { Button, Form, Table, Container} from "react-bootstrap";
+import * as entity from "../Firebase/entity"; 
 
 export class DashboardAction extends React.Component {
     constructor(props) {
@@ -207,5 +208,29 @@ export class TakeRequestAction extends DashboardAction {
                 </Table>
             </Container> 
         )
+    }
+}
+
+
+export class VerifyPendingUserAction extends DashboardAction {
+    constructor(props) {
+        super(props); 
+        this.state = {
+            "pending_users": []
+        }; 
+
+        this.handleStatusChange = this.handleStatusChange.bind(this); 
+    }
+
+    handleStatusChange(event) {
+        let target = event.target; 
+        let new_status; 
+        if (target.value === "0") {
+            //unpaid 
+            new_status = entity.MembershipStatus.suspended; 
+            // mark suspended 
+            this.props.firebase.user.suspendUser(target.user); 
+        }
+
     }
 }
