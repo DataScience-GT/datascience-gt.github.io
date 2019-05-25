@@ -11,10 +11,12 @@ class SignUpForm extends React.Component {
             password: "", 
             first_name: "", 
             last_name: "", 
-            phone_number: ""
+            phone_number: "", 
+            verification: ""
         }; 
 
         this.handleInputChange = this.handleInputChange.bind(this); 
+        this.handleFileChange = this.handleFileChange.bind(this); 
         this.handleSubmit = this.handleSubmit.bind(this); 
     }
 
@@ -26,13 +28,20 @@ class SignUpForm extends React.Component {
             [name]: value
         }); 
     }
-
+    handleFileChange(event) {
+        const target = event.target; 
+        const file = target.files[0]; 
+        this.setState({
+            "verification": file
+        }); 
+    }
     async handleSubmit(event) {
         // try creating an account 
         event.preventDefault(); 
         let state = this.state; 
-        this.props.firebase.user.createUser(state.email, state.password, 
-            state.first_name, state.last_name, state.alt_email, state.phone_number); 
+        await this.props.firebase.user.createUser(state.email, state.password, 
+            state.first_name, state.last_name, state.alt_email, state.phone_number);
+        this.props.firebase.user.updateUserVerification(2, this.state.verification, this.state.verification.name); 
     }
 
     render() {
@@ -67,6 +76,12 @@ class SignUpForm extends React.Component {
                 <Form.Group>
                     <Form.Label> Phone Number </Form.Label>
                     <Form.Control onChange={this.handleInputChange} name="phone_number" type="tel" placeholder="Phone Number" /> 
+                </Form.Group>
+
+                {/* TODO: REMOVE THIS AND MOVE TO SECONDARY STAGE!!! */}
+                <Form.Group> 
+                    <Form.Label> Verification Picture</Form.Label>
+                    <Form.Control onChange={this.handleFileChange} name="verification" type="file" accept="image/png, image/jpg, image/jpeg" />
                 </Form.Group>
                 <Button variant="primary" type="submit"> 
                     Sign Up 

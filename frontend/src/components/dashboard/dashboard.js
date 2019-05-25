@@ -5,7 +5,7 @@ import * as ROUTES from "../../constants/routes";
 import {withRouter} from "react-router-dom"
 import {compose} from "recompose"; 
 import {AuthUserContext} from "../Session"; 
-import {CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction} from "./actions"; 
+import {CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction, VerifyPendingUserAction} from "./actions"; 
 
 /**
  * TODO: Build some dashboard here. 
@@ -27,6 +27,7 @@ class Dashboard extends React.Component {
                 <br/>
                 <CreateJoinRequestAction firebase={this.props.firebase} authUser={this.authUser}/>
                 <TakeRequestAction firebase={this.props.firebase} authUser={this.authUser}/>
+                <VerifyPendingUserAction firebase={this.props.firebase} authUser={this.authUser}></VerifyPendingUserAction>
             </Container>
         )
     }

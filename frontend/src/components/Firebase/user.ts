@@ -11,10 +11,12 @@ import firebase, { firestore } from "firebase";
  * Provides the entirety of the User API Functionality  
  */
 class UserApi {
-    firebase: Firebase["app"];
-    db: Firebase["db"];  
+    firebase: typeof firebase;
+    db: firestore.Firestore;  
     auth: firebase.auth.Auth;
+    _fbapp: Firebase;
     constructor(firebaseApp: Firebase) {
+        this._fbapp = firebaseApp; 
         this.firebase = firebaseApp.app; 
         this.db = firebaseApp.db; 
         this.auth = this.firebase.auth(); 
@@ -30,19 +32,19 @@ class UserApi {
         }
         return current_user_uid.uid; 
     }
-    async check_perms(uid: string, group: string) {
+    async check_perms(uid: string, group: string): Promise<boolean>{
         // check pending first 
         let user_setting = ((await this.db.collection('users').doc(uid).get()).data() as entity.User).membership_status; 
-        if (user_setting === entity.MembershipStatus.pending || 
-            user_setting === entity.MembershipStatus.suspended) {
-            return false; 
-        } else {
+        // if (user_setting === entity.MembershipStatus.pending || 
+        //     user_setting === entity.MembershipStatus.suspended) {
+        //     return false; 
+        // } else {
             let snapshot = await this.db.collection('usergroups').doc(group).collection('members').doc(uid).get()
             if (snapshot.exists) {
                 return true; 
             } 
             return false; 
-        }
+        // }
     }
     /**
      * Returns the data file for a specific user. 
@@ -110,7 +112,8 @@ class UserApi {
                 creation_ts: +new Date(), 
                 verified_ts: -1, 
                 membership_status: entity.MembershipStatus.pending, 
-                short_title: ""
+                short_title: "", 
+                verification_uri: ""
             }; 
             // Upload to db. 
             return this.db.collection('users').doc(res.user.uid).set(user); 
@@ -120,6 +123,48 @@ class UserApi {
     }
 
     /**
+     * Updates a user's verification status. 
+     * 
+     * @param option How the user will pay. Options: 
+     *  - 0: Defer payment (does nothing)
+     *  - 1: Cash 
+     *  - 2: Venmo (file param required)
+     * @param file The file/blob to upload. Required if option is venmo.
+     * @param fname The name of the file. 
+     */
+    async updateUserVerification(option: number, file?: File|Blob, fname?: string) {
+        if (option === 0) {
+            // pass 
+        } else if (option === 1) {
+            return this.db.collection('users').doc(this.get_current_uid()).update({"verification_uri": "cash"});
+        } else if (option === 2) {
+            if (!file) {
+                throw Error("File argument cannot be null if option is 2"); 
+            }
+            if (!fname) {
+                throw Error("File name argument cannot be null if option is 2"); 
+            }
+            const snapshot = await this._fbapp.file.uploadVerification(file, fname);
+            const download_url = (await snapshot.ref.getDownloadURL()) as string;  
+            return this.db.collection('users').doc(this.get_current_uid()).update({"verification_uri": download_url});
+        }
+    }
+
+    async getPendingUsers(): Promise<entity.User[] | undefined> {
+        // only let membership & finance access this 
+        let perm1 = await this.check_perms(this.get_current_uid(), "finance"); 
+        let perm2 = await this.check_perms(this.get_current_uid(), "membership"); 
+        console.log(await this.get_user(this.get_current_uid()));
+        console.log(perm1, perm2); 
+        if (perm1 || perm2) {
+            let query = await this.db.collection('users').where("membership_status", "==", entity.MembershipStatus.pending).get(); 
+            let user_docs:entity.User[] = query.docs.map(data => {
+                return data.data() as entity.User; 
+            });  
+            return user_docs; 
+        } 
+    }
+    /**
      * Verify user's payment status. Only allows people within Finance to do this action. 
      * @param user The string UID 
      * @param status: Whether or not to verify. 
@@ -127,7 +172,7 @@ class UserApi {
      *   1. Mark as active-semester 
      *   2. Mark as active-year 
      */
-    async verifyUserPayment(user: string, status: number) {
+    async verifyUserPayment(user: string, status: string) {
         // verify whether or not user has paid 
         /**
          * 0. Only proceed if context.auth.uid is in the Finance usergroup 
@@ -144,11 +189,11 @@ class UserApi {
             snapshot = await this.db.collection('usergroups').doc('finance').collection('members').doc(current_user_uid).get()
             if (snapshot.exists) {
                 let target_membership_status: entity.MembershipStatus; 
-                if (status === 0) {
+                if (status === "0") {
                     target_membership_status = entity.MembershipStatus.suspended; 
-                } else if (status === 1) {
+                } else if (status === "1") {
                     target_membership_status = entity.MembershipStatus.active_semester; 
-                } else if (status === 2) {
+                } else if (status === "2") {
                     target_membership_status = entity.MembershipStatus.active_year; 
                 } else {
                     throw new Error("Incorrect status")

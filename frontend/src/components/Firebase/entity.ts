@@ -94,7 +94,8 @@ export interface User {
     creation_ts: number, 
     verified_ts: number, 
     membership_status: MembershipStatus, 
-    short_title: string
+    short_title: string, 
+    verification_uri: string //Will be "cash" if cash 
 }
 
 /**

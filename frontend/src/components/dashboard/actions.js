@@ -99,7 +99,6 @@ export class CreateJoinRequestAction extends DashboardAction {
         this.handleSubmit = this.handleSubmit.bind(this); 
         this.props.firebase.group.get_groups().then(groups => {
             this.available_groups = groups; 
-            console.log(this.available_groups)
             this.forceUpdate()
         })
     }
@@ -218,19 +217,56 @@ export class VerifyPendingUserAction extends DashboardAction {
         this.state = {
             "pending_users": []
         }; 
-
         this.handleStatusChange = this.handleStatusChange.bind(this); 
     }
+    componentDidMount() {
+        // get pending users 
+        this.update_pending_users_state(); 
+        this.forceUpdate(); 
+    }
+    async update_pending_users_state() {
+        // fetch pending users 
+        let ret = await this.props.firebase.user.getPendingUsers(); 
+        console.log(ret) 
+        if (ret) {
+            this.update_users(ret); 
+        }
+    }
 
+    update_users(snapshot) {
+        console.log("Updating")
+        this.setState({"pending_users": snapshot})
+    
+    }
+    
     handleStatusChange(event) {
         let target = event.target; 
-        let new_status; 
-        if (target.value === "0") {
-            //unpaid 
-            new_status = entity.MembershipStatus.suspended; 
-            // mark suspended 
-            this.props.firebase.user.suspendUser(target.user); 
-        }
+        console.log(target.value, target.name)
+        this.props.firebase.user.verifyUserPayment(target.value, target.name); 
+        this.update_pending_users_state(); 
+    }
 
+    render() { return (
+        <Container> 
+            <Table> 
+                <tbody>
+
+                {this.state.pending_users.map(req => 
+                    <tr key={req.uid}>
+                        <td>{req.first_name}</td>
+                        <td>{req.last_name}</td>
+                        <td><img src={req.verification_uri}></img></td>
+                        <td>
+                            <Button variant="danger" name="0" value={req.uid} onClick={this.handleStatusChange}>Suspend</Button>
+                            <Button variant="primary" name="1" value={req.uid} onClick={this.handleStatusChange}>Paid Semester</Button>
+                            <Button variant="primary" name="2" value={req.uid} onClick={this.handleStatusChange}>Paid Year</Button>
+                        </td>
+                    </tr>
+                    )}
+                </tbody>
+            </Table>
+
+        </Container>
+    )
     }
 }
