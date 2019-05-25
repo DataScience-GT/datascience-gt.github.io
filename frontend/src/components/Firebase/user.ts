@@ -35,16 +35,16 @@ class UserApi {
     async check_perms(uid: string, group: string): Promise<boolean>{
         // check pending first 
         let user_setting = ((await this.db.collection('users').doc(uid).get()).data() as entity.User).membership_status; 
-        // if (user_setting === entity.MembershipStatus.pending || 
-        //     user_setting === entity.MembershipStatus.suspended) {
-        //     return false; 
-        // } else {
+        if (user_setting === entity.MembershipStatus.pending || 
+            user_setting === entity.MembershipStatus.suspended) {
+            return false; 
+        } else {
             let snapshot = await this.db.collection('usergroups').doc(group).collection('members').doc(uid).get()
             if (snapshot.exists) {
                 return true; 
             } 
             return false; 
-        // }
+        }
     }
     /**
      * Returns the data file for a specific user. 
