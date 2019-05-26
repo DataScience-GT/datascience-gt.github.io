@@ -23,7 +23,6 @@ export enum MembershipStatus {
     active_semester, 
     active_year, 
     suspended, 
-    unpaid
 }
 
 /**
@@ -88,12 +87,15 @@ export interface User {
         gm: Array<number>
         other: Array<number>
     }
+    interests: Array<string>, 
+    profile_pic: string,
     groups: Array<Group>, 
     qr_code: string, 
     creation_ts: number, 
     verified_ts: number, 
     membership_status: MembershipStatus, 
-    short_title: string
+    short_title: string, 
+    verification_uri: string //Will be "cash" if cash 
 }
 
 /**

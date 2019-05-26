@@ -20,12 +20,8 @@
     ], 
     "rewrites": [
       {
-        "source": "**/userCreateAddInfo", 
-        "function": "userCreateAddInfo"
-      }, 
-      {
-        "source": "**/userDeleteTrigger", 
-        "function": "userDeleteTrigger"
+        "source": "**/paid_account", 
+        "function": "paid_account"
       }
     ]
   },
