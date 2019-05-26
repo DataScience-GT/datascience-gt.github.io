@@ -222,27 +222,23 @@ export class VerifyPendingUserAction extends DashboardAction {
     componentDidMount() {
         // get pending users 
         this.update_pending_users_state(); 
-        this.forceUpdate(); 
     }
     async update_pending_users_state() {
         // fetch pending users 
         let ret = await this.props.firebase.user.getPendingUsers(); 
-        console.log(ret) 
         if (ret) {
             this.update_users(ret); 
         }
     }
 
     update_users(snapshot) {
-        console.log("Updating")
         this.setState({"pending_users": snapshot})
     
     }
     
     handleStatusChange(event) {
         let target = event.target; 
-        console.log(target.value, target.name)
-        this.props.firebase.user.verifyUserPayment(target.value, target.name); 
+        this.props.firebase.user.verifyUserPayment(target.value, target.name, target.is_cash); 
         this.update_pending_users_state(); 
     }
 
@@ -255,11 +251,13 @@ export class VerifyPendingUserAction extends DashboardAction {
                     <tr key={req.uid}>
                         <td>{req.first_name}</td>
                         <td>{req.last_name}</td>
-                        <td><img src={req.verification_uri}></img></td>
+                        <td>{req.verification_uri.split(",")[0] === "cash"
+                            ? req.verification_uri 
+                            : <img src={req.verification_uri}></img>}</td>
                         <td>
-                            <Button variant="danger" name="0" value={req.uid} onClick={this.handleStatusChange}>Suspend</Button>
-                            <Button variant="primary" name="1" value={req.uid} onClick={this.handleStatusChange}>Paid Semester</Button>
-                            <Button variant="primary" name="2" value={req.uid} onClick={this.handleStatusChange}>Paid Year</Button>
+                            <Button variant="danger" name="0" value={req.uid} is_cash={(req.verification_uri.split(",")[0] === "cash").toString()} onClick={this.handleStatusChange}>Suspend</Button>
+                            <Button variant="primary" name="1" value={req.uid} is_cash={(req.verification_uri.split(",")[0] === "cash").toString()} onClick={this.handleStatusChange}>Paid Semester</Button>
+                            <Button variant="primary" name="2" value={req.uid} is_cash={(req.verification_uri.split(",")[0] === "cash").toString()} onClick={this.handleStatusChange}>Paid Year</Button>
                         </td>
                     </tr>
                     )}

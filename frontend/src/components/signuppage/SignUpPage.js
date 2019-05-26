@@ -12,10 +12,13 @@ class SignUpForm extends React.Component {
             first_name: "", 
             last_name: "", 
             phone_number: "", 
-            verification: ""
+            verification: "", 
+            verification_method: "venmo", 
+            vs_amount: 0, 
+            vs_person: ""
         }; 
 
-        this.handleInputChange = this.handleInputChange.bind(this); 
+        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this); 
         this.handleSubmit = this.handleSubmit.bind(this); 
     }
@@ -31,19 +34,44 @@ class SignUpForm extends React.Component {
     handleFileChange(event) {
         const target = event.target; 
         const file = target.files[0]; 
+     
         this.setState({
             "verification": file
         }); 
     }
+
     async handleSubmit(event) {
         // try creating an account 
         event.preventDefault(); 
         let state = this.state; 
         await this.props.firebase.user.createUser(state.email, state.password, 
             state.first_name, state.last_name, state.alt_email, state.phone_number);
-        this.props.firebase.user.updateUserVerification(2, this.state.verification, this.state.verification.name); 
+        if (this.state.verification_method === "cash") {
+            this.props.firebase.user.updateUserVerificationCash(this.state.vs_amount, this.state.vs_person); 
+        } else if (this.state.verification_method === "venmo") {
+            console.log("File Verified") 
+            this.props.firebase.user.updateUserVerificationVenmo(this.state.verification, this.state.verification.name); 
+        }
     }
-
+    getVerificationStub(method) {
+        if (method === "venmo") {
+            return (
+                <Form.Group> 
+                <Form.Label> Verification Picture</Form.Label>
+                <Form.Control onChange={this.handleFileChange} name="verification" type="file" accept="image/png, image/jpg, image/jpeg" />
+                </Form.Group>
+            )
+        } else if (method === "cash") {
+            return (
+                <Form.Group>
+                    <Form.Label>Amount</Form.Label>
+                    <Form.Control name="vs_amount" onChange={this.handleInputChange} type="number"></Form.Control>
+                    <Form.Label>Person you Paid To</Form.Label>
+                    <Form.Control name="vs_person" onChange={this.handleInputChange} type="text"></Form.Control>
+                </Form.Group> 
+            )
+        }
+    }
     render() {
         return (
             <Form onSubmit={this.handleSubmit}>
@@ -79,10 +107,15 @@ class SignUpForm extends React.Component {
                 </Form.Group>
 
                 {/* TODO: REMOVE THIS AND MOVE TO SECONDARY STAGE!!! */}
-                <Form.Group> 
-                    <Form.Label> Verification Picture</Form.Label>
-                    <Form.Control onChange={this.handleFileChange} name="verification" type="file" accept="image/png, image/jpg, image/jpeg" />
+                <Form.Group>
+                    <Form.Label> Select preferred payment method </Form.Label>
+                    <div>
+                        <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="venmo" checked={this.state.verification_method === "venmo"} label="venmo" />
+                        <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="cash" checked={this.state.verification_method === "cash"} label="cash" /> 
+                        <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="defer" checked={this.state.verification_method === "defer"} label="defer" />  
+                    </div>
                 </Form.Group>
+                {this.getVerificationStub(this.state.verification_method)}
                 <Button variant="primary" type="submit"> 
                     Sign Up 
                 </Button>
