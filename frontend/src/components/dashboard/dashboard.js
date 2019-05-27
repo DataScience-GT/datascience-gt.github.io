@@ -1,3 +1,8 @@
+/**
+ * This file should be the center point for dashboard building. In order to keep file sizes manageable, the 
+ * actions themselves are in [[actions.js]] in this folder; those could probably be 
+ * split up eventually because we will have a lot of actions. 
+ */
 import React from 'react'; 
 import { withFirebase } from '../Firebase'; 
 import {Container} from "react-bootstrap"; 
@@ -8,9 +13,9 @@ import {AuthUserContext} from "../Session";
 import {CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction, VerifyPendingUserAction} from "./actions"; 
 
 /**
- * TODO: Build some dashboard here. 
+ * TODO: Build some dashboard here. Currently just loads all actions that I created so I coud test them 
+ * - Raj 
  */
-
 class Dashboard extends React.Component {
     constructor(props) {
         super(props); 

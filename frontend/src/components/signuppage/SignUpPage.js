@@ -1,3 +1,9 @@
+/**
+ * This is responsible for user sign-up. We collect data 
+ * and then call the createUser function, which signs them up. 
+ * Then, the process flows as normal; firebase signup followed 
+ * by a document in our `/users` collection. 
+ */
 import React from 'react';
 import { Button, Form, Container } from "react-bootstrap";
 import { withFirebase } from '../Firebase';
@@ -114,7 +120,9 @@ class SignUpForm extends React.Component {
                     <Form.Control onChange={this.handleInputChange} name="phone_number" type="tel" placeholder="Phone Number" /> 
                 </Form.Group>
 
-                {/* TODO: REMOVE THIS AND MOVE TO SECONDARY STAGE!!! */}
+                {/* TODO: REMOVE THIS AND MOVE TO SECONDARY STAGE!!! 
+                    This is where the user can select which payment method they prefer. 
+                */}
                 <Form.Group>
                     <Form.Label> Select preferred payment method </Form.Label>
                     <div>

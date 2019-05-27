@@ -1,8 +1,11 @@
+/**
+ * Provies the basics of file management. Has some scripts to 
+ * support special, common uploads such as Venmo and Resume. 
+ * This should be the POC for all google cloud storage functionality. 
+ */
 import Firebase from "./firebase"; 
 import * as firebase from "firebase"; 
-// import {Storage} from "@google-cloud/storage"; 
-import * as entity from "./entity" 
-import * as user from "./user" 
+
 
 
 class FileApi {

@@ -1,4 +1,7 @@
-import * as entity from "./entity"; 
+/**
+ * This file provides the Group Api. This includes basic functions 
+ * for managing groups, mostly related to creating, deleting, etc. 
+ */
 import Firebase from "./firebase";
 import { firestore } from "firebase";
 
@@ -12,7 +15,8 @@ export default class GroupApi {
         this.db = firebaseApp.db; 
     }
     /**
-     * Get list of all groups 
+     * Get list of all groups. Really a wrapper around 
+     * [[GroupApi.get_groups_and_members()]] 
      */
     async get_groups(){
         const docs:any = await this.get_groups_and_members(); 
@@ -20,6 +24,9 @@ export default class GroupApi {
         return mapped;
     }
 
+    /**
+     * Get list of all groups AND members in the group. 
+     */
     async get_groups_and_members() {
         const documents =  await this.db.collection('usergroups').get(); 
         return documents.docs.map((doc: { data: () => any; }) => doc.data()); 
@@ -27,6 +34,16 @@ export default class GroupApi {
     /**
      * Creates a Group
      * Lets anyone create a group. Adds creating user to it by default. 
+     * A few things happen to create a group. 
+     * 1. A document is created under /usergroups with the document ID 
+     * of the group name and the `name` member equal to the name of the group. 
+     * 2. A collection is created under `/usergroups/{name}/members`. This will 
+     * hold a document for each member in the group. A document is used so we can 
+     * eventually extend functionality and have group owners/moderators if we want. 
+     * 3. The calling user is added to the group
+     *   - the group `name` is added to the array under `/users/{uid}/groups` 
+     *   - the user document is created for this group under `/usergroups/{name}/members/{uid}`
+     * 
      * 
      * @param name name of the group to create. 
      */
@@ -42,7 +59,10 @@ export default class GroupApi {
     /**
      * Deletes a group. Automatically disassociates 
      * all members from this group. Member must be part of 
-     * Membership | Group Member 
+     * Membership | Group Member. 
+     * 
+     * This probably won't work if there are any join requests. This is a todo. 
+     * TODO: Make this work with join requests. See issue #77 on ZenHub. 
      * 
      * @param name Name of group to delete.
      */
@@ -67,6 +87,10 @@ export default class GroupApi {
         }
     }
 
+    /**
+     * Gets a list of all pending join requests. 
+     * @param name Get the name of the group you want to view. 
+     */
     getPendingRequests(name: string) {
         return this.db.collection('usergroups').doc(name).collection('join_requests').get()
     }

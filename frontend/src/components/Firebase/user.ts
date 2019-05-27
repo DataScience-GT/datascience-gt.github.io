@@ -24,6 +24,7 @@ class UserApi {
         this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
         this.functions = this.firebase.functions(); 
     }
+
     /**
      * Gets the UID of the user who is currently authenticated 
      */
@@ -34,6 +35,14 @@ class UserApi {
         }
         return current_user_uid.uid; 
     }
+
+    /**
+     * Sees if `uid` is a member of `group`, and if `uid` is active. 
+     * If the user is `pending` or `suspended` automatically returns `false`. 
+     * Else, if the user is indeed part of a group, then it returns `true`.
+     * @param uid The user ID we're checking 
+     * @param group The group to check 
+     */
     async check_perms(uid: string, group: string): Promise<boolean>{
         // check pending first 
         let user_setting = ((await this.db.collection('users').doc(uid).get()).data() as entity.User).membership_status; 
@@ -48,6 +57,7 @@ class UserApi {
             return false; 
         }
     }
+
     /**
      * Returns the data file for a specific user. 
      * @param uid The user ID to request 
@@ -56,6 +66,7 @@ class UserApi {
         let doc = await this.db.collection("users").doc(uid).get(); 
         return await doc.data(); 
     }
+    
     /**
      * Performs a sign-in procedure and returns the result of the promise 
      * @param email The sign-up email

@@ -2,6 +2,11 @@ import React from 'react';
 import { Button, Form, Table, Container} from "react-bootstrap";
 import * as entity from "../Firebase/entity"; 
 
+/**
+ * Super Action class. This provides every component 
+ * with a user object inside, so we don't have to continuously re-query 
+ * firestore. 
+ */
 export class DashboardAction extends React.Component {
     constructor(props) {
         super(props)
@@ -12,6 +17,23 @@ export class DashboardAction extends React.Component {
     }
 }
 
+/**
+ * Action to create a group. This internally uses the 
+ * [[../Firebase/groups]] API to create a group. Upon creation of a group, 
+ * two things happen: 
+ * 1. The group is added to the `/usergroups/` collection as a document. The 
+ * group document looks like: 
+ * ```json 
+ * { 
+ *  "name": "group_name", 
+ *  "members": [], 
+ *  "join_requests": []
+ * }
+ * ``` 
+ * `members` is really a firebase collection. Each document in the members 
+ * collection is an empty document with the same UID as the user. 
+ * the `join_requests` collection appears when there are join requests. 
+ */
 export class CreateGroupAction extends DashboardAction {
     constructor(props) {
         super(props); 
@@ -26,6 +48,10 @@ export class CreateGroupAction extends DashboardAction {
         this.setState({name: event.target.value}); 
     }
 
+    /**
+     * A simple wrapper that interally just calls create_group with the name. 
+     * @param event The triggering JS event 
+     */
     handleSubmit(event) {
         event.preventDefault(); 
         const name = this.state.name; 
@@ -44,6 +70,10 @@ export class CreateGroupAction extends DashboardAction {
     }
 }
 
+/**
+ * Similar to above, but performs a recursive delete on a group. 
+ * Again, internally just calls delete_group. 
+ */
 export class DeleteGroupAction extends DashboardAction {
     constructor(props) {
         super(props); 
@@ -86,6 +116,11 @@ export class DeleteGroupAction extends DashboardAction {
     }
 }
 
+/**
+ * Similar to the other two; provides a UI wrapper for the 
+ * `user.requestJoinGroup` function call. Note that this one is in the `user` 
+ * api instead of the `group` api. 
+ */
 export class CreateJoinRequestAction extends DashboardAction {
     constructor(props) {
         super(props) 
@@ -131,6 +166,11 @@ export class CreateJoinRequestAction extends DashboardAction {
     }
 }
 
+/**
+ * Allows a member of a group to approve or deny the addition of another member. 
+ * Internally wraps up `user.respondToJoinRequest` and `group.getPendingRequests` 
+ * into one UI element. 
+ */
 export class TakeRequestAction extends DashboardAction {
     constructor(props) {
         super(props) 
@@ -143,6 +183,15 @@ export class TakeRequestAction extends DashboardAction {
         this.handleInputChange = this.handleInputChange.bind(this); 
         this.handleSubmit = this.handleSubmit.bind(this); 
         this.handleClick = this.handleClick.bind(this); 
+
+        /**
+         * This should be changed so that it only shows the users' groups. 
+         * Should be a simple fix from `this.props.firebase.group.get_groups()` 
+         * to `this.user.groups` (which is an array). This would also 
+         * drastically make the render better as there's one less database 
+         * query to be taken. I would change it now but I'm tired and too 
+         * lazy to test. See issue #78
+         */
         this.props.firebase.group.get_groups().then(groups => {
             this.available_groups = groups; 
             this.forceUpdate()
@@ -210,7 +259,10 @@ export class TakeRequestAction extends DashboardAction {
     }
 }
 
-
+/**
+ * Allows a finance user to confirm whether or not a payment has been made. 
+ * Essentially a UI wrapper for `user.verifyUserPayment`. 
+ */
 export class VerifyPendingUserAction extends DashboardAction {
     constructor(props) {
         super(props); 

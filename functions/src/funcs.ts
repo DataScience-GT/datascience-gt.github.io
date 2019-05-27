@@ -1,3 +1,20 @@
+/**
+ * Includes google cloud functions. For laziness, 
+ * some things from the web-api are duplicated here, including the 
+ * - `check_perms` function from `components/Firebase/user`
+ * - `MembershipStatus` enum from `components/Firebase/entity`
+ * - `get_user` function from `components/Firebase/user` 
+ * 
+ * If those ever change, you should probably change them here too. That being said, 
+ * I doubt that those will ever change. 
+ */
+
+ /** Magically allow CORS. 
+  * 
+  * TODO: Fix this. Migrate function to our domain and only allow 
+  * same-origin requests. Makes testing a bitch so for dev purposes, 
+  * this is left here. See issue #80. 
+  */
 require('cors')({ origin: true });
 import * as functions from "firebase-functions"
 import * as admin from "firebase-admin"
@@ -76,6 +93,9 @@ export const onUserVerify = async function(data: any, context: any): Promise<any
             String(yyyy)); 
         const userdoc: any = await get_user(data.uid); 
 
+        /**
+         * This part writes to the Ledger sheet. 
+         */
         const VenmoLedgerPromise =  sheets.spreadsheets.values.append({
             spreadsheetId: financeSpreadsheet, 
             range: sheet.ledger_sheet + "!A1:D1", 
@@ -85,6 +105,9 @@ export const onUserVerify = async function(data: any, context: any): Promise<any
             resource: {values: [[datestring, "Dues " + userdoc.gt_email, "Dues", data.amount]]}
         } as sheets_v4.Params$Resource$Spreadsheets$Values$Append)
 
+        /**
+         * This part writes to the Dues sheet. 
+         */
         const DuesLedgerPromise = sheets.spreadsheets.values.append({
             spreadsheetId: financeSpreadsheet, 
             range: sheet.dues_sheet + "!A1", 
@@ -98,6 +121,12 @@ export const onUserVerify = async function(data: any, context: any): Promise<any
     }
 } 
 
+/**
+ * Dummy function for testing purposes, to make sure the frontend works right 
+ * and that we don't spam the main budget sheet. 
+ * @param data Same as above
+ * @param context Same as above
+ */
 export const onUserVerifyDummy = function(data: any, context: any) {
     return {status: "success", data: data}; 
 }

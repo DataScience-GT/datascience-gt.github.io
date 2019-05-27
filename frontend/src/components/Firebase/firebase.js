@@ -1,3 +1,9 @@
+/**
+ * It's OK that our app secret is in here because the app secret 
+ * is public anyway. Security comes from database writing rules 
+ * This includes a building class that provides all Firebase 
+ * functionality under one reference class. 
+ */
 import app from 'firebase/app';
 import 'firebase/firestore'; 
 import 'firebase/auth'
@@ -15,6 +21,15 @@ const firebaseConfig = {
     appId: "1:672446353769:web:f98c65e7ff823af3"
 };
 
+/**
+ * I'm quite proud of this build pattern. We 
+ * link up the classes from the inividual APIs 
+ * to the Firebase class itself, so we really have 
+ * a series of singletons working together under 
+ * one singleton, all accessing the same data, while 
+ * keeping file sizes manageable. 
+ * - Raj
+ */
 class Firebase {
     constructor() {
         app.initializeApp(firebaseConfig); 

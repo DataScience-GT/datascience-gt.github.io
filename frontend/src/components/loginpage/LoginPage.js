@@ -1,3 +1,7 @@
+/**
+ * This file provides the login functionality. Upon login, 
+ * the user is redirected to the dashboard. 
+ */
 import React from 'react';
 import { Button, Form, Container } from "react-bootstrap";
 import { withFirebase } from '../Firebase';
