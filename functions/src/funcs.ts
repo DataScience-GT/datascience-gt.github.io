@@ -74,6 +74,7 @@ export const onUserVerify = async function(data: any, context: any): Promise<any
         const datestring = "".concat(mm < 10 ? "0" + String(mm) : String(mm), "/",
             dd < 10 ? "0" + String(dd) : String(dd), "/",
             String(yyyy)); 
+        const userdoc: any = await get_user(data.uid); 
 
         const VenmoLedgerPromise =  sheets.spreadsheets.values.append({
             spreadsheetId: financeSpreadsheet, 
@@ -81,10 +82,9 @@ export const onUserVerify = async function(data: any, context: any): Promise<any
             auth: jwt, 
             key: apiKey, 
             valueInputOption: "USER_ENTERED", 
-            resource: {values: [[datestring, "Dues Payment", "Dues", data.amount]]}
+            resource: {values: [[datestring, "Dues " + userdoc.gt_email, "Dues", data.amount]]}
         } as sheets_v4.Params$Resource$Spreadsheets$Values$Append)
 
-        const userdoc: any = await get_user(data.uid); 
         const DuesLedgerPromise = sheets.spreadsheets.values.append({
             spreadsheetId: financeSpreadsheet, 
             range: sheet.dues_sheet + "!A1", 
@@ -99,5 +99,5 @@ export const onUserVerify = async function(data: any, context: any): Promise<any
 } 
 
 export const onUserVerifyDummy = function(data: any, context: any) {
-    return {data: data}; 
+    return {status: "success", data: data}; 
 }
