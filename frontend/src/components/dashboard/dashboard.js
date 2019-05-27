@@ -14,7 +14,6 @@ import {CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeReque
 class Dashboard extends React.Component {
     constructor(props) {
         super(props); 
-        console.log(this.authUser); 
         this.authUser = props.authUser; 
     }
 

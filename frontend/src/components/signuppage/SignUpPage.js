@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Form, Container } from "react-bootstrap";
 import { withFirebase } from '../Firebase';
-
+import { compose } from 'recompose'; 
+import {withRouter} from 'react-router-dom'; 
+import * as ROUTES from '../../constants/routes'; 
 
 class SignUpForm extends React.Component {
     constructor(props) {
@@ -44,15 +46,21 @@ class SignUpForm extends React.Component {
         // try creating an account 
         event.preventDefault(); 
         let state = this.state; 
-        await this.props.firebase.user.createUser(state.email, state.password, 
-            state.first_name, state.last_name, state.alt_email, state.phone_number);
-        if (this.state.verification_method === "cash") {
-            this.props.firebase.user.updateUserVerificationCash(this.state.vs_amount, this.state.vs_person); 
-        } else if (this.state.verification_method === "venmo") {
-            console.log("File Verified") 
-            this.props.firebase.user.updateUserVerificationVenmo(this.state.verification, this.state.verification.name); 
-        }
+        try {
+            await this.props.firebase.user.createUser(state.email, state.password, 
+                state.first_name, state.last_name, state.alt_email, state.phone_number); 
+            if (this.state.verification_method === "cash") {
+                await this.props.firebase.user.updateUserVerificationCash(this.state.vs_amount, this.state.vs_person); 
+            } else if (this.state.verification_method === "venmo") {
+                this.props.firebase.user.updateUserVerificationVenmo(this.state.verification, this.state.verification.name); 
+            }
+            this.props.history.push(ROUTES.DASHBOARD); 
+        } catch(err) {
+            alert(err); 
+            this.props.history.push(ROUTES.SIGNUP); 
+        } 
     }
+
     getVerificationStub(method) {
         if (method === "venmo") {
             return (
@@ -124,7 +132,7 @@ class SignUpForm extends React.Component {
     }
 }
 
-const SignUpWithFirebase = withFirebase(SignUpForm); 
+const SignUpWithFirebase = compose(withRouter, withFirebase)(SignUpForm); 
 
 export default class SignUpPage extends React.Component {
     render() {

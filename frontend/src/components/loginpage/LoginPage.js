@@ -3,8 +3,7 @@ import { Button, Form, Container } from "react-bootstrap";
 import { withFirebase } from '../Firebase';
 import * as ROUTES from "../../constants/routes"; 
 import { compose } from 'recompose'
-import {Link, withRouter} from 'react-router-dom'; 
-import { withAuthentication } from '../Session';
+import {withRouter} from 'react-router-dom'; 
 
 class LoginForm extends React.Component {
   constructor(props) {

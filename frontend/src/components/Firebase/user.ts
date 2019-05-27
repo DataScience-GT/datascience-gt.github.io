@@ -135,28 +135,39 @@ class UserApi {
      * @param file The file/blob to upload. Required if option is venmo.
      * @param fname The name of the file. 
      */
-    async updateUserVerificationVenmo(file: File|Blob, fname?: string) {
+    async updateUserVerificationVenmo(file: File, fname?: string) {
         if (!file) {
-            throw Error("File argument cannot be null if option is 2"); 
+            throw Error("You MUST upload a screenshot if opting for venmo"); 
         }
-        if (!fname) {
-            throw Error("File name argument cannot be null if option is 2"); 
-        }
-        const snapshot = await this._fbapp.file.uploadVerification(file, fname);
+        const snapshot = await this._fbapp.file.uploadVerification(file, file.name);
         const download_url = (await snapshot.ref.getDownloadURL()) as string;  
         return this.db.collection('users').doc(this.get_current_uid()).update({"verification_uri": download_url});
     }
 
+    /**
+     * Allows a user to opt for a cash payment. 
+     * 
+     * @param amount The amount that was transferred
+     * @param to The person who received the transaction. They will need to manually provide verification. 
+     */
     async updateUserVerificationCash(amount: number, to: string) {
+        if (!amount) {
+            throw Error("You must include the amount you paid"); 
+        } 
+        if (!to) {
+            throw Error("You must include who you paid to"); 
+        }
         return this.db.collection('users').doc(this.get_current_uid()).update({"verification_uri": "cash,".concat(String(amount), ",", to)});
     }
 
+    /**
+     * Provides a list of users who are still pending to an authenticated Finance or 
+     * Membership user. 
+     */
     async getPendingUsers(): Promise<entity.User[] | undefined> {
         // only let membership & finance access this 
         let perm1 = await this.check_perms(this.get_current_uid(), "finance"); 
         let perm2 = await this.check_perms(this.get_current_uid(), "membership"); 
-        console.log(await this.get_user(this.get_current_uid()));
-        console.log(perm1, perm2); 
         if (perm1 || perm2) {
             let query = await this.db.collection('users').where("membership_status", "==", entity.MembershipStatus.pending).get(); 
             let user_docs:entity.User[] = query.docs.map(data => {
@@ -236,6 +247,8 @@ class UserApi {
      */
     private call_cloud_disable_function(user:string) {
         // TODO: Create a cloud function to disable user
+        // Placeholder until we actually get around to making one of these
+        // This will live in a cloud function obviously. 
     }
     /**
      * 
