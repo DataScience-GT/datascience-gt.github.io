@@ -203,7 +203,15 @@ class UserApi {
                 } else {
                     throw new Error("Incorrect status")
                 }
-                this.functions.httpsCallable("onUserVerify")({
+                /**
+                 * IMPORTANT: USE onUserVerify for all prod purposes. 
+                 * Use onUserVerifyDummy for all dev purposes. 
+                 * 
+                 * Currently the funciton returns nothing of importance; 
+                 * so, the dummy returns a "success" and the data it was passed. 
+                 * 
+                 */
+                this.functions.httpsCallable("onUserVerifyDummy")({
                     uid: user, 
                     amount: amount, 
                     is_cash: isCash

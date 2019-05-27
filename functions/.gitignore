@@ -9,3 +9,6 @@ node_modules/
 
 # Documentation 
 docs/
+
+# keys
+creds.ts
