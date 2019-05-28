@@ -132,7 +132,7 @@ class SignUpForm extends React.Component {
                     </div>
                 </Form.Group>
                 <Form.Group>
-                    <Form.label>More About You</Form.label>
+                    <Form.Text>More About You</Form.Text>
                 </Form.Group>
                 {this.getVerificationStub(this.state.verification_method)}
                 <Button variant="primary" type="submit"> 
