@@ -131,13 +131,15 @@ class SignUpForm extends React.Component {
                         <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="defer" checked={this.state.verification_method === "defer"} label="defer" />  
                     </div>
                 </Form.Group>
-                <Form.Group>
-                    <Form.Text>More About You</Form.Text>
-                </Form.Group>
                 {this.getVerificationStub(this.state.verification_method)}
+                {/* <Form.Group>
+                    <Form.Text>More About You</Form.Text>
+                </Form.Group> */}
+
                 <Button variant="primary" type="submit"> 
                     Sign Up 
                 </Button>
+
             </Form>
         )
     }

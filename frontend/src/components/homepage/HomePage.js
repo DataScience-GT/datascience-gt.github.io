@@ -1,6 +1,7 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap'; 
-import * as DUES from "../../constants/app_constants"; 
+import * as DUES from "../../constants/app_constants";
+import * as ROUTES from "../../constants/routes";  
 export default class HomePage extends React.Component {
 
     render() {
@@ -87,6 +88,7 @@ export default class HomePage extends React.Component {
                         <Row> 
                             <Col className="text-center">
                                 <h2 className="section-heading text-uppercase"> Join </h2>   
+                                <a href={ROUTES.SIGNUP} className="btn btn-primary">Sign up Now</a>
                             </Col> 
                         </Row>
                         <Row> 
