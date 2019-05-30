@@ -35,8 +35,18 @@ class LoginForm extends React.Component {
   async handleSubmit(event) {
     // sign user in 
     event.preventDefault(); 
-    await this.props.firebase.user.sign_in(this.state.email_addr, this.state.password); 
-    this.props.history.push(ROUTES.DASHBOARD); 
+    try {
+      await this.props.firebase.user.sign_in(this.state.email_addr, this.state.password); 
+      this.props.history.push(ROUTES.DASHBOARD); 
+    } catch (err) {
+      if (err.code === "auth/user-not-found") {
+        alert("Email not found - did you make a typo?"); 
+      } else if (err.code === "auth/wrong-password") {
+        alert("Wrong password - please try again"); 
+      } else {
+        console.log(err); 
+      }
+    }
   }
   render() {
     return (

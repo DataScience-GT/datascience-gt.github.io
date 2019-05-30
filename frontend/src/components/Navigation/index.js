@@ -15,9 +15,12 @@ export default class Navigation extends React.Component {
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand><Link to='/'>DSGT</Link></Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link href="">About</Nav.Link>
-                    <Nav.Link href="#features">Projects</Nav.Link>
-                    <Nav.Link href="#pricing">Calendar</Nav.Link>
+                    <Nav.Link href="#about">About</Nav.Link>
+                    <Nav.Link href="#projects">Projects</Nav.Link>
+                    <Nav.Link href="#calendar">Calendar</Nav.Link>
+                    <Nav.Link href="#join">Join</Nav.Link>
+                    <Nav.Link href="#resources">Resources</Nav.Link>
+                    <Nav.Link href="#contact">Contact</Nav.Link>
                 </Nav>
                 <Nav>
                     <AuthUserContext.Consumer>
