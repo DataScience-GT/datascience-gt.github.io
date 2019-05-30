@@ -5,6 +5,13 @@ $copy-font: "Roboto";
 $nav-height: 4vh; 
 $highlight-color: rgb(40, 40, 40); 
 $bright-highlight-color: yellow; 
+/**
+Overflow prevention 
+*/ 
+img, embed, object, video {
+  max-width: 100%;
+}
+
 body {
     background-color: transparent;
 }
