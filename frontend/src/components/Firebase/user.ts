@@ -76,6 +76,11 @@ class UserApi {
         return await this.auth.signInWithEmailAndPassword(email, password); 
     }
 
+    signout() {
+        // sign out the user 
+        return this.auth.signOut(); 
+    }
+
     /**
      * Creates a user by first signing up with firebase, and upon success, 
      * creating a [[entity.User]] entry in our database at the /users endpoint. 

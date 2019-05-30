@@ -10,7 +10,7 @@ import * as entity from "../Firebase/entity";
 export class DashboardAction extends React.Component {
     constructor(props) {
         super(props)
-        this.user = (this.props.firebase.user.get_user(props.authUser.uid));
+        this.userPromise = (this.props.firebase.user.get_user(props.authUser.uid));
     }
     render() {
         return;
@@ -125,19 +125,20 @@ export class CreateJoinRequestAction extends DashboardAction {
     constructor(props) {
         super(props) 
         this.state = {
+            available_groups: [], 
             name: "", 
             reason: "", 
         }
-        this.available_groups = []
 
         this.handleInputChange = this.handleInputChange.bind(this); 
         this.handleSubmit = this.handleSubmit.bind(this); 
-        this.props.firebase.group.get_groups().then(groups => {
-            this.available_groups = groups; 
-            this.forceUpdate()
-        })
     }
 
+    componentDidMount() {
+        this.props.firebase.group.get_groups().then(groups => {
+            this.setState({"available_groups": groups})
+        })
+    }
     handleInputChange(event) {
         let target = event.target; 
         this.setState({[target.name]: target.value})
@@ -153,7 +154,7 @@ export class CreateJoinRequestAction extends DashboardAction {
                 <Form.Group> 
                     <Form.Control as="select" onChange={this.handleInputChange} name="name"> 
                         <option>None Selected</option>
-                        {this.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
+                        {this.state.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
                     </Form.Control>
                 </Form.Group>
                 <Form.Group>
@@ -175,16 +176,20 @@ export class TakeRequestAction extends DashboardAction {
     constructor(props) {
         super(props) 
         this.state = {
+            "available_groups": [],
             "selected": "", 
             "requests": []
         }; 
-        this.available_groups = []
         this.reqs = [] 
         this.handleInputChange = this.handleInputChange.bind(this); 
         this.handleSubmit = this.handleSubmit.bind(this); 
         this.handleClick = this.handleClick.bind(this); 
 
-        /**
+       
+    }
+
+    componentDidMount() {
+         /**
          * This should be changed so that it only shows the users' groups. 
          * Should be a simple fix from `this.props.firebase.group.get_groups()` 
          * to `this.user.groups` (which is an array). This would also 
@@ -193,11 +198,9 @@ export class TakeRequestAction extends DashboardAction {
          * lazy to test. See issue #78
          */
         this.props.firebase.group.get_groups().then(groups => {
-            this.available_groups = groups; 
-            this.forceUpdate()
+            this.setState({"available_groups": groups}); 
         })
     }
-
     handleInputChange(event) {
         let target = event.target; 
         this.setState({
@@ -234,7 +237,7 @@ export class TakeRequestAction extends DashboardAction {
                         <Form.Label>Select Group for Requests</Form.Label>
                         <Form.Control onChange={this.handleInputChange} as="select" name="selected_option">
                             <option> None selected </option> 
-                            {this.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
+                            {this.state.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
                         </Form.Control>
                     </Form.Group>
                 </Form>
@@ -275,6 +278,7 @@ export class VerifyPendingUserAction extends DashboardAction {
         // get pending users 
         this.update_pending_users_state(); 
     }
+ 
     async update_pending_users_state() {
         // fetch pending users 
         let ret = await this.props.firebase.user.getPendingUsers(); 
