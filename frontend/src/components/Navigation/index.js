@@ -39,22 +39,25 @@ export default class Navigation extends React.Component {
     }
     render() {
         return (
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant="dark" expand="md">
                 <Navbar.Brand><Link to='/'>DSGT</Link></Navbar.Brand>
-                <Nav className="mr-auto">
-                    <Nav.Link href={ROUTES.LANDING +"#about"}>About</Nav.Link>
-                    <Nav.Link href={ROUTES.LANDING + "#projects"}>Projects</Nav.Link>
-                    <Nav.Link href={ROUTES.LANDING + "#calendar"}>Calendar</Nav.Link>
-                    <Nav.Link href={ROUTES.LANDING + "#join"}>Join</Nav.Link>
-                    <Nav.Link href={ROUTES.LANDING + "#resources"}>Resources</Nav.Link>
-                    <Nav.Link href={ROUTES.LANDING + "#contact"}>Contact</Nav.Link>
-                </Nav>
-                <Nav>
-                    <AuthLoginComponent /> 
-                    {/* <AuthUserContext.Consumer>
-                        {authUser => authUser ? <Nav.Link>Sign Out</Nav.Link>: <Nav.Link href={ROUTES.LOGIN}>Log in</Nav.Link>}
-                    </AuthUserContext.Consumer> */}
-                </Nav>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse>
+                    <Nav className="mr-auto">
+                        <Nav.Link href={ROUTES.LANDING +"#about"}>About</Nav.Link>
+                        <Nav.Link href={ROUTES.LANDING + "#projects"}>Projects</Nav.Link>
+                        <Nav.Link href={ROUTES.LANDING + "#calendar"}>Calendar</Nav.Link>
+                        <Nav.Link href={ROUTES.LANDING + "#join"}>Join</Nav.Link>
+                        <Nav.Link href={ROUTES.LANDING + "#resources"}>Resources</Nav.Link>
+                        <Nav.Link href={ROUTES.LANDING + "#contact"}>Contact</Nav.Link>
+                    </Nav>
+                    <Nav>
+                        <AuthLoginComponent /> 
+                        {/* <AuthUserContext.Consumer>
+                            {authUser => authUser ? <Nav.Link>Sign Out</Nav.Link>: <Nav.Link href={ROUTES.LOGIN}>Log in</Nav.Link>}
+                        </AuthUserContext.Consumer> */}
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
         )
     }
