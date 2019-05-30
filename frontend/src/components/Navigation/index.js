@@ -35,7 +35,6 @@ let AuthLoginComponent = withRouter(withAuthentication(LoginComponent));
 export default class Navigation extends React.Component {
     constructor(props, authUser) {
         super(props); 
-        console.log(authUser); 
     }
     render() {
         return (

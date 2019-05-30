@@ -296,7 +296,16 @@ export class VerifyPendingUserAction extends DashboardAction {
         this.props.firebase.user.verifyUserPayment(target.value, target.name, target.is_cash); 
         this.update_pending_users_state(); 
     }
-
+    render_verification_stub(req) {
+        if (req.verification_uri === "") {
+            return "Deferred"
+        }
+        else if (req.verification_uri.split(",")[0] === "cash") {
+            return req.verification_uri
+        } else {
+            return <img alt={req.verification_uri} src={req.verification_uri}></img>
+        }
+    }
     render() { return (
         <Container> 
             <Table> 
@@ -306,9 +315,7 @@ export class VerifyPendingUserAction extends DashboardAction {
                     <tr key={req.uid}>
                         <td>{req.first_name}</td>
                         <td>{req.last_name}</td>
-                        <td>{req.verification_uri.split(",")[0] === "cash"
-                            ? req.verification_uri 
-                            : <img alt="Verification Screenshot" src={req.verification_uri}></img>}</td>
+                        <td>{this.render_verification_stub(req)}</td>
                         <td>
                             <Button variant="danger" name="0" value={req.uid} is_cash={(req.verification_uri.split(",")[0] === "cash").toString()} onClick={this.handleStatusChange}>Suspend</Button>
                             <Button variant="primary" name="1" value={req.uid} is_cash={(req.verification_uri.split(",")[0] === "cash").toString()} onClick={this.handleStatusChange}>Paid Semester</Button>

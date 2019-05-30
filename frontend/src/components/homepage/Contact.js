@@ -20,13 +20,13 @@ export default function ContactCore(){ return (
             </Row>
             <Row>
                 <Col sm={4} className="text-center">
-                    <ContactLink href={CONSTANTS.FACEBOOK} target="_blank"><span class="fab fa-facebook "></span></ContactLink>
+                    <ContactLink href={CONSTANTS.FACEBOOK} target="_blank"><span className="fab fa-facebook "></span></ContactLink>
                 </Col>
                 <Col sm={4} className="text-center">
-                    <ContactLink href={CONSTANTS.LINKEDIN}><span class="fab fa-linkedin"></span></ContactLink>
+                    <ContactLink href={CONSTANTS.LINKEDIN}><span className="fab fa-linkedin"></span></ContactLink>
                 </Col>
                 <Col sm={4} className="text-center">
-                    <ContactLink href={CONSTANTS.EMAIL_URL}><span class="fas fa-envelope"></span></ContactLink>
+                    <ContactLink href={CONSTANTS.EMAIL_URL}><span className="fas fa-envelope"></span></ContactLink>
                 </Col>
             </Row>
             </React.Fragment>

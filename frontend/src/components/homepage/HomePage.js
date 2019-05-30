@@ -160,7 +160,7 @@ const Events = () => {
     return (
         <Section id="events" heading="Upcoming Events">
             <div className="responsiveCal">
-                <iframe title="calendar" width="100%" height='600px' id="calframe" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=kha5imvol6hbevvblb7sr48vjs%40group.calendar.google.com&amp;color=%23711616&amp;ctz=America%2FNew_York" scrolling="no" frameborder='0'></iframe>
+                <iframe title="calendar" width="100%" height='600px' id="calframe" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=kha5imvol6hbevvblb7sr48vjs%40group.calendar.google.com&amp;color=%23711616&amp;ctz=America%2FNew_York" scrolling="no" frameBorder='0'></iframe>
             </div>
         </Section>
     )
