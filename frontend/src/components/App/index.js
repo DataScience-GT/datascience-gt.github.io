@@ -17,7 +17,6 @@ class App extends React.Component {
             <Router>
                 <Navigation/> 
         
-                <hr/>
         
                 <Route exact path={ROUTES.LANDING} component={HomePage} />
                 <Route path={ROUTES.LOGIN} component={LoginPage} />

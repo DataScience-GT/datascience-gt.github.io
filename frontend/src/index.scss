@@ -12,6 +12,20 @@ img, embed, object, video {
   max-width: 100%;
 }
 
+/** Calendar responsive 
+*/
+.responsiveCal {
+ 
+position: relative; padding-bottom: 75%; height: 0; overflow: hidden;
+    
+}
+    
+.responsiveCal iframe {
+    
+position: absolute; top:0; left: 0; width: 100%; height: 100%;
+    
+}
+
 body {
     background-color: transparent;
 }
@@ -22,6 +36,20 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0.5vh; 
     margin-bottom: 0.5vh; 
 }
+
+// h1 {
+//     font-size: 5vw; 
+// }
+
+// h2 {
+//     font-size: 3.8vw; 
+// }
+// h3 {
+//     font-size: 3.5vw; 
+// }
+// h4 {
+//     font-size:3vw; 
+// }
 p {
     text-align: left; 
 }
@@ -31,24 +59,29 @@ ul {
 header, section {
     padding-top: $nav-height; 
 }
+section#page-top{
+    padding-top: 0; 
+}
 
 .jumbotron {
-    padding-top: 20vh; 
+    padding-top: 15vw; 
+    background-image: url('https://datasciencegt.org/img/dsgt-bg.jpg');
     background-size: cover; 
     background-attachment: fixed; 
-    min-height: 50vh; 
+    min-height: 50vw; 
+    max-height: 96vh;
 }
 .intro-text {
     color: white; 
 }
 .intro-heading {
-    font-size: 4vw; 
+    font-size: 5vw; 
     font-weight: 800; 
     font-family: $header-font;     
 }
 
 .intro-subtext {
-    font-size: 2vw; 
+    font-size: 3.5vw; 
     font-family: $header-font;
     text-shadow: 5px; 
 }

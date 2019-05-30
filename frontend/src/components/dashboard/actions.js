@@ -1,6 +1,5 @@
 import React from 'react'; 
 import { Button, Form, Table, Container} from "react-bootstrap";
-import * as entity from "../Firebase/entity"; 
 
 /**
  * Super Action class. This provides every component 
@@ -309,7 +308,7 @@ export class VerifyPendingUserAction extends DashboardAction {
                         <td>{req.last_name}</td>
                         <td>{req.verification_uri.split(",")[0] === "cash"
                             ? req.verification_uri 
-                            : <img src={req.verification_uri}></img>}</td>
+                            : <img alt="Verification Screenshot" src={req.verification_uri}></img>}</td>
                         <td>
                             <Button variant="danger" name="0" value={req.uid} is_cash={(req.verification_uri.split(",")[0] === "cash").toString()} onClick={this.handleStatusChange}>Suspend</Button>
                             <Button variant="primary" name="1" value={req.uid} is_cash={(req.verification_uri.split(",")[0] === "cash").toString()} onClick={this.handleStatusChange}>Paid Semester</Button>
