@@ -4,7 +4,6 @@
  * This should be the POC for all google cloud storage functionality. 
  */
 import Firebase from "./firebase"; 
-import * as firebase from "firebase"; 
 
 
 
@@ -12,13 +11,11 @@ class FileApi {
     db: firebase.firestore.Firestore;  
     storage: firebase.storage.Storage; 
     rootref: firebase.storage.Reference; 
-    firebase: typeof firebase;
     _fbapp: Firebase;
     constructor(firebaseApp: Firebase) {
         this._fbapp = firebaseApp; 
-        this.firebase = firebaseApp.app; 
         this.db = firebaseApp.db; 
-        this.storage = this.firebase.storage(); 
+        this.storage = firebaseApp.app.storage(); 
         this.rootref = this.storage.ref(); 
     }
 

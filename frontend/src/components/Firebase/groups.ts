@@ -3,7 +3,7 @@
  * for managing groups, mostly related to creating, deleting, etc. 
  */
 import Firebase from "./firebase";
-import { firestore } from "firebase";
+import {firestore} from "firebase/app";
 
 
 export default class GroupApi {

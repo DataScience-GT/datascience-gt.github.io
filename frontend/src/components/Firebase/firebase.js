@@ -7,6 +7,8 @@
 import app from 'firebase/app';
 import 'firebase/firestore'; 
 import 'firebase/auth'
+import 'firebase/functions'
+import 'firebase/storage'
 import UserApi from "./user";  
 import FileApi from "./file"; 
 import GroupApi from "./groups"; 

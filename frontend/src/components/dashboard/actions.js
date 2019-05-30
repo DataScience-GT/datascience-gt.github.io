@@ -1,6 +1,5 @@
 import React from 'react'; 
 import { Button, Form, Table, Container} from "react-bootstrap";
-import * as entity from "../Firebase/entity"; 
 
 /**
  * Super Action class. This provides every component 
@@ -10,7 +9,7 @@ import * as entity from "../Firebase/entity";
 export class DashboardAction extends React.Component {
     constructor(props) {
         super(props)
-        this.user = (this.props.firebase.user.get_user(props.authUser.uid));
+        this.userPromise = (this.props.firebase.user.get_user(props.authUser.uid));
     }
     render() {
         return;
@@ -125,19 +124,20 @@ export class CreateJoinRequestAction extends DashboardAction {
     constructor(props) {
         super(props) 
         this.state = {
+            available_groups: [], 
             name: "", 
             reason: "", 
         }
-        this.available_groups = []
 
         this.handleInputChange = this.handleInputChange.bind(this); 
         this.handleSubmit = this.handleSubmit.bind(this); 
-        this.props.firebase.group.get_groups().then(groups => {
-            this.available_groups = groups; 
-            this.forceUpdate()
-        })
     }
 
+    componentDidMount() {
+        this.props.firebase.group.get_groups().then(groups => {
+            this.setState({"available_groups": groups})
+        })
+    }
     handleInputChange(event) {
         let target = event.target; 
         this.setState({[target.name]: target.value})
@@ -153,7 +153,7 @@ export class CreateJoinRequestAction extends DashboardAction {
                 <Form.Group> 
                     <Form.Control as="select" onChange={this.handleInputChange} name="name"> 
                         <option>None Selected</option>
-                        {this.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
+                        {this.state.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
                     </Form.Control>
                 </Form.Group>
                 <Form.Group>
@@ -175,16 +175,20 @@ export class TakeRequestAction extends DashboardAction {
     constructor(props) {
         super(props) 
         this.state = {
+            "available_groups": [],
             "selected": "", 
             "requests": []
         }; 
-        this.available_groups = []
         this.reqs = [] 
         this.handleInputChange = this.handleInputChange.bind(this); 
         this.handleSubmit = this.handleSubmit.bind(this); 
         this.handleClick = this.handleClick.bind(this); 
 
-        /**
+       
+    }
+
+    componentDidMount() {
+         /**
          * This should be changed so that it only shows the users' groups. 
          * Should be a simple fix from `this.props.firebase.group.get_groups()` 
          * to `this.user.groups` (which is an array). This would also 
@@ -193,11 +197,9 @@ export class TakeRequestAction extends DashboardAction {
          * lazy to test. See issue #78
          */
         this.props.firebase.group.get_groups().then(groups => {
-            this.available_groups = groups; 
-            this.forceUpdate()
+            this.setState({"available_groups": groups}); 
         })
     }
-
     handleInputChange(event) {
         let target = event.target; 
         this.setState({
@@ -234,7 +236,7 @@ export class TakeRequestAction extends DashboardAction {
                         <Form.Label>Select Group for Requests</Form.Label>
                         <Form.Control onChange={this.handleInputChange} as="select" name="selected_option">
                             <option> None selected </option> 
-                            {this.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
+                            {this.state.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
                         </Form.Control>
                     </Form.Group>
                 </Form>
@@ -275,6 +277,7 @@ export class VerifyPendingUserAction extends DashboardAction {
         // get pending users 
         this.update_pending_users_state(); 
     }
+ 
     async update_pending_users_state() {
         // fetch pending users 
         let ret = await this.props.firebase.user.getPendingUsers(); 
@@ -293,7 +296,16 @@ export class VerifyPendingUserAction extends DashboardAction {
         this.props.firebase.user.verifyUserPayment(target.value, target.name, target.is_cash); 
         this.update_pending_users_state(); 
     }
-
+    render_verification_stub(req) {
+        if (req.verification_uri === "") {
+            return "Deferred"
+        }
+        else if (req.verification_uri.split(",")[0] === "cash") {
+            return req.verification_uri
+        } else {
+            return <img alt={req.verification_uri} src={req.verification_uri}></img>
+        }
+    }
     render() { return (
         <Container> 
             <Table> 
@@ -303,9 +315,7 @@ export class VerifyPendingUserAction extends DashboardAction {
                     <tr key={req.uid}>
                         <td>{req.first_name}</td>
                         <td>{req.last_name}</td>
-                        <td>{req.verification_uri.split(",")[0] === "cash"
-                            ? req.verification_uri 
-                            : <img src={req.verification_uri}></img>}</td>
+                        <td>{this.render_verification_stub(req)}</td>
                         <td>
                             <Button variant="danger" name="0" value={req.uid} is_cash={(req.verification_uri.split(",")[0] === "cash").toString()} onClick={this.handleStatusChange}>Suspend</Button>
                             <Button variant="primary" name="1" value={req.uid} is_cash={(req.verification_uri.split(",")[0] === "cash").toString()} onClick={this.handleStatusChange}>Paid Semester</Button>

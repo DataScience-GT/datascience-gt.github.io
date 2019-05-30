@@ -5,24 +5,23 @@
  */
 import Firebase from "./firebase"; 
 import * as entity from "./entity"; 
-import firebase, { firestore } from "firebase";
+import {firestore, auth, functions} from "firebase/app";
+
 import {DUES_SEMESTER, DUES_YEAR} from "../../constants/app_constants"; 
 /**
  * Provides the entirety of the User API Functionality  
  */
 class UserApi {
-    firebase: typeof firebase;
-    db: firestore.Firestore;  
+    db: firebase.firestore.Firestore;  
     auth: firebase.auth.Auth;
     _fbapp: Firebase;
     functions: firebase.functions.Functions;
     constructor(firebaseApp: Firebase) {
         this._fbapp = firebaseApp; 
-        this.firebase = firebaseApp.app; 
         this.db = firebaseApp.db; 
-        this.auth = this.firebase.auth(); 
-        this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
-        this.functions = this.firebase.functions(); 
+        this.auth = firebaseApp.app.auth(); 
+        this.auth.setPersistence(auth.Auth.Persistence.SESSION);
+        this.functions = this._fbapp.app.functions(); 
     }
 
     /**
@@ -74,6 +73,11 @@ class UserApi {
      */
     async sign_in(email:string, password:string) {
         return await this.auth.signInWithEmailAndPassword(email, password); 
+    }
+
+    signout() {
+        // sign out the user 
+        return this.auth.signOut(); 
     }
 
     /**
