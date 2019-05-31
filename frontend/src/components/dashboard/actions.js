@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { Button, Form, Table, Container} from "react-bootstrap";
+import { Button, Form, Table, Container, Row, Col} from "react-bootstrap";
 
 /**
  * Super Action class. This provides every component 
@@ -8,12 +8,45 @@ import { Button, Form, Table, Container} from "react-bootstrap";
  */
 export class DashboardAction extends React.Component {
     constructor(props) {
-        super(props)
-        this.userPromise = (this.props.firebase.user.get_user(props.authUser.uid));
+        super(props);
     }
-    render() {
-        return;
+    render() {return; 
     }
+}
+
+/**
+ * Default view profile action. Loads the user's profile.
+ */
+export class ViewProfile extends DashboardAction {
+    static descriptor = "View Profile"
+    render () {return (
+        <Container>  
+            <Row> 
+                <Col>
+                    <h2>Welcome, {this.props.user.first_name}</h2>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <h3> Basic Information </h3> 
+                    <hr />
+                    <Table>
+                        <tbody>
+                            <tr>
+                                <td> Name </td><td>{this.props.user.first_name + " " + this.props.user.last_name}</td>
+                            </tr>
+                            <tr><td> Email </td><td>{this.props.user.gt_email}</td>
+                            </tr>
+                            <tr>
+                                <td>Groups</td>
+                                <td>{this.props.user.groups}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </Col>
+            </Row>
+        </Container>
+    )}
 }
 
 /**
@@ -34,6 +67,7 @@ export class DashboardAction extends React.Component {
  * the `join_requests` collection appears when there are join requests. 
  */
 export class CreateGroupAction extends DashboardAction {
+    static descriptor = "Create New Group"
     constructor(props) {
         super(props); 
         this.state = {
@@ -74,9 +108,11 @@ export class CreateGroupAction extends DashboardAction {
  * Again, internally just calls delete_group. 
  */
 export class DeleteGroupAction extends DashboardAction {
+    static descriptor = "Delete Group"
     constructor(props) {
         super(props); 
         this.state = {
+            groups_available: [],
             name: ""
         }
         this.handleInputChange = this.handleInputChange.bind(this); 
@@ -84,10 +120,9 @@ export class DeleteGroupAction extends DashboardAction {
         this.setup_groups_available();
     }
     async setup_groups_available() {
-        const availale_groups = await this.props.firebase.group.get_groups();
-        this.groups_available = availale_groups.map(group => 
-            <li>{group}</li>
-        )
+        this.props.firebase.group.get_groups().then(available_groups => {
+            this.setState({'groups_available': available_groups})
+        })
 
     }
     handleInputChange(event){
@@ -104,7 +139,9 @@ export class DeleteGroupAction extends DashboardAction {
         return (
             <Form onSubmit={this.handleSubmit}>
                 <p>Available Groups: </p>
-                <ul>{this.groups_available}</ul>
+                <ul>{this.state.groups_available.map((group) => { return(
+                    <li key={group}>{group}</li>
+                )})}</ul>
                 <Form.Group>
                     <Form.Label>Delete Group Name</Form.Label>
                     <Form.Control onChange={this.handleInputChange} name="name"></Form.Control>
@@ -121,6 +158,7 @@ export class DeleteGroupAction extends DashboardAction {
  * api instead of the `group` api. 
  */
 export class CreateJoinRequestAction extends DashboardAction {
+    static descriptor = "Join a Group"; 
     constructor(props) {
         super(props) 
         this.state = {
@@ -172,6 +210,7 @@ export class CreateJoinRequestAction extends DashboardAction {
  * into one UI element. 
  */
 export class TakeRequestAction extends DashboardAction {
+    static descriptor = "View Join Requests";
     constructor(props) {
         super(props) 
         this.state = {
@@ -196,9 +235,7 @@ export class TakeRequestAction extends DashboardAction {
          * query to be taken. I would change it now but I'm tired and too 
          * lazy to test. See issue #78
          */
-        this.props.firebase.group.get_groups().then(groups => {
-            this.setState({"available_groups": groups}); 
-        })
+        this.setState({"available_groups": this.props.user.groups}); 
     }
     handleInputChange(event) {
         let target = event.target; 
@@ -266,6 +303,7 @@ export class TakeRequestAction extends DashboardAction {
  * Essentially a UI wrapper for `user.verifyUserPayment`. 
  */
 export class VerifyPendingUserAction extends DashboardAction {
+    static descriptor = "Verify Pending Users";
     constructor(props) {
         super(props); 
         this.state = {

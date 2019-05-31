@@ -5,44 +5,106 @@
  */
 import React from 'react'; 
 import { withFirebase } from '../Firebase'; 
-import {Container} from "react-bootstrap"; 
+import {Container, Row, Col, Button} from "react-bootstrap"; 
 import {withRouter} from "react-router-dom"
 import {compose} from "recompose"; 
-import {AuthUserContext} from "../Session"; 
-import {CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction, VerifyPendingUserAction} from "./actions"; 
+import {AuthUserContext, withAuthentication} from "../Session"; 
+import {ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction, VerifyPendingUserAction} from "./actions"; 
 import * as entity from "../Firebase/entity"; 
+import * as ROUTES from "../../constants/routes"
 /**
  * TODO: Build some dashboard here. Currently just loads all actions that I created so I coud test them 
  * - Raj 
  */
+
+const LoadingComponent = props => {return (
+    "Loading your Dashboard"
+)}
+
+const actionMapping = {
+    default: [ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction], 
+    finance: [VerifyPendingUserAction]
+}
+
 class Dashboard extends React.Component {
     constructor(props) {
         super(props); 
-        this.authUser = props.authUser; 
+        this.state = {
+            "current_render":  LoadingComponent, 
+            "actions": [], 
+            "user": {}, 
+            "reverseMap": {}
+        }
         this.getDashboard = this.getDashboard.bind(this);
         this.getUnverifiedStub = this.getUnverifiedStub.bind(this);  
-        this.state = {
-            "user": {}
+        this.selectAction = this.selectAction.bind(this);
+        this.cached_user_id = null;
+        this.first_render_only = true; 
+    }
+    componentDidUpdate() {
+        if (this.context === null) {
+            console.log(this.context, this);
+        } else {
+           
+            if (this.cached_user_id !== this.context.uid) {
+                this.props.firebase.user.get_user(this.context.uid).then((user) => {
+                    if (this.first_render_only) {
+                        this.setState({current_render: ViewProfile});
+                        this.first_render_only = false; 
+                    }
+                    let newActions = actionMapping.default;
+                    let newReverseMap = {};
+                    user.groups.forEach(group => {
+                        if(actionMapping[group]) {
+                            newActions = newActions.concat(actionMapping[group]);
+                        }
+                    })
+                    newActions.forEach(action => {
+                        newReverseMap[action.descriptor] = action;
+                    })
+                    this.setState({"actions": newActions, "reverseMap":  newReverseMap, "user": user}); 
+                    this.cached_user_id = this.context.uid;
+                }); 
+            }
         }
-
     }
-    componentDidMount() {
-        this.props.firebase.user.get_user(this.authUser.uid).then((user) => {
-            this.setState({"user": user}); 
-        }); 
+    selectAction(event) {
+        event.preventDefault(); 
+        this.setState({"current_render": this.state.reverseMap[event.target.name]})
     }
-
     getDashboard() {
         return (
-            <div>
-            <CreateGroupAction firebase={this.props.firebase} authUser={this.authUser}/> 
-            <br/>
-            <DeleteGroupAction firebase={this.props.firebase} authUser={this.authUser}/>
-            <br/>
-            <CreateJoinRequestAction firebase={this.props.firebase} authUser={this.authUser}/>
-            <TakeRequestAction firebase={this.props.firebase} authUser={this.authUser}/>
-            <VerifyPendingUserAction firebase={this.props.firebase} authUser={this.authUser}></VerifyPendingUserAction>
-            </div>
+            <Row>
+                <Col sm={12} lg={3}>
+                    <Container>
+                        <Row>
+                            <h3>Actions</h3>
+                        </Row>
+                        {this.state.actions.map(action => {return (
+                            <Row key={action}>
+                                <Button name={action.descriptor} onClick={this.selectAction}>{action.descriptor}</Button>
+                            </Row>
+                        )})}
+                    </Container>
+                </Col>
+                <Col>
+                    <Row> 
+                        <h3>{this.state.current_render.descriptor}</h3>
+                    </Row>
+                    <Row>
+                        {React.createElement(this.state.current_render, {authUser: this.context, firebase: this.props.firebase, user: this.state.user})}
+                    </Row>
+                </Col>
+            </Row>
+            // <div>
+            // <CreateGroupAction firebase={this.props.firebase} authUser={this.authUser}/> 
+            // <br/>
+            // <DeleteGroupAction firebase={this.props.firebase} authUser={this.authUser}/>
+            // <br/>
+            // <CreateJoinRequestAction firebase={this.props.firebase} authUser={this.authUser}/>
+            // <TakeRequestAction firebase={this.props.firebase} authUser={this.authUser}/>
+            // <VerifyPendingUserAction firebase={this.props.firebase} authUser={this.authUser}></VerifyPendingUserAction>
+            // </div>
         )
     }
 
@@ -64,18 +126,15 @@ class Dashboard extends React.Component {
     }
 }
 
-const DashboardWithFirebase = compose(withRouter, withFirebase) (Dashboard); 
+Dashboard.contextType = AuthUserContext;
+const DashboardWithFirebase = withRouter(withAuthentication(Dashboard));
 
 export default class DashboardPage extends React.Component{
     render() {
         return (
-            <div className="dashboard">
-                <Container> 
-                    <AuthUserContext.Consumer>
-                        {authUser => authUser? <DashboardWithFirebase authUser={authUser} />: "Loading..."}
-                    </AuthUserContext.Consumer> 
-                </Container>
-            </div>
+            <Container className="dashboard" style={{"padding-top": "2vh"}}>
+                <DashboardWithFirebase />
+            </Container>
         )
     }
 }
