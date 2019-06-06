@@ -29,6 +29,20 @@ class LoginComponent extends React.Component {
         }
     }
 }
+
+class SignupComponent extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <Nav.Link href={ROUTES.SIGNUP}>Sign Up</Nav.Link>
+        )
+    }
+}
+
+
 LoginComponent.contextType = AuthUserContext; 
 let AuthLoginComponent = withRouter(withAuthentication(LoginComponent)); 
 
@@ -52,7 +66,7 @@ export default class Navigation extends React.Component {
                     </Nav>
                     <Nav>
                         <AuthLoginComponent /> 
-                       
+                        <SignupComponent />
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
