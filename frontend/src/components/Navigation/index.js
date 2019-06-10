@@ -31,10 +31,6 @@ class LoginComponent extends React.Component {
 }
 
 class SignupComponent extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <Nav.Link href={ROUTES.SIGNUP}>Sign Up</Nav.Link>
@@ -52,7 +48,7 @@ export default class Navigation extends React.Component {
     }
     render() {
         return (
-            <Navbar bg="dark" variant="dark" expand="md">
+            <Navbar fixed ="top" bg="dark" variant="dark" expand="md">
                 <Navbar.Brand><Link to='/'>DSGT</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse>

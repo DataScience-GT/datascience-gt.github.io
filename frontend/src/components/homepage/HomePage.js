@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap'; 
 import * as CONSTANTS from "../../constants/app_constants";
 import * as ROUTES from "../../constants/routes";  
-import ProjectCore from "./Project"
+// import ProjectCore from "./Project"
 import ContactCore from "./Contact" 
 
 class Section extends React.Component {
@@ -141,13 +141,13 @@ const Join = () => {return (
     </Section>
 )}
 
-let Projects = () => {
-    return (
-        <Section id="projects" heading="Projects" subheading="See what we're working on">
-            <ProjectCore/>
-        </Section>
-    )
-}
+// let Projects = () => {
+//     return (
+//         <Section id="projects" heading="Projects" subheading="See what we're working on">
+//             <ProjectCore/>
+//         </Section>
+//     )
+// }
 
 const Contact = () => { return (
     <Section id="contact" heading="Contact Us" subheading="Stay in Touch">
@@ -166,13 +166,13 @@ const Events = () => {
     )
 }
 
-const Team = () => {
-    return (
-        <Section id="team" heading="Meet our Team">
+// const Team = () => {
+//     return (
+//         <Section id="team" heading="Meet our Team">
 
-        </Section>
-    )
-}
+//         </Section>
+//     )
+// }
 
 const Resources = () => {return (
     <Section id="resources" heading="Getting Started Resources">

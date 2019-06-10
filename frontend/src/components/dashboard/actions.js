@@ -7,10 +7,8 @@ import { Button, Form, Table, Container, Row, Col} from "react-bootstrap";
  * firestore. 
  */
 export class DashboardAction extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {return; 
+    render() {
+        return; 
     }
 }
 

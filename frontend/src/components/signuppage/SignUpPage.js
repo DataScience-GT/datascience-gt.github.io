@@ -88,6 +88,7 @@ class SignUpForm extends React.Component {
     }
     render() {
         return (
+            <Container>
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="formBasicEmail"> 
                     <Form.Label>GT Email Address</Form.Label> 
@@ -141,6 +142,7 @@ class SignUpForm extends React.Component {
                 </Button>
 
             </Form>
+            </Container>
         )
     }
 }
