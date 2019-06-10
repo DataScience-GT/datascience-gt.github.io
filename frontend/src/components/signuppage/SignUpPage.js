@@ -10,6 +10,7 @@ import { withFirebase } from '../Firebase';
 import { compose } from 'recompose'; 
 import {withRouter} from 'react-router-dom'; 
 import * as ROUTES from '../../constants/routes'; 
+import './SignUpPage.css';
 
 class SignUpForm extends React.Component {
     constructor(props) {
@@ -88,61 +89,59 @@ class SignUpForm extends React.Component {
     }
     render() {
         return (
-            <Container>
-            <Form onSubmit={this.handleSubmit}>
-                <Form.Group controlId="formBasicEmail"> 
-                    <Form.Label>GT Email Address</Form.Label> 
-                    <Form.Control onChange={this.handleInputChange} name="email" type="email" placeholder="Enter GT Email" /> 
-                </Form.Group>
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Group controlId="formBasicEmail"> 
+                        <Form.Label>GT Email Address</Form.Label> 
+                        <Form.Control onChange={this.handleInputChange} name="email" type="email" placeholder="Enter GT Email" /> 
+                    </Form.Group>
 
-                {/* Password Entry - TODO Include Password Validation */}
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label> New Password </Form.Label>
-                    <Form.Control onChange={this.handleInputChange} name="password" type="password" placeholder="Password" />
-                </Form.Group>
+                    {/* Password Entry - TODO Include Password Validation */}
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label> New Password </Form.Label>
+                        <Form.Control onChange={this.handleInputChange} name="password" type="password" placeholder="Password" />
+                    </Form.Group>
 
-                <Form.Group>
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control onChange={this.handleInputChange} name="first_name" type="text" placeholder="First Name" />
-                </Form.Group>
+                    <Form.Group>
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Control onChange={this.handleInputChange} name="first_name" type="text" placeholder="First Name" />
+                    </Form.Group>
 
-                <Form.Group> 
-                    <Form.Label>Last Name</Form.Label> 
-                    <Form.Control onChange={this.handleInputChange} name="last_name" type="text" placeholder="Last Name" /> 
-                </Form.Group>
+                    <Form.Group> 
+                        <Form.Label>Last Name</Form.Label> 
+                        <Form.Control onChange={this.handleInputChange} name="last_name" type="text" placeholder="Last Name" /> 
+                    </Form.Group>
 
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Alternate Email Address (i.e. gmail)</Form.Label>
-                    <Form.Control onChange={this.handleInputChange} name="alt_email" type="email" placeholder="alternate email" /> 
-                </Form.Group>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Alternate Email Address (i.e. gmail)</Form.Label>
+                        <Form.Control onChange={this.handleInputChange} name="alt_email" type="email" placeholder="alternate email" /> 
+                    </Form.Group>
 
-                <Form.Group>
-                    <Form.Label> Phone Number </Form.Label>
-                    <Form.Control onChange={this.handleInputChange} name="phone_number" type="tel" placeholder="Phone Number" /> 
-                </Form.Group>
+                    <Form.Group>
+                        <Form.Label> Phone Number </Form.Label>
+                        <Form.Control onChange={this.handleInputChange} name="phone_number" type="tel" placeholder="Phone Number" /> 
+                    </Form.Group>
 
-                {/* TODO: REMOVE THIS AND MOVE TO SECONDARY STAGE!!! 
-                    This is where the user can select which payment method they prefer. 
-                */}
-                <Form.Group>
-                    <Form.Label> Select preferred payment method </Form.Label>
-                    <div>
-                        <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="venmo" checked={this.state.verification_method === "venmo"} label="venmo" />
-                        <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="cash" checked={this.state.verification_method === "cash"} label="cash" /> 
-                        <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="defer" checked={this.state.verification_method === "defer"} label="defer" />  
-                    </div>
-                </Form.Group>
-                {this.getVerificationStub(this.state.verification_method)}
-                {/* <Form.Group>
-                    <Form.Text>More About You</Form.Text>
-                </Form.Group> */}
+                    {/* TODO: REMOVE THIS AND MOVE TO SECONDARY STAGE!!! 
+                        This is where the user can select which payment method they prefer. 
+                    */}
+                    <Form.Group>
+                        <Form.Label> Select preferred payment method </Form.Label>
+                        <div>
+                            <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="venmo" checked={this.state.verification_method === "venmo"} label="Venmo" />
+                            <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="cash" checked={this.state.verification_method === "cash"} label="Cash" /> 
+                            <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="defer" checked={this.state.verification_method === "defer"} label="Defer" />  
+                        </div>
+                    </Form.Group>
+                    {this.getVerificationStub(this.state.verification_method)}
+                    {/* <Form.Group>
+                        <Form.Text>More About You</Form.Text>
+                    </Form.Group> */}
 
-                <Button variant="primary" type="submit"> 
-                    Sign Up 
-                </Button>
+                    <Button variant="primary" type="submit"> 
+                        Sign Up 
+                    </Button>
 
-            </Form>
-            </Container>
+                </Form>
         )
     }
 }
@@ -153,7 +152,7 @@ export default class SignUpPage extends React.Component {
     render() {
         return (
             <div className="Login"> 
-            <Container> 
+            <Container className="box"> 
                 <SignUpWithFirebase /> 
             </Container>
             </div>

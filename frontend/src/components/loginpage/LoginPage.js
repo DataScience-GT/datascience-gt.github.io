@@ -8,6 +8,7 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from "../../constants/routes"; 
 import { compose } from 'recompose'
 import {withRouter} from 'react-router-dom'; 
+import './LoginPage.css';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -77,7 +78,7 @@ export default class LoginPage extends React.Component {
     render() {
         return (
           <div className="Login">
-            <Container>
+            <Container className="box">
             <LoginWithFirebase />
             </Container>
           </div>
