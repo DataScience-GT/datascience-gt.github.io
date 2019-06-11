@@ -45,7 +45,17 @@ export interface Group {
  * `gt_email` User's Georgia Tech email. Acts as a PK, and prevents duplicate account creation. 
  *
  * `alt_email` User's preferred alternate email, if any. 
+ * 
+ * `major` User's major at Gatech
+ * 
+ * `year` User's current year at Gatech
+ * 
+ * `industry pref 1` primary industry preference
  *
+ * `industry pref 2` secondary industry preference
+ * 
+ * `industry pref 3` tertia industry preference
+ *  
  * `phone_number` User's preferred contact phone number. 
  * 
  * `slack_id` User's ID on slack, for integration purposes 
@@ -77,6 +87,8 @@ export interface User {
     last_name: string, 
     gt_email: string, 
     alt_email: string, 
+    major: string,
+    year: string
     phone_number: string, 
     slack_id: string, 
     XP: number, 

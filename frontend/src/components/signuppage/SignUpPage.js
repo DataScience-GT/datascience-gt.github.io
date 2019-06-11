@@ -19,7 +19,9 @@ class SignUpForm extends React.Component {
             email: "", 
             password: "", 
             first_name: "", 
-            last_name: "", 
+            last_name: "",
+            major: "",
+            year: "Freshman",
             phone_number: "", 
             verification: "", 
             verification_method: "venmo", 
@@ -55,7 +57,7 @@ class SignUpForm extends React.Component {
         let state = this.state; 
         try {
             await this.props.firebase.user.createUser(state.email, state.password, 
-                state.first_name, state.last_name, state.alt_email, state.phone_number); 
+                state.first_name, state.last_name, state.alt_email, state.major, state.year, state.phone_number); 
             if (this.state.verification_method === "cash") {
                 await this.props.firebase.user.updateUserVerificationCash(this.state.vs_amount, this.state.vs_person); 
             } else if (this.state.verification_method === "venmo") {
@@ -113,7 +115,22 @@ class SignUpForm extends React.Component {
 
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Alternate Email Address (i.e. gmail)</Form.Label>
-                        <Form.Control onChange={this.handleInputChange} name="alt_email" type="email" placeholder="alternate email" /> 
+                        <Form.Control onChange={this.handleInputChange} name="alt_email" type="email" placeholder="Alternate Email" /> 
+                    </Form.Group>
+
+                    <Form.Group> 
+                        <Form.Label>Major</Form.Label> 
+                        <Form.Control onChange={this.handleInputChange} name="major" type="text" placeholder="Major" /> 
+                    </Form.Group>
+
+                    <Form.Group controlId="">
+                        <Form.Label>Year</Form.Label>
+                        <Form.Control onChange={this.handleInputChange} as="select" name="year" type="text">
+                            <option>Freshman</option>
+                            <option>Sophomore</option>
+                            <option>Junior</option>
+                            <option>Senior</option>
+                        </Form.Control>
                     </Form.Group>
 
                     <Form.Group>
@@ -153,6 +170,7 @@ export default class SignUpPage extends React.Component {
         return (
             <div className="Login"> 
             <Container className="box"> 
+                <h1>Looking to join us? Sign up here!</h1>
                 <SignUpWithFirebase /> 
             </Container>
             </div>

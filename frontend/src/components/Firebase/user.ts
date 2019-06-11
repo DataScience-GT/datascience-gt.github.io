@@ -94,6 +94,8 @@ class UserApi {
         first_name: string, 
         last_name: string, 
         alt_email: string, 
+        major: string,
+        year: string,
         phone_number: string) {
         //create firebase user 
         //check string 
@@ -117,6 +119,8 @@ class UserApi {
                 last_name: last_name,
                 gt_email: email,
                 alt_email: alt_email, 
+                major: major,
+                year: year,
                 phone_number: phone_number, 
                 slack_id: "", 
                 XP: 0, 

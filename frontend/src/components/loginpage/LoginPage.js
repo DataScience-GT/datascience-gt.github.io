@@ -79,7 +79,8 @@ export default class LoginPage extends React.Component {
         return (
           <div className="Login">
             <Container className="box">
-            <LoginWithFirebase />
+              <h1>Log in</h1>
+              <LoginWithFirebase />
             </Container>
           </div>
         );
