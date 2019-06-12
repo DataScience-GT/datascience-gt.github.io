@@ -6,6 +6,7 @@ import Navigation from '../Navigation';
 import HomePage from "../homepage/HomePage"; 
 import SignUpPage from "../signuppage/SignUpPage"; 
 import LoginPage from "../loginpage/LoginPage"; 
+import ThankYouPage from '../thankyoupage/ThankYouPage';
 import DashboardPage from "../dashboard/dashboard"; 
 import * as ROUTES from "../../constants/routes"
 
@@ -16,11 +17,10 @@ class App extends React.Component {
         return (
             <Router>
                 <Navigation/> 
-        
-        
                 <Route exact path={ROUTES.LANDING} component={HomePage} />
                 <Route path={ROUTES.LOGIN} component={LoginPage} />
                 <Route path={ROUTES.SIGNUP} component={SignUpPage} />
+                <Route path={ROUTES.THANKYOU} component={ThankYouPage} />
                 <Route path={ROUTES.DASHBOARD} component={DashboardPage} />
             </Router> 
         )

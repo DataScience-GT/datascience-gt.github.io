@@ -38,7 +38,7 @@ class LoginForm extends React.Component {
     event.preventDefault(); 
     try {
       await this.props.firebase.user.sign_in(this.state.email_addr, this.state.password); 
-      this.props.history.push(ROUTES.DASHBOARD); 
+      this.props.history.push(ROUTES.THANKYOU); 
     } catch (err) {
       if (err.code === "auth/user-not-found") {
         alert("Email not found - did you make a typo?"); 
