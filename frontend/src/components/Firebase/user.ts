@@ -241,7 +241,7 @@ class UserApi {
                  * so, the dummy returns a "success" and the data it was passed. 
                  * 
                  */
-                this.functions.httpsCallable("onUserVerifyDummy")({
+                this.functions.httpsCallable("onUserVerify")({
                     uid: user, 
                     amount: amount, 
                     is_cash: isCash
