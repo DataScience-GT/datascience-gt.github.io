@@ -111,7 +111,7 @@ class Dashboard extends React.Component {
     getUnverifiedStub(membership_status) {
 
         if (membership_status === entity.MembershipStatus.pending) {
-            return <p><br/><br/>Your membership confirmation is pending. We'll verify it within a few days. Apologies for the delay!</p>; 
+            return <p>Your membership confirmation is pending. We'll verify it within a few days. Apologies for the delay!</p>; 
         }
         if (membership_status === entity.MembershipStatus.suspended) {
             return (<p> Your account has been suspended. Please contact support at <a href="mailto:datascience.gt@gmail.com">datascience.gt@gmail.com</a> for assistance.</p>)
