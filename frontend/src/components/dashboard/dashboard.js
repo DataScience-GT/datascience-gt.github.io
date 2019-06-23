@@ -46,6 +46,18 @@ class Dashboard extends React.Component {
         }
     }
 
+<<<<<<< HEAD
+=======
+    getUnverifiedStub(membership_status) {
+
+        if (membership_status === entity.MembershipStatus.pending) {
+            return <p>Your membership confirmation is pending. We'll verify it within a few days. Apologies for the delay!</p>; 
+        }
+        if (membership_status === entity.MembershipStatus.suspended) {
+            return (<p> Your account has been suspended. Please contact support at <a href="mailto:datascience.gt@gmail.com">datascience.gt@gmail.com</a> for assistance.</p>)
+        }
+    }
+>>>>>>> c2320d889143712f8406c4668c7442ee5a51cbc5
     render() {
 
         return (
@@ -175,7 +187,7 @@ const DashboardWithFirebase = withRouter(withAuthentication(Dashboard));
 export default class DashboardPage extends React.Component{
     render() {
         return (
-            <Container className="dashboard" style={{"padding-top": "2vh"}}>
+            <Container className="dashboard" style={{"paddingTop": "2vh"}}>
                 <DashboardWithFirebase />
             </Container>
         )
