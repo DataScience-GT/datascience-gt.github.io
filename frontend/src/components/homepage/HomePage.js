@@ -5,6 +5,11 @@ import * as ROUTES from "../../constants/routes";
 // import ProjectCore from "./Project"
 import ContactCore from "./Contact" 
 
+/**
+ * This is the homepage of the website.
+ * Split up into React Fragments to provide modularity.
+ */
+
 class Section extends React.Component {
     render() {
         return (
@@ -225,7 +230,7 @@ export default class HomePage extends React.Component {
                 <Contact/>
       
 
-            </Container>
+                </Container>
             </React.Fragment>
             
         );

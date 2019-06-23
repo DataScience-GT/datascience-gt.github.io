@@ -5,6 +5,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import * as ROUTES from "../../constants/routes"
 import {AuthUserContext, withAuthentication} from "../Session"; 
 import {withRouter} from "react-router-dom"; 
+import './index.css';
+
+/**
+ * Login button on the Navbar that gets conditionally rendered.
+ */
 class LoginComponent extends React.Component {
     constructor(props) {
         super(props); 
@@ -19,8 +24,9 @@ class LoginComponent extends React.Component {
     }
 
     render() {
+        console.log(this.context);
         if (this.context) {
-           return (
+        return (
             <Nav.Link href="" onClick={this.SignOut}>Sign Out</Nav.Link>
            )
         }
@@ -30,11 +36,18 @@ class LoginComponent extends React.Component {
     }
 }
 
+/**
+ * Sign up button on the Navbar that also gets conditionally rendered.
+ */
 class SignupComponent extends React.Component {
     render() {
-        return (
-            <Nav.Link href={ROUTES.SIGNUP}>Sign Up</Nav.Link>
-        )
+        if(this.context) {
+            return null;
+        } else {
+            return (
+                <Nav.Link href={ROUTES.SIGNUP}>Sign Up</Nav.Link>
+            )
+        }
     }
 }
 
@@ -42,30 +55,35 @@ class SignupComponent extends React.Component {
 LoginComponent.contextType = AuthUserContext; 
 let AuthLoginComponent = withRouter(withAuthentication(LoginComponent)); 
 
+SignupComponent.contextType = AuthUserContext;
+let AuthSignUpComponent = withRouter(withAuthentication(SignupComponent));
+
 export default class Navigation extends React.Component {
     constructor(props, authUser) {
         super(props); 
     }
     render() {
         return (
-            <Navbar fixed ="top" bg="dark" variant="dark" expand="md">
-                <Navbar.Brand><Link to='/'>DSGT</Link></Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse>
-                    <Nav className="mr-auto">
-                        <Nav.Link href={ROUTES.LANDING +"#about"}>About</Nav.Link>
-                        {/* <Nav.Link href={ROUTES.LANDING + "#projects"}>Projects</Nav.Link> */}
-                        <Nav.Link href={ROUTES.LANDING + "#events"}>Events</Nav.Link>
-                        <Nav.Link href={ROUTES.LANDING + "#join"}>Join</Nav.Link>
-                        <Nav.Link href={ROUTES.LANDING + "#resources"}>Resources</Nav.Link>
-                        <Nav.Link href={ROUTES.LANDING + "#contact"}>Contact</Nav.Link>
-                    </Nav>
-                    <Nav>
-                        <AuthLoginComponent /> 
-                        <SignupComponent />
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
+            <div className="padded">
+                <Navbar fixed ="top" bg="dark" variant="dark" expand="md">
+                    <Navbar.Brand><Link to='/'>DSGT</Link></Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse>
+                        <Nav className="mr-auto">
+                            <Nav.Link href={ROUTES.LANDING +"#about"}>About</Nav.Link>
+                            {/* <Nav.Link href={ROUTES.LANDING + "#projects"}>Projects</Nav.Link> */}
+                            <Nav.Link href={ROUTES.LANDING + "#events"}>Events</Nav.Link>
+                            <Nav.Link href={ROUTES.LANDING + "#join"}>Join</Nav.Link>
+                            <Nav.Link href={ROUTES.LANDING + "#resources"}>Resources</Nav.Link>
+                            <Nav.Link href={ROUTES.LANDING + "#contact"}>Contact</Nav.Link>
+                        </Nav>
+                        <Nav>
+                            <AuthLoginComponent /> 
+                            <AuthSignUpComponent />
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </div>
         )
     }
 }

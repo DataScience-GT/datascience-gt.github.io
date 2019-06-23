@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { Button, Form, Table, Container, Row, Col} from "react-bootstrap";
+import { Card, Button, Form, Table, Container, Row, Col, Badge, } from "react-bootstrap";
 
 /**
  * Super Action class. This provides every component 
@@ -12,39 +12,70 @@ export class DashboardAction extends React.Component {
     }
 }
 
+export class UserWelcomeHeader extends React.Component {
+    static descriptor = "User Welcome";
+    render() {
+        return (
+            <h1><strong>Welcome {this.props.user.first_name}!</strong></h1>
+        )
+    }
+}
+
+export class XPBadge extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Body>
+                        <Card.Text>
+                            <h1><Badge variant="info">XP: {this.props.XP}</Badge></h1>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </div>
+        )
+    }
+}
+
 /**
  * Default view profile action. Loads the user's profile.
  */
 export class ViewProfile extends DashboardAction {
     static descriptor = "View Profile"
-    render () {return (
-        <Container>  
-            <Row> 
-                <Col>
-                    <h2>Welcome, {this.props.user.first_name}</h2>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <h3> Basic Information </h3> 
-                    <hr />
-                    <Table>
-                        <tbody>
-                            <tr>
-                                <td> Name </td><td>{this.props.user.first_name + " " + this.props.user.last_name}</td>
-                            </tr>
-                            <tr><td> Email </td><td>{this.props.user.gt_email}</td>
-                            </tr>
-                            <tr>
-                                <td>Groups</td>
-                                <td>{this.props.user.groups}</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
-        </Container>
-    )}
+    render () {
+        return (
+            <Container>  
+                <Row> 
+                    <Col>
+                        <h2>Welcome, {this.props.user.first_name}</h2>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <h3> Basic Information </h3> 
+                        <hr />
+                        <Table>
+                            <tbody>
+                                <tr>
+                                    <td> Name </td><td>{this.props.user.first_name + " " + this.props.user.last_name}</td>
+                                </tr>
+                                <tr><td> Email </td><td>{this.props.user.gt_email}</td>
+                                </tr>
+                                <tr>
+                                    <td>Groups</td>
+                                    <td>{this.props.user.groups}</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    }
 }
 
 /**

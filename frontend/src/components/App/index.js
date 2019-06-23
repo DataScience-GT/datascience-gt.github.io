@@ -16,8 +16,6 @@ class App extends React.Component {
         return (
             <Router>
                 <Navigation/> 
-        
-        
                 <Route exact path={ROUTES.LANDING} component={HomePage} />
                 <Route path={ROUTES.LOGIN} component={LoginPage} />
                 <Route path={ROUTES.SIGNUP} component={SignUpPage} />
