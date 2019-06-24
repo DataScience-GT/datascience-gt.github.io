@@ -11,7 +11,7 @@ import {withRouter} from "react-router-dom"
 import {AuthUserContext, withAuthentication} from "../Session"; 
 import {UserWelcomeHeader, XPBadge, ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction, VerifyPendingUserAction} from "./actions"; 
 import {EventList} from './Event/Event';
-// import DashboardNavbar from './Navbar/DashboardNavbar';
+import DashboardNavbar from './Navbar/DashboardNavbar';
 import * as entity from "../Firebase/entity"; 
 // import * as ROUTES from "../../constants/routes"
 /**
@@ -33,44 +33,33 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'user': {}
+            user: {},
+            current_tab: '',
         }
     }
 
     componentDidUpdate() {
         if(this.cached_user_id !== this.context.uid) {
             this.props.firebase.user.get_user(this.context.uid).then((user) => {
-                this.setState({'user': user});
-                console.log(this.state);
+                this.setState({user: user, current_tab: 'home'});
             })
         }
     }
 
-<<<<<<< HEAD
-=======
-    getUnverifiedStub(membership_status) {
-
-        if (membership_status === entity.MembershipStatus.pending) {
-            return <p>Your membership confirmation is pending. We'll verify it within a few days. Apologies for the delay!</p>; 
-        }
-        if (membership_status === entity.MembershipStatus.suspended) {
-            return (<p> Your account has been suspended. Please contact support at <a href="mailto:datascience.gt@gmail.com">datascience.gt@gmail.com</a> for assistance.</p>)
-        }
-    }
->>>>>>> c2320d889143712f8406c4668c7442ee5a51cbc5
     render() {
 
         return (
-            // <h2>Welcome to your dashboard!</h2>
-            // <UserWelcomeHeader />
-            <Container>
+            <Container fluid={true}>
                 <DashboardNavbar />
                 <Row>
                     <Col><UserWelcomeHeader user={this.state.user} /></Col>
                 </Row>
                 <Row>
                     <Col><XPBadge XP={this.state.user.XP}></XPBadge></Col>
-                    <Col><EventList /></Col>
+                    <Col>
+                        <h2>Upcoming Events</h2>
+                        <EventList />
+                    </Col>
                 </Row>
             </Container>
         )
@@ -187,9 +176,9 @@ const DashboardWithFirebase = withRouter(withAuthentication(Dashboard));
 export default class DashboardPage extends React.Component{
     render() {
         return (
-            <Container className="dashboard" style={{"paddingTop": "2vh"}}>
+            // <Container className="dashboard" style={{"paddingTop": "2vh"}}>
                 <DashboardWithFirebase />
-            </Container>
+            // </Container>
         )
     }
 }

@@ -1,3 +1,4 @@
 .rsvp-button {
     display: flex;
+    align-self: flex-end;
 }

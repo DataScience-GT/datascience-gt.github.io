@@ -38,7 +38,7 @@ export class EventCard extends React.Component {
           return (
             <div>
                 <Card>
-                    <Card.Body onClick={this.handleShow}>EVENT<Button onClick={this.handleClick} class="rsvp-button" variant="outline-success">RSVP</Button></Card.Body>
+                    <Card.Body onClick={this.handleShow}>EVENT</Card.Body>
                 </Card>
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
@@ -47,9 +47,7 @@ export class EventCard extends React.Component {
                     </Modal.Header>
                     <Modal.Body>blah blah blah...</Modal.Body>
                     <Modal.Footer>
-                    <Button variant="secondary" onClick={this.handleClose}>
-                        Close
-                    </Button>
+                        <Button onClick={this.handleClick} class="rsvp-button" variant="outline-success">RSVP</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
@@ -62,7 +60,11 @@ export class EventList extends React.Component {
     // TODO: Dynamically render event cards with all the events.
     render() {
         return (
-            <EventCard />
+            <div>
+                <EventCard />
+                <EventCard />
+                <EventCard />
+            </div>
         )
     }
 }

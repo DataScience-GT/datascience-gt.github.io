@@ -1,5 +1,6 @@
 import React from 'react'; 
 import { Card, Button, Form, Table, Container, Row, Col, Badge, } from "react-bootstrap";
+import './actions.css';
 
 /**
  * Super Action class. This provides every component 
@@ -32,7 +33,7 @@ export class XPBadge extends React.Component {
                 <Card style={{ width: '18rem' }}>
                     <Card.Body>
                         <Card.Text>
-                            <h1><Badge variant="info">XP: {this.props.XP}</Badge></h1>
+                            <h1><Badge className="xp-badge" variant="info">Your XP: {this.props.XP}</Badge></h1>
                         </Card.Text>
                     </Card.Body>
                 </Card>
