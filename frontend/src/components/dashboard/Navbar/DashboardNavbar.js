@@ -6,7 +6,7 @@ export default class DashboardNavbar extends React.Component {
     render() {
         return (
             <div>
-                <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+                <Navbar collapseOnSelect expand="lg" bg="secondary" variant="dark">
                     <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">

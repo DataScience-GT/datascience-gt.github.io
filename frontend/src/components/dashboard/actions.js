@@ -23,10 +23,6 @@ export class UserWelcomeHeader extends React.Component {
 }
 
 export class XPBadge extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>

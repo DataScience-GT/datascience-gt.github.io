@@ -13,6 +13,7 @@ import {UserWelcomeHeader, XPBadge, ViewProfile, CreateGroupAction, DeleteGroupA
 import {EventList} from './Event/Event';
 import DashboardNavbar from './Navbar/DashboardNavbar';
 import * as entity from "../Firebase/entity"; 
+import { FirebaseContext } from '../Firebase';
 // import * as ROUTES from "../../constants/routes"
 /**
  * TODO: Build some dashboard here. Currently just loads all actions that I created so I coud test them 
@@ -49,19 +50,25 @@ class Dashboard extends React.Component {
     render() {
 
         return (
-            <Container fluid={true}>
-                <DashboardNavbar />
-                <Row>
-                    <Col><UserWelcomeHeader user={this.state.user} /></Col>
-                </Row>
-                <Row>
-                    <Col><XPBadge XP={this.state.user.XP}></XPBadge></Col>
-                    <Col>
-                        <h2>Upcoming Events</h2>
-                        <EventList />
-                    </Col>
-                </Row>
-            </Container>
+            <FirebaseContext.Consumer>
+                {firebase => {
+                    return (
+                        <Container fluid={true}>
+                            <DashboardNavbar />
+                            <Row>
+                                <Col><UserWelcomeHeader user={this.state.user} /></Col>
+                            </Row>
+                            <Row>
+                                <Col><XPBadge XP={this.state.user.XP}></XPBadge></Col>
+                                <Col>
+                                    <h2>Upcoming Events</h2>
+                                        <EventList firebase={firebase}/>
+                                </Col>
+                            </Row>
+                        </Container>
+                    )
+                }}
+            </FirebaseContext.Consumer>
         )
     }
 }
