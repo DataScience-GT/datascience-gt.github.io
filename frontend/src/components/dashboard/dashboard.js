@@ -2,27 +2,26 @@
  * This file should be the center point for dashboard building. In order to keep file sizes manageable, the 
  * actions themselves are in [[actions.js]] in this folder; those could probably be 
  * split up eventually because we will have a lot of actions. 
+ * @author Vidhur Kumar and Raj Shrimali
  */
 import React from 'react'; 
 // import { withFirebase } from '../Firebase'; 
-import {Container, Row, Col, Button} from "react-bootstrap"; 
+import {Container, Row, Col} from "react-bootstrap"; 
 import {withRouter} from "react-router-dom"
 // import {compose} from "recompose"; 
 import {AuthUserContext, withAuthentication} from "../Session"; 
-import {UserWelcomeHeader, XPBadge, ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction, VerifyPendingUserAction} from "./actions"; 
-import {EventList} from './Event/Event';
-import DashboardNavbar from './Navbar/DashboardNavbar';
-import * as entity from "../Firebase/entity"; 
+import {ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction, VerifyPendingUserAction} from "./actions"; 
+import {EventList} from './Member Dashboard/Event/Event';
+import DashboardNavbar from './Member Dashboard/Navbar/DashboardNavbar';
+import XPCard from './Member Dashboard/XP Card/XPCard';
+import UserWelcomeHeader from './Member Dashboard/User Welcome Header/UserWelcomeHeader';
 import { FirebaseContext } from '../Firebase';
-// import * as ROUTES from "../../constants/routes"
-/**
- * TODO: Build some dashboard here. Currently just loads all actions that I created so I coud test them 
- * - Raj 
- */
 
-const LoadingComponent = props => {return (
-    "Loading your Dashboard"
-)}
+
+
+// const LoadingComponent = props => {return (
+//     "Loading your Dashboard"
+// )}
 
 const actionMapping = {
     default: [ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction], 
@@ -59,8 +58,8 @@ class Dashboard extends React.Component {
                                 <Col><UserWelcomeHeader user={this.state.user} /></Col>
                             </Row>
                             <Row>
-                                <Col><XPBadge XP={this.state.user.XP}></XPBadge></Col>
-                                <Col>
+                                <Col xs="6"><XPCard XP={this.state.user.XP}></XPCard></Col>
+                                <Col xs="6">
                                     <h2>Upcoming Events</h2>
                                         <EventList firebase={firebase}/>
                                 </Col>

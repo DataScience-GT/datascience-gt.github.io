@@ -1,6 +1,5 @@
 import React from 'react'; 
-import { Card, Button, Form, Table, Container, Row, Col, Badge, } from "react-bootstrap";
-import './actions.css';
+import {Button, Form, Table, Container, Row, Col } from "react-bootstrap";
 
 /**
  * Super Action class. This provides every component 
@@ -10,31 +9,6 @@ import './actions.css';
 export class DashboardAction extends React.Component {
     render() {
         return; 
-    }
-}
-
-export class UserWelcomeHeader extends React.Component {
-    static descriptor = "User Welcome";
-    render() {
-        return (
-            <h1><strong>Welcome {this.props.user.first_name}!</strong></h1>
-        )
-    }
-}
-
-export class XPBadge extends React.Component {
-    render() {
-        return (
-            <div>
-                <Card style={{ width: '18rem' }}>
-                    <Card.Body>
-                        <Card.Text>
-                            <h1><Badge className="xp-badge" variant="info">Your XP: {this.props.XP}</Badge></h1>
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-            </div>
-        )
     }
 }
 

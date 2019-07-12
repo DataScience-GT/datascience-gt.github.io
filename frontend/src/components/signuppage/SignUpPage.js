@@ -5,7 +5,7 @@
  * by a document in our `/users` collection. 
  */
 import React from 'react';
-import { Button, Form, Container } from "react-bootstrap";
+import { Button, Form, Container, Row } from "react-bootstrap";
 import { withFirebase } from '../Firebase';
 import { compose } from 'recompose'; 
 import {withRouter} from 'react-router-dom'; 
@@ -63,7 +63,7 @@ class SignUpForm extends React.Component {
             } else if (this.state.verification_method === "venmo") {
                 this.props.firebase.user.updateUserVerificationVenmo(this.state.verification, this.state.verification.name); 
             }
-            this.props.history.push(ROUTES.THANKYOU); 
+            this.props.history.push(ROUTES.LOGIN); 
         } catch(err) {
             alert(err); 
             this.props.history.push(ROUTES.SIGNUP); 
@@ -169,8 +169,8 @@ export default class SignUpPage extends React.Component {
     render() {
         return (
             <div className="Login"> 
-            <Container className="box"> 
-                <h1>Looking to join us? Sign up here!</h1>
+            <Container> 
+                <h1>Looking to join us? Sign up here!</h1>                
                 <SignUpWithFirebase /> 
             </Container>
             </div>

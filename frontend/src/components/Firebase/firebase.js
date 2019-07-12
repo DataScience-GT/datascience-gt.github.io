@@ -12,6 +12,7 @@ import 'firebase/storage'
 import UserApi from "./user";  
 import FileApi from "./file"; 
 import GroupApi from "./groups"; 
+import EventApi from './event';
 
 const firebaseConfig = {
     apiKey: "AIzaSyD_OKCjgVUePBaR6KmvjCirYEOSyB_8qTg",
@@ -49,6 +50,7 @@ class Firebase {
         this.user = new UserApi(this); 
         this.file = new FileApi(this); 
         this.group = new GroupApi(this); 
+        this.event = new EventApi(this);
     }
 }
 

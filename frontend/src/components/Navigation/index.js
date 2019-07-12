@@ -65,7 +65,7 @@ export default class Navigation extends React.Component {
     render() {
         return (
             <div className="padded">
-                <Navbar fixed ="top" bg="dark" variant="dark" expand="md">
+                <Navbar sticky ="top" bg="dark" variant="dark" expand="md">
                     <Navbar.Brand><Link to='/'>DSGT</Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse>

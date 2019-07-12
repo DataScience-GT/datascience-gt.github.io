@@ -1,8 +1,6 @@
 import React from 'react'; 
-import {Button, Accordion, Card, Modal} from 'react-bootstrap';
+import {Button, Card, Modal} from 'react-bootstrap';
 import './Event.css';
-import * as entity from "../../Firebase/entity"; 
-import { FirebaseContext } from '../../Firebase';
 
 export class Event {
     constructor(name, date, desc) {
@@ -36,21 +34,19 @@ export class EventCard extends React.Component {
       }
       
       render() {
-        //   console.log('EVENTSSS');
-        //   console.log(this.props.firebase);
           return (
                 <div>
                 <Card>
-                    <Card.Body onClick={this.handleShow}>EVENT</Card.Body>
+                    <Card.Body onClick={this.handleShow}>{this.props.event.name}</Card.Body>
                 </Card>
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Event Description:</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>blah blah blah...</Modal.Body>
+                    <Modal.Body>{this.props.event.desc}</Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.handleClick} class="rsvp-button" variant="outline-success">RSVP</Button>
+                        <Button onClick={this.handleClick} className="rsvp-button" variant="outline-success">RSVP</Button>
                     </Modal.Footer>
                 </Modal>
                 </div>
@@ -62,16 +58,28 @@ export class EventList extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props.firebase);
+        this.state = {
+            events: []
+        }
+
+        // Pull the list of events from Firebase.
+        this.props.firebase.event.get_events().then(snapshot => {
+            let events = this.state.events;
+            snapshot.forEach(doc => {
+                events.push(doc.data());
+              });
+              this.setState({events: events});
+              console.log(this.state);
+        }).catch(err => {
+            console.log('Error getting documents', err);
+        });
     }
 
-    // TODO: Dynamically render event cards with all the events.
     render() {
+        const eventItems = this.state.events.map(event => <EventCard event={event}/>);
         return (
             <div>
-                <EventCard/>
-                {/* <EventCard />
-                <EventCard /> */}
+                {eventItems}
             </div>
         )
     }
