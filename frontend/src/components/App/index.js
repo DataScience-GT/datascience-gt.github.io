@@ -3,10 +3,10 @@ import React from 'react' ;
 import {BrowserRouter as Router, Route} from 'react-router-dom'; 
 
 import Navigation from '../Navigation'; 
-import HomePage from "../homepage/HomePage"; 
-import SignUpPage from "../signuppage/SignUpPage"; 
-import LoginPage from "../loginpage/LoginPage"; 
-import DashboardPage from "../dashboard/dashboard"; 
+import HomePage from "../Home Page/HomePage"; 
+import SignUpPage from "../Signup Page/SignUpPage";
+import LoginPage from "../Login Page/LoginPage"; 
+import DashboardPage from "../Dashboard/dashboard"; 
 import * as ROUTES from "../../constants/routes"
 
 import { withAuthentication} from "../Session"

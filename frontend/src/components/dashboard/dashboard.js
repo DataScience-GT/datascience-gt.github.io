@@ -10,7 +10,7 @@ import {Container, Row, Col} from "react-bootstrap";
 import {withRouter} from "react-router-dom"
 // import {compose} from "recompose"; 
 import {AuthUserContext, withAuthentication} from "../Session"; 
-import {ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction, VerifyPendingUserAction} from "./actions"; 
+// import {ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction, VerifyPendingUserAction} from "./actions"; 
 import {EventList} from './Member Dashboard/Event/Event';
 import DashboardNavbar from './Member Dashboard/Navbar/DashboardNavbar';
 import XPCard from './Member Dashboard/XP Card/XPCard';
@@ -23,10 +23,10 @@ import { FirebaseContext } from '../Firebase';
 //     "Loading your Dashboard"
 // )}
 
-const actionMapping = {
-    default: [ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction], 
-    finance: [VerifyPendingUserAction]
-}
+// const actionMapping = {
+//     default: [ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction], 
+//     finance: [VerifyPendingUserAction]
+// }
 
 class Dashboard extends React.Component {
 
@@ -182,9 +182,7 @@ const DashboardWithFirebase = withRouter(withAuthentication(Dashboard));
 export default class DashboardPage extends React.Component{
     render() {
         return (
-            // <Container className="dashboard" style={{"paddingTop": "2vh"}}>
-                <DashboardWithFirebase />
-            // </Container>
+            <DashboardWithFirebase />
         )
     }
 }

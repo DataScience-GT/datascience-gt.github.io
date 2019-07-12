@@ -2,12 +2,12 @@
  * This file provides the login functionality. Upon login, 
  * the user is redirected to the dashboard. 
  */
-import React from './node_modules/react';
+import React from 'react';
 import { Button, Form, Container } from "react-bootstrap";
 import { withFirebase } from '../Firebase';
 import * as ROUTES from "../../constants/routes"; 
-import { compose } from './node_modules/recompose'
-import {withRouter} from './node_modules/react-router-dom'; 
+import { compose } from 'recompose'
+import {withRouter} from 'react-router-dom'; 
 import './LoginPage.css';
 
 class LoginForm extends React.Component {

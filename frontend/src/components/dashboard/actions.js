@@ -1,5 +1,5 @@
-import React from 'react'; 
-import {Button, Form, Table, Container, Row, Col } from "react-bootstrap";
+import React from './node_modules/react'; 
+import {Button, Form, Table, Container, Row, Col } from "./node_modules/react-bootstrap";
 
 /**
  * Super Action class. This provides every component 
