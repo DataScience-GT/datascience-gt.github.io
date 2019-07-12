@@ -30,8 +30,9 @@ import { FirebaseContext } from '../Firebase';
 
 class Dashboard extends React.Component {
 
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
+        console.log(this.context);
         this.state = {
             user: {},
             current_tab: '',
@@ -55,13 +56,13 @@ class Dashboard extends React.Component {
                         <Container fluid={true}>
                             <DashboardNavbar />
                             <Row>
-                                <Col><UserWelcomeHeader user={this.state.user} /></Col>
+                                <Col><UserWelcomeHeader user={this.state.user}/></Col>
                             </Row>
                             <Row>
                                 <Col xs="6"><XPCard XP={this.state.user.XP}></XPCard></Col>
                                 <Col xs="6">
                                     <h2>Upcoming Events</h2>
-                                        <EventList firebase={firebase}/>
+                                    <EventList firebase={firebase}/>
                                 </Col>
                             </Row>
                         </Container>

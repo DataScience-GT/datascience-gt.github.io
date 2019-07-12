@@ -5,7 +5,7 @@
  * by a document in our `/users` collection. 
  */
 import React from 'react';
-import { Button, Form, Container, Row } from "react-bootstrap";
+import { Button, Form, Container } from "react-bootstrap";
 import { withFirebase } from '../Firebase';
 import { compose } from 'recompose'; 
 import {withRouter} from 'react-router-dom'; 

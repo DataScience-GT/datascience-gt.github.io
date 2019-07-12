@@ -17,10 +17,6 @@ export class Event {
  * @author Vidhur Kumar
  */
 export class EventTypeBadge extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     /**
      * Maps the specified event type to the corresponding badge variant.
      */
@@ -34,6 +30,25 @@ export class EventTypeBadge extends React.Component {
 
             case "special":
                 return "danger";
+
+            default:
+                return "secondary";
+        }
+    }
+
+    mapTypeToBadgeText = (type) => {
+        switch(type) {
+            case "gm":
+                return "General Meeting";
+
+            case "workshop":
+                return "Workshop";
+
+            case "special":
+                return "Special";
+
+            default:
+                return "Unknown";
         }
     }
 
@@ -73,11 +88,11 @@ export class EventCard extends React.Component {
       render() {
           return (
                 <div>
-                    <Card>
+                    <Card className="text-center">
                         <Card.Body onClick={this.handleShow}>
                             <span>
                             {this.props.event.name} 
-                              <EventTypeBadge type={this.props.event.type}/>
+                            <EventTypeBadge type={this.props.event.type}/>
                             </span>
                         </Card.Body>
                     </Card>
