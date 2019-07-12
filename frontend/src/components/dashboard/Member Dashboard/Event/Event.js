@@ -55,7 +55,7 @@ export class EventTypeBadge extends React.Component {
     render() {
         return (
             <h5><Badge variant={this.mapTypeToBadgeVariant(this.props.type)}>{this.mapTypeToBadgeText(this.props.type)}</Badge></h5>
-        )
+        );
     }
 }
 

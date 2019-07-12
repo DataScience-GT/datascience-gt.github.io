@@ -47,6 +47,11 @@ class Dashboard extends React.Component {
         }
     }
 
+    handleClick = (event) => {
+        this.setState({current_tab: event.target.name});
+    }
+
+    // TODO: Finish modularizing toggle components
     render() {
 
         return (
@@ -54,7 +59,7 @@ class Dashboard extends React.Component {
                 {firebase => {
                     return (
                         <Container fluid={true}>
-                            <DashboardNavbar />
+                            <DashboardNavbar click={this.handleClick}/>
                             <Row>
                                 <Col><UserWelcomeHeader user={this.state.user}/></Col>
                             </Row>
