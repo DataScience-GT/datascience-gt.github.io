@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'; 
 import Nav from 'react-bootstrap/Nav'; 
 import Navbar from 'react-bootstrap/Navbar'; 
-import * as ROUTES from "../../constants/routes"
+import * as ROUTES from "../../config/routes"
 import {AuthUserContext, withAuthentication} from "../Session"; 
 import {withRouter} from "react-router-dom"; 
 import './index.css';

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap'; 
-import * as CONSTANTS from "../../constants/app_constants";
-import * as ROUTES from "../../constants/routes";  
+import * as CONSTANTS from "../../config/config";
+import * as ROUTES from "../../config/routes";  
 // import ProjectCore from "./Project"
 import ContactCore from "./Contact" 
 

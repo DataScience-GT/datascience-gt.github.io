@@ -5,7 +5,7 @@
 import React from './node_modules/react';
 import { Button, Form, Container } from "react-bootstrap";
 import { withFirebase } from '../Firebase';
-import * as ROUTES from "../../constants/routes"; 
+import * as ROUTES from "../../config/routes"; 
 import { compose } from './node_modules/recompose'
 import {withRouter} from './node_modules/react-router-dom'; 
 import './LoginPage.css';

@@ -7,7 +7,7 @@ import HomePage from "../Home Page/HomePage";
 import SignUpPage from "../Signup Page/SignUpPage";
 import LoginPage from "../Login Page/LoginPage"; 
 import DashboardPage from "../Dashboard/dashboard"; 
-import * as ROUTES from "../../constants/routes"
+import * as ROUTES from "../../config/routes"
 
 import { withAuthentication} from "../Session"
 

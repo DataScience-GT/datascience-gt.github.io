@@ -7,7 +7,7 @@ import Firebase from "./firebase";
 import * as entity from "./entity"; 
 import {firestore, auth, functions} from "firebase/app";
 
-import {DUES_SEMESTER, DUES_YEAR} from "../../constants/app_constants"; 
+import {DUES_SEMESTER, DUES_YEAR} from "../../config/config";
 /**
  * Provides the entirety of the User API Functionality  
  */

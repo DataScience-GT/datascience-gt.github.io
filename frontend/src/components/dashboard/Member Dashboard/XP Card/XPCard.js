@@ -13,7 +13,7 @@ export default class XPCard extends React.Component {
                 <Card>
                     <Card.Body>
                         <Card.Text>
-                            <h1><Badge variant="info">Your XP: {this.props.XP}</Badge></h1>
+                            <h1><Badge variant="info">XP: {this.props.XP}</Badge></h1>
                         </Card.Text>
                         <XPGrowthChart/>
                     </Card.Body>

@@ -9,8 +9,7 @@ import { Button, Form, Container } from "react-bootstrap";
 import { withFirebase } from '../Firebase';
 import { compose } from 'recompose'; 
 import {withRouter} from 'react-router-dom'; 
-import * as ROUTES from '../../constants/routes'; 
-import './SignUpPage.css';
+import * as ROUTES from '../../config/routes'
 
 class SignUpForm extends React.Component {
     constructor(props) {

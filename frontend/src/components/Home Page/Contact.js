@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {Row, Col} from 'react-bootstrap'; 
-import * as CONSTANTS from "../../constants/app_constants";
+import * as CONSTANTS from "../../config/config";
 
 const ContactLink = (props) => {
     return (
