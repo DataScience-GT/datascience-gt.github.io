@@ -54,7 +54,7 @@ export class EventTypeBadge extends React.Component {
 
     render() {
         return (
-            <Badge variant={this.mapTypeToBadgeVariant(this.props.type)}>{this.props.type}</Badge>
+            <h5><Badge variant={this.mapTypeToBadgeVariant(this.props.type)}>{this.mapTypeToBadgeText(this.props.type)}</Badge></h5>
         )
     }
 }
@@ -88,12 +88,10 @@ export class EventCard extends React.Component {
       render() {
           return (
                 <div>
-                    <Card className="text-center">
+                    <Card>
                         <Card.Body onClick={this.handleShow}>
-                            <span>
-                            {this.props.event.name} 
-                            <EventTypeBadge type={this.props.event.type}/>
-                            </span>
+                            <span>{this.props.event.name}</span>
+                            <span className="event-type"><EventTypeBadge type={this.props.event.type}/></span>
                         </Card.Body>
                     </Card>
 
