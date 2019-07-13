@@ -6,15 +6,14 @@
  */
 import React from 'react'; 
 // import { withFirebase } from '../Firebase'; 
-import {Container, Row, Col} from "react-bootstrap"; 
+import {Container} from "react-bootstrap"; 
 import {withRouter} from "react-router-dom"
 // import {compose} from "recompose"; 
 import {AuthUserContext, withAuthentication} from "../Session"; 
 // import {ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction, VerifyPendingUserAction} from "./actions"; 
-import {EventList} from './Member Dashboard/Event/Event';
 import DashboardNavbar from './Member Dashboard/Navbar/DashboardNavbar';
-import XPCard from './Member Dashboard/XP Card/XPCard';
-import UserWelcomeHeader from './Member Dashboard/User Welcome Header/UserWelcomeHeader';
+import DashboardHomePage from './Common/DashboardHomePage';
+import DashboardEditProfilePage from './Common/DashboardEditProfilePage';
 import { FirebaseContext } from '../Firebase';
 
 
@@ -28,6 +27,45 @@ import { FirebaseContext } from '../Firebase';
 //     finance: [VerifyPendingUserAction]
 // }
 
+// export class DashboardHomePage extends React.Component {
+
+//     render() {
+//         return (
+//             <div>
+//                 <Row>
+//                     <Col><UserWelcomeHeader user={this.props.user}/></Col>
+//                 </Row>
+//                 <Row>
+//                     <Col xs="6"><XPCard XP={this.props.user.XP}></XPCard></Col>
+//                     <Col xs="6">
+//                         <h2>Upcoming Events</h2>
+//                         <EventList firebase={this.props.firebase}/>
+//                     </Col>
+//                 </Row>
+//             </div>
+//         )
+//     }
+// }
+
+// export class DashboardEditProfilePage extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             userData: {}
+//         }
+//     }
+
+//     componentWillMount() {
+
+//     }
+
+//     render() {
+//         return (
+//             <h2>EDIT PROFILE!</h2>
+//         )
+//     }
+// }
+ 
 class Dashboard extends React.Component {
 
     constructor(props, context) {
@@ -35,14 +73,14 @@ class Dashboard extends React.Component {
         console.log(this.context);
         this.state = {
             user: {},
-            current_tab: '',
+            current_tab: 'home',
         }
     }
 
     componentDidUpdate() {
         if(this.cached_user_id !== this.context.uid) {
             this.props.firebase.user.get_user(this.context.uid).then((user) => {
-                this.setState({user: user, current_tab: 'home'});
+                this.setState({user: user});
             })
         }
     }
@@ -53,14 +91,22 @@ class Dashboard extends React.Component {
 
     // TODO: Finish modularizing toggle components
     render() {
-
         return (
             <FirebaseContext.Consumer>
                 {firebase => {
+                let dashboardContent;
+
+                if(this.state.current_tab === 'home') {
+                    dashboardContent = <DashboardHomePage user={this.state.user} firebase={firebase}/>
+                } else if(this.state.current_tab === 'edit') {
+                    dashboardContent = <DashboardEditProfilePage firebase={firebase}/>
+                }
                     return (
                         <Container fluid={true}>
                             <DashboardNavbar click={this.handleClick}/>
-                            <Row>
+                            {/* <DashboardHomePage user={this.state.user} firebase={firebase}/> */}
+                            {dashboardContent}
+                            {/* <Row>
                                 <Col><UserWelcomeHeader user={this.state.user}/></Col>
                             </Row>
                             <Row>
@@ -69,7 +115,7 @@ class Dashboard extends React.Component {
                                     <h2>Upcoming Events</h2>
                                     <EventList firebase={firebase}/>
                                 </Col>
-                            </Row>
+                            </Row> */}
                         </Container>
                     )
                 }}

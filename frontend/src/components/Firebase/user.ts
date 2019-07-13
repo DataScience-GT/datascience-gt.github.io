@@ -147,7 +147,7 @@ class UserApi {
             return null;
         }
     }
-
+    
     /**
      * Updates a user's verification status upon venmo payment. 
      * 
