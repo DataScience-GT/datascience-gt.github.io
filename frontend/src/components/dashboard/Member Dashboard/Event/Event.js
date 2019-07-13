@@ -31,6 +31,9 @@ export class EventTypeBadge extends React.Component {
             case "special":
                 return "danger";
 
+            case "project":
+                return "success";
+
             default:
                 return "secondary";
         }
@@ -47,6 +50,9 @@ export class EventTypeBadge extends React.Component {
             case "special":
                 return "Special";
 
+            case "project":
+                return "Project";
+
             default:
                 return "Unknown";
         }
@@ -54,13 +60,13 @@ export class EventTypeBadge extends React.Component {
 
     render() {
         return (
-            <h5><Badge variant={this.mapTypeToBadgeVariant(this.props.type)}>{this.mapTypeToBadgeText(this.props.type)}</Badge></h5>
+            <h5><Badge pill variant={this.mapTypeToBadgeVariant(this.props.type)}>{this.mapTypeToBadgeText(this.props.type)}</Badge></h5>
         );
     }
 }
 
 /**
- * 
+ * @author Vidhur Kumar
  */
 export class EventCard extends React.Component {
     constructor(props, context) {
@@ -110,7 +116,7 @@ export class EventCard extends React.Component {
 }
 
 /**
- * 
+ * @author Vidhur Kumar
  */
 export class EventList extends React.Component {
 

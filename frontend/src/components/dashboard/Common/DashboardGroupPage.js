@@ -1,5 +1,14 @@
-import React from './node_modules/react'; 
-import {Button, Form, Table, Container, Row, Col } from "./node_modules/react-bootstrap";
+import React from 'react';
+import {Button, Form, Table, Container, Row, Col } from "react-bootstrap"; 
+
+export default class DashboardGroupPage extends React.Component {
+
+    render() {
+        return (
+            <h2>Groups Page!</h2>
+        )
+    }
+}
 
 /**
  * Super Action class. This provides every component 

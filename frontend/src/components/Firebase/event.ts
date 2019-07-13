@@ -29,7 +29,7 @@ class EventApi {
         return await this.db.collection("events").doc(uid).get();
     }
 
-    async create_event(name: string, desc: string, date: Date, type: string) {
+    async create_event(name: string, desc: string, date: Date, type: string, owner: entity.User) {
         let newEventRef = this.db.collection("events").doc();
 
         return newEventRef.set({
@@ -37,6 +37,7 @@ class EventApi {
             desc: desc,
             date: Date,
             type: type,
+            owner: owner,
             rsvp_list: []
         });
     }

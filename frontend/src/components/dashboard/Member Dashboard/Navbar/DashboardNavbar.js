@@ -16,6 +16,8 @@ export default class DashboardNavbar extends React.Component {
                         <Nav className="mr-auto">
                         <Nav.Link name="home" onClick={this.props.click}>Home</Nav.Link>
                         <Nav.Link name="edit" onClick={this.props.click}>Edit Profile</Nav.Link>
+                        <Nav.Link name="event" onClick={this.props.click}>Edit Events</Nav.Link>
+                        <Nav.Link name="group" onClick={this.props.click}>Edit Groups</Nav.Link>                        
                         </Nav>
                         <Nav>
                         </Nav>

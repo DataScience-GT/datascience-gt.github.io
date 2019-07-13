@@ -6,7 +6,7 @@ import Navigation from '../Navigation';
 import HomePage from "../Home Page/HomePage"; 
 import SignUpPage from "../Signup Page/SignUpPage";
 import LoginPage from "../Login Page/LoginPage"; 
-import DashboardPage from "../Dashboard/dashboard"; 
+import DashboardPage from "../Dashboard/Dashboard"; 
 import * as ROUTES from "../../config/routes"
 
 import { withAuthentication} from "../Session"

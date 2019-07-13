@@ -14,6 +14,8 @@ import {AuthUserContext, withAuthentication} from "../Session";
 import DashboardNavbar from './Member Dashboard/Navbar/DashboardNavbar';
 import DashboardHomePage from './Common/DashboardHomePage';
 import DashboardEditProfilePage from './Common/DashboardEditProfilePage';
+import DashboardEventPage from './Common/DashboardEventPage';
+import DashboardGroupPage from './Common/DashboardGroupPage';
 import { FirebaseContext } from '../Firebase';
 
 
@@ -25,45 +27,6 @@ import { FirebaseContext } from '../Firebase';
 // const actionMapping = {
 //     default: [ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction], 
 //     finance: [VerifyPendingUserAction]
-// }
-
-// export class DashboardHomePage extends React.Component {
-
-//     render() {
-//         return (
-//             <div>
-//                 <Row>
-//                     <Col><UserWelcomeHeader user={this.props.user}/></Col>
-//                 </Row>
-//                 <Row>
-//                     <Col xs="6"><XPCard XP={this.props.user.XP}></XPCard></Col>
-//                     <Col xs="6">
-//                         <h2>Upcoming Events</h2>
-//                         <EventList firebase={this.props.firebase}/>
-//                     </Col>
-//                 </Row>
-//             </div>
-//         )
-//     }
-// }
-
-// export class DashboardEditProfilePage extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             userData: {}
-//         }
-//     }
-
-//     componentWillMount() {
-
-//     }
-
-//     render() {
-//         return (
-//             <h2>EDIT PROFILE!</h2>
-//         )
-//     }
 // }
  
 class Dashboard extends React.Component {
@@ -100,6 +63,10 @@ class Dashboard extends React.Component {
                     dashboardContent = <DashboardHomePage user={this.state.user} firebase={firebase}/>
                 } else if(this.state.current_tab === 'edit') {
                     dashboardContent = <DashboardEditProfilePage firebase={firebase}/>
+                } else if(this.state.current_tab === 'event') {
+                    dashboardContent = <DashboardEventPage />
+                } else if(this.state.current_tab === 'group') {
+                    dashboardContent = <DashboardGroupPage />
                 }
                     return (
                         <Container fluid={true}>
