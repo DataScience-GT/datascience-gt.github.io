@@ -1,11 +1,20 @@
 import React from 'react';
-import {Button, Form, Table, Container, Row, Col } from "react-bootstrap"; 
+import {Button, Form, Table, Container } from "react-bootstrap"; 
 
 export default class DashboardGroupPage extends React.Component {
 
     render() {
         return (
-            <h2>Groups Page!</h2>
+            <Container>
+                <h2>Groups Page!</h2>
+                <CreateGroupAction firebase={this.props.firebase} authUser={this.authUser}/> 
+                <br/>
+                <DeleteGroupAction firebase={this.props.firebase} authUser={this.authUser}/>
+                <br/>
+                <CreateJoinRequestAction firebase={this.props.firebase} authUser={this.authUser}/>
+                {/* <TakeRequestAction firebase={this.props.firebase}/> */}
+                <VerifyPendingUserAction firebase={this.props.firebase} authUser={this.authUser}></VerifyPendingUserAction>
+            </Container>
         )
     }
 }
@@ -18,43 +27,6 @@ export default class DashboardGroupPage extends React.Component {
 export class DashboardAction extends React.Component {
     render() {
         return; 
-    }
-}
-
-/**
- * Default view profile action. Loads the user's profile.
- */
-export class ViewProfile extends DashboardAction {
-    static descriptor = "View Profile"
-    render () {
-        return (
-            <Container>  
-                <Row> 
-                    <Col>
-                        <h2>Welcome, {this.props.user.first_name}</h2>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <h3> Basic Information </h3> 
-                        <hr />
-                        <Table>
-                            <tbody>
-                                <tr>
-                                    <td> Name </td><td>{this.props.user.first_name + " " + this.props.user.last_name}</td>
-                                </tr>
-                                <tr><td> Email </td><td>{this.props.user.gt_email}</td>
-                                </tr>
-                                <tr>
-                                    <td>Groups</td>
-                                    <td>{this.props.user.groups}</td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </Col>
-                </Row>
-            </Container>
-        )
     }
 }
 
@@ -218,94 +190,95 @@ export class CreateJoinRequestAction extends DashboardAction {
  * Internally wraps up `user.respondToJoinRequest` and `group.getPendingRequests` 
  * into one UI element. 
  */
-export class TakeRequestAction extends DashboardAction {
-    static descriptor = "View Join Requests";
-    constructor(props) {
-        super(props) 
-        this.state = {
-            "available_groups": [],
-            "selected": "", 
-            "requests": []
-        }; 
-        this.reqs = [] 
-        this.handleInputChange = this.handleInputChange.bind(this); 
-        this.handleSubmit = this.handleSubmit.bind(this); 
-        this.handleClick = this.handleClick.bind(this); 
+// export class TakeRequestAction extends DashboardAction {
+//     static descriptor = "View Join Requests";
+//     constructor(props) {
+//         super(props) 
+//         this.state = {
+//             "available_groups": [],
+//             "selected": "", 
+//             "requests": []
+//         }; 
+//         console.log(this.props.firebase.user);
+//         this.reqs = [] 
+//         this.handleInputChange = this.handleInputChange.bind(this); 
+//         this.handleSubmit = this.handleSubmit.bind(this); 
+//         this.handleClick = this.handleClick.bind(this); 
 
        
-    }
+//     }
 
-    componentDidMount() {
-         /**
-         * This should be changed so that it only shows the users' groups. 
-         * Should be a simple fix from `this.props.firebase.group.get_groups()` 
-         * to `this.user.groups` (which is an array). This would also 
-         * drastically make the render better as there's one less database 
-         * query to be taken. I would change it now but I'm tired and too 
-         * lazy to test. See issue #78
-         */
-        this.setState({"available_groups": this.props.user.groups}); 
-    }
-    handleInputChange(event) {
-        let target = event.target; 
-        this.setState({
-            "selected": target.value
-        }, this.handleUpdateRequests); 
-    }
+//     componentDidMount() {
+//          /**
+//          * This should be changed so that it only shows the users' groups. 
+//          * Should be a simple fix from `this.props.firebase.group.get_groups()` 
+//          * to `this.user.groups` (which is an array). This would also 
+//          * drastically make the render better as there's one less database 
+//          * query to be taken. I would change it now but I'm tired and too 
+//          * lazy to test. See issue #78
+//          */
+//         this.setState({"available_groups": this.props.firebase.user.groups}); 
+//     }
+//     handleInputChange(event) {
+//         let target = event.target; 
+//         this.setState({
+//             "selected": target.value
+//         }, this.handleUpdateRequests); 
+//     }
 
-    handleUpdateRequests(force) {
-        this.props.firebase.group.getPendingRequests(this.state.selected).then(req => {
-            if (!force) {
-                this.setState({"requests": req.docs.map(doc => doc.data())}); 
-            } else {
-                this.state.requests = req.docs.map(doc => doc.data()); 
-                this.forceUpdate(); 
-            }
-        })
-    }
+//     handleUpdateRequests(force) {
+//         this.props.firebase.group.getPendingRequests(this.state.selected).then(req => {
+//             if (!force) {
+//                 this.setState({"requests": req.docs.map(doc => doc.data())}); 
+//             } else {
+//                 this.state.requests = req.docs.map(doc => doc.data()); 
+//                 this.forceUpdate(); 
+//             }
+//         })
+//     }
 
-    handleSubmit(event) {
-        event.preventDefault(); 
-    }
+//     handleSubmit(event) {
+//         event.preventDefault(); 
+//     }
     
-    handleClick(event) {
-        this.props.firebase.user.respondToJoinRequest(this.state.selected, event.target.value, 
-            event.target.name === "approve" ? 1 : 0); 
-        this.handleUpdateRequests(true); 
-    }
+//     handleClick(event) {
+//         this.props.firebase.user.respondToJoinRequest(this.state.selected, event.target.value, 
+//             event.target.name === "approve" ? 1 : 0); 
+//         this.handleUpdateRequests(true); 
+//     }
 
-    render() {
-        return (
-            <Container> 
-                <Form onSubmit={this.handleSubmit}>
-                    <Form.Group>
-                        <Form.Label>Select Group for Requests</Form.Label>
-                        <Form.Control onChange={this.handleInputChange} as="select" name="selected_option">
-                            <option> None selected </option> 
-                            {this.state.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
-                        </Form.Control>
-                    </Form.Group>
-                </Form>
-                <Table> 
-                    <tbody>
+//     render() {
+//         return (
+//             <Container> 
+//                 <Form onSubmit={this.handleSubmit}>
+//                     <Form.Group>
+//                         <Form.Label>Select Group for Requests</Form.Label>
+//                         <Form.Control onChange={this.handleInputChange} as="select" name="selected_option">
+//                             <option> None selected </option> 
+//                             {this.state.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
+//                         </Form.Control>
+//                     </Form.Group>
+//                 </Form>
+//                 <Table> 
+//                     <tbody>
 
-                    {this.state.requests.map(req => 
-                        <tr key={req.user}>
-                            <td>{req.first_name}</td>
-                            <td>{req.last_name}</td>
-                            <td>{req.reason}</td>
-                            <td>
-                                <Button variant="primary" name="approve" value={req.user} onClick={this.handleClick}>Approve</Button>
-                                <Button variant="danger" name="deny" value={req.user} onClick={this.handleClick}>Deny</Button>
-                            </td>
-                        </tr>
-                     )}
-                    </tbody>
-                </Table>
-            </Container> 
-        )
-    }
-}
+//                     {this.state.requests.map(req => 
+//                         <tr key={req.user}>
+//                             <td>{req.first_name}</td>
+//                             <td>{req.last_name}</td>
+//                             <td>{req.reason}</td>
+//                             <td>
+//                                 <Button variant="primary" name="approve" value={req.user} onClick={this.handleClick}>Approve</Button>
+//                                 <Button variant="danger" name="deny" value={req.user} onClick={this.handleClick}>Deny</Button>
+//                             </td>
+//                         </tr>
+//                      )}
+//                     </tbody>
+//                 </Table>
+//             </Container> 
+//         )
+//     }
+// }
 
 /**
  * Allows a finance user to confirm whether or not a payment has been made. 

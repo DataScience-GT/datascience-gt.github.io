@@ -33,7 +33,6 @@ class Dashboard extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        console.log(this.context);
         this.state = {
             user: {},
             current_tab: 'home',
@@ -58,31 +57,19 @@ class Dashboard extends React.Component {
             <FirebaseContext.Consumer>
                 {firebase => {
                 let dashboardContent;
-
                 if(this.state.current_tab === 'home') {
                     dashboardContent = <DashboardHomePage user={this.state.user} firebase={firebase}/>
                 } else if(this.state.current_tab === 'edit') {
                     dashboardContent = <DashboardEditProfilePage firebase={firebase}/>
                 } else if(this.state.current_tab === 'event') {
-                    dashboardContent = <DashboardEventPage />
+                    dashboardContent = <DashboardEventPage firebase={firebase}/>
                 } else if(this.state.current_tab === 'group') {
-                    dashboardContent = <DashboardGroupPage />
+                    dashboardContent = <DashboardGroupPage firebase={firebase}/>
                 }
                     return (
                         <Container fluid={true}>
                             <DashboardNavbar click={this.handleClick}/>
-                            {/* <DashboardHomePage user={this.state.user} firebase={firebase}/> */}
                             {dashboardContent}
-                            {/* <Row>
-                                <Col><UserWelcomeHeader user={this.state.user}/></Col>
-                            </Row>
-                            <Row>
-                                <Col xs="6"><XPCard XP={this.state.user.XP}></XPCard></Col>
-                                <Col xs="6">
-                                    <h2>Upcoming Events</h2>
-                                    <EventList firebase={firebase}/>
-                                </Col>
-                            </Row> */}
                         </Container>
                     )
                 }}
