@@ -96,7 +96,7 @@ export class EventCard extends React.Component {
                 <div>
                     <Card>
                         <Card.Body onClick={this.handleShow}>
-                            <span>{this.props.event.name}</span>
+                            <span><strong>{this.props.event.name}</strong></span>
                             <span className="event-type"><EventTypeBadge type={this.props.event.type}/></span>
                         </Card.Body>
                     </Card>
