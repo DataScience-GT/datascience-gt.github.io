@@ -147,6 +147,38 @@ class UserApi {
             return null;
         }
     }
+
+    /**
+     * Retrieves all users from the 'users' collection.
+     */
+    async get_all_users() {
+        let users: any = [];
+        await this.db.collection('users').get().then(snapshot => {
+            snapshot.docs.forEach(doc => {
+                users.push({id: doc.id, first_name: doc.data().first_name, last_name: doc.data().last_name})
+            })
+        });
+        
+        return users;
+    }
+
+    /**
+     * 
+     * @param uid 
+     * @param group 
+     */
+    async add_user_to_group(uid: string, group: string) {
+        let userRef = this.db.collection("users").doc(uid);
+        
+        // TODO: Error handling for when group does not exist.
+        userRef.get().then(doc => {
+            console.log(doc.data());
+        })
+
+        // userRef.update({
+        //     groups: firestore.FieldValue.arrayUnion(group)
+        // })
+    }
     
     /**
      * Updates a user's verification status upon venmo payment. 

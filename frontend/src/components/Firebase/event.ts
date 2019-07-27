@@ -25,8 +25,8 @@ class EventApi {
         return await this.db.collection("events").get();
     }
 
-    async get_event(uid: string) {
-        return await this.db.collection("events").doc(uid).get();
+    async get_event(id: string) {
+        return await this.db.collection("events").doc(id).get();
     }
 
     async create_event(name: string, desc: string, date: Date, type: string, owner: entity.User) {
@@ -35,7 +35,7 @@ class EventApi {
         return newEventRef.set({
             name: name,
             desc: desc,
-            date: Date,
+            date: date,
             type: type,
             owner: owner,
             rsvp_list: []

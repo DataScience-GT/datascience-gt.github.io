@@ -71,6 +71,7 @@ export class CreateGroupAction extends DashboardAction {
         const name = this.state.name; 
         this.props.firebase.group.create_group(name); 
     }
+    
     render() {
         return (
             <Form onSubmit={this.handleSubmit}>
@@ -144,6 +145,7 @@ export class CreateJoinRequestAction extends DashboardAction {
         super(props) 
         this.state = {
             available_groups: [], 
+            users: [],
             name: "", 
             reason: "", 
         }
@@ -154,7 +156,10 @@ export class CreateJoinRequestAction extends DashboardAction {
 
     componentDidMount() {
         this.props.firebase.group.get_groups().then(groups => {
-            this.setState({"available_groups": groups})
+            this.setState({available_groups: groups});
+        });
+        this.props.firebase.user.get_all_users().then(users => {
+           this.setState({users: users});
         })
     }
     handleInputChange(event) {
@@ -164,7 +169,9 @@ export class CreateJoinRequestAction extends DashboardAction {
 
     handleSubmit(event) {
         event.preventDefault(); 
-        this.props.firebase.user.requestJoinGroup(this.state.name, this.state.reason); 
+        // this.props.firebase.user.add_user_to_group(null, null);
+        console.log(event.target.name);
+        // this.props.firebase.user.requestJoinGroup(this.state.name, this.state.reason); 
     }
     render() {
         return (
@@ -175,11 +182,17 @@ export class CreateJoinRequestAction extends DashboardAction {
                         {this.state.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
                     </Form.Control>
                 </Form.Group>
+                <Form.Group controlId="exampleForm.ControlSelect2">
+                    <Form.Label>Example multiple select</Form.Label>
+                    <Form.Control name="user" as="select" multiple>
+                        {this.state.users.map(user => <option>{user.first_name + " " + user.last_name}</option>)}
+                    </Form.Control>
+                </Form.Group>
                 <Form.Group>
                     <Form.Label>Reason</Form.Label>
                     <Form.Control name="reason" as="textarea" rows='3' onChange={this.handleInputChange}></Form.Control>
                 </Form.Group>
-                <Button variant="primary" type="submit">Create Request</Button>
+                <Button variant="primary" type="submit">Add To Group</Button>
             </Form>
         )
     }

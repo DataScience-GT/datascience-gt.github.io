@@ -14,12 +14,13 @@ export default class GroupApi {
         this._fbapp = firebaseApp; 
         this.db = firebaseApp.db; 
     }
+
     /**
      * Get list of all groups. Really a wrapper around 
      * [[GroupApi.get_groups_and_members()]] 
      */
     async get_groups(){
-        const docs:any = await this.get_groups_and_members(); 
+        const docs: any = await this.get_groups_and_members(); 
         const mapped = docs.map((doc: { name: string; }) => doc.name); 
         return mapped;
     }
@@ -94,5 +95,4 @@ export default class GroupApi {
     getPendingRequests(name: string) {
         return this.db.collection('usergroups').doc(name).collection('join_requests').get()
     }
-
 }
