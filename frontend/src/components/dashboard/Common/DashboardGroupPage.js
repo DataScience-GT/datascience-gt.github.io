@@ -1,34 +1,13 @@
 import React from 'react';
 import {Button, Form, Table, Container } from "react-bootstrap"; 
-
-export default class DashboardGroupPage extends React.Component {
-
-    render() {
-        return (
-            <Container>
-                <h2>Groups Page!</h2>
-                <CreateGroupAction firebase={this.props.firebase} authUser={this.authUser}/> 
-                <br/>
-                <DeleteGroupAction firebase={this.props.firebase} authUser={this.authUser}/>
-                <br/>
-                <CreateJoinRequestAction firebase={this.props.firebase} authUser={this.authUser}/>
-                {/* <TakeRequestAction firebase={this.props.firebase}/> */}
-                <VerifyPendingUserAction firebase={this.props.firebase} authUser={this.authUser}></VerifyPendingUserAction>
-            </Container>
-        )
-    }
-}
+import { AuthUserContext, withAuthentication } from '../../Session';
+import {withRouter} from 'react-router-dom'; 
+import DashboardNavbar from '../Member Dashboard/Navbar/DashboardNavbar';
 
 /**
- * Super Action class. This provides every component 
- * with a user object inside, so we don't have to continuously re-query 
- * firestore. 
+ * @author Vidhur Kumar
+ * @since 224
  */
-export class DashboardAction extends React.Component {
-    render() {
-        return; 
-    }
-}
 
 /**
  * Action to create a group. This internally uses the 
@@ -47,7 +26,7 @@ export class DashboardAction extends React.Component {
  * collection is an empty document with the same UID as the user. 
  * the `join_requests` collection appears when there are join requests. 
  */
-export class CreateGroupAction extends DashboardAction {
+export class CreateGroupForm extends React.Component {
     static descriptor = "Create New Group"
     constructor(props) {
         super(props); 
@@ -89,7 +68,7 @@ export class CreateGroupAction extends DashboardAction {
  * Similar to above, but performs a recursive delete on a group. 
  * Again, internally just calls delete_group. 
  */
-export class DeleteGroupAction extends DashboardAction {
+export class DeleteGroupForm extends React.Component {
     static descriptor = "Delete Group"
     constructor(props) {
         super(props); 
@@ -139,7 +118,7 @@ export class DeleteGroupAction extends DashboardAction {
  * `user.requestJoinGroup` function call. Note that this one is in the `user` 
  * api instead of the `group` api. 
  */
-export class CreateJoinRequestAction extends DashboardAction {
+export class CreateJoinRequestForm extends React.Component {
     static descriptor = "Join a Group"; 
     constructor(props) {
         super(props) 
@@ -182,8 +161,8 @@ export class CreateJoinRequestAction extends DashboardAction {
                         {this.state.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
                     </Form.Control>
                 </Form.Group>
-                <Form.Group controlId="exampleForm.ControlSelect2">
-                    <Form.Label>Example multiple select</Form.Label>
+                <Form.Group>
+                    <Form.Label>Select User</Form.Label>
                     <Form.Control name="user" as="select" multiple>
                         {this.state.users.map(user => <option>{user.first_name + " " + user.last_name}</option>)}
                     </Form.Control>
@@ -297,7 +276,7 @@ export class CreateJoinRequestAction extends DashboardAction {
  * Allows a finance user to confirm whether or not a payment has been made. 
  * Essentially a UI wrapper for `user.verifyUserPayment`. 
  */
-export class VerifyPendingUserAction extends DashboardAction {
+export class VerifyPendingUserForm extends React.Component {
     static descriptor = "Verify Pending Users";
     constructor(props) {
         super(props); 
@@ -306,7 +285,7 @@ export class VerifyPendingUserAction extends DashboardAction {
         }; 
         this.handleStatusChange = this.handleStatusChange.bind(this); 
     }
-    componentDidMount() {
+    componentDidUpdate() {
         // get pending users 
         this.update_pending_users_state(); 
     }
@@ -361,5 +340,34 @@ export class VerifyPendingUserAction extends DashboardAction {
 
         </Container>
     )
+    }
+}
+
+export class DashboardGroupContainer extends React.Component {
+
+    render() {
+        return (
+            <Container>
+                <h2>Groups Page!</h2>
+                <CreateGroupForm firebase={this.props.firebase} authUser={this.authUser}/> 
+                <DeleteGroupForm firebase={this.props.firebase} authUser={this.authUser}/>
+                <CreateJoinRequestForm firebase={this.props.firebase} authUser={this.authUser}/>
+                <VerifyPendingUserForm firebase={this.props.firebase} authUser={this.authUser}></VerifyPendingUserForm>
+            </Container>
+        )
+    }
+}
+
+DashboardGroupContainer.contextType = AuthUserContext;
+const DashboardGroupContainerWithFirebase = withRouter(withAuthentication(DashboardGroupContainer));
+
+export default class DashboardGroupPage extends React.Component {
+    render() {
+        return (
+            <div>
+                <DashboardNavbar />
+                <DashboardGroupContainerWithFirebase />
+            </div>
+        )
     }
 }

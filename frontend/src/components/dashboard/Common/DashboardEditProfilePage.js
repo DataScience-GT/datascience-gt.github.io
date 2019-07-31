@@ -1,17 +1,50 @@
 import React from 'react'; 
 import { Button, Form, Container } from "react-bootstrap";
+import {withRouter} from 'react-router-dom'; 
+import DashboardNavbar from '../Member Dashboard/Navbar/DashboardNavbar';
+import { AuthUserContext, withAuthentication } from '../../Session';
 
-export default class DashboardEditProfilePage extends React.Component {
-    constructor(props) {
-        super(props);
+/**
+ * @author Vidhur Kumar
+ */
+export class DashboardEditProfileContainer extends React.Component {
+    constructor(props, context) {
+        super(props, context);
         this.state = {
-            userData: {}
+            userData: {},
+            gt_email: '',
+            first_name: '',
+            last_name: '',
+            alt_email: '',
+            major: '',
+            year: '',
+            phone_number: '',
         }
-
-        console.log(this.props.firebase.user);
     }
 
-    componentWillMount() {
+    componentDidUpdate() {
+        this.props.firebase.user.get_user(this.props.firebase.user.get_current_uid()).then(snapshot => {
+            this.setState({userData: snapshot});
+        });
+    }
+
+    handleInputChange = (event) => {
+        this.setState({[event.target.name]: event.target.value});
+    }
+
+    handleSubmit = () => {
+        // this.props.firebase.user.update_user(
+        //     this.props.firebase.user.get_current_uid(), 
+        //     this.state.gt_email, 
+        //     this.state.first_name, 
+        //     this.state.last_name,
+        //     this.state.alt_email,
+        //     this.state.major,
+        //     this.state.year,
+        //     this.state.phone_number
+        // );
+        console.log(this.state);
+        alert('here');
     }
 
     render() {
@@ -20,27 +53,27 @@ export default class DashboardEditProfilePage extends React.Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="formBasicEmail"> 
                         <Form.Label>GT Email Address</Form.Label> 
-                        <Form.Control onChange={this.handleInputChange} name="email" type="email" placeholder="Enter GT Email" /> 
+                        <Form.Control onChange={this.handleInputChange} name="gt_email" type="email" defaultValue={this.state.userData.gt_email} /> 
                     </Form.Group>
 
                     <Form.Group>
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control onChange={this.handleInputChange} name="first_name" type="text" placeholder="First Name" />
+                        <Form.Control onChange={this.handleInputChange} name="first_name" type="text" defaultValue={this.state.userData.first_name} />
                     </Form.Group>
 
                     <Form.Group> 
                         <Form.Label>Last Name</Form.Label> 
-                        <Form.Control onChange={this.handleInputChange} name="last_name" type="text" placeholder="Last Name" /> 
+                        <Form.Control onChange={this.handleInputChange} name="last_name" type="text" defaultValue={this.state.userData.last_name}/> 
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Alternate Email Address (i.e. gmail)</Form.Label>
-                        <Form.Control onChange={this.handleInputChange} name="alt_email" type="email" placeholder="Alternate Email" /> 
+                        <Form.Control onChange={this.handleInputChange} name="alt_email" type="email" defaultValue={this.state.userData.alt_email} /> 
                     </Form.Group>
 
                     <Form.Group> 
                         <Form.Label>Major</Form.Label> 
-                        <Form.Control onChange={this.handleInputChange} name="major" type="text" placeholder="Major" /> 
+                        <Form.Control onChange={this.handleInputChange} name="major" type="text" defaultValue={this.state.userData.major} /> 
                     </Form.Group>
 
                     <Form.Group controlId="">
@@ -55,7 +88,7 @@ export default class DashboardEditProfilePage extends React.Component {
 
                     <Form.Group>
                         <Form.Label> Phone Number </Form.Label>
-                        <Form.Control onChange={this.handleInputChange} name="phone_number" type="tel" placeholder="Phone Number" /> 
+                        <Form.Control onChange={this.handleInputChange} name="phone_number" type="tel" defaultValue={this.state.userData.phone_number} /> 
                     </Form.Group>
 
                     {/* TODO: REMOVE THIS AND MOVE TO SECONDARY STAGE!!! 
@@ -72,6 +105,20 @@ export default class DashboardEditProfilePage extends React.Component {
 
                 </Form>    
             </Container>    
+        )
+    }
+}
+
+DashboardEditProfileContainer.contextType = AuthUserContext;
+const DashboardEditProfilePageWithFirebase = withRouter(withAuthentication(DashboardEditProfileContainer));
+
+export default class DashboardEditProfilePage extends React.Component {
+    render() {
+        return (
+            <div>
+                <DashboardNavbar />
+                <DashboardEditProfilePageWithFirebase />
+            </div>
         )
     }
 }

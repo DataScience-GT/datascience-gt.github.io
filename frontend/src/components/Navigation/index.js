@@ -24,7 +24,6 @@ class LoginComponent extends React.Component {
     }
 
     render() {
-        console.log(this.context);
         if (this.context) {
         return (
             <Nav.Link href="" onClick={this.SignOut}>Sign Out</Nav.Link>

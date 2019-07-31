@@ -66,6 +66,44 @@ export class EventTypeBadge extends React.Component {
 }
 
 /**
+ * 
+ */
+export class EventRSVPModal extends React.Component {
+    render() {
+        return (
+            <Modal show={this.props.show} onHide={this.props.handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Event Description:</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{this.props.event.desc}</Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={this.handleClick} className="rsvp-button" variant="outline-success">RSVP</Button>
+                </Modal.Footer>
+            </Modal>
+        )
+    }
+}
+
+/**
+ * 
+ */
+export class EventEditModal extends React.Component {
+    render() {
+        return (
+            <Modal show={this.props.show} onHide={this.props.handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit EVENTTT:</Modal.Title>
+                </Modal.Header>
+                <Modal.Body></Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={this.handleClick} className="rsvp-button" variant="outline-success">RSVP</Button>
+                </Modal.Footer>
+            </Modal>
+        )
+    }
+}
+
+/**
  * @author Vidhur Kumar
  */
 export class EventCard extends React.Component {
@@ -88,10 +126,13 @@ export class EventCard extends React.Component {
       }
 
       handleClick = () => {
+        this.props.firebase.event.rsvp_to_event()
         alert('You have RSVPd!');
       }
       
       render() {
+          const modal = this.props.isRSVP ? <EventRSVPModal show={this.state.show} event={this.props.event} handleClose={this.handleClose}/> :
+            <EventEditModal show={this.state.show} event={this.props.event} handleClose={this.handleClose}/>;
           return (
                 <div>
                     <Card>
@@ -100,7 +141,9 @@ export class EventCard extends React.Component {
                             <span className="event-type"><EventTypeBadge type={this.props.event.type}/></span>
                         </Card.Body>
                     </Card>
-
+                    {modal}
+                    {/* <EventRSVPModal show={this.state.show} event={this.props.event} handleClose={this.handleClose}/> */}
+{/* 
                     <Modal show={this.state.show} onHide={this.handleClose}>
                         <Modal.Header closeButton>
                             <Modal.Title>Event Description:</Modal.Title>
@@ -109,7 +152,7 @@ export class EventCard extends React.Component {
                         <Modal.Footer>
                             <Button onClick={this.handleClick} className="rsvp-button" variant="outline-success">RSVP</Button>
                         </Modal.Footer>
-                    </Modal>
+                    </Modal> */}
                 </div>
           )
       }
@@ -139,7 +182,7 @@ export class EventList extends React.Component {
     }
 
     render() {
-        const eventItems = this.state.events.map(event => <EventCard key={event.name} event={event}/>);
+        const eventItems = this.state.events.map(event => <EventCard key={event.name} event={event}  isRSVP={this.props.isRSVP} firebase={this.props.firebase}/>);
         return (
             <div>
                 {eventItems}

@@ -148,6 +148,23 @@ class UserApi {
         }
     }
 
+    async update_user(uid: string, gt_email: string, first_name: string, last_name: string, alt_email: string, major: string, year: string, phone_number: string) {
+        let userRef = await this.db.collection('users').doc(uid);
+        return userRef.update({
+                first_name: first_name,
+                last_name: last_name,
+                gt_email: gt_email,
+                alt_email: alt_email,
+                major: major,
+                year: year,
+                phone_number: phone_number
+            }).then(() => {
+                console.log('Successfully updated user');
+            }).catch(err => {
+                console.log(err);
+            });
+    }
+
     /**
      * Retrieves all users from the 'users' collection.
      */

@@ -4,7 +4,9 @@ import UserWelcomeHeader from '../Member Dashboard/User Welcome Header/UserWelco
 import {EventList} from '../Member Dashboard/Event/Event';
 import XPCard from '../Member Dashboard/XP Card/XPCard';
 
-
+/**
+ * @author Vidhur Kumar
+ */
 export default class DashboardHomePage extends React.Component {
     render() {
         return (
@@ -16,7 +18,7 @@ export default class DashboardHomePage extends React.Component {
                     <Col xs="6"><XPCard XP={this.props.user.XP}></XPCard></Col>
                     <Col xs="6">
                         <h2>Upcoming Events</h2>
-                        <EventList firebase={this.props.firebase}/>
+                        <EventList firebase={this.props.firebase}  isRSVP={true}/>
                     </Col>
                 </Row>
             </div>

@@ -1,34 +1,16 @@
+import React from 'react'; 
+import {withRouter} from "react-router-dom"
+import {AuthUserContext, withAuthentication} from "../Session"; 
+import DashboardNavbar from './Member Dashboard/Navbar/DashboardNavbar';
+import DashboardHomePage from './Common/DashboardHomePage';
+import { FirebaseContext } from '../Firebase';
+
 /**
  * This file should be the center point for dashboard building. In order to keep file sizes manageable, the 
  * actions themselves are in [[actions.js]] in this folder; those could probably be 
  * split up eventually because we will have a lot of actions. 
- * @author Vidhur Kumar and Raj Shrimali
+ * @author Raj Shrimali and Vidhur Kumar
  */
-import React from 'react'; 
-// import { withFirebase } from '../Firebase'; 
-import {Container} from "react-bootstrap"; 
-import {withRouter} from "react-router-dom"
-// import {compose} from "recompose"; 
-import {AuthUserContext, withAuthentication} from "../Session"; 
-// import {ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction, VerifyPendingUserAction} from "./actions"; 
-import DashboardNavbar from './Member Dashboard/Navbar/DashboardNavbar';
-import DashboardHomePage from './Common/DashboardHomePage';
-import DashboardEditProfilePage from './Common/DashboardEditProfilePage';
-import DashboardEventPage from './Common/DashboardEventPage';
-import DashboardGroupPage from './Common/DashboardGroupPage';
-import { FirebaseContext } from '../Firebase';
-
-
-
-// const LoadingComponent = props => {return (
-//     "Loading your Dashboard"
-// )}
-
-// const actionMapping = {
-//     default: [ViewProfile, CreateGroupAction, DeleteGroupAction, CreateJoinRequestAction, TakeRequestAction], 
-//     finance: [VerifyPendingUserAction]
-// }
- 
 class Dashboard extends React.Component {
 
     constructor(props, context) {
@@ -51,26 +33,15 @@ class Dashboard extends React.Component {
         this.setState({current_tab: event.target.name});
     }
 
-    // TODO: Finish modularizing toggle components
     render() {
         return (
             <FirebaseContext.Consumer>
                 {firebase => {
-                let dashboardContent;
-                if(this.state.current_tab === 'home') {
-                    dashboardContent = <DashboardHomePage user={this.state.user} firebase={firebase}/>
-                } else if(this.state.current_tab === 'edit') {
-                    dashboardContent = <DashboardEditProfilePage firebase={firebase}/>
-                } else if(this.state.current_tab === 'event') {
-                    dashboardContent = <DashboardEventPage firebase={firebase}/>
-                } else if(this.state.current_tab === 'group') {
-                    dashboardContent = <DashboardGroupPage firebase={firebase}/>
-                }
                     return (
-                        <Container fluid={true}>
+                        <div>
                             <DashboardNavbar click={this.handleClick}/>
-                            {dashboardContent}
-                        </Container>
+                            <DashboardHomePage user={this.state.user} firebase={firebase}/>
+                        </div>
                     )
                 }}
             </FirebaseContext.Consumer>

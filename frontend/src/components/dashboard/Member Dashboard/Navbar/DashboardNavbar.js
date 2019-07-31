@@ -1,6 +1,7 @@
 import React from 'react'; 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import * as ROUTES from '../../../../config/routes';
 
 /**
  * @author Vidhur Kumar
@@ -14,10 +15,10 @@ export default class DashboardNavbar extends React.Component {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                        <Nav.Link name="home" onClick={this.props.click}>Home</Nav.Link>
-                        <Nav.Link name="edit" onClick={this.props.click}>Edit Profile</Nav.Link>
-                        <Nav.Link name="event" onClick={this.props.click}>Edit Events</Nav.Link>
-                        <Nav.Link name="group" onClick={this.props.click}>Edit Groups</Nav.Link>                        
+                        <Nav.Link name="home" href={ROUTES.DASHBOARD_HOME}>Home</Nav.Link>
+                        <Nav.Link name="edit" href={ROUTES.DASHBORD_EDIT_PROFILE}>Edit Profile</Nav.Link>
+                        <Nav.Link name="event" href={ROUTES.DASHBOARD_EVENT}>Edit Events</Nav.Link>
+                        <Nav.Link name="group" href={ROUTES.DASHBOARD_GROUP}>Edit Groups</Nav.Link>                        
                         </Nav>
                         <Nav>
                         </Nav>

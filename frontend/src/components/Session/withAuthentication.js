@@ -1,14 +1,14 @@
+import React from 'react'; 
+import AuthUserContext from "./context"; 
+import { withFirebase } from "../Firebase"
+
 /**
  * Magically supports authentication. I'm not sure 
  * how it works, I followed a tutorial and it somehow 
  * just worked. My best-guesses are embedded. 
  * 
+ * @author Raj Shrimali
  */
-import React from 'react'; 
-import AuthUserContext from "./context"; 
-import { withFirebase } from "../Firebase"
-
-// We are making a componetn that adds auth state 
 const withAuthentication = Component => {
     class withAuthentication extends React.Component {
         constructor(props) {
