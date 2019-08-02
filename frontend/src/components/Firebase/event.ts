@@ -4,7 +4,6 @@
  * Instantiate with a firebase app instance - will use that 
  */
 import Firebase from "./firebase"; 
-import * as entity from "./entity"; 
 import {firestore, auth, functions} from "firebase/app";
 
 /**
@@ -56,9 +55,8 @@ class EventApi {
      * @param type 
      * @param owner 
      */
-    async create_event(name: string, desc: string, date: Date, type: string, owner: entity.User) {
+    async create_event(name: string, desc: string, date: Date, type: string, owner: string) {
         let newEventRef = this.db.collection("events").doc();
-
         return newEventRef.set({
             name: name,
             desc: desc,
@@ -86,11 +84,11 @@ class EventApi {
      * @param uid
      * @param user 
      */
-    async rsvp_to_event(uid: string, user: entity.User) {
+    async rsvp_to_event(uid: string, userName: string) {
         let eventRef = this.db.collection("events").doc(uid);
 
         eventRef.update({
-            rsvp_list: firestore.FieldValue.arrayUnion(user)
+            rsvp_list: firestore.FieldValue.arrayUnion(userName)
         });
     }
 }

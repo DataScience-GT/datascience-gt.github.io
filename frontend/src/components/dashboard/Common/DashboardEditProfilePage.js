@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Form, Container } from "react-bootstrap";
 import {withRouter} from 'react-router-dom'; 
 import DashboardNavbar from '../Member Dashboard/Navbar/DashboardNavbar';
+import firebase from 'firebase';
 import { AuthUserContext, withAuthentication } from '../../Session';
 
 /**
@@ -19,16 +20,45 @@ export class DashboardEditProfileContainer extends React.Component {
             major: '',
             year: '',
             phone_number: '',
+            resume: '',
         }
     }
 
-    componentDidUpdate() {
-        this.props.firebase.user.get_user(this.props.firebase.user.get_current_uid()).then(snapshot => {
-            this.setState({userData: snapshot});
+    componentDidMount() {
+        this.populate_events();
+
+        this.props.firebase.event.get_events().then(snapshot => {
+            snapshot.docs.forEach(doc => {
+                console.log(doc.data());
+            })
+        })
+
+        this.props.firebase.user.get_all_users().then(snapshot => {
+            snapshot.docs.forEach(doc => {
+                console.log(doc.data());
+            })
+        })
+    }
+
+    async populate_events() {
+        await firebase.auth().onAuthStateChanged((user) => {
+            this.props.firebase.user.get_user(this.props.firebase.user.get_current_uid()).then(snapshot => {
+                this.setState({
+                    userData: snapshot,
+                    gt_email: snapshot['gt_email'], 
+                    first_name: snapshot['first_name'],
+                    last_name: snapshot['last_name'],
+                    alt_email: snapshot['alt_email'],
+                    major: snapshot['major'],
+                    year: snapshot['year'],
+                    phone_number: snapshot['phone_number']
+                });
         });
+        })
     }
 
     handleInputChange = (event) => {
+        // console.log(event.target);
         this.setState({[event.target.name]: event.target.value});
     }
 
@@ -43,8 +73,7 @@ export class DashboardEditProfileContainer extends React.Component {
         //     this.state.year,
         //     this.state.phone_number
         // );
-        console.log(this.state);
-        alert('here');
+        this.props.firebase.user.update_user_email(this.props.firebase.user.get_current_uid(), this.state.alt_email);
     }
 
     render() {
@@ -53,7 +82,7 @@ export class DashboardEditProfileContainer extends React.Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="formBasicEmail"> 
                         <Form.Label>GT Email Address</Form.Label> 
-                        <Form.Control onChange={this.handleInputChange} name="gt_email" type="email" defaultValue={this.state.userData.gt_email} /> 
+                        <Form.Control onChange={this.handleInputChange} name="gt_email" type="email" value={this.state.gt_email} /> 
                     </Form.Group>
 
                     <Form.Group>
@@ -89,6 +118,11 @@ export class DashboardEditProfileContainer extends React.Component {
                     <Form.Group>
                         <Form.Label> Phone Number </Form.Label>
                         <Form.Control onChange={this.handleInputChange} name="phone_number" type="tel" defaultValue={this.state.userData.phone_number} /> 
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label>Upload Resume (PDF only)</Form.Label>
+                        <Form.Control onChange={this.handleInputChange} name="resume" type="file" accept=".pdf"/>
                     </Form.Group>
 
                     {/* TODO: REMOVE THIS AND MOVE TO SECONDARY STAGE!!! 

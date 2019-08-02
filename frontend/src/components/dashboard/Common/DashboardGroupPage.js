@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Form, Table, Container } from "react-bootstrap"; 
+import {Button, Form, Table, Container, ListGroup } from "react-bootstrap"; 
 import { AuthUserContext, withAuthentication } from '../../Session';
 import {withRouter} from 'react-router-dom'; 
 import DashboardNavbar from '../Member Dashboard/Navbar/DashboardNavbar';
@@ -100,9 +100,10 @@ export class DeleteGroupForm extends React.Component {
         return (
             <Form onSubmit={this.handleSubmit}>
                 <p>Available Groups: </p>
-                <ul>{this.state.groups_available.map((group) => { return(
-                    <li key={group}>{group}</li>
-                )})}</ul>
+                <ListGroup>{this.state.groups_available.map((group) => { return(
+                    <ListGroup.Item key={group}>{group}</ListGroup.Item>
+                )})}
+                </ListGroup>
                 <Form.Group>
                     <Form.Label>Delete Group Name</Form.Label>
                     <Form.Control onChange={this.handleInputChange} name="name"></Form.Control>

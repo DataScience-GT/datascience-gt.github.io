@@ -17,18 +17,20 @@ const withAuthentication = Component => {
             this.state = {
                 authUser: null
             }; 
+
+
         }
         //upon the creation of the component, we add a listener 
         // to the authneication state of firebase. 
         componentDidMount() {
             // the listener goes ahead and sets the authUser upon firebase authenicatino changes 
             this.listener = this.props.firebase.user.auth.onAuthStateChanged(
-              authUser => {
-                  authUser
-                  ? this.setState({authUser})
-                  : this.setState({authUser: null}); 
-              },
-            ); 
+                authUser => {
+                    authUser
+                    ? this.setState({authUser})
+                    : this.setState({authUser: null}); 
+                },
+              ); 
         }
     
         // upon removing the app, we call the listner. Not sure what this 

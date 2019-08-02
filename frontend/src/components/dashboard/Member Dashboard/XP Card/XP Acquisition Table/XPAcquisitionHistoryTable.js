@@ -1,11 +1,12 @@
 import React from 'react'; 
 import {Table} from 'react-bootstrap';
+import './XPAcquisitonHistoryTable.css';
 
 export default class XPAcquisitonHistoryTable extends React.Component {
 
     render() {
         return (
-            <Table striped bordered hover variant="secondary">
+            <Table striped bordered hover className="xp-table">
                 <thead>
                     <tr>
                     <th>Event</th>

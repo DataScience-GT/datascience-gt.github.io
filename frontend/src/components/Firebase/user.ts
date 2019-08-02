@@ -65,6 +65,22 @@ class UserApi {
         let doc = await this.db.collection("users").doc(uid).get(); 
         return await doc.data(); 
     }
+
+    async get_user_from_name(first_name: string, last_name: string) {
+        await this.db.collection('users')
+            .where('first_name', '==', first_name)
+            .where('last_name', '==', last_name)
+            .get()
+            .then(snapshot => {
+                if(snapshot.empty) {
+                    return null;
+                }
+                let user = [];
+                snapshot.docs.forEach(doc => {
+                    user.push({id: doc.id, data: doc.data()});
+                });
+            })
+    }
     
     /**
      * Performs a sign-in procedure and returns the result of the promise 
@@ -151,13 +167,13 @@ class UserApi {
     async update_user(uid: string, gt_email: string, first_name: string, last_name: string, alt_email: string, major: string, year: string, phone_number: string) {
         let userRef = await this.db.collection('users').doc(uid);
         return userRef.update({
-                first_name: first_name,
-                last_name: last_name,
-                gt_email: gt_email,
+                // first_name: first_name,
+                // last_name: last_name,
+                // gt_email: gt_email,
                 alt_email: alt_email,
-                major: major,
-                year: year,
-                phone_number: phone_number
+                // major: major,
+                // year: year,
+                // phone_number: phone_number
             }).then(() => {
                 console.log('Successfully updated user');
             }).catch(err => {
@@ -165,18 +181,25 @@ class UserApi {
             });
     }
 
+    async update_user_email(uid: string, email: string) {
+        return await this.db.collection('users').doc(uid);
+        // return userRef.update({
+        //     alt_email: email
+        // })
+        // .then(() => {
+        //     console.log('Updated');
+        // })
+        // .catch(() => {
+        //     console.log('Failed');
+        // });
+    }
+
     /**
      * Retrieves all users from the 'users' collection.
      */
     async get_all_users() {
         let users: any = [];
-        await this.db.collection('users').get().then(snapshot => {
-            snapshot.docs.forEach(doc => {
-                users.push({id: doc.id, first_name: doc.data().first_name, last_name: doc.data().last_name})
-            })
-        });
-        
-        return users;
+        return await this.db.collection('users').get();
     }
 
     /**

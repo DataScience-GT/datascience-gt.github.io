@@ -2,10 +2,12 @@ import React from 'react';
 import {Link} from 'react-router-dom'; 
 import Nav from 'react-bootstrap/Nav'; 
 import Navbar from 'react-bootstrap/Navbar'; 
+import {Button} from 'react-bootstrap';
 import * as ROUTES from "../../config/routes"
 import {AuthUserContext, withAuthentication} from "../Session"; 
 import {withRouter} from "react-router-dom"; 
-import './index.css';
+import {withFirebase} from '../Firebase';
+import './Navigation.css';
 
 /**
  * Login button on the Navbar that gets conditionally rendered.
@@ -57,15 +59,17 @@ let AuthLoginComponent = withRouter(withAuthentication(LoginComponent));
 SignupComponent.contextType = AuthUserContext;
 let AuthSignUpComponent = withRouter(withAuthentication(SignupComponent));
 
-export default class Navigation extends React.Component {
+class Navigation extends React.Component {
     constructor(props, authUser) {
         super(props); 
+        
     }
     render() {
+        let isLoggedin = this.props.firebase.user.auth.currentUser;
         return (
             <div className="padded">
-                <Navbar sticky ="top" bg="dark" variant="dark" expand="md">
-                    <Navbar.Brand><Link to='/'>DSGT</Link></Navbar.Brand>
+                <Navbar className="main-navbar" sticky ="top" expand="md">
+                    <Navbar.Brand><Link to='/'></Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse>
                         <Nav className="mr-auto">
@@ -75,8 +79,12 @@ export default class Navigation extends React.Component {
                             <Nav.Link href={ROUTES.LANDING + "#join"}>Join</Nav.Link>
                             <Nav.Link href={ROUTES.LANDING + "#resources"}>Resources</Nav.Link>
                             <Nav.Link href={ROUTES.LANDING + "#contact"}>Contact</Nav.Link>
+
                         </Nav>
                         <Nav>
+                            {isLoggedin && 
+                                    <Button className="dsgt-button" variant="primary" href={ROUTES.DASHBOARD_HOME}>Go To Dashboard</Button>
+                            }
                             <AuthLoginComponent /> 
                             <AuthSignUpComponent />
                         </Nav>
@@ -86,6 +94,8 @@ export default class Navigation extends React.Component {
         )
     }
 }
+
+export default withFirebase(Navigation);
 
 
 

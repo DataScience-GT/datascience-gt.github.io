@@ -3,7 +3,7 @@ import { Button, Form, Container, Modal } from "react-bootstrap";
 import {withRouter} from 'react-router-dom'; 
 import DashboardNavbar from '../Member Dashboard/Navbar/DashboardNavbar';
 import { withAuthentication } from '../../Session';
-import { EventList, EventEditModal } from '../Member Dashboard/Event/Event';
+import { EventList } from '../Member Dashboard/Event/Event';
 
 /**
  * @author Vidhur Kumar
@@ -20,6 +20,7 @@ export class CreateEventForm extends React.Component {
             name: "",
             desc: "",
             date: "",
+            type: "",
         }
     }
 
@@ -33,11 +34,16 @@ export class CreateEventForm extends React.Component {
     /**
      * 
      */
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault(); 
         // console.log(this.props.firebase.event);
-        this.props.firebase.event.create_event(this.state.name, this.state.desc, this.state.date, null, null);
-        this.setState({name: '', desc: '', date: ''});
+        let name = '';
+        await this.props.firebase.user.get_user(this.props.firebase.user.get_current_uid())
+        .then(snapshot => {
+            name = snapshot['first_name'] + ' ' + snapshot['last_name'];
+        })
+        await this.props.firebase.event.create_event(this.state.name, this.state.desc, this.state.date, this.state.type, name);
+        this.setState({name: '', desc: '', date: '', type: ''});
     }
 
     /**
@@ -58,10 +64,10 @@ export class CreateEventForm extends React.Component {
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlSelect1">
                         <Form.Label>Event Type</Form.Label>
-                        <Form.Control as="select">
+                        <Form.Control as="select" name="type" onChange={this.handleInputChange}>
                             <option>General Meeting</option>
                             <option>Workshop</option>
-                            <option></option>
+                            <option>Project</option>
                             <option>Special</option>
                         </Form.Control>
                     </Form.Group>
@@ -139,7 +145,7 @@ export class EditEventForm extends React.Component {
     }
 
     render() {
-        const eventItems = this.state.events.map(event => <option key={event.id}>{event.data.name}</option>);
+        // const eventItems = this.state.events.map(event => <option key={event.id}>{event.data.name}</option>);
         return (
             <div>
                 
