@@ -6,6 +6,7 @@ import firebase from 'firebase';
 import { AuthUserContext, withAuthentication } from '../../Session';
 
 /**
+ * The dashboard's edit profile page. Used to change any personal information, upload resumes, etc.
  * @author Vidhur Kumar
  */
 export class DashboardEditProfileContainer extends React.Component {
@@ -27,17 +28,11 @@ export class DashboardEditProfileContainer extends React.Component {
     componentDidMount() {
         this.populate_events();
 
-        this.props.firebase.event.get_events().then(snapshot => {
-            snapshot.docs.forEach(doc => {
-                console.log(doc.data());
-            })
-        })
-
-        this.props.firebase.user.get_all_users().then(snapshot => {
-            snapshot.docs.forEach(doc => {
-                console.log(doc.data());
-            })
-        })
+        // this.props.firebase.event.get_events().then(snapshot => {
+        //     snapshot.docs.forEach(doc => {
+        //         console.log(doc.data());
+        //     })
+        // })
     }
 
     async populate_events() {
@@ -57,29 +52,27 @@ export class DashboardEditProfileContainer extends React.Component {
         })
     }
 
-    handleInputChange = (event) => {
+    handleInputChange = async (event) => {
         // console.log(event.target);
-        this.setState({[event.target.name]: event.target.value});
+        await this.setState({[event.target.name]: event.target.value});
+        console.log(this.state);
     }
 
-    handleSubmit = () => {
-        // this.props.firebase.user.update_user(
-        //     this.props.firebase.user.get_current_uid(), 
-        //     this.state.gt_email, 
-        //     this.state.first_name, 
-        //     this.state.last_name,
-        //     this.state.alt_email,
-        //     this.state.major,
-        //     this.state.year,
-        //     this.state.phone_number
-        // );
-        this.props.firebase.user.update_user_email(this.props.firebase.user.get_current_uid(), this.state.alt_email);
+    handleSubmit = async () => {
+        await this.props.firebase.user.update_user(this.props.firebase.user.get_current_uid(), this.state.gt_email, this.state.first_name, this.state.last_name,
+                this.state.alt_email, this.state.major, this.state.year, this.state.phone_number);
+        // this.props.firebase.user.update_user_email(this.props.firebase.user.get_current_uid(), this.state.alt_email);
+    //    this.props.firebase.user.get_all_users().then(snapshot => {
+    //         snapshot.docs.forEach(doc => {
+    //             console.log(doc.data());
+    //         })
+    //     });
     }
 
     render() {
         return (
             <Container>
-                <Form onSubmit={this.handleSubmit}>
+                <Form>
                     <Form.Group controlId="formBasicEmail"> 
                         <Form.Label>GT Email Address</Form.Label> 
                         <Form.Control onChange={this.handleInputChange} name="gt_email" type="email" value={this.state.gt_email} /> 
@@ -108,10 +101,10 @@ export class DashboardEditProfileContainer extends React.Component {
                     <Form.Group controlId="">
                         <Form.Label>Year</Form.Label>
                         <Form.Control onChange={this.handleInputChange} as="select" name="year" type="text">
-                            <option>Freshman</option>
-                            <option>Sophomore</option>
-                            <option>Junior</option>
-                            <option>Senior</option>
+                            <option selected={this.state.userData.year === 'Freshman'}>Freshman</option>
+                            <option selected={this.state.userData.year === 'Sophomore'}>Sophomore</option>
+                            <option selected={this.state.userData.year === 'Junior'}>Junior</option>
+                            <option selected={this.state.userData.year === 'Senior'}>Senior</option>
                         </Form.Control>
                     </Form.Group>
 
@@ -133,7 +126,7 @@ export class DashboardEditProfileContainer extends React.Component {
                         <Form.Text>More About You</Form.Text>
                     </Form.Group> */}
 
-                    <Button variant="primary" type="submit"> 
+                    <Button onClick={this.handleSubmit} variant="primary" type="button"> 
                         Submit changes
                     </Button>
 

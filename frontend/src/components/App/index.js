@@ -14,6 +14,9 @@ import * as ROUTES from "../../config/routes"
 import { withAuthentication} from "../Session"
 import  DashboardGroupPage from '../Dashboard/Common/DashboardGroupPage';
 
+/**
+ * @author Raj Shrimali and Vidhur Kumar
+ */
 class App extends React.Component {
     render () {
         return (

@@ -55,7 +55,7 @@ class EventApi {
      * @param type 
      * @param owner 
      */
-    async create_event(name: string, desc: string, date: Date, type: string, owner: string) {
+    async create_event(name: string, desc: string, date: Date, type: string, owner: string, link: string) {
         let newEventRef = this.db.collection("events").doc();
         return newEventRef.set({
             name: name,
@@ -63,16 +63,50 @@ class EventApi {
             date: date,
             type: type,
             owner: owner,
+            links: [link],
             rsvp_list: []
         });
     }
 
     /**
      * 
-     * @param uid 
+     * @param id 
      */
-    async delete_event(uid: string) {
+    async delete_event(id: string) {
+        await this.db.collection('events').doc(id).delete()
+            .then(() => {
+                console.log('Event successfully deleted')
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
 
+    async update_event(id: string, name: string, desc: string, date: Date, type: string) {
+        let eventRef = this.db.collection("events").doc(id);
+        return eventRef.update({
+            name: name,
+            desc: desc,
+            date: date,
+            type: type,
+        })
+        .then(() => {
+            console.log('Successfully updated event.')
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+
+    async add_field_to_event() {
+        await this.db.collection('events').get().then(snapshot => {
+            snapshot.docs.forEach(async doc => {
+                let eventRef = await this.db.collection('events').doc(doc.id);
+                eventRef.set({
+                    links: []
+                }, {merge: true});
+            })
+        })
     }
 
     /**

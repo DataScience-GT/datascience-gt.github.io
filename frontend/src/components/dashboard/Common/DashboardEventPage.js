@@ -1,11 +1,12 @@
 import React from 'react'; 
-import { Button, Form, Container, Modal } from "react-bootstrap"; 
+import { Button, Form, InputGroup, Container, Modal } from "react-bootstrap"; 
 import {withRouter} from 'react-router-dom'; 
 import DashboardNavbar from '../Member Dashboard/Navbar/DashboardNavbar';
 import { withAuthentication } from '../../Session';
 import { EventList } from '../Member Dashboard/Event/Event';
 
 /**
+ * The dashboard's event page for event creation, deletion, and modification.
  * @author Vidhur Kumar
  */
 export class CreateEventForm extends React.Component {
@@ -21,14 +22,27 @@ export class CreateEventForm extends React.Component {
             desc: "",
             date: "",
             type: "",
+            link: "",
         }
+    }
+
+    componentDidMount() {
+        this.viewEvents();
+    }
+
+    viewEvents = async () => {
+        await this.props.firebase.event.get_events().then(snapshot => {
+            snapshot.docs.forEach(doc => {
+                console.log(doc.data());
+            })
+        })
     }
 
     /**
      * 
      */
-    handleInputChange = (event) => {
-        this.setState({[event.target.name]: event.target.value}); 
+    handleInputChange = async (event) => {
+        await this.setState({[event.target.name]: event.target.value});
     }
 
     /**
@@ -42,8 +56,8 @@ export class CreateEventForm extends React.Component {
         .then(snapshot => {
             name = snapshot['first_name'] + ' ' + snapshot['last_name'];
         })
-        await this.props.firebase.event.create_event(this.state.name, this.state.desc, this.state.date, this.state.type, name);
-        this.setState({name: '', desc: '', date: '', type: ''});
+        await this.props.firebase.event.create_event(this.state.name, this.state.desc, this.state.date, this.state.type, name, this.state.link);
+        this.setState({name: '', desc: '', date: '', type: '', link: ''});
     }
 
     /**
@@ -74,6 +88,16 @@ export class CreateEventForm extends React.Component {
                     <Form.Group>
                         <Form.Label>Event Date</Form.Label>
                         <Form.Control onChange={this.handleInputChange} name="date" type="date" value={this.state.date}></Form.Control>
+                    </Form.Group>
+                    <Form.Group>
+                        <InputGroup className="mb-3">
+                        <InputGroup.Prepend>
+                            <InputGroup.Text>Event Files Link</InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <Form.Control onChange={this.handleInputChange} type="url" name="link" value={this.state.link}/>
+                        {/* <Form.Control onChange={this.handleInputChange} type="url" name="link2"/>
+                        <Form.Control onChange={this.handleInputChange} type="url" name="link3"/> */}
+                        </InputGroup>
                     </Form.Group>
                     <Button variant="primary" type="submit">Create</Button>
                 </Form>
@@ -190,10 +214,6 @@ export class DashboardEventContainer extends React.Component {
 const DashboardEventPageWithFirebase = withRouter(withAuthentication(DashboardEventContainer));
 
 export default class DashboardEventPage extends React.Component {
-
-    componentDidMount() {
-        console.log(this);
-    }
     render() {
         return (
             <div>

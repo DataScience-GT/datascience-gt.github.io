@@ -138,13 +138,26 @@ export class CreateJoinRequestForm extends React.Component {
         this.props.firebase.group.get_groups().then(groups => {
             this.setState({available_groups: groups});
         });
-        this.props.firebase.user.get_all_users().then(users => {
-           this.setState({users: users});
-        })
+        this.populateUsers();
     }
+
+    /**
+     * 
+     */
+    populateUsers = async () => {
+        let users = [];
+        await this.props.firebase.user.get_all_users().then(snapshot => {
+           snapshot.docs.forEach(doc => {
+               users.push({id: doc.id, data: doc.data()});
+           })
+        });
+        await this.setState({users: users});
+    }
+
     handleInputChange(event) {
         let target = event.target; 
         this.setState({[target.name]: target.value})
+        console.log(this.state.users);
     }
 
     handleSubmit(event) {
@@ -165,7 +178,7 @@ export class CreateJoinRequestForm extends React.Component {
                 <Form.Group>
                     <Form.Label>Select User</Form.Label>
                     <Form.Control name="user" as="select" multiple>
-                        {this.state.users.map(user => <option>{user.first_name + " " + user.last_name}</option>)}
+                        {this.state.users.map(user => <option>{user.data.first_name + " " + user.data.last_name}</option>)}
                     </Form.Control>
                 </Form.Group>
                 <Form.Group>
@@ -353,7 +366,7 @@ export class DashboardGroupContainer extends React.Component {
                 <CreateGroupForm firebase={this.props.firebase} authUser={this.authUser}/> 
                 <DeleteGroupForm firebase={this.props.firebase} authUser={this.authUser}/>
                 <CreateJoinRequestForm firebase={this.props.firebase} authUser={this.authUser}/>
-                <VerifyPendingUserForm firebase={this.props.firebase} authUser={this.authUser}></VerifyPendingUserForm>
+                {/* <VerifyPendingUserForm firebase={this.props.firebase} authUser={this.authUser}></VerifyPendingUserForm> */}
             </Container>
         )
     }

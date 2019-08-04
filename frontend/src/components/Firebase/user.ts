@@ -167,13 +167,13 @@ class UserApi {
     async update_user(uid: string, gt_email: string, first_name: string, last_name: string, alt_email: string, major: string, year: string, phone_number: string) {
         let userRef = await this.db.collection('users').doc(uid);
         return userRef.update({
-                // first_name: first_name,
-                // last_name: last_name,
-                // gt_email: gt_email,
+                gt_email: gt_email,
+                first_name: first_name,
+                last_name: last_name,
                 alt_email: alt_email,
-                // major: major,
-                // year: year,
-                // phone_number: phone_number
+                major: major,
+                year: year,
+                phone_number: phone_number
             }).then(() => {
                 console.log('Successfully updated user');
             }).catch(err => {
@@ -181,24 +181,10 @@ class UserApi {
             });
     }
 
-    async update_user_email(uid: string, email: string) {
-        return await this.db.collection('users').doc(uid);
-        // return userRef.update({
-        //     alt_email: email
-        // })
-        // .then(() => {
-        //     console.log('Updated');
-        // })
-        // .catch(() => {
-        //     console.log('Failed');
-        // });
-    }
-
     /**
      * Retrieves all users from the 'users' collection.
      */
     async get_all_users() {
-        let users: any = [];
         return await this.db.collection('users').get();
     }
 
@@ -218,6 +204,18 @@ class UserApi {
         // userRef.update({
         //     groups: firestore.FieldValue.arrayUnion(group)
         // })
+    }
+
+    async add_xp_history_to_user() {
+        await this.db.collection('users').get().then(snapshot => {
+            snapshot.docs.forEach(async doc => {
+                let userRef = await this.db.collection('users').doc(doc.id);
+                userRef.set({xp_history: []}, {merge: true});
+            })
+        })
+
+        // let userRef = await this.db.collection('users').doc(uid);
+
     }
     
     /**

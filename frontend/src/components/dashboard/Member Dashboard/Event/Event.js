@@ -87,53 +87,66 @@ export class EventRSVPModal extends React.Component {
 /**
  * @author Vidhur Kumar
  */
-export class EventEditModal extends React.Component {
+export class EventEditForm extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            username: '',
             name: this.props.event.data.name,
             desc: this.props.event.data.desc,
-            type: this.props.event.data.type,
             date: this.props.event.data.date,
+            type: this.props.event.data.type,
+            show: this.props.show
         }
+
+        this.props.firebase.user.get_user(this.props.firebase.user.get_current_uid())
+        .then(snapshot => {
+            this.setState({username: snapshot['first_name'] + ' ' + snapshot['last_name']});
+        });
     }
 
+    handleInputChange = (event) => {
+        this.setState({[event.target.name]: event.target.value}); 
+    }
+
+    handleSubmit = async () => {
+        await this.props.firebase.event.update_event(this.props.event.id, this.state.name, this.state.desc, this.state.date, this.state.type);
+    }
+
+    handleDelete = async () => {
+        await this.props.firebase.event.delete_event(this.props.event.id);
+    }
+
+
     render() {
+        const isEventOwnerContext = this.state.username !== this.props.event.data.owner;
         return (
-            <Modal show={this.props.show} onHide={this.props.handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit Event</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form onSubmit={this.handleSubmit}>
-                        <Form.Group>
-                            <Form.Label>Event Name</Form.Label>
-                            <Form.Control onChange={this.handleInputChange} name="name" defaultValue={this.props.event.data.name}></Form.Control>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Event Description</Form.Label>
-                            <Form.Control onChange={this.handleInputChange} name="desc" defaultValue={this.props.event.data.desc}></Form.Control>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Event Type</Form.Label>
-                            <Form.Control as="select">
-                                <option>General Meeting</option>
-                                <option>Workshop</option>
-                                <option></option>
-                                <option>Special</option>
-                            </Form.Control>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Event Date</Form.Label>
-                            <Form.Control onChange={this.handleInputChange} name="date" type="date" defaultValue={this.props.event.data.date}></Form.Control>
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button className="rsvp-button" variant="outline-info">Save</Button>
-                </Modal.Footer>
-            </Modal>
+            <Form>
+                <Form.Group>
+                    <Form.Label>Event Name</Form.Label>
+                    <Form.Control onChange={this.handleInputChange} name="name" defaultValue={this.props.event.data.name}></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Event Description</Form.Label>
+                    <Form.Control onChange={this.handleInputChange} name="desc" defaultValue={this.props.event.data.desc}></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Event Type</Form.Label>
+                    <Form.Control onChange={this.handleInputChange} as="select" name="type">
+                        <option selected={this.props.event.data.type === 'General Meeting'}>General Meeting</option>
+                        <option selected={this.props.event.data.type === 'Workshop'}>Workshop</option>
+                        <option selected={this.props.event.data.type === 'Project'}>Project</option>
+                        <option selected={this.props.event.data.type === 'Special'}>Special</option>
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Event Date</Form.Label>
+                    <Form.Control onChange={this.handleInputChange} name="date" type="date" defaultValue={this.props.event.data.date}></Form.Control>
+                </Form.Group>
+                <Button disabled={isEventOwnerContext} onClick={this.handleSubmit} className="rsvp-button" variant="outline-success">Save</Button>
+                <Button disabled={isEventOwnerContext} onClick={this.handleDelete} className="rsvp-button" variant="outline-danger">Delete</Button>
+            </Form>
         )
     }
 }
@@ -149,7 +162,15 @@ export class EventCard extends React.Component {
     
         this.state = {
           show: false,
+          username: ''
         };
+
+        this.props.firebase.user.get_user(this.props.firebase.user.get_current_uid())
+        .then(snapshot => {
+            this.setState({username: snapshot['first_name'] + ' ' + snapshot['last_name']});
+        });
+
+        console.log(this.props.event.data);
       }
 
       handleClose = () => {
@@ -161,21 +182,23 @@ export class EventCard extends React.Component {
       }
 
       handleClick = async () => {
-        let name = '';
-        await this.props.firebase.user.get_user(this.props.firebase.user.get_current_uid())
-        .then(snapshot => {
-            name = snapshot['first_name'] + ' ' + snapshot['last_name'];
-        })
+      }
 
-        console.log(this.props.event);
-        // this.props.firebase.event.rsvp_to_event(this.props.event.id, name);
-        // alert('You have RSVPd!');
+      handleSubmit = () => {
+          if(this.props.isRSVP) {
+
+          } else {
+          }
       }
       
       render() {
-          const modal = this.props.isRSVP ? <EventRSVPModal show={this.state.show} event={this.props.event} rsvp={() => this.handleClick} handleClose={() => this.handleClose}/> :
-            <EventEditModal show={this.state.show} event={this.props.event} handleClose={() => this.handleClose}/>;
-          return (
+        const modalTitle = this.props.isRSVP ? 'Event Description' : 'Edit Event'
+        const modalBody = this.props.isRSVP ? this.props.event.data.desc :
+                <EventEditForm handleSubmit={this.handleSubmit.bind(this)} event={this.props.event} firebase={this.props.firebase}/>;
+        const eventLinks = this.props.event.data.links && this.props.event.data.links.length > 0 ?
+        <Button variant="info"><a href={this.props.event.data.links[0]}>Files</a></Button> :
+            null;
+        return (
                 <div>
                     <Card>
                         <Card.Body onClick={this.handleShow}>
@@ -183,18 +206,21 @@ export class EventCard extends React.Component {
                             <span className="event-type"><EventTypeBadge type={this.props.event.data.type}/></span>
                         </Card.Body>
                     </Card>
-                    {modal}
-                    {/* <EventRSVPModal show={this.state.show} event={this.props.event} handleClose={this.handleClose}/> */}
-{/* 
                     <Modal show={this.state.show} onHide={this.handleClose}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Event Description:</Modal.Title>
+                            <Modal.Title>{modalTitle}</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>{this.props.event.desc}</Modal.Body>
-                        <Modal.Footer>
-                            <Button onClick={this.handleClick} className="rsvp-button" variant="outline-success">RSVP</Button>
-                        </Modal.Footer>
-                    </Modal> */}
+                        <Modal.Body>
+                            {modalBody}
+                            <br />
+                            {eventLinks}
+                        </Modal.Body>
+                        {this.props.isRSVP &&
+                            <Modal.Footer>
+                                <Button className="rsvp-button" variant="outline-success">RSVP</Button>
+                            </Modal.Footer>
+                        }
+                    </Modal>
                 </div>
           )
       }
