@@ -190,6 +190,11 @@ export class EventCard extends React.Component {
           } else {
           }
       }
+
+      handleRSVP = () => {
+          this.props.firebase.event.rsvp_to_event(this.props.event.id, this.state.username);
+          this.handleClose();
+      }
       
       render() {
         const modalTitle = this.props.isRSVP ? 'Event Description' : 'Edit Event'
@@ -217,7 +222,7 @@ export class EventCard extends React.Component {
                         </Modal.Body>
                         {this.props.isRSVP &&
                             <Modal.Footer>
-                                <Button className="rsvp-button" variant="outline-success">RSVP</Button>
+                                <Button disabled={this.props.event.data.rsvp_list.includes(this.state.username)} onClick={this.handleRSVP} className="rsvp-button" variant="outline-success">RSVP</Button>
                             </Modal.Footer>
                         }
                     </Modal>

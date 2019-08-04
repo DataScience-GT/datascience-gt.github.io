@@ -31,12 +31,7 @@ class EventApi {
      * 
      */
     async get_events() {
-        // let events = [];
         return await this.db.collection("events").get();
-        //     snapshot.docs.forEach(doc => {
-        //         events.push({id: doc.id, data: doc.data()});
-        //     });
-        // });
     }
 
     /**
@@ -44,7 +39,7 @@ class EventApi {
      * @param id 
      */
     async get_event(id: string) {
-        // return await this.db.collection("events").doc(id).get();
+        return await this.db.collection("events").doc(id).get();
     }
 
     /**
@@ -118,8 +113,8 @@ class EventApi {
      * @param uid
      * @param user 
      */
-    async rsvp_to_event(uid: string, userName: string) {
-        let eventRef = this.db.collection("events").doc(uid);
+    async rsvp_to_event(id: string, userName: string) {
+        let eventRef = this.db.collection("events").doc(id);
 
         eventRef.update({
             rsvp_list: firestore.FieldValue.arrayUnion(userName)
