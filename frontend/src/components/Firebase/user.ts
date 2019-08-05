@@ -67,6 +67,7 @@ class UserApi {
     }
 
     async get_user_from_name(first_name: string, last_name: string) {
+        let id = null;
         await this.db.collection('users')
             .where('first_name', '==', first_name)
             .where('last_name', '==', last_name)
@@ -75,11 +76,18 @@ class UserApi {
                 if(snapshot.empty) {
                     return null;
                 }
-                let user = [];
-                snapshot.docs.forEach(doc => {
-                    user.push({id: doc.id, data: doc.data()});
-                });
+
+                if(snapshot.docs.length > 1) {
+                    throw new Error("More than one user found with the same first name and the last name");
+                }
+
+                id = snapshot.docs[0].id;
             })
+            .catch((err) => {
+                console.log(err);
+            })
+
+            return id;
     }
     
     /**
@@ -179,6 +187,37 @@ class UserApi {
             }).catch(err => {
                 console.log(err);
             });
+    }
+
+    async update_user_event_history(uid: string, event: string, xp: number, eventType: string) {
+        let userRef = await this.db.collection('users').doc(uid);
+        let eventArray = "";
+        switch(eventType) {
+            case "Workshop":
+                eventArray = "workshop";
+                break;
+
+            case "General Meeting":
+                eventArray = "gm";
+                break;
+
+            case "Project":
+                eventArray = "project";
+                break;
+
+            case "Special":
+                eventArray = "other";
+                break;
+
+            default:
+                eventArray = "";
+        }
+
+        eventArray = "event_history." + eventArray;
+
+        return userRef.update({
+            eventArray: firestore.FieldValue.arrayUnion({event: event, xp: xp})
+        })
     }
 
     /**

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Button, Form, Table, Container, ListGroup } from "react-bootstrap"; 
-import { AuthUserContext, withAuthentication } from '../../Session';
+import { AuthUserContext, withAuthentication } from '../../../Session';
 import {withRouter} from 'react-router-dom'; 
-import DashboardNavbar from '../Member Dashboard/Navbar/DashboardNavbar';
+import DashboardNavbar from '../../Member Dashboard/Navbar/DashboardNavbar';
 
 /**
  * @author Vidhur Kumar

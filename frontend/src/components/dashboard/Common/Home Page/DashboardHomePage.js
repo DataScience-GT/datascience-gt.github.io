@@ -1,8 +1,8 @@
 import React from 'react'; 
 import {Row, Col} from "react-bootstrap"; 
-import UserWelcomeHeader from '../Member Dashboard/User Welcome Header/UserWelcomeHeader';
-import {EventList} from '../Member Dashboard/Event/Event';
-import XPCard from '../Member Dashboard/XP Card/XPCard';
+import UserWelcomeHeader from '../../Member Dashboard/User Welcome Header/UserWelcomeHeader';
+import {EventList} from '../../Member Dashboard/Event/Event';
+import XPCard from '../../Member Dashboard/XP Card/XPCard';
 
 /**
  * @author Vidhur Kumar

@@ -1,9 +1,9 @@
 import React from 'react'; 
 import { Button, Form, InputGroup, Container, Modal } from "react-bootstrap"; 
 import {withRouter} from 'react-router-dom'; 
-import DashboardNavbar from '../Member Dashboard/Navbar/DashboardNavbar';
-import { withAuthentication } from '../../Session';
-import { EventList } from '../Member Dashboard/Event/Event';
+import DashboardNavbar from '../../Member Dashboard/Navbar/DashboardNavbar';
+import { withAuthentication } from '../../../Session';
+import { EventList } from '../../Member Dashboard/Event/Event';
 
 /**
  * The dashboard's event page for event creation, deletion, and modification.

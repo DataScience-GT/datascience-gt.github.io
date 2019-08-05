@@ -1,9 +1,9 @@
 import React from 'react'; 
 import { Button, Form, Container } from "react-bootstrap";
 import {withRouter} from 'react-router-dom'; 
-import DashboardNavbar from '../Member Dashboard/Navbar/DashboardNavbar';
+import DashboardNavbar from '../../Member Dashboard/Navbar/DashboardNavbar';
 import firebase from 'firebase';
-import { AuthUserContext, withAuthentication } from '../../Session';
+import { AuthUserContext, withAuthentication } from '../../../Session';
 
 /**
  * The dashboard's edit profile page. Used to change any personal information, upload resumes, etc.
