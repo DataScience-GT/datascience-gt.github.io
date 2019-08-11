@@ -77,6 +77,14 @@ class EventApi {
             })
     }
 
+    async delete_events() {
+        await this.db.collection('events').get().then(snapshot => {
+            snapshot.docs.forEach(doc => {
+                this.delete_event(doc.id);
+            })
+        })
+    }
+
     async update_event(id: string, name: string, desc: string, date: Date, type: string) {
         let eventRef = this.db.collection("events").doc(id);
         return eventRef.update({

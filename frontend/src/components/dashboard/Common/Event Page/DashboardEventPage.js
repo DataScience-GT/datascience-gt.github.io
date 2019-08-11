@@ -21,13 +21,13 @@ export class CreateEventForm extends React.Component {
             name: "",
             desc: "",
             date: "",
-            type: "",
+            type: "General Meeting",
             link: "",
         }
     }
 
     componentDidMount() {
-        this.viewEvents();
+        // this.viewEvents();
     }
 
     viewEvents = async () => {
@@ -58,6 +58,7 @@ export class CreateEventForm extends React.Component {
         })
         await this.props.firebase.event.create_event(this.state.name, this.state.desc, this.state.date, this.state.type, name, this.state.link);
         this.setState({name: '', desc: '', date: '', type: '', link: ''});
+        document.location.reload(true);
     }
 
     /**
@@ -95,8 +96,6 @@ export class CreateEventForm extends React.Component {
                             <InputGroup.Text>Event Files Link</InputGroup.Text>
                         </InputGroup.Prepend>
                         <Form.Control onChange={this.handleInputChange} type="url" name="link" value={this.state.link}/>
-                        {/* <Form.Control onChange={this.handleInputChange} type="url" name="link2"/>
-                        <Form.Control onChange={this.handleInputChange} type="url" name="link3"/> */}
                         </InputGroup>
                     </Form.Group>
                     <Button variant="primary" type="submit">Create</Button>

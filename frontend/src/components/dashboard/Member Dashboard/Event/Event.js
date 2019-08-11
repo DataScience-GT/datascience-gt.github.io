@@ -110,14 +110,6 @@ export class EventEditForm extends React.Component {
         this.setState({[event.target.name]: event.target.value}); 
     }
 
-    handleSubmit = async () => {
-        await this.props.firebase.event.update_event(this.props.event.id, this.state.name, this.state.desc, this.state.date, this.state.type);
-    }
-
-    handleDelete = async () => {
-        await this.props.firebase.event.delete_event(this.props.event.id);
-    }
-
 
     render() {
         const isEventOwnerContext = this.state.username !== this.props.event.data.owner;
@@ -144,8 +136,10 @@ export class EventEditForm extends React.Component {
                     <Form.Label>Event Date</Form.Label>
                     <Form.Control onChange={this.handleInputChange} name="date" type="date" defaultValue={this.props.event.data.date}></Form.Control>
                 </Form.Group>
-                <Button disabled={isEventOwnerContext} onClick={this.handleSubmit} className="rsvp-button" variant="outline-success">Save</Button>
-                <Button disabled={isEventOwnerContext} onClick={this.handleDelete} className="rsvp-button" variant="outline-danger">Delete</Button>
+                <div className="event-button-container">
+                    <Button disabled={isEventOwnerContext} onClick={this.props.handleSubmit} className="rsvp-button" variant="outline-success">Save</Button>
+                    <Button disabled={isEventOwnerContext} onClick={this.props.handleDelete} className="rsvp-button" variant="outline-danger">Delete</Button>
+                </div>
             </Form>
         )
     }
@@ -169,8 +163,6 @@ export class EventCard extends React.Component {
         .then(snapshot => {
             this.setState({username: snapshot['first_name'] + ' ' + snapshot['last_name']});
         });
-
-        console.log(this.props.event.data);
       }
 
       handleClose = () => {
@@ -184,12 +176,13 @@ export class EventCard extends React.Component {
       handleClick = async () => {
       }
 
-      handleSubmit = () => {
-          if(this.props.isRSVP) {
+    handleSubmit = async () => {
+        await this.props.firebase.event.update_event(this.props.event.id, this.state.name, this.state.desc, this.state.date, this.state.type);
+    }
 
-          } else {
-          }
-      }
+    handleDelete = async () => {
+        await this.props.firebase.event.delete_event(this.props.event.id);
+    }
 
       handleRSVP = () => {
           this.props.firebase.event.rsvp_to_event(this.props.event.id, this.state.username);
@@ -204,7 +197,7 @@ export class EventCard extends React.Component {
       render() {
         const modalTitle = this.props.isRSVP ? 'Event Description' : 'Edit Event'
         const modalBody = this.props.isRSVP ? this.props.event.data.desc :
-                <EventEditForm handleSubmit={this.handleSubmit.bind(this)} event={this.props.event} firebase={this.props.firebase}/>;
+                <EventEditForm handleSubmit={this.handleSubmit.bind(this)} handleDelete={this.handleDelete.bind(this)} event={this.props.event} firebase={this.props.firebase}/>;
         const eventLinks = this.props.event.data.links && this.props.event.data.links.length > 0 ?
         <Button variant="info"><a href={this.props.event.data.links[0]}>Files</a></Button> :
             null;
@@ -252,8 +245,11 @@ export class EventList extends React.Component {
             let events = this.state.events;
             snapshot.forEach(doc => {
                 events.push({id: doc.id, data: doc.data()});
-              });
-              this.setState({events: events});
+            });
+            events.sort((a, b) => {
+                return new Date(a.data.date) - new Date(b.data.date);
+            });
+            this.setState({events: events});
         }).catch(err => {
             console.log('Error getting documents', err);
         });
