@@ -3,6 +3,7 @@ import { Button, Form, InputGroup, Container, Modal } from "react-bootstrap";
 import {withRouter} from 'react-router-dom'; 
 import DashboardNavbar from '../../Member Dashboard/Navbar/DashboardNavbar';
 import { withAuthentication } from '../../../Session';
+import { FirebaseContext } from '../../../Firebase';
 import { EventList } from '../../Member Dashboard/Event/Event';
 
 /**
@@ -22,6 +23,7 @@ export class CreateEventForm extends React.Component {
             desc: "",
             date: "",
             type: "General Meeting",
+            XP: 0,
             link: "",
         }
     }
@@ -85,6 +87,10 @@ export class CreateEventForm extends React.Component {
                             <option>Project</option>
                             <option>Special</option>
                         </Form.Control>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>XP Points</Form.Label>
+                        <Form.Control onChange={this.handleInputChange} name="XP" type="number" value={this.state.XP}></Form.Control>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Event Date</Form.Label>
@@ -215,10 +221,17 @@ const DashboardEventPageWithFirebase = withRouter(withAuthentication(DashboardEv
 export default class DashboardEventPage extends React.Component {
     render() {
         return (
-            <div>
-                <DashboardNavbar />
-                <DashboardEventPageWithFirebase />
-            </div>
+            <FirebaseContext.Consumer>
+            {firebase => {
+                return (
+                    <div>
+                        <DashboardNavbar firebase={firebase}/>
+                        <DashboardEventPageWithFirebase />
+                    </div>
+                )
+
+            }}
+            </FirebaseContext.Consumer>
         )
     }
 }

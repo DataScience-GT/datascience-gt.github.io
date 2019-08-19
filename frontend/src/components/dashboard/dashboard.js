@@ -39,7 +39,7 @@ class Dashboard extends React.Component {
                 {firebase => {
                     return (
                         <div>
-                            <DashboardNavbar click={this.handleClick}/>
+                            <DashboardNavbar click={this.handleClick} firebase={firebase}/>
                             <DashboardHomePage user={this.state.user} firebase={firebase}/>
                         </div>
                     )

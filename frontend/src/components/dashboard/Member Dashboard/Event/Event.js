@@ -97,6 +97,7 @@ export class EventEditForm extends React.Component {
             desc: this.props.event.data.desc,
             date: this.props.event.data.date,
             type: this.props.event.data.type,
+            XP: this.props.event.data.XP,
             show: this.props.show
         }
 
@@ -124,6 +125,14 @@ export class EventEditForm extends React.Component {
                     <Form.Control onChange={this.handleInputChange} name="desc" defaultValue={this.props.event.data.desc}></Form.Control>
                 </Form.Group>
                 <Form.Group>
+                    <Form.Label>XP Points</Form.Label>
+                    <Form.Control onChange={this.handleInputChange} name="XP" type="number" defaultValue={this.props.event.data.XP}></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Event Date</Form.Label>
+                    <Form.Control onChange={this.handleInputChange} name="date" type="date" defaultValue={this.props.event.data.date}></Form.Control>
+                </Form.Group>
+                <Form.Group>
                     <Form.Label>Event Type</Form.Label>
                     <Form.Control onChange={this.handleInputChange} as="select" name="type">
                         <option selected={this.props.event.data.type === 'General Meeting'}>General Meeting</option>
@@ -132,17 +141,22 @@ export class EventEditForm extends React.Component {
                         <option selected={this.props.event.data.type === 'Special'}>Special</option>
                     </Form.Control>
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>Event Date</Form.Label>
-                    <Form.Control onChange={this.handleInputChange} name="date" type="date" defaultValue={this.props.event.data.date}></Form.Control>
-                </Form.Group>
                 <div className="event-button-container">
-                    <Button disabled={isEventOwnerContext} onClick={this.props.handleSubmit} className="rsvp-button" variant="outline-success">Save</Button>
-                    <Button disabled={isEventOwnerContext} onClick={this.props.handleDelete} className="rsvp-button" variant="outline-danger">Delete</Button>
+                    <Button disabled={isEventOwnerContext} 
+                            onClick={() => this.props.handleSubmit(this.props.event.id, this.state.name, this.state.desc, this.state.XP, this.state.date, this.state.type)} className="rsvp-button" variant="outline-success">Save</Button>
+                    <Button disabled={isEventOwnerContext} 
+                            onClick={() => this.props.handleDelete(this.props.event.id)} className="rsvp-button" variant="outline-danger">Delete</Button>
                 </div>
             </Form>
         )
     }
+}
+
+
+export const EventXPBadge = (props) => {
+    return (
+        <Badge pill variant="info">XP: {props.XP}</Badge>
+    )
 }
 
 /**
@@ -165,23 +179,27 @@ export class EventCard extends React.Component {
         });
       }
 
-      handleClose = () => {
+    handleClose = () => {
         this.setState({ show: false });
-      }
-    
-      handleShow = () => {
-        this.setState({ show: true });
-      }
-
-      handleClick = async () => {
-      }
-
-    handleSubmit = async () => {
-        await this.props.firebase.event.update_event(this.props.event.id, this.state.name, this.state.desc, this.state.date, this.state.type);
     }
 
-    handleDelete = async () => {
-        await this.props.firebase.event.delete_event(this.props.event.id);
+    handleShow = () => {
+        this.setState({ show: true });
+    }
+
+    handleClick = async () => {
+    }
+
+    handleSubmit = async (id, name, desc, XP, date, type) => {
+        await this.props.firebase.event.update_event(id, name, desc, XP, date, type);
+        await this.handleClose();
+        document.location.reload(true);
+    }
+
+    handleDelete = async (id) => {
+        await this.props.firebase.event.delete_event(id);
+        await this.handleClose();
+        document.location.reload(true);
     }
 
       handleRSVP = () => {
@@ -207,6 +225,7 @@ export class EventCard extends React.Component {
                         <Card.Body onClick={this.handleShow}>
                             <span><strong>{this.props.event.data.name}</strong></span>
                             <span className="event-type"><EventTypeBadge type={this.props.event.data.type}/></span>
+                            <span className="event-type"><EventXPBadge XP={this.props.event.data.XP}/></span>
                         </Card.Body>
                     </Card>
                     <Modal show={this.state.show} onHide={this.handleClose}>

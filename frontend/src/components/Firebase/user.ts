@@ -189,6 +189,11 @@ class UserApi {
             });
     }
 
+    async update_user_resume(uid: string, file: File) {
+        // let userRef = this.db.collection('users').doc(uid);
+        return await this._fbapp.file.uploadResume(file, file.name);
+    }
+
     async update_user_event_history(uid: string, event: string, xp: number, eventType: string) {
         let userRef = await this.db.collection('users').doc(uid);
         let eventArray = "";

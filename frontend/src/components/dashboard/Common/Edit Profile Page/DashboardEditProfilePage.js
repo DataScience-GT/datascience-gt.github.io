@@ -3,7 +3,9 @@ import { Button, Form, Container } from "react-bootstrap";
 import {withRouter} from 'react-router-dom'; 
 import DashboardNavbar from '../../Member Dashboard/Navbar/DashboardNavbar';
 import firebase from 'firebase';
+import { FirebaseContext } from '../../../Firebase';
 import { AuthUserContext, withAuthentication } from '../../../Session';
+import { throwStatement } from '@babel/types';
 
 /**
  * The dashboard's edit profile page. Used to change any personal information, upload resumes, etc.
@@ -21,7 +23,7 @@ export class DashboardEditProfileContainer extends React.Component {
             major: '',
             year: '',
             phone_number: '',
-            resume: '',
+            resume: null,
         }
     }
 
@@ -58,15 +60,22 @@ export class DashboardEditProfileContainer extends React.Component {
         console.log(this.state);
     }
 
+    handleFileInputChange = async (event) => {
+        const target = event.target; 
+        const file = target.files[0]; 
+        console.log(file);
+        this.setState({
+            resume: file
+        });
+    }
+
     handleSubmit = async () => {
         await this.props.firebase.user.update_user(this.props.firebase.user.get_current_uid(), this.state.gt_email, this.state.first_name, this.state.last_name,
                 this.state.alt_email, this.state.major, this.state.year, this.state.phone_number);
-        // this.props.firebase.user.update_user_email(this.props.firebase.user.get_current_uid(), this.state.alt_email);
-    //    this.props.firebase.user.get_all_users().then(snapshot => {
-    //         snapshot.docs.forEach(doc => {
-    //             console.log(doc.data());
-    //         })
-    //     });
+        if(this.state.resume != null) {
+            await this.props.firebase.user.update_user_resume(this.props.firebase.user.get_current_uid(), this.state.resume);
+        }
+        document.location.reload(true);
     }
 
     render() {
@@ -115,7 +124,7 @@ export class DashboardEditProfileContainer extends React.Component {
 
                     <Form.Group>
                         <Form.Label>Upload Resume (PDF only)</Form.Label>
-                        <Form.Control onChange={this.handleInputChange} name="resume" type="file" accept=".pdf"/>
+                        <Form.Control onChange={this.handleFileInputChange} name="resume" type="file" accept=".pdf"/>
                     </Form.Group>
 
                     {/* TODO: REMOVE THIS AND MOVE TO SECONDARY STAGE!!! 
@@ -140,12 +149,23 @@ DashboardEditProfileContainer.contextType = AuthUserContext;
 const DashboardEditProfilePageWithFirebase = withRouter(withAuthentication(DashboardEditProfileContainer));
 
 export default class DashboardEditProfilePage extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
-            <div>
-                <DashboardNavbar />
-                <DashboardEditProfilePageWithFirebase />
-            </div>
+            <FirebaseContext.Consumer>
+            {firebase => {
+                return (
+                    <div>
+                        <DashboardNavbar firebase={firebase}/>
+                        <DashboardEditProfilePageWithFirebase />
+                    </div>
+                )
+
+            }}
+            </FirebaseContext.Consumer>
         )
     }
 }

@@ -34,12 +34,12 @@ const Hero = () => {
     <section id="page-top">
         <div className="jumbotron">
             <Row>
-                <Col sm={12} className="text-center">
+                {/* <Col sm={12} className="text-center">
                     <div className="intro-text">
                         <div className="intro-heading text-uppercase">Data Science @ Georgia Tech</div>
                         <div className="intro-subtext text-uppercase">Data Science with a Focus on the Community</div>
                     </div>
-                </Col>
+                </Col> */}
             </Row>
             <Row>
                 <Col className="text-center">

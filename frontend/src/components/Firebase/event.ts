@@ -50,11 +50,12 @@ class EventApi {
      * @param type 
      * @param owner 
      */
-    async create_event(name: string, desc: string, date: Date, type: string, owner: string, link: string) {
+    async create_event(name: string, desc: string, XP: number, date: Date, type: string, owner: string, link: string) {
         let newEventRef = this.db.collection("events").doc();
         return newEventRef.set({
             name: name,
             desc: desc,
+            XP: XP,
             date: date,
             type: type,
             owner: owner,
@@ -85,11 +86,12 @@ class EventApi {
         })
     }
 
-    async update_event(id: string, name: string, desc: string, date: Date, type: string) {
+    async update_event(id: string, name: string, desc: string, XP: number, date: Date, type: string) {
         let eventRef = this.db.collection("events").doc(id);
         return eventRef.update({
             name: name,
             desc: desc,
+            XP: XP,
             date: date,
             type: type,
         })

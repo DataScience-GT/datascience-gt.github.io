@@ -38,7 +38,8 @@ class FileApi {
      * @param name The name of the resume  
      */
     uploadResume(file: Blob|File, name: string) {
-
+        let location = this._fbapp.user.get_current_uid() + "/resume";
+        return this.uploadFile(file, "resume_" + name, {}, location);
     }
 
     /**

@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Form, Table, Container, ListGroup } from "react-bootstrap"; 
 import { AuthUserContext, withAuthentication } from '../../../Session';
 import {withRouter} from 'react-router-dom'; 
+import { FirebaseContext } from '../../../Firebase';
 import DashboardNavbar from '../../Member Dashboard/Navbar/DashboardNavbar';
 
 /**
@@ -378,10 +379,17 @@ const DashboardGroupContainerWithFirebase = withRouter(withAuthentication(Dashbo
 export default class DashboardGroupPage extends React.Component {
     render() {
         return (
-            <div>
-                <DashboardNavbar />
-                <DashboardGroupContainerWithFirebase />
-            </div>
+            <FirebaseContext.Consumer>
+            {firebase => {
+                return (
+                    <div>
+                        <DashboardNavbar firebase={firebase}/>
+                        <DashboardGroupContainerWithFirebase />
+                    </div>
+                )
+
+            }}
+            </FirebaseContext.Consumer>
         )
     }
 }
