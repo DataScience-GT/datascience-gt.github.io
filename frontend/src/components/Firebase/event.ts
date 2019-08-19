@@ -103,12 +103,20 @@ class EventApi {
         })
     }
 
+    async distribute_event_XP(id: string) {
+        let eventRef = this.db.collection("events").doc(id);
+        eventRef.get().then(snapshot => {
+            console.log(snapshot.data());
+            return snapshot.data();
+        })
+    }
+
     async add_field_to_event() {
         await this.db.collection('events').get().then(snapshot => {
             snapshot.docs.forEach(async doc => {
                 let eventRef = await this.db.collection('events').doc(doc.id);
                 eventRef.set({
-                    links: []
+                    xpAdded: false
                 }, {merge: true});
             })
         })

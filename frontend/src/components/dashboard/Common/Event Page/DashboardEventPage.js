@@ -29,15 +29,22 @@ export class CreateEventForm extends React.Component {
     }
 
     componentDidMount() {
-        // this.viewEvents();
+        this.viewEvents();
     }
 
     viewEvents = async () => {
         await this.props.firebase.event.get_events().then(snapshot => {
-            snapshot.docs.forEach(doc => {
-                console.log(doc.data());
+            snapshot.docs.forEach(async doc => {
+                // console.log(doc.data()['rsvp_list']);
+                if(doc.data()['rsvp_list'].length > 0) {
+                    let curr = doc.data()['rsvp_list'][0];
+                    this.props.firebase.user.get_user_from_name(curr.split(" ")[0], curr.split(" ")[1]).then(res => console.log(res));
+                }
+                // console.log(doc.data()['date']);
+                // console.log(new Date(doc.data()['date']) < new Date());
             })
         })
+
     }
 
     /**

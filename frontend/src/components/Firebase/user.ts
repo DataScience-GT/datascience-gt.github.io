@@ -250,12 +250,16 @@ class UserApi {
         // })
     }
 
-    async add_xp_history_to_user() {
+
+    async add_eventXP_to_user(uid: string, eventId: string, eventXP: number) {
         await this.db.collection('users').get().then(snapshot => {
             snapshot.docs.forEach(async doc => {
                 let userRef = await this.db.collection('users').doc(doc.id);
-                userRef.set({xp_history: []}, {merge: true});
-            })
+                userRef.update({
+                    xp_history: firestore.FieldValue.arrayUnion({id: eventId, xp: eventXP}),
+                    XP: firestore.FieldValue.increment(eventXP)
+                });
+            });
         })
 
         // let userRef = await this.db.collection('users').doc(uid);
