@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { Button, Form, InputGroup, Container, Modal } from "react-bootstrap"; 
 import {withRouter} from 'react-router-dom'; 
-import DashboardNavbar from '../../Member Dashboard/Navbar/DashboardNavbar';
+import DashboardNavbar from '../../Member Dashboard/Dashboard Navbar/DashboardNavbar';
 import { withAuthentication } from '../../../Session';
 import { FirebaseContext } from '../../../Firebase';
 import EventList from '../../Member Dashboard/Event List/EventList';

@@ -3,6 +3,11 @@
     align-self: flex-end;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .event-type {
     float: right;
     /* margin-left: 4%; */

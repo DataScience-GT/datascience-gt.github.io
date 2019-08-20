@@ -4,3 +4,13 @@
     -o-animation: fadein 1s; /* Opera < 12.1 */
     animation: fadein 1s;
 }
+
+.event-header {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}

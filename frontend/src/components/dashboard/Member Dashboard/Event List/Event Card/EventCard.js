@@ -65,7 +65,7 @@ export default class EventCard extends React.Component {
         const modalBody = this.props.isRSVP ? this.props.event.data.desc :
             <EventEditForm handleSubmit={this.handleSubmit.bind(this)} handleDelete={this.handleDelete.bind(this)} event={this.props.event} firebase={this.props.firebase}/>;
         const eventLinks = this.props.event.data.links && this.props.event.data.links.length > 0 ?
-        <Button variant="info"><a href={this.props.event.data.links[0]}>Files</a></Button> :
+        <Button variant="outline-info"><a href={this.props.event.data.links[0]}>Files</a></Button> :
             null;
         return (
                 <div>

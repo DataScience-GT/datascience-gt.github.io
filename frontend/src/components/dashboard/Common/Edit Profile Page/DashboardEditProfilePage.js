@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { Button, Form, Container } from "react-bootstrap";
 import {withRouter} from 'react-router-dom'; 
-import DashboardNavbar from '../../Member Dashboard/Navbar/DashboardNavbar';
+import DashboardNavbar from '../../Member Dashboard/Dashboard Navbar/DashboardNavbar';
 import firebase from 'firebase';
 import { FirebaseContext } from '../../../Firebase';
 import { AuthUserContext, withAuthentication } from '../../../Session';

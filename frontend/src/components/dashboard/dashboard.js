@@ -1,7 +1,7 @@
 import React from 'react'; 
 import {withRouter} from "react-router-dom"
 import {AuthUserContext, withAuthentication} from "../Session"; 
-import DashboardNavbar from './Member Dashboard/Navbar/DashboardNavbar';
+import DashboardNavbar from './Member Dashboard/Dashboard Navbar/DashboardNavbar';
 import DashboardHomePage from './Common/Home Page/DashboardHomePage';
 import { FirebaseContext } from '../Firebase';
 
