@@ -23,10 +23,14 @@ class Dashboard extends React.Component {
 
     componentDidUpdate() {
         if(this.cached_user_id !== this.context.uid) {
-            this.props.firebase.user.get_user(this.context.uid).then((user) => {
-                this.setState({user: user});
-            })
+            this.getCurrentUser();
         }
+    }
+
+    async getCurrentUser() {
+        await this.props.firebase.user.get_user(this.context.uid).then((user) => {
+                this.setState({user: user});
+            });
     }
 
     handleClick = (event) => {

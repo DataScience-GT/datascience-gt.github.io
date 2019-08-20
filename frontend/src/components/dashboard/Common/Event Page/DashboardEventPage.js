@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import DashboardNavbar from '../../Member Dashboard/Navbar/DashboardNavbar';
 import { withAuthentication } from '../../../Session';
 import { FirebaseContext } from '../../../Firebase';
-import { EventList } from '../../Member Dashboard/Event/Event';
+import EventList from '../../Member Dashboard/Event List/EventList';
 
 /**
  * The dashboard's event page for event creation, deletion, and modification.
