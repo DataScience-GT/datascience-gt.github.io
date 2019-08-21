@@ -18,7 +18,7 @@ export default class DashboardHomePage extends React.Component {
                     <Col><UserWelcomeHeader user={this.props.user}/></Col>
                 </Row>
                 <Row>
-                    <Col xs="6"><XPCard XP={this.props.user.XP}></XPCard></Col>
+                    <Col xs="6"><XPCard XP={this.props.user.XP} firebase={this.props.firebase}></XPCard></Col>
                     <Col xs="6">
                         <h2>Upcoming Events</h2>
                         <span className="event-header">

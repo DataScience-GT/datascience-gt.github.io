@@ -18,7 +18,9 @@ export default class EventList extends React.Component {
         this.props.firebase.event.get_events().then(snapshot => {
             let events = this.state.events;
             snapshot.forEach(doc => {
-                events.push({id: doc.id, data: doc.data()});
+                if(new Date(doc.data()['date']) > new Date()) {
+                    events.push({id: doc.id, data: doc.data()});
+                }
             });
             events.sort((a, b) => {
                 return new Date(a.data.date) - new Date(b.data.date);

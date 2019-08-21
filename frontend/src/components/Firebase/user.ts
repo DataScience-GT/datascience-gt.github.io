@@ -194,6 +194,13 @@ class UserApi {
         return await this._fbapp.file.uploadResume(file, file.name);
     }
 
+    async update_user_XP(uid: string, XP: number) {
+        let userRef = await this.db.collection('users').doc(uid);
+        return userRef.update({
+            XP: firestore.FieldValue.increment(XP)
+        });
+    }
+
     async update_user_event_history(uid: string, event: string, xp: number, eventType: string) {
         let userRef = await this.db.collection('users').doc(uid);
         let eventArray = "";
@@ -252,15 +259,11 @@ class UserApi {
 
 
     async add_eventXP_to_user(uid: string, eventId: string, eventXP: number) {
-        await this.db.collection('users').get().then(snapshot => {
-            snapshot.docs.forEach(async doc => {
-                let userRef = await this.db.collection('users').doc(doc.id);
-                userRef.update({
-                    xp_history: firestore.FieldValue.arrayUnion({id: eventId, xp: eventXP}),
-                    XP: firestore.FieldValue.increment(eventXP)
-                });
-            });
-        })
+        let userRef = await this.db.collection('users').doc(uid);
+        userRef.update({
+            XP: firestore.FieldValue.increment(eventXP),
+            xp_history: firestore.FieldValue.arrayUnion({id: eventId, xp: eventXP}),
+        });
 
         // let userRef = await this.db.collection('users').doc(uid);
 

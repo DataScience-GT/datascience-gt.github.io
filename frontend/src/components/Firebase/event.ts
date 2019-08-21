@@ -103,6 +103,19 @@ class EventApi {
         })
     }
 
+    async mark_event_xpAdded(id: string) {
+        let eventRef = this.db.collection("events").doc(id);
+        return eventRef.update({
+            xpAdded: true
+        })
+        .then(() => {
+            console.log('Successfully updated event.')
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+
     async distribute_event_XP(id: string) {
         let eventRef = this.db.collection("events").doc(id);
         eventRef.get().then(snapshot => {

@@ -9,6 +9,11 @@ import './XPCard.css';
  * @author Vidhur Kumar
  */
 export default class XPCard extends React.Component {
+
+    constructor(props) {
+       super(props);
+    }
+
     render() {
         return (
             <div>
@@ -18,7 +23,7 @@ export default class XPCard extends React.Component {
                             <h1><Badge className="xp-badge">XP: {this.props.XP}</Badge></h1>
                         </Card.Text>
                         <XPGrowthChart/>
-                        <XPAcquisitionHistoryTable/>
+                        <XPAcquisitionHistoryTable firebase={this.props.firebase}/>
                     </Card.Body>
                 </Card>
             </div>

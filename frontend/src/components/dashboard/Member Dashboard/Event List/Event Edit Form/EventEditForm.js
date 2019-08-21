@@ -1,6 +1,8 @@
 import React from 'react';
 import {Button, Form} from 'react-bootstrap';
 
+import './EventEditForm.css';
+
 /**
  * @author Vidhur Kumar
  */
