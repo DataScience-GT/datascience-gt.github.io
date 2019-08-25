@@ -443,6 +443,11 @@ class UserApi {
         }
         return false; 
     }
+
+    async addUserToGroup(uid: string, group: string) {
+        await this.db.collection('users').doc(uid).update({groups: firestore.FieldValue.arrayUnion(group)});
+    }
+
     /**
      * Submit a request to join a group. 
      * 

@@ -127,6 +127,7 @@ export class CreateJoinRequestForm extends React.Component {
         this.state = {
             available_groups: [], 
             users: [],
+            user: "",
             name: "", 
             reason: "", 
         }
@@ -155,10 +156,10 @@ export class CreateJoinRequestForm extends React.Component {
         await this.setState({users: users});
     }
 
-    handleInputChange(event) {
+    async handleInputChange(event) {
         let target = event.target; 
-        this.setState({[target.name]: target.value})
-        console.log(this.state.users);
+        await this.setState({[target.name]: target.value})
+        console.log(this.state);
     }
 
     handleSubmit(event) {
@@ -166,11 +167,16 @@ export class CreateJoinRequestForm extends React.Component {
         // this.props.firebase.user.add_user_to_group(null, null);
         console.log(event.target.name);
         // this.props.firebase.user.requestJoinGroup(this.state.name, this.state.reason); 
+        // this.props.firebase.user.addUserToGroups(this.props.firebase.user.get_user_from_name().then())
+        this.props.firebase.user.get_user_from_name(this.state.user.split(" ")[0], this.state.user.split(" ")[1]).then(id => {
+            this.props.firebase.user.addUserToGroup(id, this.state.name);
+        });
     }
     render() {
         return (
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group> 
+                    <Form.Label>Select Group</Form.Label>
                     <Form.Control as="select" onChange={this.handleInputChange} name="name"> 
                         <option>None Selected</option>
                         {this.state.available_groups.map(group => <option key={group} value={group}>{group}</option>)}
@@ -178,7 +184,7 @@ export class CreateJoinRequestForm extends React.Component {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Select User</Form.Label>
-                    <Form.Control name="user" as="select" multiple>
+                    <Form.Control onChange={this.handleInputChange} name="user" as="select" multiple>
                         {this.state.users.map(user => <option>{user.data.first_name + " " + user.data.last_name}</option>)}
                     </Form.Control>
                 </Form.Group>
@@ -363,11 +369,10 @@ export class DashboardGroupContainer extends React.Component {
     render() {
         return (
             <Container>
-                <h2>Groups Page!</h2>
                 <CreateGroupForm firebase={this.props.firebase} authUser={this.authUser}/> 
                 <DeleteGroupForm firebase={this.props.firebase} authUser={this.authUser}/>
                 <CreateJoinRequestForm firebase={this.props.firebase} authUser={this.authUser}/>
-                {/* <VerifyPendingUserForm firebase={this.props.firebase} authUser={this.authUser}></VerifyPendingUserForm> */}
+                <VerifyPendingUserForm firebase={this.props.firebase} authUser={this.authUser}></VerifyPendingUserForm>
             </Container>
         )
     }

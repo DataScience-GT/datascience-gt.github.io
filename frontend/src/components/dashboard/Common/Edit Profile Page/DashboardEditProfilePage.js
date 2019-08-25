@@ -55,9 +55,7 @@ export class DashboardEditProfileContainer extends React.Component {
     }
 
     handleInputChange = async (event) => {
-        // console.log(event.target);
         await this.setState({[event.target.name]: event.target.value});
-        // console.log(this.state);
     }
 
     handleFileInputChange = async (event) => {
