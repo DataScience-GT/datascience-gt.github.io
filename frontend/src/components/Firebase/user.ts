@@ -166,7 +166,11 @@ class UserApi {
                 verification_uri: ""
             }; 
             // Upload to db. 
-            return this.db.collection('users').doc(res.user.uid).set(user); 
+            let result = await this.db.collection('users').doc(res.user.uid).set(user); 
+        } catch {
+            // upon error - delete firebase user 
+            let del = res.user.delete(); 
+            throw new Error("User Creation failed. Please try again, or contact datasciencegt@gmail.com for assistance.");
         } finally {
             return null;
         }
@@ -239,24 +243,7 @@ class UserApi {
         return await this.db.collection('users').get();
     }
 
-    /**
-     * 
-     * @param uid 
-     * @param group 
-     */
-    async add_user_to_group(uid: string, group: string) {
-        let userRef = this.db.collection("users").doc(uid);
-        
-        // TODO: Error handling for when group does not exist.
-        userRef.get().then(doc => {
-            console.log(doc.data());
-        })
-
-        // userRef.update({
-        //     groups: firestore.FieldValue.arrayUnion(group)
-        // })
-    }
-
+  
 
     async add_eventXP_to_user(uid: string, eventId: string, eventXP: number) {
         let userRef = await this.db.collection('users').doc(uid);
@@ -445,7 +432,11 @@ class UserApi {
     }
 
     async addUserToGroup(uid: string, group: string) {
-        await this.db.collection('users').doc(uid).update({groups: firestore.FieldValue.arrayUnion(group)});
+        // update the user's doc 
+        let p1 = this.db.collection('users').doc(uid).update({groups: firestore.FieldValue.arrayUnion(group)});
+        let p2 = this.db.collection('usergroups').doc(group).collection("members").doc(uid).set({}); 
+        await p1; 
+        await p2; 
     }
 
     /**
