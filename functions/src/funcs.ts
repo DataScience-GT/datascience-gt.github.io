@@ -20,7 +20,7 @@ import * as functions from "firebase-functions"
 import * as admin from "firebase-admin"
 import {google, sheets_v4} from "googleapis"
 
-import {api_key, service_creds, sheet} from "./creds"
+import {api_key, service_creds, sheet} from "./creds";
 const apiKey = api_key.key; 
 const jwt = new google.auth.JWT(service_creds.client_email, undefined, service_creds.private_key, ["https://www.googleapis.com/auth/spreadsheets"]); 
 
@@ -129,4 +129,122 @@ export const onUserVerify = async function(data: any, context: any): Promise<any
  */
 export const onUserVerifyDummy = function(data: any, context: any) {
     return {status: "success", data: data}; 
+}
+
+/**
+ * 
+ */
+export const scheduledEventXPDistribution = () => {
+    const events: any = get_events();
+
+    events.forEach(event => {
+        if(new Date(event.data.date) < new Date() && !event.data.xpAdded) {
+            const rsvp_list = event.data.rsvp_list;
+            if(rsvp_list.length > 0) {
+                rsvp_list.forEach(user => {
+                    const id: any = get_user_from_name(user.split(" ")[0], user.split(" ")[1])
+                    add_eventXP_to_user(id, event.id, event.data.XP)
+                        .then(() => {
+                            console.log('Successfully added event XP to user.')
+                        })
+                        .catch((err) => {
+                            console.log('Error updating user event XP: ' + err);
+                        })
+                });
+            }
+            mark_event_xpAdded(event.id)
+                .then(() => {
+                    console.log('Successfully marked event XP flag.')
+                })
+                .catch((err) => {
+                    console.log('Error updating event XP flag: ' + err);
+                });
+        }
+    })
+};
+
+/**
+ * 
+ * @param uid 
+ * @param eventId 
+ * @param eventXP 
+ */
+async function add_eventXP_to_user(uid: string, eventId: string, eventXP: number) {
+    const userRef = await db.collection('users').doc(uid);
+    userRef.update({
+        XP: admin.firestore.FieldValue.increment(eventXP),
+        xp_history: admin.firestore.FieldValue.arrayUnion({id: eventId, xp: eventXP}),
+    })
+    .then(() => {
+        console.log('Successfully updated user event XP')
+    })
+    .catch((err) => {
+        console.log('Error updating user event XP: ' + err);
+    })
+
+    // let userRef = await this.db.collection('users').doc(uid);
+
+}
+
+/**
+ * 
+ * @param id 
+ */
+async function mark_event_xpAdded(id: string) {
+    const eventRef = db.collection("events").doc(id);
+    return eventRef.update({
+        xpAdded: true
+    })
+    .then(() => {
+        console.log('Successfully updated event.')
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}
+
+/**
+ * 
+ * @param first_name 
+ * @param last_name 
+ */
+async function get_user_from_name(first_name: string, last_name: string) {
+    let id;
+    await db.collection('users')
+        .where('first_name', '==', first_name)
+        .where('last_name', '==', last_name)
+        .get()
+        .then(snapshot => {
+            if(snapshot.empty) {
+                return null;
+            }
+
+            if(snapshot.docs.length > 1) {
+                throw new Error("More than one user found with the same first name and the last name");
+            }
+
+            id = snapshot.docs[0].id;
+            return id;
+        })
+        .catch((err) => {
+            console.log(err);
+            return null;
+        })
+
+}
+
+/**
+ * 
+ */
+async function get_events() {
+    const events: any = [];
+    await db.collection('events').get().then(snapshot => {
+        snapshot.docs.forEach(doc => {
+            if(!doc.data().xpAdded) {
+                events.push({id: doc.id, data: doc.data()});
+            }
+        })
+    })
+
+    return events;
 }
