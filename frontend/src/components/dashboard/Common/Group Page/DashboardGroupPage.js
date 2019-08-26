@@ -127,12 +127,14 @@ export class CreateJoinRequestForm extends React.Component {
         this.state = {
             available_groups: [], 
             users: [],
-            user: "",
+            // selectedUserIds: new Set(),
+            selectedUserId: '',
             name: "", 
             reason: "", 
         }
 
         this.handleInputChange = this.handleInputChange.bind(this); 
+        this.handleSelectedOptionsChange = this.handleSelectedOptionsChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this); 
     }
 
@@ -159,18 +161,22 @@ export class CreateJoinRequestForm extends React.Component {
     async handleInputChange(event) {
         let target = event.target; 
         await this.setState({[target.name]: target.value})
-        console.log(this.state);
+        // console.log(target.selectedOptions[0].getAttribute('data-key'));
+    }
+
+    async handleSelectedOptionsChange(event) {
+        let target = event.target; 
+        await this.setState({'selectedUserId': target[target.selectedIndex].getAttribute('data-key')});
+        console.log(this.state.selectedUserId);
     }
 
     handleSubmit(event) {
         event.preventDefault(); 
         // this.props.firebase.user.add_user_to_group(null, null);
-        console.log(event.target.name);
         // this.props.firebase.user.requestJoinGroup(this.state.name, this.state.reason); 
         // this.props.firebase.user.addUserToGroups(this.props.firebase.user.get_user_from_name().then())
-        this.props.firebase.user.get_user_from_name(this.state.user.split(" ")[0], this.state.user.split(" ")[1]).then(id => {
-            this.props.firebase.user.addUserToGroup(id, this.state.name);
-        });
+        // this.props.firebase.user.get_user_from_name(this.state.user.split(" ")[0], this.state.user.split(" ")[1]).then(id => console.log(id));
+        this.props.firebase.user.addUserToGroup(this.state.selectedUserId, this.state.name);
     }
     render() {
         return (
@@ -184,8 +190,8 @@ export class CreateJoinRequestForm extends React.Component {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Select User</Form.Label>
-                    <Form.Control onChange={this.handleInputChange} name="user" as="select" multiple>
-                        {this.state.users.map(user => <option>{user.data.first_name + " " + user.data.last_name}</option>)}
+                    <Form.Control onChange={this.handleSelectedOptionsChange} name="selectedUserId" as="select">
+                        {this.state.users.map(user => <option key={user.id} data-key={user.id}>{user.data.first_name + " " + user.data.last_name}</option>)}
                     </Form.Control>
                 </Form.Group>
                 <Form.Group>
