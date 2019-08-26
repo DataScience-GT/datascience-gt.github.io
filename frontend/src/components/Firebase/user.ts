@@ -436,8 +436,20 @@ class UserApi {
         // update the user's doc 
         let p1 = this.db.collection('users').doc(uid).update({groups: firestore.FieldValue.arrayUnion(group)});
         let p2 = this.db.collection('usergroups').doc(group).collection("members").doc(uid).set({}); 
-        await p1; 
-        await p2; 
+        await p1
+            .then(() => {
+                console.log('Successfully updated user groups');
+            })
+            .catch((err) => {
+                console.log('Error in updating user groups');
+            })
+        await p2
+            .then(() => {
+                console.log('Successfully updated usergroups');
+            })
+            .catch((err) => {
+                console.log('Error in updating usergroups');
+            })
     }
 
     /**
