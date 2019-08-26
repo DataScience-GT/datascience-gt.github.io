@@ -11,7 +11,7 @@ import DashboardEventPage from '../Dashboard/Common/Event Page/DashboardEventPag
 import DashboardEditProfilePage from '../Dashboard/Common/Edit Profile Page/DashboardEditProfilePage';
 import * as ROUTES from "../../config/routes"
 
-import { withAuthentication} from "../Session"
+import { withAuthentication } from "../Session"
 import  DashboardGroupPage from '../Dashboard/Common/Group Page/DashboardGroupPage';
 
 /**
