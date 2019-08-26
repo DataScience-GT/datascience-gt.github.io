@@ -4,6 +4,10 @@ import {AuthUserContext, withAuthentication} from "../Session";
 import DashboardNavbar from './Member Dashboard/Dashboard Navbar/DashboardNavbar';
 import DashboardHomePage from './Common/Home Page/DashboardHomePage';
 import { FirebaseContext } from '../Firebase';
+import {MembershipStatus} from "../Firebase/entity"; 
+
+import { Button, Form, Container } from "react-bootstrap";
+import * as ROUTES from '../../config/routes'
 
 /**
  * This file should be the center point for dashboard building. In order to keep file sizes manageable, the 
@@ -41,18 +45,120 @@ class Dashboard extends React.Component {
         return (
             <FirebaseContext.Consumer>
                 {firebase => {
+                    if (this.state.user.membership_status === MembershipStatus.pending && this.state.user.verification_uri === "") {
+                        return (<div><UnverifiedComponent user={this.state.user} firebase={firebase} /></div>)
+                    } else if (this.state.user.membership_status === MembershipStatus.pending) {
+                        return (
+                            <Container>
+                                <h2>We're working on confirming your membership status, and we appreciate your patience. Please give us 1-2 days to confirm.</h2>
+                            </Container>
+                        )
+                    } else {
                     return (
-                        <div>
-                            <DashboardNavbar click={this.handleClick} firebase={firebase}/>
-                            <DashboardHomePage user={this.state.user} firebase={firebase}/>
-                        </div>
-                    )
-                }}
+                            <div>
+                                <DashboardNavbar click={this.handleClick} firebase={firebase}/>
+                                <DashboardHomePage user={this.state.user} firebase={firebase}/>
+                            </div>
+                            )
+                        }}
+                    }
             </FirebaseContext.Consumer>
         )
     }
 }
+class UnverifiedComponent extends React.Component {
+    constructor(props) {
+        super(props); 
+        this.state = {
+            verification: "", 
+            verification_method: "venmo", 
+            vs_amount: 0, 
+            vs_person: ""
 
+        }
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this); 
+        this.handleSubmit = this.handleSubmit.bind(this); 
+
+    }
+    getVerificationStub(method) {
+        if (method === "venmo") {
+            return (
+                <Form.Group> 
+                <Form.Label> Verification Picture</Form.Label>
+                <Form.Control onChange={this.handleFileChange} name="verification" type="file" accept="image/png, image/jpg, image/jpeg" />
+                </Form.Group>
+            )
+        } else if (method === "cash") {
+            return (
+                <Form.Group>
+                    <Form.Label>Amount</Form.Label>
+                    <Form.Control name="vs_amount" onChange={this.handleInputChange} type="number"></Form.Control>
+                    <Form.Label>Person you Paid To</Form.Label>
+                    <Form.Control name="vs_person" onChange={this.handleInputChange} type="text"></Form.Control>
+                </Form.Group> 
+            )
+        }
+    }
+    handleInputChange(event) {
+        const target = event.target; 
+        const value = target.type === "checkbox" ? target.checked : target.value; 
+        const name = target.name; 
+        this.setState({
+            [name]: value
+        }); 
+    }
+    handleFileChange(event) {
+        const target = event.target; 
+        const file = target.files[0]; 
+     
+        this.setState({
+            "verification": file
+        }); 
+    }
+
+    async handleSubmit(event) {
+        // try creating an account 
+        event.preventDefault(); 
+        try {
+            if (this.state.verification_method === "cash") {
+                console.log("Updating Cash")
+                await this.props.firebase.user.updateUserVerificationCash(this.state.vs_amount, this.state.vs_person); 
+            } else if (this.state.verification_method === "venmo") {
+                await this.props.firebase.user.updateUserVerificationVenmo(this.state.verification, this.state.verification.name); 
+            }
+        } catch(err) {
+            alert(err); 
+            this.props.history.push(ROUTES.LOGIN); 
+        } 
+    }
+
+    render() {
+        return (
+        <Container> 
+                
+            <Form onSubmit={this.handleSubmit}> 
+                <Form.Group>
+                <Form.Label> Select preferred payment method </Form.Label>
+                <div>
+                    <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="venmo" checked={this.state.verification_method === "venmo"} label="Venmo" />
+                    <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="cash" checked={this.state.verification_method === "cash"} label="Cash" /> 
+                    <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="defer" checked={this.state.verification_method === "defer"} label="Defer" />  
+                </div>
+                </Form.Group>
+                {this.getVerificationStub(this.state.verification_method)}
+                {/* <Form.Group>
+                    <Form.Text>More About You</Form.Text>
+                </Form.Group> */}
+
+                <Button variant="primary" type="submit"> 
+                    Sign Up 
+                </Button>
+            </Form> 
+        </Container>
+        )
+    }
+}
 // class Dashboard extends React.Component {
 //     constructor(props) {
 //         super(props); 
