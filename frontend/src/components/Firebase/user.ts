@@ -155,6 +155,7 @@ class UserApi {
                     gm: [], 
                     other: []
                 },
+                xp_history: [],
                 profile_pic: "", 
                 interests: [],
                 groups: [],

@@ -98,7 +98,8 @@ export interface User {
         project: Array<number>, 
         gm: Array<number>
         other: Array<number>
-    }
+    },
+    xp_history: Array<Object>,
     interests: Array<string>, 
     profile_pic: string,
     groups: Array<Group>, 
