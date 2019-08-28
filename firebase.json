@@ -32,7 +32,19 @@
         "destination": "/index.html"
       }, 
       {
-        "source": "**/dashboard", 
+        "source": "**/dashboard/home", 
+        "destination": "/index.html"
+      },
+      {
+        "source": "**/dashboard/edit", 
+        "destination": "/index.html"
+      },
+      {
+        "source": "**/dashboard/event", 
+        "destination": "/index.html"
+      },
+      {
+        "source": "**/dashboard/group", 
         "destination": "/index.html"
       }
     ]

@@ -6,7 +6,8 @@ import Navigation from '../Navigation/Navigation';
 import HomePage from "../Home Page/HomePage"; 
 import SignUpPage from "../Signup Page/SignUpPage";
 import LoginPage from "../Login Page/LoginPage"; 
-import DashboardPage from "../Dashboard/Dashboard"; 
+// import Dashboard from "../Dashboard/Dashboard"; 
+import Dashboard from '../Dashboard/Dashboard';
 import DashboardEventPage from '../Dashboard/Common/Event Page/DashboardEventPage';
 import DashboardEditProfilePage from '../Dashboard/Common/Edit Profile Page/DashboardEditProfilePage';
 import * as ROUTES from "../../config/routes"
@@ -25,7 +26,7 @@ class App extends React.Component {
                 <Route exact path={ROUTES.LANDING} component={HomePage} />
                 <Route path={ROUTES.LOGIN} component={LoginPage} />
                 <Route path={ROUTES.SIGNUP} component={SignUpPage} />
-                <Route path={ROUTES.DASHBOARD_HOME} component={DashboardPage} />
+                <Route path={ROUTES.DASHBOARD_HOME} component={Dashboard} />
                 <Route path={ROUTES.DASHBORD_EDIT_PROFILE} component={DashboardEditProfilePage}/>
                 <Route path={ROUTES.DASHBOARD_EVENT} component={DashboardEventPage}/>                
                 <Route path={ROUTES.DASHBOARD_GROUP} component={DashboardGroupPage} />
