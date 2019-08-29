@@ -5,11 +5,12 @@
  * by a document in our `/users` collection. 
  */
 import React from 'react';
-import { Button, Form, Container } from "react-bootstrap";
+import { Button, Form, Container, Row, Col } from "react-bootstrap";
 import { withFirebase } from '../Firebase';
 import { compose } from 'recompose'; 
 import {withRouter} from 'react-router-dom'; 
 import * as ROUTES from '../../config/routes'
+import * as CONSTANTS from "../../config/config"
 
 class SignUpForm extends React.Component {
     constructor(props) {
@@ -140,6 +141,37 @@ class SignUpForm extends React.Component {
                     {/* TODO: REMOVE THIS AND MOVE TO SECONDARY STAGE!!! 
                         This is where the user can select which payment method they prefer. 
                     */}
+                    <Row> 
+                        <Col sm={6}>
+                            <h3>Joining with Venmo</h3> 
+                            <ol> 
+                                <li> Venmo ${CONSTANTS.DUES_SEMESTER} for a semester membership, 
+                                or ${CONSTANTS.DUES_YEAR} for a year membership, to @datascience-gt </li>
+                                <li> Take a screenshot of your payment </li>
+                                <li> Click the signup button, fill out the form, select "Venmo", and attach your screenshot</li>
+                                <li> Hit "Submit", and you're all done! We'll verify your payment and send you an invite 
+                                    to the slack within a few days. Welcome to the team! 
+                                </li>
+                            </ol>
+                        </Col>
+                        <Col sm={6}>
+                            <h3> Joining with Cash </h3> 
+                            Don't have a Venmo? Refuse to use online payments to stick it to our corporate overlords? 
+                            No problem. 
+                            <ol>
+                                <li> Pay in cash to any member of the DSGT Team </li>
+                                <li> Get their name when you pay them! </li>
+                                <li> Go to the signup form, fill it out, select "Cash" and put in the amount you paid along with 
+                                    the name of the person you gave cash to. 
+                                    It's ${CONSTANTS.DUES_SEMESTER} for a semester, or ${CONSTANTS.DUES_YEAR} for a year. 
+                                </li>
+                                <li> Hit submit and you're done! It might take us a few days to verify your payment, but 
+                                    once we do we'll send you a invite to our Slack channel and hook you up with the getting 
+                                    started material. Glad to have you on the team! 
+                                </li>
+                            </ol>
+                        </Col>
+                    </Row>
                     <Form.Group>
                         <Form.Label> Select preferred payment method </Form.Label>
                         <div>

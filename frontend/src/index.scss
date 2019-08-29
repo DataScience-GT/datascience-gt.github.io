@@ -110,8 +110,8 @@ nav {
     img {
         padding: 0.5vh; 
         max-height: $nav-height + 3vh; 
-        filter: invert(1); 
-        -webkit-filter: invert(1); 
+        // filter: invert(1); 
+        // -webkit-filter: invert(1); 
     }
 }
 
