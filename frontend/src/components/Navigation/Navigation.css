@@ -1,5 +1,14 @@
 .main-navbar {
-    background: #000000;
+    background: #000001;
+}
+/* 
+.navbar-light .navbar-toggler {
+    color: azure;
+    border-color: azure;
+} */
+
+.navbar-light .navbar-toggler-icon{
+    background-image: url("https://icon-library.net/images/three-bars-icon/three-bars-icon-6.jpg");
 }
 
 .navbar-light .navbar-nav .nav-link {

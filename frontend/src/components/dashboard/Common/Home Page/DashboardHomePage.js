@@ -18,8 +18,8 @@ export default class DashboardHomePage extends React.Component {
                     <Col><UserWelcomeHeader user={this.props.user}/></Col>
                 </Row>
                 <Row>
-                    <Col xs="6"><XPCard XP={this.props.user.XP} firebase={this.props.firebase}></XPCard></Col>
-                    <Col xs="6">
+                    <Col xs="12" md="6"><XPCard XP={this.props.user.XP} firebase={this.props.firebase}></XPCard></Col>
+                    <Col xs="12" md="6">
                         <h2>Upcoming Events</h2>
                         <span className="event-header">
                             <Button variant="outline-primary"><a href="https://forms.gle/8fzb6fr8D9d8K4Cv7" target="_blank">Event Excuse Form</a></Button>

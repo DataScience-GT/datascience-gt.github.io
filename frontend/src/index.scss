@@ -68,7 +68,9 @@ section#page-top{
     // background-image: url('https://datasciencegt.org/img/dsgt-bg.jpg');
     background-image: url('/img/dsgt-website-banner-min.png');
     background-size: cover; 
-    background-attachment: fixed; 
+    background-repeat:no-repeat;
+    background-position:center;
+    // background-attachment: fixed; 
     min-height: 50vw; 
     max-height: 96vh;
     border-radius: 0;

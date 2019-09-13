@@ -1,9 +1,11 @@
 import React from 'react';
-import {Container, Row, Col} from 'react-bootstrap'; 
+import {Container, Row, Col, Table, Button} from 'react-bootstrap'; 
 import * as CONSTANTS from "../../config/config";
 import * as ROUTES from "../../config/routes";  
 // import ProjectCore from "./Project"
 import ContactCore from "./Contact" 
+
+import './HomePage.css';
 
 /**
  * This is the homepage of the website.
@@ -42,9 +44,8 @@ const Hero = () => {
                 </Col> */}
             </Row>
             <Row>
-                <Col className="text-center">
+                <Col sm="12" className="text-center">
                     <a href={CONSTANTS.SUBSCRIBE} id="welcomebutton" className="btn btn-large btn-outline-dark link-override link-button" role="button">Subscribe to our mailling list</a> <br/>
-
                 </Col>
             </Row>
         </div>
@@ -171,6 +172,47 @@ const Events = () => {
     )
 }
 
+const MeetingDescription = (props) => {
+    return (
+        <div className="meeting-description">
+            {props.name}
+            <Button href={props.slidesURL} variant="warning" bsSize="sm">View Slides</Button>
+            <Button href={props.materialsURL} variant="primary" bsSize="sm">View Materials</Button>
+        </div>
+    )
+}
+
+const Meetings = () => {
+    return (
+        <Section id="meetings" heading="Meetings">
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                    <th>Date</th>
+                    <th>Workshop</th>
+                    <th>Slides</th>
+                    <th>Materials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9/9/2019</td>
+                        <td>
+                        <MeetingDescription 
+                            name="Introduction to Data Science (Track 1)"
+                            slidesURL="https://drive.google.com/open?id=1KGVdH3CHyo99EA3kIVZPT5FTXyuVa-SvNNJCO5rAF8s"
+                            materialsURL="https://drive.google.com/open?id=1cKG75Q1vbvUrDLhORfqq4coSqRlvuvGo"
+                        />
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </Table>
+        </Section>
+    )
+}
+
 // const Team = () => {
 //     return (
 //         <Section id="team" heading="Meet our Team">
@@ -223,6 +265,7 @@ export default class HomePage extends React.Component {
                 <Events />
 
                 {/* <Team /> */}
+                <Meetings />
                 <Join/>
 
                 <Resources />

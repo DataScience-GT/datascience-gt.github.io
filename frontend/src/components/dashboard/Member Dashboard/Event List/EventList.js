@@ -17,8 +17,10 @@ export default class EventList extends React.Component {
         // Pull the list of events from Firebase.
         this.props.firebase.event.get_events().then(snapshot => {
             let events = this.state.events;
+            let yesterdaysDate = new Date();
+            yesterdaysDate.setDate(yesterdaysDate.getDate() - 2);
             snapshot.forEach(doc => {
-                if(new Date(doc.data()['date']) >= new Date()) {
+                if(new Date(doc.data()['date']) >= yesterdaysDate) {
                     events.push({id: doc.id, data: doc.data()});
                 }
             });
