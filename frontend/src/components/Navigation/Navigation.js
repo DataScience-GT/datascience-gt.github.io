@@ -78,6 +78,7 @@ class Navigation extends React.Component {
                             <Nav.Link href={ROUTES.LANDING + "#events"}>Events</Nav.Link>
                             <Nav.Link href={ROUTES.LANDING + "#join"}>Join</Nav.Link>
                             <Nav.Link href={ROUTES.LANDING + "#resources"}>Resources</Nav.Link>
+                            <Nav.Link href={ROUTES.BLOG}>Blog</Nav.Link>
                             <Nav.Link href={ROUTES.LANDING + "#contact"}>Contact</Nav.Link>
 
                         </Nav>
