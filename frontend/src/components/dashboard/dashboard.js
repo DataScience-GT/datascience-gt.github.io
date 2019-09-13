@@ -7,6 +7,7 @@ import { FirebaseContext } from '../Firebase';
 import {MembershipStatus} from "../Firebase/entity"; 
 
 import { Button, Form, Container } from "react-bootstrap";
+import Spinner from 'react-bootstrap/Spinner'
 import * as ROUTES from '../../config/routes'
 
 /**
@@ -20,6 +21,7 @@ class Dashboard extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
+            isLoading: true,
             user: {},
             current_tab: 'home',
         }
@@ -33,7 +35,7 @@ class Dashboard extends React.Component {
 
     async getCurrentUser() {
         await this.props.firebase.user.get_user(this.context.uid).then((user) => {
-                this.setState({user: user});
+                this.setState({user: user, isLoading: false});
             });
     }
 
@@ -43,6 +45,7 @@ class Dashboard extends React.Component {
 
     render() {
         return (
+            this.state.isLoading ?   <Spinner animation="border" size="xlg" /> :
             <FirebaseContext.Consumer>
                 {firebase => {
                     if (this.state.user.membership_status === MembershipStatus.pending && this.state.user.verification_uri === "") {

@@ -1,5 +1,6 @@
 import React from 'react'; 
 import EventCard from './Event Card/EventCard';
+import Spinner from 'react-bootstrap/Spinner'
 
 import './EventList.css';
 
@@ -11,6 +12,7 @@ export default class EventList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isLoading: true,
             events: []
         }
 
@@ -27,7 +29,7 @@ export default class EventList extends React.Component {
             events.sort((a, b) => {
                 return new Date(a.data.date) - new Date(b.data.date);
             });
-            this.setState({events: events});
+            this.setState({events: events, isLoading: false});
         }).catch(err => {
             console.log('Error getting documents', err);
         });
@@ -36,6 +38,7 @@ export default class EventList extends React.Component {
     render() {
         const eventItems = this.state.events.map(event => <EventCard key={event.data.name} event={event} isRSVP={this.props.isRSVP} firebase={this.props.firebase}/>);
         return (
+            this.state.isLoading ? <Spinner animation="border" size="xlg" /> :
             <div>
                 {eventItems}
             </div>
