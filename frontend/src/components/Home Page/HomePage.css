@@ -1,8 +1,12 @@
 .meeting-description {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .react-bootstrap-table table {
     table-layout: auto;
+}
+
+.c1-signup-button {
+    margin-top: 25%;
 }

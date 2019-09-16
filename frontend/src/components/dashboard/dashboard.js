@@ -6,12 +6,8 @@ import DashboardHomePage from './Common/Home Page/DashboardHomePage';
 import { FirebaseContext } from '../Firebase';
 import {MembershipStatus} from "../Firebase/entity"; 
 
-<<<<<<< HEAD
-import { Button, Form, Container } from "react-bootstrap";
+import { Button, Form, Container, Row, Col } from "react-bootstrap";
 import Spinner from 'react-bootstrap/Spinner'
-=======
-import { Button, Form, Container, Row, Col} from "react-bootstrap";
->>>>>>> 4509761914406bc54fb6e97e5a5a0da252c7f6b0
 import * as ROUTES from '../../config/routes'
 import * as CONSTANTS from "../../config/config"
 /**

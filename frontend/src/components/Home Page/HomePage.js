@@ -45,7 +45,12 @@ const Hero = () => {
             </Row>
             <Row>
                 <Col sm="12" className="text-center">
-                    <a href={CONSTANTS.SUBSCRIBE} id="welcomebutton" className="btn btn-large btn-outline-dark link-override link-button" role="button">Subscribe to our mailling list</a> <br/>
+                    {/* <a href={CONSTANTS.SUBSCRIBE} id="welcomebutton" className="btn btn-large btn-outline-dark link-override link-button" role="button">Subscribe to our mailling list</a> <br/> */}
+                </Col>
+            </Row>
+            <Row>
+                <Col sm="12" className="text-center">
+                    <Button className="c1-signup-button" href="https://c1games.com/gatech" variant="info" size="lg">Sign up here!</Button>
                 </Col>
             </Row>
         </div>
@@ -190,8 +195,8 @@ const Meetings = () => {
                     <tr>
                     <th>Date</th>
                     <th>Workshop</th>
-                    <th>Slides</th>
-                    <th>Materials</th>
+                    {/* <th>Slides</th>
+                    <th>Materials</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -204,8 +209,16 @@ const Meetings = () => {
                             materialsURL="https://drive.google.com/open?id=1cKG75Q1vbvUrDLhORfqq4coSqRlvuvGo"
                         />
                         </td>
-                        <td></td>
-                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>9/16/2019</td>
+                        <td>
+                        <MeetingDescription 
+                            name="Programming for Data Science (Track 1)"
+                            slidesURL="https://drive.google.com/open?id=1tpm72vMscR8FvMCahixmWs5588cG9nCFxjBqVyvflnw"
+                            materialsURL="https://drive.google.com/open?id=18sybnYBrxJj_B7Tng_-WLQKEwQanTwJz"
+                        />
+                        </td>
                     </tr>
                 </tbody>
             </Table>
