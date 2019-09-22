@@ -88,8 +88,6 @@ export class DashboardEditProfileContainer extends React.Component {
                 showAlert: true
             });
         }
-        // document.location.reload(true);
-
     }
 
     render() {
