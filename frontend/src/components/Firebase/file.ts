@@ -29,7 +29,7 @@ class FileApi {
      */
     uploadFile(file: Blob|File, name: string, metadata: any, location: string) {
         const loc_ref = this.rootref.child(location + "/" + name); 
-        return loc_ref.put(file, metadata); 
+        return loc_ref.put(file, metadata);
     } 
 
     /**
@@ -37,9 +37,26 @@ class FileApi {
      * @param file The data itself 
      * @param name The name of the resume  
      */
-    uploadResume(file: Blob|File, name: string) {
+    async uploadResume(file: Blob|File, name: string) {
+        let userRef = this.db.collection('users').doc(this._fbapp.user.get_current_uid());
         let location = this._fbapp.user.get_current_uid() + "/resume";
-        return this.uploadFile(file, "resume_" + name, {}, location);
+        await this.uploadFile(file, "resume_" + name, {}, location)
+            .then(() => {
+                console.log('Successfully uploaded resume.')
+                let resume_uri = location + "/resume_" + name;
+                return userRef.update({
+                    resume_uri: resume_uri
+                })
+                .then(() => {
+                    console.log('Successfully updated user resume URI.');
+                })
+                .catch((err) => {
+                    console.log('Error updating resume URI: ' + err);
+                })
+            })
+            .catch((err) => {
+                console.log('Error uploading resume: ' + err);
+            })
     }
 
     /**

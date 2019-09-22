@@ -181,8 +181,8 @@ const MeetingDescription = (props) => {
     return (
         <div className="meeting-description">
             {props.name}
-            <Button href={props.slidesURL} variant="warning" bsSize="sm">View Slides</Button>
-            <Button href={props.materialsURL} variant="primary" bsSize="sm">View Materials</Button>
+            <Button href={props.slidesURL} variant="warning" type="button">View Slides</Button>
+            <Button href={props.materialsURL} variant="primary" type="button">View Materials</Button>
         </div>
     )
 }

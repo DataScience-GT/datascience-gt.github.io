@@ -194,9 +194,13 @@ class UserApi {
             });
     }
 
+    /**
+     * Updates the user resume and the resume URI.
+     * @param uid 
+     * @param file 
+     */
     async update_user_resume(uid: string, file: File) {
-        // let userRef = this.db.collection('users').doc(uid);
-        return await this._fbapp.file.uploadResume(file, file.name);
+        await this._fbapp.file.uploadResume(file, file.name);
     }
 
     async update_user_XP(uid: string, XP: number) {
