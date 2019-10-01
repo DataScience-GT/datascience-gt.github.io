@@ -61,7 +61,7 @@ class SignUpForm extends React.Component {
             if (this.state.verification_method === "cash") {
                 await this.props.firebase.user.updateUserVerificationCash(this.state.vs_amount, this.state.vs_person); 
             } else if (this.state.verification_method === "venmo") {
-                this.props.firebase.user.updateUserVerificationVenmo(this.state.verification, this.state.verification.name); 
+                await this.props.firebase.user.updateUserVerificationVenmo(this.state.verification, this.state.verification.name); 
             }
             this.props.history.push(ROUTES.LOGIN); 
         } catch(err) {
