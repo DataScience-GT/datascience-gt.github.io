@@ -80,7 +80,7 @@ class Navigation extends React.Component {
                             <Nav.Link href={ROUTES.LANDING + "#resources"}>Resources</Nav.Link>
                             <Nav.Link href={ROUTES.BLOG}>Blog</Nav.Link>                            
                             <Nav.Link href={ROUTES.LANDING + "#contact"}>Contact</Nav.Link>
-
+                            <Button href="https://drive.google.com/open?id=1c9qtc5oo0UQv_iSNYtJ1gyyF7_dHA6li" variant="warning">Checkpoint</Button>
                         </Nav>
                         <Nav>
                             {isLoggedin && 

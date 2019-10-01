@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {Row, Col} from 'react-bootstrap'; 
+import {Row, Col, Button} from 'react-bootstrap'; 
 import * as CONSTANTS from "../../config/config";
 
 const ContactLink = (props) => {
@@ -13,9 +13,10 @@ export default function ContactCore(){ return (
 
             <Row>
                 <Col className="text-center">
-                    <a href={CONSTANTS.SUBSCRIBE} className="btn link-override link-button" role="button">
+                    <Button href={CONSTANTS.SUBSCRIBE}>Subscribe to our Mailing List!</Button>
+                    {/* <a href={CONSTANTS.SUBSCRIBE} className="btn link-override link-button" role="button">
                         Subscribe to our Mailing List!
-                    </a>
+                    </a> */}
                 </Col>
             </Row>
             <Row>

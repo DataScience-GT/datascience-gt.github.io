@@ -1,6 +1,11 @@
-.meeting-description {
+.parent-meetingdesc {
     display: flex;
     justify-content: space-between;
+}
+
+.parent-meetingdesc .child-meetingdesc {
+    display: flex;
+    justify-content: space-around;
 }
 
 .react-bootstrap-table table {
