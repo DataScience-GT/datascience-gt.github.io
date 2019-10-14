@@ -53,7 +53,7 @@ export default class GroupApi {
         this.db.collection('usergroups').doc(name).collection('members').doc(this._fbapp.user.get_current_uid()).set({}) 
         // add user to group 
         const curr_uid = this._fbapp.user.get_current_uid(); 
-        console.log(name)
+        // console.log(name)
         this.db.collection('users').doc(curr_uid).update({groups: firestore.FieldValue.arrayUnion(name)})
     }
 

@@ -42,7 +42,7 @@ class UserApi {
      * @param uid The user ID we're checking 
      * @param group The group to check 
      */
-    async check_perms(uid: string, group: string): Promise<boolean>{
+    async check_perms(uid: string, group: string): Promise<boolean> {
         // check pending first 
         let user_setting = ((await this.db.collection('users').doc(uid).get()).data() as entity.User).membership_status; 
         if (user_setting === entity.MembershipStatus.pending || 
@@ -61,7 +61,7 @@ class UserApi {
      * Returns the data file for a specific user. 
      * @param uid The user ID to request 
      */
-    async get_user(uid:string){
+    async get_user(uid:string) {
         let doc = await this.db.collection("users").doc(uid).get(); 
         return await doc.data(); 
     }
@@ -126,7 +126,9 @@ class UserApi {
         if (email.slice(-11) !== '@gatech.edu') {
             throw new Error("Email validation failed"); 
         }
+
         let res: firebase.auth.UserCredential; 
+        // TODO: Check proper errors on create user.
         try {
             res = await this.auth.createUserWithEmailAndPassword(email, password); 
         } catch {
@@ -167,10 +169,10 @@ class UserApi {
                 verification_uri: ""
             }; 
             // Upload to db. 
-            let result = await this.db.collection('users').doc(res.user.uid).set(user); 
+            await this.db.collection('users').doc(res.user.uid).set(user); 
         } catch {
             // upon error - delete firebase user 
-            let del = res.user.delete(); 
+            res.user.delete(); 
             throw new Error("User Creation failed. Please try again, or contact datasciencegt@gmail.com for assistance.");
         } finally {
             return null;
@@ -200,6 +202,19 @@ class UserApi {
      * @param file 
      */
     async update_user_resume(uid: string, file: File) {
+
+        let userRef = await this.db.collection('users').doc(uid);
+
+        let resume_uri;
+        userRef.get().then(snapshot => {
+            if(snapshot.exists) {
+                let data = snapshot.data();
+                // resume_uri = data['resume_uri'];
+            } else {
+
+            }
+        })
+
         await this._fbapp.file.uploadResume(file, file.name);
     }
 
@@ -211,34 +226,34 @@ class UserApi {
     }
 
     async update_user_event_history(uid: string, event: string, xp: number, eventType: string) {
-        let userRef = await this.db.collection('users').doc(uid);
-        let eventArray = "";
-        switch(eventType) {
-            case "Workshop":
-                eventArray = "workshop";
-                break;
+        // let userRef = await this.db.collection('users').doc(uid);
+        // let eventArray = "";
+        // switch(eventType) {
+        //     case "Workshop":
+        //         eventArray = "workshop";
+        //         break;
 
-            case "General Meeting":
-                eventArray = "gm";
-                break;
+        //     case "General Meeting":
+        //         eventArray = "gm";
+        //         break;
 
-            case "Project":
-                eventArray = "project";
-                break;
+        //     case "Project":
+        //         eventArray = "project";
+        //         break;
 
-            case "Special":
-                eventArray = "other";
-                break;
+        //     case "Special":
+        //         eventArray = "other";
+        //         break;
 
-            default:
-                eventArray = "";
-        }
+        //     default:
+        //         eventArray = "";
+        // }
 
-        eventArray = "event_history." + eventArray;
+        // eventArray = "event_history." + eventArray;
 
-        return userRef.update({
-            eventArray: firestore.FieldValue.arrayUnion({event: event, xp: xp})
-        })
+        // return userRef.update({
+        //     eventArray: firestore.FieldValue.arrayUnion({event: event, xp: xp})
+        // })
     }
 
     /**
@@ -470,7 +485,7 @@ class UserApi {
             first_name: curr_user.first_name, 
             last_name: curr_user.last_name, 
             reason: reason
-        })
+        });
     }
 
     /**

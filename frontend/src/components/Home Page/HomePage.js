@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Row, Col, Table, Button} from 'react-bootstrap'; 
 import * as CONSTANTS from "../../config/config";
-import * as ROUTES from "../../config/routes";  
+// import * as ROUTES from "../../config/routes";  
 // import ProjectCore from "./Project"
 import ContactCore from "./Contact" 
 
@@ -173,6 +173,7 @@ const MeetingContent = (props) => {
     return (
         <div className="parent-meetingdesc">
             <Button href={props.slidesURL} variant="warning" type="button" size="sm">Slides</Button>
+            <Button href={props.notebookURL} className="notebook-button" type="button" size="sm">Notebook</Button>
             <Button href={props.materialsURL} variant="primary" type="button" size="sm">Materials</Button>
         </div>
     )
@@ -215,6 +216,7 @@ const Meetings = () => {
                         <td>
                         <MeetingContent 
                             slidesURL="https://drive.google.com/open?id=1tpm72vMscR8FvMCahixmWs5588cG9nCFxjBqVyvflnw"
+                            notebookURL="https://nbviewer.jupyter.org/github/DataScience-GT/Workshops/blob/master/Fall%202019/Track-1/Programming%20for%20Data%20Science/Programming%20for%20Data%20Science.ipynb"
                             materialsURL="https://drive.google.com/open?id=18sybnYBrxJj_B7Tng_-WLQKEwQanTwJz"
                         />
                         </td>
@@ -225,6 +227,7 @@ const Meetings = () => {
                         <td>
                         <MeetingContent 
                             slidesURL="https://drive.google.com/open?id=1iOWIJtb0kE2xg5lgsq5c404DkqZo_5ScJhlVJqKiWhw"
+                            notebookURL="https://nbviewer.jupyter.org/github/DataScience-GT/Workshops/blob/master/Fall%202019/Track-1/Mathematical%20Fundamentals%20for%20Data%20Science/Math%20Principles.ipynb"
                             materialsURL="https://drive.google.com/open?id=1xVAenbk4UPnq4pN2j6z7ML5HeiADjAUp"
                         />
                         </td>
@@ -235,6 +238,7 @@ const Meetings = () => {
                         <td>
                         <MeetingContent 
                             slidesURL="https://drive.google.com/open?id=1QQ1p0lNYJ5Q1miOpGcm9D9EPmYRruX08d59nSFvarlY"
+                            notebookURL="https://nbviewer.jupyter.org/github/DataScience-GT/Workshops/blob/master/Fall%202019/Track-1/Survey%20of%20Algorithms%20for%20Data%20Science/Survey%20of%20Algorithms.ipynb"
                             materialsURL="https://drive.google.com/open?id=1tfQyfYRJ9sAz3utXVlrOu3-azFy9v0hV"
                         />
                         </td>
@@ -253,30 +257,30 @@ const Meetings = () => {
 //     )
 // }
 
-const Resources = () => {return (
-    <Section id="resources" heading="Getting Started Resources">
-        <Row>
-            <Col sm={12} md={6}>
-                <h3 className="section-subheading text-muted">Public Content</h3>
-                <p>
-                    We have some of our getting started content publicly available, no membership required. 
-                    Below, you can find a drive link to our first few workshops, so you can try it out 
-                    and see what type of things we teach. 
-                </p>
-                <a href="https://drive.google.com/open?id=1CPCUEXDQA5nriNLfnElGKFWGeVWgPgvM">Drive Link</a>
-            </Col>
-            <Col sm={12} md={6}>
-                <h3 className="section-subheading text-muted">Our Custom Curriculum</h3>
-                <p>
-                    Our workshop people have worked hard to design a custom curriculum, that gets 
-                    the basics of data science across in the span of a semester. This pulls from 
-                    some of the top data science programs in the country! You can give it a look  
-                    <a href="https://drive.google.com/open?id=1PPMCEZUK4J0apsABmGaw1LFK7vXh3mFzJcSR1YRmlxE"> here.</a>
-                </p>
-            </Col>
-        </Row>
-    </Section>
-)}
+// const Resources = () => {return (
+//     <Section id="resources" heading="Getting Started Resources">
+//         <Row>
+//             <Col sm={12} md={6}>
+//                 <h3 className="section-subheading text-muted">Public Content</h3>
+//                 <p>
+//                     We have some of our getting started content publicly available, no membership required. 
+//                     Below, you can find a drive link to our first few workshops, so you can try it out 
+//                     and see what type of things we teach. 
+//                 </p>
+//                 <a href="https://drive.google.com/open?id=1CPCUEXDQA5nriNLfnElGKFWGeVWgPgvM">Drive Link</a>
+//             </Col>
+//             <Col sm={12} md={6}>
+//                 <h3 className="section-subheading text-muted">Our Custom Curriculum</h3>
+//                 <p>
+//                     Our workshop people have worked hard to design a custom curriculum, that gets 
+//                     the basics of data science across in the span of a semester. This pulls from 
+//                     some of the top data science programs in the country! You can give it a look  
+//                     <a href="https://drive.google.com/open?id=1PPMCEZUK4J0apsABmGaw1LFK7vXh3mFzJcSR1YRmlxE"> here.</a>
+//                 </p>
+//             </Col>
+//         </Row>
+//     </Section>
+// )}
 
  
 

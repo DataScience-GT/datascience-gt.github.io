@@ -20,5 +20,6 @@
 }
 
 .dsgt-button {
-    background-color: #338AFC;
+    background-color: #338AFC !important;
+    border-color: #338AFC !important;
 }

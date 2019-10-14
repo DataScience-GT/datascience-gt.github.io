@@ -30,7 +30,19 @@ class FileApi {
     uploadFile(file: Blob|File, name: string, metadata: any, location: string) {
         const loc_ref = this.rootref.child(location + "/" + name); 
         return loc_ref.put(file, metadata);
-    } 
+    }
+
+    /**
+     * Deletes the file present at the specified location with the specified name.
+     * @param file 
+     * @param name 
+     * @param metadata 
+     * @param location 
+     */
+    deleteFile(file: Blob|File, name: string, metadata: any, location: string) {
+        const loc_ref = this.rootref.child(location + "/" + name); 
+        return loc_ref.delete();
+    }
 
     /**
      * Uploads a user's resume 
@@ -40,6 +52,9 @@ class FileApi {
     async uploadResume(file: Blob|File, name: string) {
         let userRef = this.db.collection('users').doc(this._fbapp.user.get_current_uid());
         let location = this._fbapp.user.get_current_uid() + "/resume";
+
+        
+
         await this.uploadFile(file, "resume_" + name, {}, location)
             .then(() => {
                 console.log('Successfully uploaded resume.')

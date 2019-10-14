@@ -28,7 +28,7 @@ export default class XPGrowthChart extends React.Component {
                 let newXPHistory = this.state.xpHistory;
                 xpHistory.forEach(async item => {
                     let eventId = item.id;
-                    let eventXP = item.xp;
+                    // let eventXP = item.xp;
                     await this.props.firebase.event.get_event(eventId).then(snapshot => {
                         let eventData = snapshot.data();
                         newXPHistory.push({
@@ -54,27 +54,27 @@ export default class XPGrowthChart extends React.Component {
         //     });
         // }
         // console.log(newData);
-        const data = [
-        {
-            "date": "Aug 23",
-            "xp": 10
-        },
+    //     const data = [
+    //     {
+    //         "date": "Aug 23",
+    //         "xp": 10
+    //     },
 
-        {
-            "date": "Sep 23",
-            "xp": 15
-        },
+    //     {
+    //         "date": "Sep 23",
+    //         "xp": 15
+    //     },
 
-        {
-            "date": "Oct 22",
-            "xp": 35
-        },
+    //     {
+    //         "date": "Oct 22",
+    //         "xp": 35
+    //     },
 
-        {
-            "date": "Nov 12",
-            "xp": 75
-        }
-    ];
+    //     {
+    //         "date": "Nov 12",
+    //         "xp": 75
+    //     }
+    // ];
         return (
             <ResponsiveContainer width="100%" height={300}>
             <LineChart width={730} height={250} data={this.state.xpHistory}>

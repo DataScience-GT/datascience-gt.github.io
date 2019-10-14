@@ -6,6 +6,7 @@
  */
 import React from 'react';
 import { Button, Form, Container, Row, Col } from "react-bootstrap";
+// import SearchBox from './Search Box/SearchBox';
 import { withFirebase } from '../Firebase';
 import { compose } from 'recompose'; 
 import {withRouter} from 'react-router-dom'; 
@@ -21,7 +22,7 @@ class SignUpForm extends React.Component {
             first_name: "", 
             last_name: "",
             major: "",
-            year: "Freshman",
+            year: "1",
             phone_number: "", 
             verification: "", 
             verification_method: "venmo", 
@@ -63,7 +64,7 @@ class SignUpForm extends React.Component {
             } else if (this.state.verification_method === "venmo") {
                 await this.props.firebase.user.updateUserVerificationVenmo(this.state.verification, this.state.verification.name); 
             }
-            this.props.history.push(ROUTES.LOGIN); 
+            this.props.history.push(ROUTES.DASHBOARD_HOME); 
         } catch(err) {
             alert(err); 
             this.props.history.push(ROUTES.SIGNUP); 
@@ -92,13 +93,13 @@ class SignUpForm extends React.Component {
     render() {
         return (
                 <Form onSubmit={this.handleSubmit}>
-                    <Form.Group controlId="formBasicEmail"> 
+                    <Form.Group> 
                         <Form.Label>GT Email Address</Form.Label> 
                         <Form.Control onChange={this.handleInputChange} name="email" type="email" placeholder="Enter GT Email" /> 
                     </Form.Group>
 
                     {/* Password Entry - TODO Include Password Validation */}
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group>
                         <Form.Label> New Password </Form.Label>
                         <Form.Control onChange={this.handleInputChange} name="password" type="password" placeholder="Password" />
                     </Form.Group>
@@ -120,21 +121,25 @@ class SignUpForm extends React.Component {
 
                     <Form.Group> 
                         <Form.Label>Major</Form.Label> 
+                        {/* <SearchBox onChange={this.handleInputChange} data={CONSTANTS.MAJORS} name="major" /> */}
                         <Form.Control onChange={this.handleInputChange} name="major" type="text" placeholder="Major" /> 
                     </Form.Group>
 
                     <Form.Group controlId="">
                         <Form.Label>Year</Form.Label>
                         <Form.Control onChange={this.handleInputChange} as="select" name="year" type="text">
-                            <option>Freshman</option>
-                            <option>Sophomore</option>
-                            <option>Junior</option>
-                            <option>Senior</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>Graduate</option>
                         </Form.Control>
                     </Form.Group>
 
+                    {/* <SearchBox /> */}
+
                     <Form.Group>
-                        <Form.Label> Phone Number </Form.Label>
+                        <Form.Label>Phone Number</Form.Label>
                         <Form.Control onChange={this.handleInputChange} name="phone_number" type="tel" placeholder="Phone Number" /> 
                     </Form.Group>
 

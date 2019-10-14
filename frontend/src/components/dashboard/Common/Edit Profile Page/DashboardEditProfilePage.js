@@ -1,5 +1,6 @@
 import React from 'react'; 
 import { Button, Form, Container } from "react-bootstrap";
+import Badge from 'react-bootstrap/Badge';
 import DashboardAlert from '../../Member Dashboard/Dashboard Alert/DashboardAlert';
 import {withRouter} from 'react-router-dom'; 
 import DashboardNavbar from '../../Member Dashboard/Dashboard Navbar/DashboardNavbar';
@@ -138,6 +139,9 @@ export class DashboardEditProfileContainer extends React.Component {
 
                         <Form.Group>
                             <Form.Label>Upload Resume (PDF only)</Form.Label>
+                            {this.state.resume_uri && 
+                                <Badge variant="secondary">{this.state.resume_uri.split('/').slice(-1)[0]}</Badge>
+                            }
                             <Form.Control onChange={this.handleFileInputChange} name="resume" type="file" accept=".pdf" />
                         </Form.Group>
 
@@ -164,10 +168,6 @@ DashboardEditProfileContainer.contextType = AuthUserContext;
 const DashboardEditProfilePageWithFirebase = withRouter(withAuthentication(DashboardEditProfileContainer));
 
 export default class DashboardEditProfilePage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <FirebaseContext.Consumer>

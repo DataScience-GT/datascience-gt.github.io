@@ -51,13 +51,13 @@ export default class EventCard extends React.Component {
     }
 
       handleRSVP = () => {
-          this.props.firebase.event.rsvp_to_event(this.props.event.id, this.state.username);
-          this.handleClose();
-          this.props.event.data.rsvp_list.forEach(member => {
-              let names = member.split(" ");
-              let id = null;
-              this.props.firebase.user.get_user_from_name(names[0], names[1]).then(snapshot => id = snapshot);
-          })
+        //   this.props.firebase.event.rsvp_to_event(this.props.event.id, this.state.username);
+        //   this.handleClose();
+        //   this.props.event.data.rsvp_list.forEach(member => {
+        //     //   let names = member.split(" ");
+        //     //   let id = null;
+        //     //   this.props.firebase.user.get_user_from_name(names[0], names[1]).then(snapshot => id = snapshot);
+        //   })
       }
       
       render() {
