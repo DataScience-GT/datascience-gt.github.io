@@ -1,6 +1,8 @@
 language: node_js
 node_js: node
 cache: npm
+before_script:
+  - cd frontend
 script:
   - npm test
 after_success:
