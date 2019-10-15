@@ -1,8 +1,22 @@
-.meeting-description {
+.parent-meetingdesc {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.parent-meetingdesc .child-meetingdesc {
     display: flex;
     justify-content: space-around;
 }
 
 .react-bootstrap-table table {
     table-layout: auto;
+}
+
+.c1-signup-button {
+    margin-top: 25%;
+}
+
+.notebook-button, .notebook-button:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #eb861a;
+    border-color: #eb861a;
 }

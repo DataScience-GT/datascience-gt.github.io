@@ -22,7 +22,7 @@ export default class XPAcquisitonHistoryTable extends React.Component {
                 let xpHistory = res['xp_history'];
                 xpHistory.forEach(async item => {
                     let eventId = item.id;
-                    let eventXP = item.xp;
+                    // let eventXP = item.xp;
                     await this.props.firebase.event.get_event(eventId).then(snapshot => {
                         let newXPHistory = this.state.xpHistory;
                         let eventData = snapshot.data();

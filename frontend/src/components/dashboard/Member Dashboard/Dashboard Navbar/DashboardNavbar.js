@@ -1,9 +1,11 @@
 import React from 'react'; 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Button } from 'react-bootstrap';
 import * as ROUTES from '../../../../config/routes';
 import firebase from 'firebase';
 import './DashboardNavbar.css';
+
 /**
  * @author Vidhur Kumar
  */
@@ -39,14 +41,15 @@ export default class DashboardNavbar extends React.Component {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                        <Nav.Link name="home" href={ROUTES.DASHBOARD_HOME}>Home</Nav.Link>
-                        <Nav.Link name="edit" href={ROUTES.DASHBORD_EDIT_PROFILE}>Edit Profile</Nav.Link>
-                        {this.state.isExec &&
-                            <Nav.Link name="event" href={ROUTES.DASHBOARD_EVENT}>Edit Events</Nav.Link>
-                        }
-                        {this.state.isExec &&
-                            <Nav.Link name="group" href={ROUTES.DASHBOARD_GROUP}>Edit Groups</Nav.Link>                        
-                        }
+                            <Nav.Link name="home" href={ROUTES.DASHBOARD_HOME}>Home</Nav.Link>
+                            <Nav.Link name="edit" href={ROUTES.DASHBORD_EDIT_PROFILE}>Edit Profile</Nav.Link>
+                            {this.state.isExec &&
+                                <Nav.Link name="event" href={ROUTES.DASHBOARD_EVENT}>Edit Events</Nav.Link>
+                            }
+                            {this.state.isExec &&
+                                <Nav.Link name="group" href={ROUTES.DASHBOARD_GROUP}>Edit Groups</Nav.Link>                        
+                            }
+                            <Button href="https://drive.google.com/open?id=1c9qtc5oo0UQv_iSNYtJ1gyyF7_dHA6li" variant="warning">Checkpoint</Button>
                         </Nav>
                         <Nav>
                         </Nav>

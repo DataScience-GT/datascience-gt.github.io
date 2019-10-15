@@ -1,5 +1,6 @@
 import React from 'react'; 
 import { Button, Form, InputGroup, Container, Modal } from "react-bootstrap"; 
+import Spinner from 'react-bootstrap/Spinner'
 import {withRouter} from 'react-router-dom'; 
 import DashboardNavbar from '../../Member Dashboard/Dashboard Navbar/DashboardNavbar';
 import { withAuthentication } from '../../../Session';
@@ -19,6 +20,7 @@ export class CreateEventForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isLoading: true,
             name: "",
             desc: "",
             date: "",
@@ -29,28 +31,29 @@ export class CreateEventForm extends React.Component {
     }
 
     componentDidMount() {
-        this.viewEvents();
+        // this.viewEvents();
     }
 
     viewEvents = async () => {
-        await this.props.firebase.event.get_events().then(snapshot => {
-            snapshot.docs.forEach(async doc => {
-                let eventId = doc.id;
-                let data = doc.data();
-                console.log(data);
-                // if(new Date(data['date']) < new Date() && !data.xpAdded) {
-                // //     this.props.firebase.event.mark_event_xpAdded(eventId);
-                // }
-                // console.log(doc.data()['rsvp_list']);
-                // if(doc.data()['rsvp_list'].length > 0) {
-                //     let curr = doc.data()['rsvp_list'][0];
-                //     this.props.firebase.user.get_user_from_name(curr.split(" ")[0], curr.split(" ")[1]).then(res => console.log(res));
-                // }
-                // console.log(doc.data()['date']);
-                // console.log(new Date(doc.data()['date']) < new Date());
-            })
-        })
-
+        // await this.props.firebase.event.get_events().then(snapshot => {
+        //     snapshot.docs.forEach(async doc => {
+        //         // let eventId = doc.id;
+        //         // let data = doc.data();
+                
+        //         // console.log(data);
+        //         // if(new Date(data['date']) < new Date() && !data.xpAdded) {
+        //         // //     this.props.firebase.event.mark_event_xpAdded(eventId);
+        //         // }
+        //         // console.log(doc.data()['rsvp_list']);
+        //         // if(doc.data()['rsvp_list'].length > 0) {
+        //         //     let curr = doc.data()['rsvp_list'][0];
+        //         //     this.props.firebase.user.get_user_from_name(curr.split(" ")[0], curr.split(" ")[1]).then(res => console.log(res));
+        //         // }
+        //         // console.log(doc.data()['date']);
+        //         // console.log(new Date(doc.data()['date']) < new Date());
+        //     })
+        // })
+        this.setState({isLoading: false});
     }
 
     /**
@@ -82,6 +85,7 @@ export class CreateEventForm extends React.Component {
      */
     render() {
         return (
+            this.state.isLoading ? <Spinner animation="border" size="xlg" /> :
             <div>
                 <h2><strong>Create Event</strong></h2>
                 <Form onSubmit={this.handleSubmit}>
@@ -191,7 +195,6 @@ export class EditEventForm extends React.Component {
         // const eventItems = this.state.events.map(event => <option key={event.id}>{event.data.name}</option>);
         return (
             <div>
-                
                 <h2><strong>Edit Event</strong></h2>
                 <EventList firebase={this.props.firebase}/>
             </div>

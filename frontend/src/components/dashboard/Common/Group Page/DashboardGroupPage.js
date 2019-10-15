@@ -335,17 +335,20 @@ export class VerifyPendingUserForm extends React.Component {
         this.props.firebase.user.verifyUserPayment(target.value, target.name, target.is_cash); 
         this.update_pending_users_state(); 
     }
+
     render_verification_stub(req) {
         if (req.verification_uri === "") {
             return "Deferred"
         }
         else if (req.verification_uri.split(",")[0] === "cash") {
-            return req.verification_uri
+            return req.verification_uri;
         } else {
             return <img alt={req.verification_uri} src={req.verification_uri}></img>
         }
     }
-    render() { return (
+
+    render() { 
+        return (
         <Container> 
             <Table> 
                 <tbody>

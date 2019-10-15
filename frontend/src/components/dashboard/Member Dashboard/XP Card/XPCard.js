@@ -1,7 +1,7 @@
 import React from 'react'; 
 import {Card, Badge} from 'react-bootstrap';
 import {} from 'recharts';
-import XPGrowthChart from './XPGrowthChart';
+// import XPGrowthChart from './XPGrowthChart';
 import XPAcquisitionHistoryTable from './XP Acquisition Table/XPAcquisitionHistoryTable';
 import './XPCard.css';
 
@@ -9,11 +9,6 @@ import './XPCard.css';
  * @author Vidhur Kumar
  */
 export default class XPCard extends React.Component {
-
-    constructor(props) {
-       super(props);
-    }
-
     render() {
         return (
             <div>

@@ -6,8 +6,10 @@ import DashboardHomePage from './Common/Home Page/DashboardHomePage';
 import { FirebaseContext } from '../Firebase';
 import {MembershipStatus} from "../Firebase/entity"; 
 
-import { Button, Form, Container } from "react-bootstrap";
+import { Button, Form, Container, Row, Col } from "react-bootstrap";
+import Spinner from 'react-bootstrap/Spinner'
 import * as ROUTES from '../../config/routes'
+import * as CONSTANTS from "../../config/config"
 
 /**
  * This file should be the center point for dashboard building. In order to keep file sizes manageable, the 
@@ -20,6 +22,7 @@ class Dashboard extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
+            isLoading: true,
             user: {},
             current_tab: 'home',
         }
@@ -33,7 +36,7 @@ class Dashboard extends React.Component {
 
     async getCurrentUser() {
         await this.props.firebase.user.get_user(this.context.uid).then((user) => {
-                this.setState({user: user});
+                this.setState({user: user, isLoading: false});
             });
     }
 
@@ -43,6 +46,7 @@ class Dashboard extends React.Component {
 
     render() {
         return (
+            this.state.isLoading ?   <Spinner animation="border" size="xlg" /> :
             <FirebaseContext.Consumer>
                 {firebase => {
                     if (this.state.user.membership_status === MembershipStatus.pending && this.state.user.verification_uri === "") {
@@ -136,8 +140,39 @@ class UnverifiedComponent extends React.Component {
     render() {
         return (
         <Container> 
-                
+            <Row> 
+                <Col sm={6}>
+                    <h3>Joining with Venmo</h3> 
+                    <ol> 
+                        <li> Venmo ${CONSTANTS.DUES_SEMESTER} for a semester membership, 
+                        or ${CONSTANTS.DUES_YEAR} for a year membership, to @datascience-gt </li>
+                        <li> Take a screenshot of your payment </li>
+                        <li> Click the signup button, fill out the form, select "Venmo", and attach your screenshot</li>
+                        <li> Hit "Submit", and you're all done! We'll verify your payment and send you an invite 
+                            to the slack within a few days. Welcome to the team! 
+                        </li>
+                    </ol>
+                </Col>
+                <Col sm={6}>
+                    <h3> Joining with Cash </h3> 
+                    Don't have a Venmo? Refuse to use online payments to stick it to our corporate overlords? 
+                    No problem. 
+                    <ol>
+                        <li> Pay in cash to any member of the DSGT Team </li>
+                        <li> Get their name when you pay them! </li>
+                        <li> Go to the signup form, fill it out, select "Cash" and put in the amount you paid along with 
+                            the name of the person you gave cash to. 
+                            It's ${CONSTANTS.DUES_SEMESTER} for a semester, or ${CONSTANTS.DUES_YEAR} for a year. 
+                        </li>
+                        <li> Hit submit and you're done! It might take us a few days to verify your payment, but 
+                            once we do we'll send you a invite to our Slack channel and hook you up with the getting 
+                            started material. Glad to have you on the team! 
+                        </li>
+                    </ol>
+                </Col>
+            </Row>  
             <Form onSubmit={this.handleSubmit}> 
+            
                 <Form.Group>
                 <Form.Label> Select preferred payment method </Form.Label>
                 <div>

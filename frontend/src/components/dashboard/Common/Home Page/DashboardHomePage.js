@@ -22,10 +22,10 @@ export default class DashboardHomePage extends React.Component {
                     <Col xs="12" md="6">
                         <h2>Upcoming Events</h2>
                         <span className="event-header">
-                            <Button variant="outline-primary"><a href="https://forms.gle/8fzb6fr8D9d8K4Cv7" target="_blank">Event Excuse Form</a></Button>
-                            <Button variant="outline-primary"><a href="https://forms.gle/XgxDPPEKxA2hGTxS6" target="_blank">Bonus XP</a></Button>
+                            <Button href="https://forms.gle/8fzb6fr8D9d8K4Cv7" variant="outline-primary">Event Excuse Form</Button>
+                            <Button href="https://forms.gle/XgxDPPEKxA2hGTxS6" variant="outline-primary">Bonus XP</Button>
                         </span>
-                        <EventList firebase={this.props.firebase}  isRSVP={true}/>
+                        <EventList firebase={this.props.firebase} isRSVP={true}/>
                     </Col>
                 </Row>
                 <Row>
