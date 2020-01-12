@@ -4,9 +4,7 @@ cache: npm
 before_script:
   - cd frontend
   - npm i -s
-  - npm install codecov -g
-scripts:
+script:
   - npm test
 after_success:
-  - codecov
-  # - npm run coverage
+  - npm run coverage
