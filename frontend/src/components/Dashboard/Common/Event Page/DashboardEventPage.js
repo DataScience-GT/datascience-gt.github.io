@@ -31,16 +31,16 @@ export class CreateEventForm extends React.Component {
     }
 
     componentDidMount() {
-        // this.viewEvents();
+        this.viewEvents();
     }
 
     viewEvents = async () => {
         // await this.props.firebase.event.get_events().then(snapshot => {
         //     snapshot.docs.forEach(async doc => {
-        //         // let eventId = doc.id;
-        //         // let data = doc.data();
+        //         let eventId = doc.id;
+        //         let data = doc.data();
                 
-        //         // console.log(data);
+        //         console.log(data);
         //         // if(new Date(data['date']) < new Date() && !data.xpAdded) {
         //         // //     this.props.firebase.event.mark_event_xpAdded(eventId);
         //         // }
@@ -170,7 +170,7 @@ export class EditEventForm extends React.Component {
     getEventId = (eventName) => {
         for(let i in this.state.events) {
             let currrentEvent = this.state.events[i];
-            if(currrentEvent.data.name ===  eventName) {
+            if(currrentEvent.data.name === eventName) {
                 return currrentEvent.id;
             }
         }
@@ -226,6 +226,7 @@ export class DashboardEventContainer extends React.Component {
     render() {
         return (
             <Container>
+                {/* <h1>HELLO</h1> */}
                 <CreateEventForm firebase={this.props.firebase}/>
                 <EditEventForm firebase={this.props.firebase}/> 
             </Container>
@@ -239,15 +240,15 @@ export default class DashboardEventPage extends React.Component {
     render() {
         return (
             <FirebaseContext.Consumer>
-            {firebase => {
-                return (
-                    <div>
-                        <DashboardNavbar firebase={firebase}/>
-                        <DashboardEventPageWithFirebase />
-                    </div>
-                )
+                {firebase => {
+                    return (
+                        <div>
+                            <DashboardNavbar firebase={firebase}/>
+                            <DashboardEventPageWithFirebase />
+                        </div>
+                    )
 
-            }}
+                }}
             </FirebaseContext.Consumer>
         )
     }

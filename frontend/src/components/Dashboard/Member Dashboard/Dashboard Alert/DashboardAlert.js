@@ -3,9 +3,14 @@ import { Button } from "react-bootstrap";
 import Alert from 'react-bootstrap/Alert'
 
 export default class DashboardAlert extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
-            <Alert show={this.props.show} variant="success">
+            <Alert show={this.props.show} variant={this.props.variant}>
                 <Alert.Heading>{this.props.heading}</Alert.Heading>
                 {/* <p>
                 Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
@@ -14,7 +19,7 @@ export default class DashboardAlert extends React.Component {
                 </p> */}
                 <hr />
                 <div className="d-flex justify-content-end">
-                    <Button onClick={this.props.close} variant="outline-success">Confirm Changes</Button>
+            <Button onClick={this.props.close} variant={"outline-" + this.props.variant}>{this.props.buttonText}</Button>
                 </div>
             </Alert>
         )

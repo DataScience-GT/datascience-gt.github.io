@@ -94,7 +94,7 @@ export class DashboardEditProfileContainer extends React.Component {
     render() {
         return (
             <div>
-                <DashboardAlert heading="Successfully uploaded resume!" show={this.state.showAlert} close={this.handleAlertClose}/>
+                <DashboardAlert variant="success" buttonText="Confirm Changes" heading="Successfully uploaded resume!" show={this.state.showAlert} close={this.handleAlertClose}/>
                 <Container>
                     <Form>
                         <Form.Group controlId="formBasicEmail"> 

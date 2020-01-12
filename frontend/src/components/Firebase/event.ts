@@ -59,8 +59,10 @@ class EventApi {
             date: date,
             type: type,
             owner: owner,
+            isOpen: false,
             links: [link],
-            rsvp_list: []
+            code: Math.floor(Math.random() * (9999 - 1000)) + 1000,
+            attendee_list: []
         });
     }
 
@@ -78,6 +80,10 @@ class EventApi {
             })
     }
 
+    /**
+     * Deletes all events in the master list.
+     * WARNING: Do not use on the main database.
+     */
     async delete_events() {
         await this.db.collection('events').get().then(snapshot => {
             snapshot.docs.forEach(doc => {
@@ -86,6 +92,15 @@ class EventApi {
         })
     }
 
+    /**
+     * 
+     * @param id 
+     * @param name 
+     * @param desc 
+     * @param XP 
+     * @param date 
+     * @param type 
+     */
     async update_event(id: string, name: string, desc: string, XP: number, date: Date, type: string) {
         let eventRef = this.db.collection("events").doc(id);
         return eventRef.update({
@@ -101,6 +116,29 @@ class EventApi {
         .catch((err) => {
             console.log(err);
         })
+    }
+
+    /**
+     * Opens up an event for members to sign in using the 4 digit code that was generated.
+     * @param id 
+     */
+    async open_event(id: string) {
+        let eventRef = this.db.collection("events").doc(id);
+        return eventRef.update({
+            isOpen: true
+        });
+    }
+
+    /**
+     * 
+     * @param id 
+     * @param name 
+     */
+    async add_to_event_attendee_list(id: string, name: string) {
+        let eventRef = this.db.collection("events").doc(id);
+        return eventRef.update({
+            attendee_list: firestore.FieldValue.arrayUnion(name)
+        });
     }
 
     async mark_event_xpAdded(id: string) {
@@ -124,6 +162,9 @@ class EventApi {
         })
     }
 
+    /**
+     * Utility function to add a particular field to every event if necessary.
+     */
     async add_field_to_event() {
         await this.db.collection('events').get().then(snapshot => {
             snapshot.docs.forEach(async doc => {

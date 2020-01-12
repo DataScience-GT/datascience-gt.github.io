@@ -13,7 +13,7 @@ export default class XPAcquisitonHistoryTable extends React.Component {
     }
 
     componentDidMount() {
-        this.retrieveUserXPHistory();
+        // this.retrieveUserXPHistory();
     }
 
     retrieveUserXPHistory = async () => {
@@ -21,13 +21,15 @@ export default class XPAcquisitonHistoryTable extends React.Component {
             this.props.firebase.user.get_user(this.props.firebase.user.get_current_uid()).then(res => {
                 let xpHistory = res['xp_history'];
                 xpHistory.forEach(async item => {
-                    let eventId = item.id;
+                    console.log(item);
+                    let eventId = item['id'];
                     // let eventXP = item.xp;
                     await this.props.firebase.event.get_event(eventId).then(snapshot => {
                         let newXPHistory = this.state.xpHistory;
                         let eventData = snapshot.data();
+                        console.log(eventData);
                         newXPHistory.push({
-                            name: eventData.name,
+                            name: eventData['name'],
                             date: eventData.date,
                             hostName: eventData.owner,
                             xpAcquired: eventData.XP

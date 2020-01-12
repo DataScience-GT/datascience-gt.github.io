@@ -48,11 +48,11 @@ const Hero = () => {
                     {/* <a href={CONSTANTS.SUBSCRIBE} id="welcomebutton" className="btn btn-large btn-outline-dark link-override link-button" role="button">Subscribe to our mailling list</a> <br/> */}
                 </Col>
             </Row>
-            <Row>
+            {/* <Row>
                 <Col sm="12" className="text-center">
                     <Button className="c1-signup-button" href="https://c1games.com/gatech" variant="info" size="lg">Sign up to participate!</Button>
                 </Col>
-            </Row>
+            </Row> */}
         </div>
     </section>
 )}
