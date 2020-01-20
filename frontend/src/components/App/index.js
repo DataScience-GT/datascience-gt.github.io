@@ -10,6 +10,7 @@ import LoginPage from "../Login Page/LoginPage";
 import Dashboard from '../Dashboard/Dashboard';
 import DashboardEventPage from '../Dashboard/Common/Event Page/DashboardEventPage';
 import DashboardEditProfilePage from '../Dashboard/Common/Edit Profile Page/DashboardEditProfilePage';
+import DashboardWorkshopsPage from '../Dashboard/Common/Workshops Page/DashboardWorkshopsPage';
 import * as ROUTES from "../../config/routes"
 
 import { withAuthentication } from "../Session"
@@ -30,6 +31,7 @@ class App extends React.Component {
                 <Route path={ROUTES.DASHBORD_EDIT_PROFILE} component={DashboardEditProfilePage}/>
                 <Route path={ROUTES.DASHBOARD_EVENT} component={DashboardEventPage}/>                
                 <Route path={ROUTES.DASHBOARD_GROUP} component={DashboardGroupPage} />
+                <Route path={ROUTES.DASHBOARD_WORKSHOPS} component={DashboardWorkshopsPage} />
             </Router> 
         )
     }

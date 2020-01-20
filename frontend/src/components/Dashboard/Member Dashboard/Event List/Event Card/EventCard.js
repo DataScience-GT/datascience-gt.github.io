@@ -13,9 +13,9 @@ import './EventCard.css';
 export default class EventCard extends React.Component {
     constructor(props, context) {
         super(props, context);
-        console.log(this.props.event.data.isOpen);
-        console.log(this.props.event.data.code);
-        console.log(this.props.event.data.attendee_list);
+        // console.log(this.props.event.data.isOpen);
+        // console.log(this.props.event.data.code);
+        // console.log(this.props.event.data.attendee_list);
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
     
@@ -29,7 +29,7 @@ export default class EventCard extends React.Component {
 
         this.props.firebase.user.get_user(this.props.firebase.user.get_current_uid())
         .then(snapshot => {
-            console.log(snapshot);
+            // console.log(snapshot);
             this.setState({username: snapshot['first_name'] + ' ' + snapshot['last_name']});
         });
         

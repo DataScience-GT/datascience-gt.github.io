@@ -204,10 +204,10 @@ const Meetings = () => {
                         /> */}
                         </td>
                         <td>
-                            <MeetingContent 
-                                slidesURL="https://drive.google.com/open?id=1KGVdH3CHyo99EA3kIVZPT5FTXyuVa-SvNNJCO5rAF8s"
-                                materialsURL="https://drive.google.com/open?id=1cKG75Q1vbvUrDLhORfqq4coSqRlvuvGo"
-                            />
+                        <MeetingContent 
+                            slidesURL="https://drive.google.com/open?id=1KGVdH3CHyo99EA3kIVZPT5FTXyuVa-SvNNJCO5rAF8s"
+                            materialsURL="https://drive.google.com/open?id=1cKG75Q1vbvUrDLhORfqq4coSqRlvuvGo"
+                        />
                         </td>
                     </tr>
                     <tr>
