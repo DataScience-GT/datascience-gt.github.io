@@ -15,6 +15,7 @@ export default class EventEditForm extends React.Component {
             name: this.props.event.data.name,
             desc: this.props.event.data.desc,
             date: this.props.event.data.date,
+            link: this.props.event.data.links[0],
             type: this.props.event.data.type,
             XP: this.props.event.data.XP,
             show: this.props.show
@@ -60,10 +61,14 @@ export default class EventEditForm extends React.Component {
                         <option selected={this.props.event.data.type === 'Special'}>Special</option>
                     </Form.Control>
                 </Form.Group>
+                <Form.Group>
+                    <Form.Label>Event Files</Form.Label>
+                    <Form.Control onChange={this.handleInputChange} name="link" type="url" defaultValue={this.props.event.data.links[0]}></Form.Control>
+                </Form.Group>
                 {isEventOwnerContext && <div><strong>Event Code: {this.props.event.data.code}</strong></div>}
                 <div className="event-button-container">
                     <Button disabled={!isEventOwnerContext} 
-                            onClick={() => this.props.handleSubmit(this.props.event.id, this.state.name, this.state.desc, this.state.XP, this.state.date, this.state.type)} className="rsvp-button" variant="outline-success">Save</Button>
+                            onClick={() => this.props.handleSubmit(this.props.event.id, this.state.name, this.state.desc, this.state.XP, this.state.date, this.state.link, this.state.type)} className="rsvp-button" variant="outline-success">Save</Button>
                     <Button disabled={!isEventOwnerContext} 
                             onClick={() => this.props.handleDelete(this.props.event.id)} className="rsvp-button" variant="outline-danger">Delete</Button>
                     {isEventOwnerContext &&

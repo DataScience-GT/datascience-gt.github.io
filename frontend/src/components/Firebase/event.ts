@@ -101,13 +101,14 @@ class EventApi {
      * @param date 
      * @param type 
      */
-    async update_event(id: string, name: string, desc: string, XP: number, date: Date, type: string) {
+    async update_event(id: string, name: string, desc: string, XP: number, date: Date, link: string, type: string) {
         let eventRef = this.db.collection("events").doc(id);
         return eventRef.update({
             name: name,
             desc: desc,
             XP: XP,
             date: date,
+            links: [link],
             type: type,
         })
         .then(() => {
