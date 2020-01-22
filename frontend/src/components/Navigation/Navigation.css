@@ -1,5 +1,5 @@
 .main-navbar {
-    background: #000001;
+    background: #FFFFFF;
 }
 /* 
 .navbar-light .navbar-toggler {
@@ -7,16 +7,20 @@
     border-color: azure;
 } */
 
-.navbar-light .navbar-toggler-icon{
+/**
+COMMENT THIS IN IF IN DARK NAVBAR MODE. Ensures that the hamburger is visible when in mobile mode.
+**/
+
+/* .navbar-light .navbar-toggler-icon{
     background-image: url("https://icon-library.net/images/three-bars-icon/three-bars-icon-6.jpg");
-}
+} */
 
 .navbar-light .navbar-nav .nav-link {
     color: #338AFC;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-    color: #D1FFFC;
+    color: #338AFC;
 }
 
 .dsgt-button {
