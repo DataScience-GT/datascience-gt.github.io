@@ -3,6 +3,8 @@ import {Container, Row, Col, Table, Button} from 'react-bootstrap';
 import * as CONSTANTS from "../../config/config";
 // import * as ROUTES from "../../config/routes";  
 // import ProjectCore from "./Project"
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 import ContactCore from "./Contact" 
 
 import './HomePage.css';
@@ -100,7 +102,26 @@ const About = () => { return (
             </Col>
         </Row>
     </Section>
-)}
+)};
+
+const Projects = () => (
+    <Section id="projects" heading="Projects" subheading="">
+        <Carousel showStatus={false} showThumbs={false}>
+            <div>
+                <img src="img/gray.png" />
+                <p className="legend">FYNAT</p>
+            </div>
+            <div>
+                <img src="img/gray.png" />
+                <p className="legend">Stormalytics</p>
+            </div>
+            <div>
+                <img src="img/gray.png" />
+                <p className="legend">Legend 3</p>
+            </div>
+        </Carousel>
+    </Section>
+)
 
 const Join = () => {return (
     <Section id="join" heading="Join" subheading="Sign Up Now!">
@@ -296,7 +317,7 @@ export default class HomePage extends React.Component {
 
                 <About />
 
-                {/* <Projects /> */}
+                <Projects />
 
                 {/* <Events /> */}
 
