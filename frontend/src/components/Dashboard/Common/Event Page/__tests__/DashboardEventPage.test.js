@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import DashboardEventPage from '../DashboardEventPage';
+import DashboardEventPage from '..';
 
 describe('Test HomePage component with shallow rendering', () => {
     it('Crash free rendering', () => {

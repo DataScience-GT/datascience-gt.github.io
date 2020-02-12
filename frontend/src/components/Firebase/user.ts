@@ -212,10 +212,10 @@ class UserApi {
 
         let userRef = await this.db.collection('users').doc(uid);
 
-        let resume_uri;
+        // let resume_uri;
         userRef.get().then(snapshot => {
             if(snapshot.exists) {
-                let data = snapshot.data();
+                // let data = snapshot.data();
                 // resume_uri = data['resume_uri'];
             } else {
 
