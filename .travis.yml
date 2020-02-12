@@ -3,6 +3,7 @@ node_js: node
 cache: npm
 before_script:
   - cd frontend
+  - npm update
   - npm i -s
 script:
   - npm test
