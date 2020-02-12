@@ -106,18 +106,32 @@ const About = () => { return (
 
 const Projects = () => (
     <Section id="projects" heading="Projects" subheading="">
-        <Carousel showStatus={false} showThumbs={false}>
+        <Carousel showStatus={false} showThumbs={false} infiniteLoop={true}>
             <div>
-                <img src="img/gray.png" />
-                <p className="legend">FYNAT</p>
+                <img src="img/projects/mentra.png" />
+                <p className="legend">
+The Mentra Team is currently working on developing a Natural Language Processing (NLP) classifier that can group any given job description into a group of skills that are necessary to succeed in that job. This will help the start-up Mentra in their goal to design an employment-matching system for individuals on the autism spectrum.
+</p>
             </div>
             <div>
                 <img src="img/gray.png" />
-                <p className="legend">Stormalytics</p>
+                <p className="legend">Students are often overwhelmed by the seemingly infinite amount of organizations when they come to campus. FYNAT hopes to utilize user-submitted data to connect those who have similar interests and use profiles of students to match them to a club or organization, taking some of the initial anxiety and fear out of the freshman college experience. </p>
             </div>
             <div>
                 <img src="img/gray.png" />
-                <p className="legend">Legend 3</p>
+                <p className="legend">The National Weather Service uses outdated, stats-based models to try to predict tornadoes. However, there is rich doppler data available and historical tornado records. Using this data, DSGT is trying to build an intelligent tornado activity predictor. We hope to be able to predict tornadoes earlier than the current standard, saving lives in the process. </p>
+            </div>
+            <div>
+                <img src="img/projects/geo.png" />
+                <p className="legend">The Geosyntec Project revolves around creating a unified data management application that can convert xml files into a more user-friendly format, specifically that of a SQL or Microsoft Access Database.</p>
+            </div>
+            <div>
+                <img src="img/projects/opioid.png" />
+                <p className="legend">The Opioid Awareness Project will be working closely with the Fulton County Department of Behavioral Health & Developmental Disabilities to develop informational material about the risks associated with opioid usage. This will be done by scraping data about opioid usage online and analyzing data with Python-Oriented Data Science libraries to generate visuals.</p>
+            </div>
+            <div>
+                <img src="img/projects/kaggle.png" />
+                <p className="legend">Kaggle Projects serve as a low-pressure way for members to gain basic data science experience. This semester, Kaggle Projects is focusing on an age-old problem in Data Science: given an extensive set of features, how can one best predict the price of a home?</p>
             </div>
         </Carousel>
     </Section>

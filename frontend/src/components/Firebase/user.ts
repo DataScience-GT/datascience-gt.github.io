@@ -66,6 +66,13 @@ class UserApi {
         return await doc.data(); 
     }
 
+    /**
+     * 
+     */
+    async get_users() {
+        return await this.db.collection("users").get();
+    }
+
     async get_user_from_name(first_name: string, last_name: string) {
         let id = null;
         await this.db.collection('users')
