@@ -4,6 +4,7 @@
 export const LANDING="/"; 
 export const SIGNUP = '/signup'; 
 export const LOGIN = '/login'; 
+export const SPONSORS = '/sponsors';
 export const BLOG = 'https://medium.com/data-science-georgia-tech'
 
 export const DASHBOARD_HOME = '/dashboard/home';

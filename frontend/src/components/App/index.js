@@ -2,6 +2,7 @@ import React from 'react' ;
 import {BrowserRouter as Router, Route} from 'react-router-dom'; 
 import Navigation from '../Navigation'; 
 import HomePage from "../Home Page"; 
+import SponsorsPage from '../Sponsors Page';
 import SignUpPage from "../Signup Page";
 import LoginPage from "../Login Page"; 
 import Dashboard from '../Dashboard';
@@ -20,6 +21,7 @@ class App extends React.Component {
             <Router>
                 <Navigation/> 
                 <Route exact path={ROUTES.LANDING} component={HomePage} />
+                <Route path={ROUTES.SPONSORS} component={SponsorsPage} />
                 <Route path={ROUTES.LOGIN} component={LoginPage} />
                 <Route path={ROUTES.SIGNUP} component={SignUpPage} />
                 <Route path={ROUTES.DASHBOARD_HOME} component={Dashboard} />
