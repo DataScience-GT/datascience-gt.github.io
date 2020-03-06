@@ -1,0 +1,74 @@
+.title {
+  padding: 0 0 55px 0;
+}
+
+.link {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.sponsor-btn {
+  width: 100%;
+  border-radius: 0;
+  background-color: #3383ed;
+  color: white;
+  padding: 15px;
+}
+
+.sponsor-container {
+  padding: 40px 0 100px 0;
+}
+
+.table thead th {
+  border-top: 0;
+  border-bottom: 1.5px solid black;
+}
+.table th {
+  border-top: 0;
+}
+
+.bottom {
+  border-bottom: 1.5px solid black;
+}
+h8 {
+  font-family: "Montserrat";
+  font-size: 13px;
+  line-height: 1.3;
+}
+.table {
+  margin-bottom: 0.5em;
+}
+.table td {
+  padding: 0.9rem;
+  text-align: center;
+}
+
+.left li h6 {
+  text-align: left;
+}
+
+.perks h6 {
+  text-align: left;
+}
+
+.container-table {
+  margin-right: 60px;
+  margin-left: 60px;
+}
+
+.contact {
+  text-align: right;
+  margin-bottom: 40px;
+  margin-top: 30px;
+  color: white;
+}
+
+.btn-contact {
+  border-radius: 20px;
+  padding: 8px 20px 8px 20px;
+}
+
+.logo {
+  height: 150px;
+  margin: auto;
+}
