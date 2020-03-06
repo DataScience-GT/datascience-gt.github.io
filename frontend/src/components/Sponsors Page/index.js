@@ -145,7 +145,9 @@ export default class SponsorsPage extends React.Component {
                     <td className="bottom"></td>
                     <td className="bottom"></td>
                     <td className="bottom">
-                      <h6>Yes</h6>
+                      <div class="container-dot">
+                        <span class="dot"></span>
+                      </div>
                     </td>
                   </tr>
                   <tr>

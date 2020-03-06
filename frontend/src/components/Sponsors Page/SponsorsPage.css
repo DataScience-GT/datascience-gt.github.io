@@ -72,3 +72,12 @@ h8 {
   height: 150px;
   margin: auto;
 }
+
+.dot {
+  height: 13px;
+  width: 13px;
+  background-color: #3383ed;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 15px;
+}
