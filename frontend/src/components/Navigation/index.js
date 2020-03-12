@@ -69,15 +69,15 @@ class Navigation extends React.Component {
         return (
             <div className="padded">
                 <Navbar className="main-navbar" sticky="top" expand="md">
-                    <Navbar.Brand><Link to='/'><img src="/img/icon-dark-min.png" alt="DSGT"/></Link></Navbar.Brand>
+                    <Navbar.Brand><Link to='/'><img src="/img/icon.png" alt="DSGT"/></Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse>
-                        <Nav className="mr-auto">
+                        <Nav className="mr-auto links">
                             <Nav.Link href={ROUTES.LANDING +"#about"}>About</Nav.Link>
                             {/* <Nav.Link href={ROUTES.LANDING + "#projects"}>Projects</Nav.Link> */}
-                            <Nav.Link href={ROUTES.LANDING + "#events"}>Events</Nav.Link>
+                            <Nav.Link href={ROUTES.LANDING + "#projects"}>Projects</Nav.Link>
+                            <Nav.Link href={ROUTES.LANDING + "#meetings"}>Meetings</Nav.Link>
                             <Nav.Link href={ROUTES.LANDING + "#join"}>Join</Nav.Link>
-                            <Nav.Link href={ROUTES.LANDING + "#resources"}>Resources</Nav.Link>
                             <Nav.Link href={ROUTES.BLOG}>Blog</Nav.Link>                            
                             <Nav.Link href={ROUTES.LANDING + "#contact"}>Contact</Nav.Link>
                         </Nav>
