@@ -16,7 +16,7 @@ export default class SponsorsPage extends React.Component {
         <div>
           <div class="sponsor-container">
             <div className="title">
-              <h3>OUT SPONSORS</h3>
+              <h3>OUR SPONSORS</h3>
             </div>
             <Container>
               <Row>
