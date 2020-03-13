@@ -6,11 +6,12 @@ import SponsorsPage from '../Sponsors Page';
 import SignUpPage from "../Signup Page";
 import LoginPage from "../Login Page"; 
 import Dashboard from '../Dashboard';
-import DashboardEventPage from '../Dashboard/Common/Event Page';
-import DashboardEditProfilePage from '../Dashboard/Common/Edit Profile Page';
+import DashboardEventPage from '../Dashboard/Pages/Event Page';
+import DashboardEditProfilePage from '../Dashboard/Pages/Edit Profile Page';
 import * as ROUTES from "../../config/routes"
 import { withAuthentication } from "../Session"
-import  DashboardGroupPage from '../Dashboard/Common/Group Page';
+import  DashboardGroupPage from '../Dashboard/Pages/Group Page';
+import DashboardWorkshopsPage from '../Dashboard/Pages/Workshops Page';
 
 /**
  * @author Raj Shrimali and Vidhur Kumar
@@ -28,6 +29,7 @@ class App extends React.Component {
                 <Route path={ROUTES.DASHBORD_EDIT_PROFILE} component={DashboardEditProfilePage}/>
                 <Route path={ROUTES.DASHBOARD_EVENT} component={DashboardEventPage}/>                
                 <Route path={ROUTES.DASHBOARD_GROUP} component={DashboardGroupPage} />
+                <Route path={ROUTES.DASHBOARD_WORKSHOPS} component={DashboardWorkshopsPage} />
             </Router> 
         )
     }

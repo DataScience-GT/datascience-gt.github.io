@@ -49,6 +49,7 @@ export default class DashboardNavbar extends React.Component {
                             {this.state.isExec &&
                                 <Nav.Link name="group" href={ROUTES.DASHBOARD_GROUP}>Edit Groups</Nav.Link>                        
                             }
+                            <Nav.Link name="workshops" href={ROUTES.DASHBOARD_WORKSHOPS}>Workshops</Nav.Link>
                         </Nav>
                         <Nav>
                         </Nav>
