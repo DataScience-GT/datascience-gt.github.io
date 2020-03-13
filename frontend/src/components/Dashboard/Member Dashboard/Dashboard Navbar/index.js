@@ -49,7 +49,6 @@ export default class DashboardNavbar extends React.Component {
                             {this.state.isExec &&
                                 <Nav.Link name="group" href={ROUTES.DASHBOARD_GROUP}>Edit Groups</Nav.Link>                        
                             }
-                            <Button href="https://drive.google.com/open?id=1c9qtc5oo0UQv_iSNYtJ1gyyF7_dHA6li" variant="warning">Checkpoint</Button>
                         </Nav>
                         <Nav>
                         </Nav>
