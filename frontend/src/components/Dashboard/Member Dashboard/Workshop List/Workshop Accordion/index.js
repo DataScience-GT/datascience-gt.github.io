@@ -1,7 +1,8 @@
 import React from 'react'; 
 import { Button, Card } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
-import SemesterWorkshopList from './Semester Workshop List';
+import SemesterWorkshopTable from './Semester Workshop Table';
+import * as WORKSHOP_CONSTANTS from '../../../../../config/workshops/config';
 
 /**
  * @author Vidhur Kumar
@@ -17,7 +18,7 @@ export default class WorkshopAccordion extends React.Component {
                     </Card.Header>
                     <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                        <SemesterWorkshopList />
+                        <SemesterWorkshopTable workshops={WORKSHOP_CONSTANTS.SPRING2020_WORKSHOPS_DATA}/>
                     </Card.Body>
                     </Accordion.Collapse>
                 </Card>
@@ -27,7 +28,7 @@ export default class WorkshopAccordion extends React.Component {
                     </Card.Header>
                     <Accordion.Collapse eventKey="1">
                     <Card.Body>
-                        <SemesterWorkshopList />
+                        <SemesterWorkshopTable workshops={WORKSHOP_CONSTANTS.SPRING2020_WORKSHOPS_DATA}/>
                     </Card.Body>
                     </Accordion.Collapse>
                 </Card>
