@@ -22,14 +22,14 @@ export default class SponsorsPage extends React.Component {
               <Row>
                 <Col>
                   <div className="logo">
-                    <img src="img/kpmg.png" />
+                    <img src="img/correlationOne.jpg" />
                   </div>
                   <div className="link">
                     <a
                       className="btn sponsor-btn"
-                      href="https://home.kpmg/xx/en/home.html"
+                      href="https://www.correlation-one.com/l"
                     >
-                      <h5>KPMG</h5>
+                      <h5>Correlation One</h5>
                     </a>
                   </div>
                 </Col>
@@ -204,7 +204,7 @@ export default class SponsorsPage extends React.Component {
             </div>
           </div>
         </div>
-      </Container>
+      </Container >
     );
   }
 }
