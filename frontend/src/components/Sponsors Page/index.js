@@ -175,7 +175,7 @@ export default class SponsorsPage extends React.Component {
                     </td>
                     <td className="bottom" colspan="3">
                       <h6>
-                        Avilable for all Tiers. <br />
+                        Available for all Tiers. <br />
                         Included upon request.
                       </h6>
                     </td>
