@@ -27,7 +27,7 @@ export default class SponsorsPage extends React.Component {
                   <div className="link">
                     <a
                       className="btn sponsor-btn"
-                      href="https://www.correlation-one.com/l"
+                      href="https://www.correlation-one.com/"
                     >
                       <h5>Correlation One</h5>
                     </a>
