@@ -5,11 +5,12 @@ jobs:
   build-and-test:
     executor:
       name: node/default
-    working_directory: ~/frontend
+    working_directory: ~
     steps:
       - checkout
       - node/with-cache:
           steps:
+            - run: cd frontend
             - run: npm install
             - run: npm test
 workflows:
