@@ -25,10 +25,7 @@ export default class SponsorsPage extends React.Component {
                     <img src="img/correlationOne.jpg" />
                   </div>
                   <div className="link">
-                    <a
-                      className="btn sponsor-btn"
-                      href="https://www.correlation-one.com/"
-                    >
+                    <a className="btn sponsor-btn" href="https://www.correlation-one.com/" target="_blank">
                       <h5>Correlation One</h5>
                     </a>
                   </div>
@@ -38,21 +35,18 @@ export default class SponsorsPage extends React.Component {
                     <img src="img/att.png" />
                   </div>
                   <div className="link">
-                    <a className="btn sponsor-btn" href="https://www.att.com/">
+                    <a className="btn sponsor-btn" href="https://www.att.com/" target="_blank">
                       <h5>AT&T</h5>
                     </a>
                   </div>
                 </Col>
                 <Col>
                   <div className="logo">
-                    <img src="img/citadel.jpg" />
+                    <img src="img/kpmg.png" />
                   </div>
                   <div className="link">
-                    <a
-                      className="btn sponsor-btn"
-                      href="https://www.citadel.com/"
-                    >
-                      <h5>Citadel</h5>
+                    <a className="btn sponsor-btn" href="https://home.kpmg/xx/en/home.html" target="_blank">
+                      <h5>KPMG</h5>
                     </a>
                   </div>
                 </Col>

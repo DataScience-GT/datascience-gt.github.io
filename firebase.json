@@ -22,7 +22,11 @@
       {
         "source": "**/paid_account", 
         "function": "paid_account"
-      }, 
+      },
+      {
+        "source": "**/sponsors",
+        "destination": "/index.html"
+      },
       {
         "source": "**/login", 
         "destination": "/index.html" 
