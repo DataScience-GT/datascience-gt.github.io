@@ -1,10 +1,13 @@
 {
   "docs": {
-    "Docusaurus": ["doc1"],
-    "First Category": ["doc2"],
-    "Second Category": ["doc3"]
+    "Overview": ["doc1", "doc2"],
+    "Routing": ["routing/routing"],
+    "Authentication": ["auth/auth"],
+    "Outer Pages": ["outer-pages/home", "outer-pages/login", "outer-pages/signup"],
+    "Firebase Interface": ["firebase/fbuser", "firebase/fbevent", "firebase/fbgroups"],
+    "Member Dashboard": ["dashboard/dbhome", "dashboard/dbeditprofile", "dashboard/dbevents", "dashboard/dbgroups", "dashboard/dbworkshops"]
   },
   "docs-other": {
-    "First Category": ["doc4", "doc5"]
+    "First Category": []
   }
 }
