@@ -24,14 +24,14 @@ const siteConfig = {
   title: 'DSGT Member Portal', // Title for your website.
   tagline: 'General documentation on file structure and component use',
   url: 'https://datascience-gt.github.io', // Your website URL
-  baseUrl: '/developer/', // Base URL for your project */
+  baseUrl: '/portal-docs/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
 
   // Used for publishing and more
-  projectName: 'DSGT Member Portal',
-  organizationName: 'Data Science @ GT',
+  projectName: 'portal-docs',
+  organizationName: 'DataScience-GT',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'
