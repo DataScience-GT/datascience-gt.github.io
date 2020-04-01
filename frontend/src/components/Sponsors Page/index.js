@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 // import DashboardNavbar from "./Member Dashboard/Dashboard Navbar";
 // import DashboardHomePage from "./Common/Home Page";
 
-import { Button, Form, Container, Row, Col, Table } from "react-bootstrap";
+import { Container, Row, Col, Table } from "react-bootstrap";
 import "./SponsorsPage.css";
 
 /**
@@ -22,30 +22,30 @@ export default class SponsorsPage extends React.Component {
               <Row>
                 <Col>
                   <div className="logo">
-                    <img src="img/correlationOne.jpg" />
+                    <img src="img/correlationOne.jpg" alt="corr_one"/>
                   </div>
                   <div className="link">
-                    <a className="btn sponsor-btn" href="https://www.correlation-one.com/" target="_blank">
+                    <a className="btn sponsor-btn" href="https://www.correlation-one.com/" target="_blank" rel="noopener noreferrer">
                       <h5>Correlation One</h5>
                     </a>
                   </div>
                 </Col>
                 <Col>
                   <div className="logo">
-                    <img src="img/att.png" />
+                    <img src="img/att.png" alt="att"/>
                   </div>
                   <div className="link">
-                    <a className="btn sponsor-btn" href="https://www.att.com/" target="_blank">
+                    <a className="btn sponsor-btn" href="https://www.att.com/" target="_blank" rel="noopener noreferrer">
                       <h5>AT&T</h5>
                     </a>
                   </div>
                 </Col>
                 <Col>
                   <div className="logo">
-                    <img src="img/kpmg.png" />
+                    <img src="img/kpmg.png" alt="kpmg"/>
                   </div>
                   <div className="link">
-                    <a className="btn sponsor-btn" href="https://home.kpmg/xx/en/home.html" target="_blank">
+                    <a className="btn sponsor-btn" href="https://home.kpmg/xx/en/home.html" target="_blank" rel="noopener noreferrer">
                       <h5>KPMG</h5>
                     </a>
                   </div>

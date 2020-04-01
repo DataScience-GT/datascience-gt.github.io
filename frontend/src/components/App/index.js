@@ -7,6 +7,8 @@ import SignUpPage from "../Signup Page";
 import LoginPage from "../Login Page"; 
 import Dashboard from '../Dashboard';
 import DashboardEventPage from '../Dashboard/Common/Event Page';
+import DashboardCreateEventPage from '../Dashboard/Common/Event Page/Create Event Page';
+import DashboardAllEventsPage from '../Dashboard/Common/Event Page/All Events Page';
 import DashboardEditProfilePage from '../Dashboard/Common/Edit Profile Page';
 import * as ROUTES from "../../config/routes"
 import { withAuthentication } from "../Session"
@@ -26,7 +28,9 @@ class App extends React.Component {
                 <Route path={ROUTES.SIGNUP} component={SignUpPage} />
                 <Route path={ROUTES.DASHBOARD_HOME} component={Dashboard} />
                 <Route path={ROUTES.DASHBORD_EDIT_PROFILE} component={DashboardEditProfilePage}/>
-                <Route path={ROUTES.DASHBOARD_EVENT} component={DashboardEventPage}/>                
+                <Route exact path={ROUTES.DASHBOARD_EVENT} component={DashboardEventPage}/>         
+                <Route path={ROUTES.DASHBOARD_EVENT + "/create"} component={DashboardCreateEventPage}/>
+                <Route path={ROUTES.DASHBOARD_EVENT + "/all"} component={DashboardAllEventsPage}/>                                
                 <Route path={ROUTES.DASHBOARD_GROUP} component={DashboardGroupPage} />
             </Router> 
         )

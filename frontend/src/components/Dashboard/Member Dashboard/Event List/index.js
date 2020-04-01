@@ -1,4 +1,5 @@
 import React from 'react'; 
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import EventCard from './Event Card';
 import Spinner from 'react-bootstrap/Spinner'
 
@@ -20,12 +21,19 @@ export default class EventList extends React.Component {
         this.props.firebase.event.get_events().then(snapshot => {
             let events = this.state.events;
             let yesterdaysDate = new Date();
-            yesterdaysDate.setDate(yesterdaysDate.getDate() - 2);
-            snapshot.forEach(doc => {
-                if(new Date(doc.data()['date']) >= yesterdaysDate) {
+
+            if(this.props.upcomingOnly) {
+                yesterdaysDate.setDate(yesterdaysDate.getDate() - 1);
+                snapshot.forEach(doc => {
+                    if(new Date(doc.data()['date']) >= yesterdaysDate) {
+                        events.push({id: doc.id, data: doc.data()});
+                    }
+                });
+            } else {
+                snapshot.forEach(doc => {
                     events.push({id: doc.id, data: doc.data()});
-                }
-            });
+                });
+            }
             events.sort((a, b) => {
                 return new Date(a.data.date) - new Date(b.data.date);
             });
