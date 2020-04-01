@@ -43,7 +43,7 @@ export default class DashboardNavbar extends React.Component {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
                             <Nav.Link name="home" href={ROUTES.DASHBOARD_HOME}>Home</Nav.Link>
-                            <Nav.Link name="edit" href={ROUTES.DASHBORD_EDIT_PROFILE}>Edit Profile</Nav.Link>
+                            <Nav.Link name="edit" href={ROUTES.DASHBORD_EDIT_PROFILE}>My Profile</Nav.Link>
                             {this.state.isExec &&
                                 <Dropdown>
                                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">Events</Dropdown.Toggle>
@@ -51,13 +51,19 @@ export default class DashboardNavbar extends React.Component {
                                 <Dropdown.Menu>
                                   <Dropdown.Item href={ROUTES.DASHBOARD_EVENT + "/create"}>Create</Dropdown.Item>
                                   <Dropdown.Item href={ROUTES.DASHBOARD_EVENT + "/all"}>All Events</Dropdown.Item>
-                                  <Dropdown.Item href={ROUTES.DASHBOARD_EVENT}>My Events</Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
-                                // <Nav.Link name="event" href={ROUTES.DASHBOARD_EVENT}>Edit Events</Nav.Link>
                             }
                             {this.state.isExec &&
-                                <Nav.Link name="group" href={ROUTES.DASHBOARD_GROUP}>Edit Groups</Nav.Link>                        
+                                <Dropdown>
+                                <Dropdown.Toggle variant="secondary" id="dropdown-basic">Groups</Dropdown.Toggle>
+                                
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href={ROUTES.DASHBOARD_GROUP + "/create"}>Create</Dropdown.Item>
+                                    <Dropdown.Item href={ROUTES.DASHBOARD_GROUP}>All Groups</Dropdown.Item>
+                                </Dropdown.Menu>
+                                </Dropdown>
+                                // <Nav.Link name="group" href={ROUTES.DASHBOARD_GROUP}>Edit Groups</Nav.Link>                        
                             }
                         </Nav>
                         <Nav>

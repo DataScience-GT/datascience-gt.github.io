@@ -2,7 +2,7 @@ import React from 'react';
 import {withRouter} from "react-router-dom"
 import {AuthUserContext, withAuthentication} from "../Session"; 
 import DashboardNavbar from './Member Dashboard/Dashboard Navbar';
-import DashboardHomePage from './Common/Home Page';
+import DashboardHomePage from './Pages/Home Page';
 import { FirebaseContext } from '../Firebase';
 import {MembershipStatus} from "../Firebase/entity"; 
 

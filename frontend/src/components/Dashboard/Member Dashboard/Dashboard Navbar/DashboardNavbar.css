@@ -1,3 +1,5 @@
 .dashboard-navbar {
     background-color: #338AFC;
+    display: flex;
+    justify-content: space-around;
 }
