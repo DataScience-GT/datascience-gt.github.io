@@ -100,8 +100,9 @@ class EventApi {
      * @param XP 
      * @param date 
      * @param type 
+     * @param owner
      */
-    async update_event(id: string, name: string, desc: string, XP: number, date: Date, link: string, type: string) {
+    async update_event(id: string, name: string, desc: string, XP: number, date: Date, link: string, type: string, owner: string) {
         let eventRef = this.db.collection("events").doc(id);
         return eventRef.update({
             name: name,
@@ -110,6 +111,7 @@ class EventApi {
             date: date,
             links: [link],
             type: type,
+            owner: owner
         })
         .then(() => {
             console.log('Successfully updated event.')

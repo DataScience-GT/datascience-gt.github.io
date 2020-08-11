@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Form} from 'react-bootstrap';
+import {Button, Form, FormGroup} from 'react-bootstrap';
 
 import './EventEditForm.css';
 
@@ -12,6 +12,7 @@ export default class EventEditForm extends React.Component {
         super(props);
         this.state = {
             username: '',
+            owner: this.props.event.data.owner,
             name: this.props.event.data.name,
             desc: this.props.event.data.desc,
             date: this.props.event.data.date,
@@ -36,24 +37,28 @@ export default class EventEditForm extends React.Component {
         const isEventOwnerContext = this.state.username === this.props.event.data.owner;
         return (
             <Form>
+                <FormGroup>
+                    <Form.Label>Change Event Owner</Form.Label>
+                    <Form.Control onChange={this.handleInputChange} name="owner" defaultValue={this.props.event.data.owner}></Form.Control>
+                </FormGroup>
                 <Form.Group>
-                    <Form.Label>Event Name</Form.Label>
+                    <Form.Label>Edit Event Name</Form.Label>
                     <Form.Control onChange={this.handleInputChange} name="name" defaultValue={this.props.event.data.name}></Form.Control>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Event Description</Form.Label>
+                    <Form.Label>Edit Event Description</Form.Label>
                     <Form.Control onChange={this.handleInputChange} name="desc" defaultValue={this.props.event.data.desc}></Form.Control>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>XP Points</Form.Label>
+                    <Form.Label>Edit XP Points</Form.Label>
                     <Form.Control onChange={this.handleInputChange} name="XP" type="number" defaultValue={this.props.event.data.XP}></Form.Control>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Event Date</Form.Label>
+                    <Form.Label>Edit Event Date</Form.Label>
                     <Form.Control onChange={this.handleInputChange} name="date" type="date" defaultValue={this.props.event.data.date}></Form.Control>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Event Type</Form.Label>
+                    <Form.Label>Edit Event Type</Form.Label>
                     <Form.Control onChange={this.handleInputChange} as="select" name="type">
                         <option selected={this.props.event.data.type === 'General Meeting'}>General Meeting</option>
                         <option selected={this.props.event.data.type === 'Workshop'}>Workshop</option>
@@ -62,13 +67,13 @@ export default class EventEditForm extends React.Component {
                     </Form.Control>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Event Files</Form.Label>
+                    <Form.Label>Edit Event Files</Form.Label>
                     <Form.Control onChange={this.handleInputChange} name="link" type="url" defaultValue={this.props.event.data.links[0]}></Form.Control>
                 </Form.Group>
                 {isEventOwnerContext && <div><strong>Event Code: {this.props.event.data.code}</strong></div>}
                 <div className="event-button-container">
                     <Button disabled={!isEventOwnerContext} 
-                            onClick={() => this.props.handleSubmit(this.props.event.id, this.state.name, this.state.desc, this.state.XP, this.state.date, this.state.link, this.state.type)} className="rsvp-button" variant="outline-success">Save</Button>
+                            onClick={() => this.props.handleSubmit(this.props.event.id, this.state.name, this.state.desc, this.state.XP, this.state.date, this.state.link, this.state.type, this.state.owner)} className="rsvp-button" variant="outline-success">Save</Button>
                     <Button disabled={!isEventOwnerContext} 
                             onClick={() => this.props.handleDelete(this.props.event.id)} className="rsvp-button" variant="outline-danger">Delete</Button>
                     {isEventOwnerContext &&
