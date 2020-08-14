@@ -3,7 +3,14 @@ import {Container, Row, Col, Table, Button} from 'react-bootstrap';
 import * as CONSTANTS from "../../config/config";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import './HomePage.css';
+import Hero from './Hero';
+import WhatWeDo from './WhatWeDo';
+import MeetTeam from './MeetTeam';
+import GetInvolved from './GetInvolved';
+import Future from './Future';
+import Opportunity from './Opportunity';
+import Footer from './Footer';
+import './LandingPage.css';
 
 /**
  * This is the homepage of the website.
@@ -31,65 +38,53 @@ import './HomePage.css';
     }
 }
 
-/**
- * 
- */
-const Hero = () => {
+// /**
+//  * 
+//  */
+// const About = () => { return (
+//     <Section id="about" heading="About Us" subheading="Georgia Tech's largest community of student data scientists">
+//         <Row> 
+//             <Col sm={12}><h3 className="text-center"> The Big Ideas </h3></Col>
+//         </Row>
+//         <Row> 
+//             <Col sm={12} md={5}><h4 className="text-uppercase">Provide</h4></Col>
+//             <Col sm={12} md={7}>
+//             <p>
+//             Data science has the potential to improve our communities, so we run projects with that sole purpose. Our
+//             projects are chosen because of their potential impact, both on our campus and the global community at large. 
+//             We don't want our members to be hindered by lack of money, so our featured projects receive funding for 
+//             resources that are crucial to their success. <br/>
 
-    return(
-    <section id="page-top">
-        <div className="jumbotron">
-        </div>
-    </section>
-)}
-
-/**
- * 
- */
-const About = () => { return (
-    <Section id="about" heading="About Us" subheading="Georgia Tech's largest community of student data scientists">
-        <Row> 
-            <Col sm={12}><h3 className="text-center"> The Big Ideas </h3></Col>
-        </Row>
-        <Row> 
-            <Col sm={12} md={5}><h4 className="text-uppercase">Provide</h4></Col>
-            <Col sm={12} md={7}>
-            <p>
-            Data science has the potential to improve our communities, so we run projects with that sole purpose. Our
-            projects are chosen because of their potential impact, both on our campus and the global community at large. 
-            We don't want our members to be hindered by lack of money, so our featured projects receive funding for 
-            resources that are crucial to their success. <br/>
-
-            We recognize a good idea can come from anywhere, so we encourage our members to pursue their own projects. 
-            Member-initiated projects receive the support of the club, and if they satisfy our community-oriented criteria, 
-            may receive funding. 
-            </p>
-            </Col>
-        </Row>
-        <Row>
-            <Col sm={12} md={5} className="order-sm-last order-md-first"><h4 className="text-uppercase">Inform</h4></Col>
-            <Col sm={12} md={7} className="order-sm-last order-md-first">
-            <p>
-            Data science is a hard field to get into, and can be intimidating for those who are unfamiliar with it. 
-            To make the learning process easier for our members, we host weekly workshops that let them interactively get 
-            familiar with data science. We also host monthly public workshops that help those who are interested learn more 
-            about the field and get their feet wet with basic data science skills. 
-            </p>
-            </Col>
-        </Row>
-        <Row>
-            <Col sm={12} md={5}><h4 className="text-uppercase">Grow</h4></Col>
-            <Col sm={12} md={7}>
-            <p>
-                We want our members to be well-prepared for their future. After all, we are nothing without them! 
-                Our special events include corporate information sessions, game nights, and networking events that 
-                allow our members to devleop themselves professionally. We are also planning on hosting a data-science-oriented 
-                hackathon in Spring 2019. 
-            </p>
-            </Col>
-        </Row>
-    </Section>
-)};
+//             We recognize a good idea can come from anywhere, so we encourage our members to pursue their own projects. 
+//             Member-initiated projects receive the support of the club, and if they satisfy our community-oriented criteria, 
+//             may receive funding. 
+//             </p>
+//             </Col>
+//         </Row>
+//         <Row>
+//             <Col sm={12} md={5} className="order-sm-last order-md-first"><h4 className="text-uppercase">Inform</h4></Col>
+//             <Col sm={12} md={7} className="order-sm-last order-md-first">
+//             <p>
+//             Data science is a hard field to get into, and can be intimidating for those who are unfamiliar with it. 
+//             To make the learning process easier for our members, we host weekly workshops that let them interactively get 
+//             familiar with data science. We also host monthly public workshops that help those who are interested learn more 
+//             about the field and get their feet wet with basic data science skills. 
+//             </p>
+//             </Col>
+//         </Row>
+//         <Row>
+//             <Col sm={12} md={5}><h4 className="text-uppercase">Grow</h4></Col>
+//             <Col sm={12} md={7}>
+//             <p>
+//                 We want our members to be well-prepared for their future. After all, we are nothing without them! 
+//                 Our special events include corporate information sessions, game nights, and networking events that 
+//                 allow our members to devleop themselves professionally. We are also planning on hosting a data-science-oriented 
+//                 hackathon in Spring 2019. 
+//             </p>
+//             </Col>
+//         </Row>
+//     </Section>
+// )};
 
 /**
  * 
@@ -292,18 +287,17 @@ const Meetings = () => {
 /**
  * @author Raj Shrimali and Vidhur Kumar
  */
-export default class HomePage extends React.Component {
+export default class LandingPage extends React.Component {
     render() {
         return (                
             <React.Fragment>
                 <Hero />
-                <Container> 
-                    <About />
-                    <Projects />
-                    <Meetings />
-                    {/* <Join/> */}
-                    <Contact/>
-                </Container>
+                <WhatWeDo />
+                <MeetTeam />
+                <GetInvolved />
+                <Future />
+                <Opportunity />
+                <Footer />
             </React.Fragment>
             
         );

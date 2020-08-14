@@ -1,0 +1,111 @@
+import React from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import gears from "./gears.png";
+import hand from "./hand.png";
+import project from "./project.png";
+import search from "./search.png";
+import theory from "./theory.png";
+
+let picContainer = {
+  height: "30vh",
+  padding: "1em",
+}
+
+let chunk = {
+  padding: "2em 1em 2em 1em",
+}
+
+let divPadding = {
+  padding: "4em 0 4em 0",
+}
+
+let blue = {
+  color: "#0063B9",
+}
+
+export default class WhatWeDo extends React.Component {
+  render() {
+    return (
+      <div>
+        <div style={divPadding}>
+          <Container>
+          {/* Row: image on left */}
+          <Row style={chunk}>
+            <Col align="center">
+              <div>
+                <img src={gears} alt="gears icon" style={picContainer}/>
+              </div>
+            </Col>
+            <Col>
+            <h2 style={blue}>Providing Foundation</h2>
+            <p>We teach our members core data science skills through a bootcamp that takes our members on a start-to-finish journey, touching on essentials such as cleaning data, identifying biases, performing basic statistics, and visualizing results. They also get an intro to more advanced concepts, such as dimensionality reduction and machine learning – all in a digestible, applicable, and interactive format. They come out of our bootcamp with a polished data science project and the confidence to learn more.</p>
+            </Col>
+          </Row>
+          {/* Row: image on right */}
+          <Row style={chunk}>
+          <Col>
+            <h2 style={blue}>Providing Practical Education</h2>
+            <p>After our foundational content, we give our members the opportunity to expand their practical and theoretical skills through bootcamps tailored to specific concentrations of learning. Data Science is more than just programming; we're equipping our members to apply their skills in the fields of Healthcare, Finance, Data Engineering, Data Visualization, & more!</p>
+          </Col>
+            <Col align="center">
+              <div>
+                <img src={hand} alt="hand icon" style={picContainer}/>
+              </div>
+            </Col>
+          </Row>
+          {/* Row: iamge on left */}
+          <Row style={chunk}>
+            <Col align="center">
+              <div>
+                <img src={theory} alt="theory icon" style={picContainer}/>
+              </div>
+            </Col>
+            <Col>
+            <h2 style={blue}>Promoting Inquisitiveness</h2>
+            <p>Fusce ultrices eget massa non consectetur. Maecenas ac tincidunt lectus. Donec
+            quis feugiat elit, ut mattis mi. Morbi vulputate tempus leo non pharetra. Fusce
+            molestie, lectus eget fringilla dictum, mauris metus pharetra est, et eleifend felis
+            est non arcu. Ut auctor erat sit amet nisi ultricies, in rhoncus diam ullamcorper.
+            </p>
+            </Col>
+          </Row>
+          {/* Row: iamge on right */}
+          <Row style={chunk}>
+          <Col>
+            <h2 style={blue}>Providing Opportunity</h2>
+            <p>We assist chapters in starting and running local data science projects to offer students an opportunity to work in a team and exercise their skills. Our members can showcase their professional data science expertise by working with corporate clients while getting paid. With the help of a corporate partner, we connect students to employers for both part-time and full-time work.</p>
+          </Col>
+            <Col align="center">
+              <div>
+                <img src={project} alt="project icon" style={picContainer}/>
+              </div>
+            </Col>
+          </Row>
+          {/* Row: iamge on left */}
+          <Row style={chunk}>
+            <Col align="center">
+              <div>
+                <img src={search} alt="search icon" style={picContainer}/>
+              </div>
+            </Col>
+            <Col>
+            <h2 style={blue}>Providing a Future</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a consequat nibh,
+            aliquam molestie tortor. Nunc ante lectus, gravida at est ullamcorper, congue
+            feugiat nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+            posuere cubilia Curae; Duis ut libero posuere justo consequat rutrum. Nam
+            accumsan sagittis urna eu placerat. Praesent id dapibus metus. Nunc luctus
+            pulvinar nisi, id ultrices odio placerat a. Morbi massa lectus, interdum non sodales
+            et, interdum a magna. Nulla lobortis dolor sed posuere ultrices. Orci letius
+            natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+            Etiam at mauris nunc. Sed pharetra enim id lectus scelerisque placerat. Sed
+            sagittis letius enim eu molestie. Pellentesque faucibus tellus ac odio commodo
+            tincidunt. Mauris laoreet elementum enim id congue.</p>
+            </Col>
+          </Row>
+          </Container>
+        </div>
+      </div>
+    );
+  }
+}

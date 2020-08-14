@@ -1,7 +1,7 @@
 import React from 'react' ;
 import {BrowserRouter as Router, Route} from 'react-router-dom'; 
 import Navigation from '../Navigation'; 
-import HomePage from "../Home Page"; 
+import LandingPage from "../Landing Page"; 
 import SponsorsPage from '../Sponsors Page';
 import SignUpPage from "../Signup Page";
 import LoginPage from "../Login Page"; 
@@ -20,7 +20,7 @@ class App extends React.Component {
         return (
             <Router>
                 <Navigation/> 
-                <Route exact path={ROUTES.LANDING} component={HomePage} />
+                <Route exact path={ROUTES.LANDING} component={LandingPage} />
                 <Route path={ROUTES.SPONSORS} component={SponsorsPage} />
                 <Route path={ROUTES.LOGIN} component={LoginPage} />
                 <Route path={ROUTES.SIGNUP} component={SignUpPage} />
