@@ -50,7 +50,7 @@ class EventApi {
      * @param type 
      * @param owner 
      */
-    async create_event(name: string, desc: string, XP: number, date: Date, type: string, owner: string, link: string) {
+    async create_event(name: string, desc: string, XP: number, date: Date, type: string, owner: string, meetingLink: string,  resourceLink: string) {
         let newEventRef = this.db.collection("events").doc();
         return newEventRef.set({
             name: name,
@@ -60,7 +60,7 @@ class EventApi {
             type: type,
             owner: owner,
             isOpen: false,
-            links: [link],
+            links: [ meetingLink, resourceLink],
             code: Math.floor(Math.random() * (9999 - 1000)) + 1000,
             attendee_list: []
         });
@@ -101,14 +101,14 @@ class EventApi {
      * @param date 
      * @param type 
      */
-    async update_event(id: string, name: string, desc: string, XP: number, date: Date, link: string, type: string) {
+    async update_event(id: string, name: string, desc: string, XP: number, date: Date, meetingLink: string, resourceLink: string, type: string) {
         let eventRef = this.db.collection("events").doc(id);
         return eventRef.update({
             name: name,
             desc: desc,
             XP: XP,
             date: date,
-            links: [link],
+            links: [meetingLink, resourceLink],
             type: type,
         })
         .then(() => {
