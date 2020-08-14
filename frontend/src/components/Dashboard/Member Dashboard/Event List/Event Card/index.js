@@ -42,9 +42,8 @@ export default class EventCard extends React.Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    handleSubmit = async (id, name, desc, XP, date, meetingLink, resourceLink, type) => {
-        console.log(id, resourceLink)
-        await this.props.firebase.event.update_event(id, name, desc, XP, date, meetingLink, resourceLink, type);
+    handleSubmit = async (id, name, desc, XP, date, meetingLink, resourceLink, type, owner) => {
+        await this.props.firebase.event.update_event(id, name, desc, XP, date, meetingLink, resourceLink, type, owner);
         await this.handleClose();
         document.location.reload(true);
     }
