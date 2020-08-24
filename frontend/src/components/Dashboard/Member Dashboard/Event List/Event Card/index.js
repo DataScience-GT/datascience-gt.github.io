@@ -42,8 +42,8 @@ export default class EventCard extends React.Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    handleSubmit = async (id, name, desc, XP, date, link, type, owner) => {
-        await this.props.firebase.event.update_event(id, name, desc, XP, date, link, type, owner);
+    handleSubmit = async (id, name, desc, XP, date, meetingLink, resourceLink, type, owner) => {
+        await this.props.firebase.event.update_event(id, name, desc, XP, date, meetingLink, resourceLink, type, owner);
         await this.handleClose();
         document.location.reload(true);
     }
@@ -92,13 +92,22 @@ export default class EventCard extends React.Component {
     }
       
       render() {
+        console.log(this.props.event);
         const isEventOwnerContext = this.state.username === this.props.event.data.owner;
         const modalTitle = this.props.isRSVP ? 'Event Description' : 'Edit Event'
         const modalBody = this.props.isRSVP ? this.props.event.data.desc :
             <EventEditForm handleSubmit={this.handleSubmit.bind(this)} handleDelete={this.handleDelete.bind(this)} handleOpenEvent={this.handleOpenEvent.bind(this)} event={this.props.event} firebase={this.props.firebase}/>;
-        const eventLinks = this.props.event.data.links && this.props.event.data.links.length > 0 ?
-            <Button variant="outline-info" href={this.props.event.data.links[0]}>Files</Button> :
-            null;
+        /*const eventLinks = this.props.event.data.links && this.props.event.data.links.length > 1 ?
+            <div>
+                <Button variant="outline-info" href={this.props.event.data.links[0]}>Meeting</Button>
+                <Button variant="outline-info" href={this.props.event.data.links[1]}>Resources</Button>
+            </div>
+             :
+            null;*/
+        const meetingLinkBtn = this.props.event.data.links && this.props.event.data.links[0] ? <Button variant="outline-info" href={this.props.event.data.links[0]}>Meeting</Button> 
+        : <Button variant="outline-info" disabled>Meeting</Button>
+        const resourceLinkBtn = this.props.event.data.links && this.props.event.data.links[1] ? <Button variant="outline-info" href={this.props.event.data.links[1]}>Resources</Button> 
+        : <Button variant="outline-info" disabled>Resources</Button>
         return (
                 <div>
                     <Card>
@@ -120,7 +129,8 @@ export default class EventCard extends React.Component {
                             {isEventOwnerContext && <div><strong>Event Code: {this.props.event.data.code}</strong></div>}
                             {modalBody}
                             <br />
-                            {eventLinks}
+                            {meetingLinkBtn}
+                            {resourceLinkBtn}
                         </Modal.Body>
                         {this.props.isRSVP &&
                             <Modal.Footer>

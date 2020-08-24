@@ -16,12 +16,13 @@ export default class EventEditForm extends React.Component {
             name: this.props.event.data.name,
             desc: this.props.event.data.desc,
             date: this.props.event.data.date,
-            link: this.props.event.data.links[0],
+            meetingLink: this.props.event.data.links[0],
+            resourceLink: this.props.event.data.links[1],
             type: this.props.event.data.type,
             XP: this.props.event.data.XP,
             show: this.props.show
         }
-
+        console.log(this.state.meetingLink, this.state.resourceLink);
         this.props.firebase.user.get_user(this.props.firebase.user.get_current_uid())
         .then(snapshot => {
             this.setState({username: snapshot['first_name'] + ' ' + snapshot['last_name']});
@@ -67,13 +68,15 @@ export default class EventEditForm extends React.Component {
                     </Form.Control>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Edit Event Files</Form.Label>
-                    <Form.Control onChange={this.handleInputChange} name="link" type="url" defaultValue={this.props.event.data.links[0]}></Form.Control>
+                    <Form.Label>Edit Meeting Link</Form.Label>
+                    <Form.Control onChange={this.handleInputChange} name="meetingLink" type="url" defaultValue={this.props.event.data.links[0]}></Form.Control>
+                    <Form.Label>Edit Resource Link</Form.Label>
+                    <Form.Control onChange={this.handleInputChange} name="resourceLink" type="url" defaultValue={this.props.event.data.links[1]}></Form.Control>
                 </Form.Group>
                 {isEventOwnerContext && <div><strong>Event Code: {this.props.event.data.code}</strong></div>}
                 <div className="event-button-container">
                     <Button disabled={!isEventOwnerContext} 
-                            onClick={() => this.props.handleSubmit(this.props.event.id, this.state.name, this.state.desc, this.state.XP, this.state.date, this.state.link, this.state.type, this.state.owner)} className="rsvp-button" variant="outline-success">Save</Button>
+                            onClick={() => this.props.handleSubmit(this.props.event.id, this.state.name, this.state.desc, this.state.XP, this.state.date, this.state.meetingLink, this.state.resourceLink, this.state.type, this.state.owner)} className="rsvp-button" variant="outline-success">Save</Button>
                     <Button disabled={!isEventOwnerContext} 
                             onClick={() => this.props.handleDelete(this.props.event.id)} className="rsvp-button" variant="outline-danger">Delete</Button>
                     {isEventOwnerContext &&

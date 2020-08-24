@@ -146,7 +146,7 @@ class SignUpForm extends React.Component {
                     {/* TODO: REMOVE THIS AND MOVE TO SECONDARY STAGE!!! 
                         This is where the user can select which payment method they prefer. 
                     */}
-                    {/* <Row> 
+                    <Row> 
                         <Col sm={6}>
                             <h3>Joining with Venmo</h3> 
                             <ol> 
@@ -176,8 +176,8 @@ class SignUpForm extends React.Component {
                                 </li>
                             </ol>
                         </Col>
-                    </Row> */}
-                    {/* <Form.Group>
+                    </Row>
+                    <Form.Group>
                         <Form.Label> Select preferred payment method </Form.Label>
                         <div>
                             <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="venmo" checked={this.state.verification_method === "venmo"} label="Venmo" />
@@ -185,7 +185,7 @@ class SignUpForm extends React.Component {
                             <Form.Check inline onChange={this.handleInputChange} type="radio" name="verification_method" value="defer" checked={this.state.verification_method === "defer"} label="Defer" />  
                         </div>
                     </Form.Group>
-                    {this.getVerificationStub(this.state.verification_method)} */}
+                    {this.getVerificationStub(this.state.verification_method)}
                     {/* <Form.Group>
                         <Form.Text>More About You</Form.Text>
                     </Form.Group> */}

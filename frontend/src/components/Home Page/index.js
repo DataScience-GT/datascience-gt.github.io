@@ -138,7 +138,7 @@ const Join = () => {return (
             </Col>
 
         </Row> */}
-        {/* <Row> 
+        <Row> 
         <Col sm={6}>
             <h3>Joining with Venmo</h3> 
             <ol> 
@@ -168,7 +168,7 @@ const Join = () => {return (
                     </li>
                 </ol>
             </Col>
-        </Row> */}
+        </Row>
     </Section>
 )};
 
@@ -301,7 +301,7 @@ export default class HomePage extends React.Component {
                     <About />
                     <Projects />
                     <Meetings />
-                    {/* <Join/> */}
+                    <Join/>
                     <Contact/>
                 </Container>
             </React.Fragment>

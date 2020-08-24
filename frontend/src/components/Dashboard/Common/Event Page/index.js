@@ -26,7 +26,8 @@ export class CreateEventForm extends React.Component {
             date: "",
             type: "General Meeting",
             XP: 0,
-            link: "",
+            meetingLink: "",
+            resourceLink: ""
         }
     }
 
@@ -74,9 +75,9 @@ export class CreateEventForm extends React.Component {
         .then(snapshot => {
             name = snapshot['first_name'] + ' ' + snapshot['last_name'];
         })
-        await this.props.firebase.event.create_event(this.state.name, this.state.desc, this.state.XP, this.state.date, this.state.type, name, this.state.link);
+        await this.props.firebase.event.create_event(this.state.name, this.state.desc, this.state.XP, this.state.date, this.state.type, name, this.state.meetingLink, this.state.resourceLink);
         console.log(this.state);
-        this.setState({name: '', desc: '', date: '', type: '', link: ''});
+        this.setState({name: '', desc: '', date: '', type: '', meetingLink: '', resourceLink: ''});
         document.location.reload(true);
     }
 
@@ -117,9 +118,15 @@ export class CreateEventForm extends React.Component {
                     <Form.Group>
                         <InputGroup className="mb-3">
                         <InputGroup.Prepend>
-                            <InputGroup.Text>Event Files Link</InputGroup.Text>
+                            <InputGroup.Text>Meeting Link</InputGroup.Text>
                         </InputGroup.Prepend>
-                        <Form.Control onChange={this.handleInputChange} type="url" name="link" value={this.state.link}/>
+                        <Form.Control onChange={this.handleInputChange} type="url" name="meetingLink" value={this.state.meetingLink}/>
+                        </InputGroup>
+                        <InputGroup className="mb-3">
+                        <InputGroup.Prepend>
+                            <InputGroup.Text>Resources</InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <Form.Control onChange={this.handleInputChange} type="url" name="resourceLink" value={this.state.resourceLink}/>
                         </InputGroup>
                     </Form.Group>
                     <Button variant="primary" type="submit">Create</Button>

@@ -20,7 +20,7 @@ export default class SponsorsPage extends React.Component {
             </div>
             <Container>
               <Row>
-                <Col>
+                <Col sm>
                   <div className="logo">
                     <img src="img/correlationOne.jpg" />
                   </div>
@@ -30,7 +30,7 @@ export default class SponsorsPage extends React.Component {
                     </a>
                   </div>
                 </Col>
-                <Col>
+                <Col sm>
                   <div className="logo">
                     <img src="img/att.png" />
                   </div>
@@ -40,7 +40,7 @@ export default class SponsorsPage extends React.Component {
                     </a>
                   </div>
                 </Col>
-                <Col>
+                <Col sm>
                   <div className="logo">
                     <img src="img/kpmg.png" />
                   </div>
@@ -58,7 +58,7 @@ export default class SponsorsPage extends React.Component {
               <h3>2019-2020 SPONSORSHIP TIERS</h3>
             </div>
             <div className="container-table">
-              <Table>
+              <Table responsive>
                 <thead>
                   <th width="500"> </th>
                   <th>
