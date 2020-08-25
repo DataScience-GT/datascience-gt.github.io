@@ -11,6 +11,11 @@ import DashboardEditProfilePage from '../Dashboard/Common/Edit Profile Page';
 import * as ROUTES from "../../config/routes"
 import { withAuthentication } from "../Session"
 import  DashboardGroupPage from '../Dashboard/Common/Group Page';
+import OurTeam from "../OurTeam";
+import OurWork from "../OurWork";
+import Contact from "../Contact";
+
+import Projects from '../Projects';
 
 /**
  * @author Raj Shrimali and Vidhur Kumar
@@ -28,6 +33,11 @@ class App extends React.Component {
                 <Route path={ROUTES.DASHBORD_EDIT_PROFILE} component={DashboardEditProfilePage}/>
                 <Route path={ROUTES.DASHBOARD_EVENT} component={DashboardEventPage}/>                
                 <Route path={ROUTES.DASHBOARD_GROUP} component={DashboardGroupPage} />
+
+                <Route path={ROUTES.PROJECTS} component={Projects} />
+                <Route path={ROUTES.OUR_TEAM} component={OurTeam} />
+                <Route path={ROUTES.OUR_WORK} component={OurWork} />
+                <Route path={ROUTES.CONTACT} component={Contact} />
             </Router> 
         )
     }

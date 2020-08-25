@@ -6,17 +6,16 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Hero from './Hero';
 import WhatWeDo from './WhatWeDo';
 import MeetTeam from './MeetTeam';
-import GetInvolved from './GetInvolved';
+import GetInvolved from './GetInvolved'; 
 import Future from './Future';
 import Opportunity from './Opportunity';
-import Footer from './Footer';
+import Footer from "../Footer";
 import './LandingPage.css';
 
 /**
  * This is the homepage of the website.
  * Split up into React Fragments to provide modularity.
  */
-
 /**
  * @author Raj Shrimali and Vidhur Kumar
  */
@@ -297,7 +296,7 @@ export default class LandingPage extends React.Component {
                 <GetInvolved />
                 <Future />
                 <Opportunity />
-                <Footer />
+                <Footer /> 
             </React.Fragment>
             
         );

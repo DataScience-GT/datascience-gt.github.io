@@ -1,5 +1,5 @@
 import React from 'react'; 
-import {Link} from 'react-router-dom'; 
+import { Link } from 'react-router-dom'; 
 import Nav from 'react-bootstrap/Nav'; 
 import Navbar from 'react-bootstrap/Navbar'; 
 import {Button} from 'react-bootstrap';
@@ -109,22 +109,22 @@ class Navigation extends React.Component {
             <div className="main">
                 {console.log(isLoggedin)}
                 <Navbar sticky="top" expand="md">
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href={ROUTES.LANDING}>
                 <img
                     src={DSGTLogo}
-                    width="30"
-                    height="30"
+                    width="35"
+                    height="35"
                     alt="DSGT icon"
                 />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse>
-                    <Nav.Link href="/home" className="links">Our Team</Nav.Link>
-                    <Nav.Link eventKey="/what-we-do" className="links">Our Work</Nav.Link>
-                    <Nav.Link eventKey="/projects" className="links">Projects</Nav.Link>
-                    <Nav.Link eventKey="/sponsors" className="links">Sponsors</Nav.Link>
-                    <Nav.Link eventKey="/contact" className="links">Contact</Nav.Link>
-                    <Nav.Link eventKey="/faqs" className="links">FAQs</Nav.Link>
+                    <Nav.Link href={ROUTES.OUR_TEAM} className="links">Our Team</Nav.Link>
+                    <Nav.Link href={ROUTES.OUR_WORK} className="links">Our Work</Nav.Link>
+                    <Nav.Link href={ROUTES.PROJECTS} className="links">Projects</Nav.Link>
+                    <Nav.Link href={ROUTES.SPONSORS} className="links">Sponsors</Nav.Link>
+                    <Nav.Link href={ROUTES.CONTACT} className="links">Contact</Nav.Link>
+                    {/*<Nav.Link eventKey="/faqs" className="links">FAQs</Nav.Link>*/}
                 </Navbar.Collapse>
                 <div>
                     {isLoggedin && 

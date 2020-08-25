@@ -1,6 +1,7 @@
 import React from 'react';
 import {Container, Button} from 'react-bootstrap';
 import background from './background.jpg';
+import * as ROUTES from "../../../config/routes";
 ///////////////////////
 // STYLES
 ///////////////////////
@@ -39,7 +40,7 @@ export default class Landing extends React.Component {
             <Container style={textStyle}>
                 <h1>MAKE DATA SCIENCE ACCESSIBLE TO ALL</h1>
                 <p>Nunc eu massa auctor sem bibendum fringilla in quis leo. Curabitur tempus nunc sed leo finibus, sit amet venenatis justo luctus. Nunc tincidunt fringilla vulputate. Morbi semper vestibulum odio, ac convallis lectus efficitur nec. Maecenas congue tortor ut dignissim ornare. Integer nec feugiat dui, ut feugiat risus. Maecenas ac erat nec urna eleifend fringilla sed eu sem.</p>
-                <Button variant="outline-light">Get Involved</Button>
+                <Button variant="outline-light" href={ROUTES.CONTACT}>Get Involved</Button>
             </Container>
         </div>
       </div>
