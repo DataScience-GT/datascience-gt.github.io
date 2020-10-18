@@ -6,6 +6,9 @@ import Footer from '../Footer';
 import Navigation from '../Navigation';
 
 import portrait from './assets/portrait.png';
+import mentra from './assets/Mentra.png';
+import storm from './assets/storm.PNG';
+import fynat from './assets/fynat.PNG';
 
 let divPadding = {
   padding: "4em 0 4em 0",
@@ -43,7 +46,7 @@ export default class Projects extends React.Component {
       <div style={divPaddingInner}>
       <CardDeck className="text-center">
         <Card style={noBorder}> {/*Mentra*/}
-        <Card.Img src={portrait}/>
+        <Card.Img src={mentra}/>
           <Card.Body style={lightBlue}>
           <Card.Title className="text-center"><h4>Mentra</h4></Card.Title>
           <Card.Text>
@@ -53,7 +56,7 @@ export default class Projects extends React.Component {
           <Card.Footer style={midBlue}>In Development</Card.Footer>
         </Card>
         <Card style={noBorder}> {/*Stormalytics*/}
-        <Card.Img src={portrait}/>
+        <Card.Img src={storm}/>
           <Card.Body style={lightBlue}>
           <Card.Title className="text-center"><h4>Stormalytics</h4></Card.Title>
           <Card.Text>
@@ -63,7 +66,7 @@ export default class Projects extends React.Component {
           <Card.Footer style={midBlue}>In Development</Card.Footer>
         </Card>
         <Card style={noBorder}> {/*FYNAT*/}
-        <Card.Img src={portrait}/>
+        <Card.Img src={fynat}/>
           <Card.Body style={lightBlue}>
           <Card.Title className="text-center"><h4>FYNAT</h4></Card.Title>
           <Card.Text>
@@ -99,7 +102,7 @@ export default class Projects extends React.Component {
           <Card.Body style={lightBlue}>
           <Card.Title className="text-center"><h4>Kaggle Projects</h4></Card.Title>
           <Card.Text>
-          The Opioid Awareness Project will be working closely with the Fulton Country Department of Behavioral Health & Developmental Disabilities to develop informational material about the risks associated with opioid usage online and analyzing data with Python-Oriented Data Science libraries to generate visuals.
+          Kaggle Projects serve as a low-pressure way for members to gain basic data science experience. This semester, Kaggle projects is focusing on an age-old problem in Data Science: given an extensive set of features, how can one best predict the price of a home?
           </Card.Text>
           </Card.Body>
           <Card.Footer style={midBlue}>In Development</Card.Footer>

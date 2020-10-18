@@ -62,10 +62,7 @@ export default class WhatWeDo extends React.Component {
             </Col>
             <Col>
             <h2 style={blue}>Promoting Inquisitiveness</h2>
-            <p>Fusce ultrices eget massa non consectetur. Maecenas ac tincidunt lectus. Donec
-            quis feugiat elit, ut mattis mi. Morbi vulputate tempus leo non pharetra. Fusce
-            molestie, lectus eget fringilla dictum, mauris metus pharetra est, et eleifend felis
-            est non arcu. Ut auctor erat sit amet nisi ultricies, in rhoncus diam ullamcorper.
+            <p>Our members are bright and talented students. Our goal is to help them continue to learn and grow through thoughtful and engaging conversations surrounding data science.
             </p>
             </Col>
           </Row>
@@ -90,17 +87,7 @@ export default class WhatWeDo extends React.Component {
             </Col>
             <Col>
             <h2 style={blue}>Providing a Future</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a consequat nibh,
-            aliquam molestie tortor. Nunc ante lectus, gravida at est ullamcorper, congue
-            feugiat nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-            posuere cubilia Curae; Duis ut libero posuere justo consequat rutrum. Nam
-            accumsan sagittis urna eu placerat. Praesent id dapibus metus. Nunc luctus
-            pulvinar nisi, id ultrices odio placerat a. Morbi massa lectus, interdum non sodales
-            et, interdum a magna. Nulla lobortis dolor sed posuere ultrices. Orci letius
-            natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-            Etiam at mauris nunc. Sed pharetra enim id lectus scelerisque placerat. Sed
-            sagittis letius enim eu molestie. Pellentesque faucibus tellus ac odio commodo
-            tincidunt. Mauris laoreet elementum enim id congue.</p>
+            <p>Our members learn powerful data visualization and design strategies that will help them become well-rounded Full-Stack Data Scientists. We also organize company events that allow our members to build a network and learn more about the professional opportunities in the field of data science. </p>
             </Col>
           </Row>
           </Container>
