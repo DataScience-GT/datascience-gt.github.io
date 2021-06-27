@@ -3,7 +3,10 @@
  * support special, common uploads such as Venmo and Resume. 
  * This should be the POC for all google cloud storage functionality. 
  */
+
+import firebase from "firebase/app";
 import Firebase from "./firebase"; 
+import firestore from "firebase/app";
 
 
 

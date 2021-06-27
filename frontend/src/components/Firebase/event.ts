@@ -3,8 +3,11 @@
  * Following Singleton model as expected from a tutorial online
  * Instantiate with a firebase app instance - will use that 
  */
+
+
+import firebase from "firebase/app";
 import Firebase from "./firebase"; 
-import {firestore, auth, functions} from "firebase/app";
+import firestore from "firebase/app";
 
 /**
  * @author Vidhur Kumar
@@ -138,7 +141,7 @@ class EventApi {
     async add_to_event_attendee_list(id: string, name: string) {
         let eventRef = this.db.collection("events").doc(id);
         return eventRef.update({
-            attendee_list: firestore.FieldValue.arrayUnion(name)
+            attendee_list: firebase.firestore.FieldValue.arrayUnion(name)
         });
     }
 
@@ -190,7 +193,7 @@ class EventApi {
         let eventRef = this.db.collection("events").doc(id);
 
         eventRef.update({
-            rsvp_list: firestore.FieldValue.arrayUnion(userName)
+            rsvp_list: firebase.firestore.FieldValue.arrayUnion(userName)
         });
     }
 }

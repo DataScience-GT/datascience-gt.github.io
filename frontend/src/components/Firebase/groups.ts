@@ -3,7 +3,7 @@
  * for managing groups, mostly related to creating, deleting, etc. 
  */
 import Firebase from "./firebase";
-import {firestore} from "firebase/app";
+import firebase from "firebase/app";
 
 
 export default class GroupApi {
@@ -54,7 +54,7 @@ export default class GroupApi {
         // add user to group 
         const curr_uid = this._fbapp.user.get_current_uid(); 
         // console.log(name)
-        this.db.collection('users').doc(curr_uid).update({groups: firestore.FieldValue.arrayUnion(name)})
+        this.db.collection('users').doc(curr_uid).update({groups: firebase.firestore.FieldValue.arrayUnion(name)})
     }
 
     /**
@@ -75,7 +75,7 @@ export default class GroupApi {
             let individualRemovalPromise = this.db.collection('usergroups').doc(name).collection('members').get().then((members: any) => {
                 // for each member in here, update their document to not include this group 
                 members.docs.forEach((memberDocRef:any) => {
-                    this.db.collection('users').doc(memberDocRef.id).update({groups: firestore.FieldValue.arrayRemove(name)}); 
+                    this.db.collection('users').doc(memberDocRef.id).update({groups: firebase.firestore.FieldValue.arrayRemove(name)}); 
                     memberDocRef.ref.delete(); 
                 })
             });

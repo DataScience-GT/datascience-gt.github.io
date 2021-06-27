@@ -5,7 +5,11 @@
  */
 import Firebase from "./firebase"; 
 import * as entity from "./entity"; 
-import {firestore, auth, functions} from "firebase/app";
+import firebase from "firebase/app";
+//import {auth, firestore, functions} from "firebase/app";
+import auth from "firebase/app";
+import firestore from "firebase/app";
+import functions from "firebase/app";
 
 import {DUES_SEMESTER, DUES_YEAR} from "../../config/config";
 /**
@@ -20,7 +24,7 @@ class UserApi {
         this._fbapp = firebaseApp; 
         this.db = firebaseApp.db; 
         this.auth = firebaseApp.app.auth(); 
-        this.auth.setPersistence(auth.Auth.Persistence.SESSION);
+        this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
         this.functions = this._fbapp.app.functions(); 
     }
 
@@ -228,7 +232,7 @@ class UserApi {
     async update_user_XP(uid: string, XP: number) {
         let userRef = await this.db.collection('users').doc(uid);
         return userRef.update({
-            XP: firestore.FieldValue.increment(XP)
+            XP: firebase.firestore.FieldValue.increment(XP)
         });
     }
 
@@ -275,8 +279,8 @@ class UserApi {
     async add_eventXP_to_user(uid: string, eventId: string, eventXP: number) {
         let userRef = await this.db.collection('users').doc(uid);
         userRef.update({
-            XP: firestore.FieldValue.increment(eventXP),
-            xp_history: firestore.FieldValue.arrayUnion({id: eventId, xp: eventXP}),
+            XP: firebase.firestore.FieldValue.increment(eventXP),
+            xp_history: firebase.firestore.FieldValue.arrayUnion({id: eventId, xp: eventXP}),
         });
 
         // let userRef = await this.db.collection('users').doc(uid);
@@ -450,7 +454,7 @@ class UserApi {
                 // we don't /need/ to wait for completion. 
                 promises.push(this.db.collection('usergroups').doc(element).collection("members").doc(user).set({})); 
             });
-            await this.db.collection('users').doc(user).update({groups: firestore.FieldValue.arrayUnion(groups)});
+            await this.db.collection('users').doc(user).update({groups: firebase.firestore.FieldValue.arrayUnion(groups)});
             //wait for completion 
             await promises; 
             return true; 
@@ -460,7 +464,7 @@ class UserApi {
 
     async addUserToGroup(uid: string, group: string) {
         // update the user's doc 
-        let p1 = this.db.collection('users').doc(uid).update({groups: firestore.FieldValue.arrayUnion(group)});
+        let p1 = this.db.collection('users').doc(uid).update({groups: firebase.firestore.FieldValue.arrayUnion(group)});
         let p2 = this.db.collection('usergroups').doc(group).collection("members").doc(uid).set({}); 
         await p1
             .then(() => {
@@ -509,7 +513,7 @@ class UserApi {
             // approve & add 
             if (response === 1) {
                 this.db.collection('usergroups').doc(name).collection('members').doc(uid).set({}); 
-                this.db.collection('users').doc(this.get_current_uid()).update({groups: firestore.FieldValue.arrayUnion(name)})     
+                this.db.collection('users').doc(this.get_current_uid()).update({groups: firebase.firestore.FieldValue.arrayUnion(name)})     
             }
             // no matter what, just delete the request 
             this.db.collection('usergroups').doc(name).collection('join_requests').doc(uid).delete(); 
@@ -530,7 +534,7 @@ class UserApi {
 
         if (perm) {
             // start the update operation 
-            const comp_promise = this.db.collection('users').doc(user).update({groups: firestore.FieldValue.arrayRemove(groups)});
+            const comp_promise = this.db.collection('users').doc(user).update({groups: firebase.firestore.FieldValue.arrayRemove(groups)});
             // delete from groups 
             groups.forEach(element => {
                 this.db.collection("usergroups").doc(element).collection("members").doc(user).delete(); 
