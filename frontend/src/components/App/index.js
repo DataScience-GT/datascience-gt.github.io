@@ -14,7 +14,7 @@ import  DashboardGroupPage from '../Dashboard/Common/Group Page';
 import OurTeam from "../OurTeam";
 import OurWork from "../OurWork";
 import Contact from "../Contact";
-
+import Bootcamp from "../Bootcamp"
 import Projects from '../Projects';
 
 /**
@@ -35,6 +35,7 @@ class App extends React.Component {
                 <Route path={ROUTES.DASHBOARD_GROUP} component={DashboardGroupPage} />
 
                 <Route path={ROUTES.PROJECTS} component={Projects} />
+                <Route path={ROUTES.BOOTCAMP} component={Bootcamp} />
                 <Route path={ROUTES.OUR_TEAM} component={OurTeam} />
                 <Route path={ROUTES.OUR_WORK} component={OurWork} />
                 <Route path={ROUTES.CONTACT} component={Contact} />
