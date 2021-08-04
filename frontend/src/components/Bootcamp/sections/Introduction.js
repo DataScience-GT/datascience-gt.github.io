@@ -23,7 +23,7 @@ var lightBlue = {
 }
 
 var container = {
-  display: flex,
+  //display: flex,
 }
 export default class Introduction extends React.Component {
   render() {
@@ -31,12 +31,14 @@ export default class Introduction extends React.Component {
       <div style={divPadding}>
       <Container style={container}>
       <h3>Welcome to Bootcamp</h3>
-      <p>DSGT bootcamp is an immersive 11-week experience where you’ll
-        learn a variety of data science skills and work in teams to answer 
-        significant questions by analyzing data. Our mentors will host 
-        workshops and guide you through your projects. We work in iterative
-        milestones and provide feedback on your work.
+      <p>DSGT Bootcamp is an immersive 12-week experience where you’ll
+        learn today's most marketable data science skills and work in teams to answer 
+        significant questions by analyzing data. Our mentors will host weekly 
+        workshops, guide you through your project, and provide feedback on your work as you iterate
+        through milestones and prepare for a world of data-related opportunities. 
       </p>
+      <p>Current Schedule: </p>
+      <iframe src="https://docs.google.com/document/d/1hoWb7rFFLursQ00QizgG2ya87Hdr_DHexOSBDQcW55o/edit" width="830" height="700"></iframe>
       </Container>
       </div>
     );
