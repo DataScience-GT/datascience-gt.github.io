@@ -7,6 +7,8 @@ import { FaDiceFive, FaFileExcel } from "react-icons/fa";
 import Milestone3 from '../assets/DSGT Bootcamp_ Milestone 3 Description.pdf';
 import DataWarriorsWork from '../assets/Data Warriors_Write_Up.pdf';
 import Workshop4Drill from '../assets/Workshop 4 Drill.png';
+import { Linking } from 'react-native';
+import { Text } from 'react-native';
 
 
 var divPadding = {
@@ -48,11 +50,20 @@ export default class PastBootcampMaterial extends React.Component {
   render() {
     return(
       <div style={divPadding}>
-      <h3 padding="4em 0 4em 0">Past Bootcamp Material</h3>
-      <Container className="d-flex justify-content-start  justify-content-between">
-        <iframe src= {Milestone3} width="400" height="500"></iframe>
-        <img src= {Workshop4Drill} width="400" height="500"></img>
-        <iframe src= {DataWarriorsWork} width="400" height="500"></iframe>
+      <h3>Past Bootcamp Material</h3>
+      <Container className="d-flex justify-content-center">
+        <div>
+          <iframe src= {Milestone3} width="350" height="500"></iframe>
+          <Text style={{color: 'green'}}>Milestone 3 Instructions Document</Text>
+        </div>
+        <div>
+          <img src= {Workshop4Drill} width="350" height="508"></img>
+          <Text style={{color: 'green'}}>Workshop 4 Colab Notebook</Text>
+        </div>
+        <div>
+          <iframe src= {DataWarriorsWork} width="350" height="500"></iframe>
+          <Text  style={{color: 'green'}}>Milestone 2 Deliverable</Text>
+        </div>
       </Container>
       </div>
     );

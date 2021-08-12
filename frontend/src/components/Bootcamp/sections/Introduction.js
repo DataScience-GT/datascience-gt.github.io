@@ -38,7 +38,7 @@ export default class Introduction extends React.Component {
         workshops, guide you through your project, and provide feedback on your work as you iterate
         through milestones and prepare for a world of data-related opportunities. 
       </p>
-      <p>Sample Schedule: </p>
+      <p style={{color: 'purple'}}>Sample Schedule: </p>
       <iframe src={Schedule} width="500" height="600"></iframe>
       </Container>
       </div>
