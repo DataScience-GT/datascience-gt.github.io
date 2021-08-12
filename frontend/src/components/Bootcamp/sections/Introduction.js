@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import { FaFileExcel } from "react-icons/fa";
 //import CardDeck from 'react-bootstrap/CardDeck';
 //import portrait from '../assets/portrait.png';
+import Schedule from '../assets/Bootcamp Spring 2021 Calendar.pdf';
 
 var divPadding = {
   padding: "4em 0 4em 0",
@@ -37,8 +38,8 @@ export default class Introduction extends React.Component {
         workshops, guide you through your project, and provide feedback on your work as you iterate
         through milestones and prepare for a world of data-related opportunities. 
       </p>
-      <p>Current Schedule: </p>
-      <iframe src="https://docs.google.com/document/d/1hoWb7rFFLursQ00QizgG2ya87Hdr_DHexOSBDQcW55o/edit" width="830" height="700"></iframe>
+      <p>Sample Schedule: </p>
+      <iframe src={Schedule} width="500" height="600"></iframe>
       </Container>
       </div>
     );

@@ -30,7 +30,7 @@ export default class PhotoGallery extends React.Component {
     return(
       <div style={divPadding}>
       <Container style={container}>
-      <h3>PhotoGallery</h3>
+      <h3>Photo Gallery</h3>
       </Container>
       </div>
     );

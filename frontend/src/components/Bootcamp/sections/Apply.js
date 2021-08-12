@@ -4,6 +4,8 @@ import Card from 'react-bootstrap/Card';
 import { FaFileExcel } from "react-icons/fa";
 //import CardDeck from 'react-bootstrap/CardDeck';
 //import portrait from '../assets/portrait.png';
+import { Linking } from 'react-native';
+import { Text } from 'react-native';
 
 var divPadding = {
   padding: "4em 0 4em 0",
@@ -30,10 +32,11 @@ export default class Apply extends React.Component {
     return(
       <div style={divPadding}>
       <Container style={container}>
-      <h3>Apply</h3>
-      <p>
-        Link Current Application
-      </p>
+      <h3>Apply Now!</h3>
+      <Text style={{color: 'blue'}} 
+          onPress={() => Linking.openURL('https://docs.google.com/forms/d/e/1FAIpQLSfUjVWyEhOu0ZJL9qiqa7H2mn_clHM9GRMJO7b77fsaI3XJpw/closedform')}>
+        <br />Bootcamp Application<br />
+      </Text>
       </Container>
       </div>
     );
