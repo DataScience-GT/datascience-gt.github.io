@@ -33,18 +33,30 @@ export default class Contact extends React.Component {
       <div style={divPadding}>
       <Container style={container}>
       <h3>Contact Us</h3>
-      <Text style={{color: 'blue'}}
+      <a href="https://discord.gg/B3DbxxA8">
+        <img src={require('../assets/Discord-Logo.png')} width="80px" height="60px"/>
+        <br /><br />
+      </a>
+      <a href="https://datasciencegt.slack.com/">
+        <img src={require('../assets/Slack.png')} width="80px" height="60px"/>
+        <br /><br />
+      </a>
+      <a href="hello@datasciencegt.org">
+        <img src={require('../assets/Gmail-logo.jpg')} width="80px" height="60px"/>
+        <br /><br />
+      </a>
+      {/* <Text style={{color: 'blue'}}
           onPress={() => Linking.openURL('https://discord.gg/B3DbxxA8')}>
         <br />Google<br />
-      </Text>
-      <Text style={{color: 'blue'}}
+      </Text> */}
+      {/* <Text style={{color: 'blue'}}
           onPress={() => Linking.openURL('datasciencegt.slack.com')}>
         <br />Email<br />
       </Text>
       <Text style={{color: 'blue'}}
           onPress={() => Linking.openURL('hello@datasciencegt.org')}>
         <br />Slack<br />
-      </Text>
+      </Text> */}
       </Container>
       </div>
     );

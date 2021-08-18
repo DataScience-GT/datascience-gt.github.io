@@ -33,26 +33,26 @@ export default class Resources extends React.Component {
       <div style={divPadding}>
       <Container style={container}>
       <h3>Resources</h3>
-      <Text style={{color: 'blue'}} 
+      <Text style={{color: 'blue'}}
           onPress={() => Linking.openURL('https://dsgt-bootcamp-site.herokuapp.com/')}>
-        <br />DSGT Bootcamp Course Website<br />
+        <br />DSGT Bootcamp Website<br />
       </Text>
-      <Text style={{color: 'blue'}} 
-          onPress={() => Linking.openURL('https://www.udemy.com/course/dsgt-bootcamp/learn/lecture/27690524?utm_campaign=email&utm_medium=email&utm_source=sendgrid.com#overview')}>
-        <br />DSGT Bootcamp Udemy Course<br />
-      </Text>
-      <Text style={{color: 'blue'}} 
-          onPress={() => Linking.openURL('https://scikit-learn.org/stable/auto_examples/index.html')}>
-        <br />Scikit-learn Examples<br />
-      </Text>
-      <Text style={{color: 'blue'}} 
-          onPress={() => Linking.openURL('https://www.kaggle.com/')}>
-        <br />Kaggle<br />
-      </Text>
-      <Text style={{color: 'blue'}} 
-          onPress={() => Linking.openURL('https://www.3blue1brown.com/')}>
-        <br />3 Blue 1 Brown<br />
-      </Text>
+      <a href="https://www.udemy.com/course/dsgt-bootcamp/learn/lecture/27690524?utm_campaign=email&utm_medium=email&utm_source=sendgrid.com#overview">
+        <img src={require('../assets/udemy.png')} width="80px" height="60px" padding="500px"/>
+        <br /><br />
+      </a>
+      <a href="https://scikit-learn.org/stable/auto_examples/index.html">
+        <img src={require('../assets/scikitlearn.png')} width="80px" height="60px" padding="50px"/>
+        <br /><br />
+      </a>
+      <a href="https://www.kaggle.com/">
+        <img src={require('../assets/kaggle.png')} width="80px" height="60px" padding="50px"/>
+        <br /><br />
+      </a>
+      <a href="https://www.3blue1brown.com/">
+        <img src={require('../assets/3b1b.jpg')} width="80px" height="60px" padding="50px"/>
+        <br /><br />
+      </a>
       </Container>
       </div>
     );
