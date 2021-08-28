@@ -37,10 +37,16 @@ const styles = {
   // bgColor: 'white',
   titleTextColor: "blue",
   rowTitleColor: "blue",
-  width: "30px",
+  // rowContentPaddingLeft: '500px',
+  // padding: "0.75em 0"
   // rowContentColor: 'grey',
   // arrowColor: "red",
+  innerWidth: '20%',
 };
+
+// .faq-style-wrapper .faq-body .faq-row {
+//   padding: 0.75em 0;
+// }
 
 const config = {
   // animate: true,
@@ -48,47 +54,14 @@ const config = {
   // tabFocus: true
 };
 
-// export default function App {
-//   return (
-//       <div>
-//           <Faq
-//               data={data}
-//               styles={styles}
-//               config={config}
-//           />
-//       </div>
-//   );
-// }
-
-// var divPadding = {
-//   padding: "4em 0 4em 0",
-// }
-
-// var divPaddingInner = {
-//   padding: "0 0 2em 0",
-// }
-
-// var noBorder = {
-//   border: "none",
-// }
-
-
-// var lightBlue = {
-//   backgroundColor: "#F1F9FF",
-// }
-
-// var container = {
-//   //display: flex,
-// }
 export default class FAQ extends React.Component {
   render() {
     return (
       <div>
-          <Faq
+          <Faq 
               data={data}
               styles={styles}
               config={config}
-
           />
       </div>
     );

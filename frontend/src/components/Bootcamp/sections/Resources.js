@@ -11,6 +11,15 @@ var divPadding = {
   padding: "4em 0 4em 0",
 }
 
+
+var divPadding2 = {
+  padding: "0 4em 0 4em",
+  // width: '100%',
+  // height: auto,
+  width: 250, 
+  // height : 300
+}
+
 var divPaddingInner = {
   padding: "0 0 2em 0",
 }
@@ -27,32 +36,35 @@ var lightBlue = {
 var container = {
   //display: flex,
 }
+
 export default class Resources extends React.Component {
   render() {
     return(
       <div style={divPadding}>
-      <Container style={container}>
+      <Container style={container} style={divPadding}>
       <h3>Resources</h3>
+      <Container  className="d-flex">
       <Text style={{color: 'blue'}}
           onPress={() => Linking.openURL('https://dsgt-bootcamp-site.herokuapp.com/')}>
         <br />DSGT Bootcamp Website<br />
       </Text>
-      <a href="https://www.udemy.com/course/dsgt-bootcamp/learn/lecture/27690524?utm_campaign=email&utm_medium=email&utm_source=sendgrid.com#overview">
-        <img src={require('../assets/udemy.png')} width="80px" height="60px" padding="500px"/>
+      <a href="https://www.udemy.com/course/dsgt-bootcamp/learn/lecture/27690524?utm_campaign=email&utm_medium=email&utm_source=sendgrid.com#overview" style={divPadding2}  resizeMode='contain'>
+        <img src={require('../assets/udemy.png')}/>
         <br /><br />
       </a>
-      <a href="https://scikit-learn.org/stable/auto_examples/index.html">
-        <img src={require('../assets/scikitlearn.png')} width="80px" height="60px" padding="50px"/>
+      <a href="https://scikit-learn.org/stable/auto_examples/index.html" style={divPadding2} resizeMode='contain'>
+        <img src={require('../assets/scikitlearn.png')}/>
         <br /><br />
       </a>
-      <a href="https://www.kaggle.com/">
-        <img src={require('../assets/kaggle.png')} width="80px" height="60px" padding="50px"/>
+      <a href="https://www.kaggle.com/" style={divPadding2} resizeMode='contain'>
+        <img src={require('../assets/kaggle.png')}/>
         <br /><br />
       </a>
-      <a href="https://www.3blue1brown.com/">
-        <img src={require('../assets/3b1b.jpg')} width="80px" height="60px" padding="50px"/>
+      <a href="https://www.3blue1brown.com/" style={divPadding2} resizeMode='contain'>
+        <img src={require('../assets/3b1b.jpg')}/>
         <br /><br />
       </a>
+      </Container>
       </Container>
       </div>
     );

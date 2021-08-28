@@ -15,10 +15,18 @@ var divPaddingInner = {
   padding: "0 0 2em 0",
 }
 
+
+var divPadding2 = {
+  padding: "0 4em 0 4em",
+  // width: '100%',
+  // height: auto,
+  width: 200, 
+  // height : auto
+}
+
 var noBorder = {
   border: "none",
 }
-
 
 var lightBlue = {
   backgroundColor: "#F1F9FF",
@@ -31,20 +39,22 @@ export default class Contact extends React.Component {
   render() {
     return(
       <div style={divPadding}>
-      <Container style={container}>
+      <Container style={container} style={divPadding}>
       <h3>Contact Us</h3>
+      <Container className="d-flex">
       <a href="https://discord.gg/B3DbxxA8">
-        <img src={require('../assets/Discord-Logo.png')} width="80px" height="60px"/>
+        <img src={require('../assets/Discord-Logo.png')} style={divPadding2} resizeMode='contain'/>
         <br /><br />
       </a>
       <a href="https://datasciencegt.slack.com/">
-        <img src={require('../assets/Slack.png')} width="80px" height="60px"/>
+        <img src={require('../assets/Slack.png')} style={divPadding2} resizeMode='contain'/>
         <br /><br />
       </a>
       <a href="hello@datasciencegt.org">
-        <img src={require('../assets/Gmail-logo.jpg')} width="80px" height="60px"/>
+        <img src={require('../assets/Gmail-logo.jpg')} style={divPadding2} resizeMode='contain'/>
         <br /><br />
       </a>
+      </Container>
       {/* <Text style={{color: 'blue'}}
           onPress={() => Linking.openURL('https://discord.gg/B3DbxxA8')}>
         <br />Google<br />
