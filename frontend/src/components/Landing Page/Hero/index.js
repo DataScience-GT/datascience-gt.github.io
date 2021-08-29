@@ -1,6 +1,6 @@
-import React from 'react';
-import {Container, Button} from 'react-bootstrap';
-import background from './background.jpg';
+import React from "react";
+import { Container, Button } from "react-bootstrap";
+import background from "./background.jpg";
 import * as ROUTES from "../../../config/routes";
 ///////////////////////
 // STYLES
@@ -9,16 +9,16 @@ let backgroundImg = {
   backgroundImage: `url(${background})`,
   // height: "100%",
   height: "80vh",
-  backgroundSize: 'cover',
+  backgroundSize: "cover",
   color: "white",
-}
+};
 
 let backgroundTint = {
   height: "inherit",
   // background: 'rgba(0,99,185,0.75)',
-  background: 'linear-gradient(to bottom, rgba(0,22,41,1), rgba(0,22,41,0.7), rgba(0,99,185,0.7), rgba(0,99,185,0.7))',
-
-}
+  background:
+    "linear-gradient(to bottom, rgba(0,22,41,1), rgba(0,22,41,0.7), rgba(0,99,185,0.7), rgba(0,99,185,0.7))",
+};
 
 let textStyle = {
   padding: "8vw",
@@ -26,6 +26,15 @@ let textStyle = {
   alignItems: "center",
   textAlign: "center",
   opacity: "1",
+};
+
+let linkColor = {
+  color: "lightblue",
+};
+
+let linkStyle = {
+  alignItems: "center",
+  textAlign: "center",
 }
 
 ///////////////////////
@@ -37,14 +46,29 @@ export default class Landing extends React.Component {
     return (
       <div style={backgroundImg}>
         <div style={backgroundTint}>
-            <Container style={textStyle}>
-                <h1>MAKE DATA SCIENCE ACCESSIBLE TO ALL</h1>
-                <p>Nunc eu massa auctor sem bibendum fringilla in quis leo. Curabitur tempus nunc sed leo finibus, sit amet venenatis justo luctus. Nunc tincidunt fringilla vulputate. Morbi semper vestibulum odio, ac convallis lectus efficitur nec. Maecenas congue tortor ut dignissim ornare. Integer nec feugiat dui, ut feugiat risus. Maecenas ac erat nec urna eleifend fringilla sed eu sem.</p>
-                <Button variant="outline-light" href={ROUTES.CONTACT}>Get Involved</Button>
-            </Container>
+          <Container style={textStyle}>
+            <h1>MAKING DATA SCIENCE ACCESSIBLE TO ALL</h1>
+            <p style={linkStyle}>
+              {" "}
+              Join our mission: apply{" "}
+              <a
+                style={linkColor}
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfv3_12vdyWsy_Lz9u3DCarO1Mw_HxIsF3hzm-92KOVU_otwQ/viewform?usp=sf_link"
+              >
+                here{" "}
+              </a>
+            </p>
+            <Button
+              variant="outline-light"
+              href={
+                "https://docs.google.com/forms/d/e/1FAIpQLSfv3_12vdyWsy_Lz9u3DCarO1Mw_HxIsF3hzm-92KOVU_otwQ/viewform?usp=sf_link"
+              }
+            >
+              Get Involved
+            </Button>
+          </Container>
         </div>
       </div>
-
     );
   }
 }

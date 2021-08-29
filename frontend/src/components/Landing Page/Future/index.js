@@ -26,6 +26,11 @@ let blue = {
   border: "none",
 }
 
+let align = {
+  alignItems: "center",
+  textAlign: "center",
+}
+
 
 export default class Future extends React.Component {
   render() {
@@ -39,78 +44,24 @@ export default class Future extends React.Component {
         <Card style={blue}>
           <Card.Body>
           <Card.Title className="text-center"><h3>Data Science Today</h3></Card.Title>
-          <Card.Text>
-          Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Sed a consequat nibh,
-          aliquam molestie tortor. Nunc ante lectus,
-          gravida at est ullamcorper, congue
-          feugiat nunc. Vestibulum ante ipsum primis
-          in faucibus orci luctus et ultrices
-          posuere cubilia Curae; Duis ut libero
-          posuere justo consequat rutrum. Nam
-          accumsan sagittis urna eu placerat.
-          Praesent id dapibus metus. Nunc luctus
-          pulvinar nisi, id ultrices odio placerat a.
-          Morbi massa lectus, interdum non sodales
-          et, interdum a magna. Nulla lobortis dolor
-          sed posuere ultrices. Orci varius
-          natoque penatibus et magnis dis parturient
-          montes, nascetur ridiculus mus.
-          Etiam at mauris nunc. Sed pharetra enim id
-          lectus scelerisque placerat. Sed
-          sagittis varius enim eu molestie.
+          <Card.Text style={align}>
+          Coming Soon
           </Card.Text>
           </Card.Body>
         </Card>
         <Card style={blue}>
           <Card.Body>
           <Card.Title className="text-center"><h3>Target Goals</h3></Card.Title>
-          <Card.Text>
-            Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Sed a consequat nibh,
-            aliquam molestie tortor. Nunc ante lectus,
-            gravida at est ullamcorper, congue
-            feugiat nunc. Vestibulum ante ipsum primis
-            in faucibus orci luctus et ultrices
-            posuere cubilia Curae; Duis ut libero
-            posuere justo consequat rutrum. Nam
-            accumsan sagittis urna eu placerat.
-            Praesent id dapibus metus. Nunc luctus
-            pulvinar nisi, id ultrices odio placerat a.
-            Morbi massa lectus, interdum non sodales
-            et, interdum a magna. Nulla lobortis dolor
-            sed posuere ultrices. Orci varius
-            natoque penatibus et magnis dis parturient
-            montes, nascetur ridiculus mus.
-            Etiam at mauris nunc. Sed pharetra enim id
-            lectus scelerisque placerat. Sed
-            sagittis varius enim eu molestie.
+          <Card.Text style={align}>
+            Coming Soon
           </Card.Text>
           </Card.Body>
         </Card>
         <Card style={blue}>
           <Card.Body>
           <Card.Title className="text-center"><h3>Reach</h3></Card.Title>
-          <Card.Text>
-            Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Sed a consequat nibh,
-            aliquam molestie tortor. Nunc ante lectus,
-            gravida at est ullamcorper, congue
-            feugiat nunc. Vestibulum ante ipsum primis
-            in faucibus orci luctus et ultrices
-            posuere cubilia Curae; Duis ut libero
-            posuere justo consequat rutrum. Nam
-            accumsan sagittis urna eu placerat.
-            Praesent id dapibus metus. Nunc luctus
-            pulvinar nisi, id ultrices odio placerat a.
-            Morbi massa lectus, interdum non sodales
-            et, interdum a magna. Nulla lobortis dolor
-            sed posuere ultrices. Orci varius
-            natoque penatibus et magnis dis parturient
-            montes, nascetur ridiculus mus.
-            Etiam at mauris nunc. Sed pharetra enim id
-            lectus scelerisque placerat. Sed
-            sagittis varius enim eu molestie.
+          <Card.Text style={align}>
+            Coming Soon
           </Card.Text>
           </Card.Body>
         </Card>
