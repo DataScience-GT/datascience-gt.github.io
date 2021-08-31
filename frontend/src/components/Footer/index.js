@@ -32,7 +32,7 @@ export default class Footer extends React.Component {
       <Col>
         <ul className="list-unstyled">
           <Nav.Link href={ROUTES.OUR_WORK}>About Us</Nav.Link>
-          <Nav.Link href={ROUTES.CONTACT}>Contact</Nav.Link>
+          <Nav.Link href='mailto:hello@datasciencegt.org'>Contact</Nav.Link>
           <Nav.Link href="/terms-conditions">Terms & Conditions</Nav.Link>
         </ul>
       </Col>

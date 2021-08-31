@@ -134,7 +134,7 @@ class Navigation extends React.Component {
             <Nav.Link href={ROUTES.SPONSORS} className="links">
               Sponsors
             </Nav.Link>
-            <Nav.Link href={ROUTES.CONTACT} className="links">
+            <Nav.Link href='mailto:hello@datasciencegt.org' className="links">
               Contact
             </Nav.Link>
             {/*<Nav.Link eventKey="/faqs" className="links">FAQs</Nav.Link>*/}

@@ -17,5 +17,5 @@ export const OUR_TEAM = "/our-team";
 export const OUR_WORK = "/our-work";
 export const BOOTCAMP = "/bootcamp"
 export const PROJECTS = "/projects";
-export const CONTACT = "/contact";
+//export const CONTACT = "/contact";
 export const FAQS = "/FAQs";

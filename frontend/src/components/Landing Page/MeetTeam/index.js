@@ -45,13 +45,13 @@ export default class MeetTeam extends React.Component {
             <Col>
               <Container style={textStyle}>
                 <h2>Meet the Team</h2>
-                <p>The Data Science Initiative started as a small club at the
+                <p>Data Science @ Georgia Tech started as a small club at the
                 Georgia Institute of Technology for spreading awareness and
                 education about data science. It has since morphed into a
                 massive program that reaches over 200 people every year and
-                draws over 100 people to each of its main events. DSI provides
+                draws over 100 people to each of its main events. DSGT provides
                 students with workshops, project opportunities, and
-                leadership opportunities to help train the coming generation
+                leadership opportunities to help train the next generation
                 of data scientists. </p>
                 <Button variant="outline-light" href={ROUTES.OUR_TEAM}>Learn More</Button>
               </Container>

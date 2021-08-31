@@ -61,10 +61,10 @@ export default class Landing extends React.Component {
             <Button
               variant="outline-light"
               href={
-                "https://docs.google.com/forms/d/e/1FAIpQLSfv3_12vdyWsy_Lz9u3DCarO1Mw_HxIsF3hzm-92KOVU_otwQ/viewform?usp=sf_link"
+                "https://www.canva.com/design/DAEoU1eyMFU/bdoAHNAioTW8qtU4X_P9Vw/view?utm_content=DAEoU1eyMFU&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton"
               }
             >
-              Get Involved
+              Attend Kickoff!
             </Button>
           </Container>
         </div>
