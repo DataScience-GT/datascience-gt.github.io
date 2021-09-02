@@ -56,8 +56,7 @@ export default class Footer extends React.Component {
         <ul className="list-unstyled">
         <Nav.Link eventKey="disabled" disabled>
           220 Ferst Dr NW, Atlanta, GA 30318
-          +1 941 286 3117
-          legal@datascienceinitiative.org
+          hello@datasciencegt.org
         </Nav.Link>
         </ul>
       </Col>
