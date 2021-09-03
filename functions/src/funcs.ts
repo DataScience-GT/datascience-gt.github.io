@@ -1,3 +1,4 @@
+require('cors')({ origin: true });
 /**
  * Includes google cloud functions. For laziness, 
  * some things from the web-api are duplicated here, including the 
@@ -15,7 +16,9 @@
   * same-origin requests. Makes testing a bitch so for dev purposes, 
   * this is left here. See issue #80. 
   */
-require('cors')({ origin: true });
+
+ /*
+
 import * as functions from "firebase-functions"
 import * as admin from "firebase-admin"
 import {google, sheets_v4} from "googleapis"
@@ -70,6 +73,8 @@ async function get_user(uid:string){
     * ```
     * @param context The authentication context for this call
     */
+
+/*
 export const onUserVerify = async function(data: any, context: any): Promise<any> {
     // verify authorization of this user 
     console.info("Triggered User Verification authorized by ", context.auth); 
@@ -95,7 +100,7 @@ export const onUserVerify = async function(data: any, context: any): Promise<any
 
         /**
          * This part writes to the Ledger sheet. 
-         */
+         
         const VenmoLedgerPromise =  sheets.spreadsheets.values.append({
             spreadsheetId: financeSpreadsheet, 
             range: sheet.ledger_sheet + "!A1:D1", 
@@ -107,7 +112,7 @@ export const onUserVerify = async function(data: any, context: any): Promise<any
 
         /**
          * This part writes to the Dues sheet. 
-         */
+         
         const DuesLedgerPromise = sheets.spreadsheets.values.append({
             spreadsheetId: financeSpreadsheet, 
             range: sheet.dues_sheet + "!A1", 
@@ -126,14 +131,14 @@ export const onUserVerify = async function(data: any, context: any): Promise<any
  * and that we don't spam the main budget sheet. 
  * @param data Same as above
  * @param context Same as above
- */
+ 
 export const onUserVerifyDummy = function(data: any, context: any) {
     return {status: "success", data: data}; 
 }
 
 /**
  * 
- */
+ 
 export const scheduledEventXPDistribution = () => {
     const events: any = get_events();
 
@@ -168,7 +173,7 @@ export const scheduledEventXPDistribution = () => {
  * @param uid 
  * @param eventId 
  * @param eventXP 
- */
+ 
 async function add_eventXP_to_user(uid: string, eventId: string, eventXP: number) {
     const userRef = await db.collection('users').doc(uid);
     userRef.update({
@@ -189,7 +194,7 @@ async function add_eventXP_to_user(uid: string, eventId: string, eventXP: number
 /**
  * 
  * @param id 
- */
+ 
 async function mark_event_xpAdded(id: string) {
     const eventRef = db.collection("events").doc(id);
     return eventRef.update({
@@ -207,7 +212,7 @@ async function mark_event_xpAdded(id: string) {
  * 
  * @param first_name 
  * @param last_name 
- */
+ 
 async function get_user_from_name(first_name: string, last_name: string) {
     let id;
     await db.collection('users')
@@ -235,7 +240,7 @@ async function get_user_from_name(first_name: string, last_name: string) {
 
 /**
  * 
- */
+ 
 async function get_events() {
     const events: any = [];
     await db.collection('events').get().then(snapshot => {
@@ -248,3 +253,6 @@ async function get_events() {
 
     return events;
 }
+
+*/
+export {}

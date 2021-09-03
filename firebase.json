@@ -1,17 +1,12 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "frontend/build",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
     "redirects": [
-      {
-        "source": "**/AtlMap",
-        "destination": "https://atlcrime.datasciencegt.org",
-        "type": 302
-      },
       {
         "source": "**/AtlCrime",
         "destination": "https://atlcrime.datasciencegt.org",
@@ -20,35 +15,7 @@
     ], 
     "rewrites": [
       {
-        "source": "**/paid_account", 
-        "function": "paid_account"
-      },
-      {
-        "source": "**/sponsors",
-        "destination": "/index.html"
-      },
-      {
-        "source": "**/login", 
-        "destination": "/index.html" 
-      }, 
-      {
-        "source": "**/signup", 
-        "destination": "/index.html"
-      }, 
-      {
-        "source": "**/dashboard/home", 
-        "destination": "/index.html"
-      },
-      {
-        "source": "**/dashboard/edit", 
-        "destination": "/index.html"
-      },
-      {
-        "source": "**/dashboard/event", 
-        "destination": "/index.html"
-      },
-      {
-        "source": "**/dashboard/group", 
+        "source": "**", 
         "destination": "/index.html"
       }
     ]

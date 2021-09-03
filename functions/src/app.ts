@@ -1,7 +1,11 @@
+require('cors')({ origin: true });
+
 /** 
  * Links all the different API endpoints together. 
  * Wraps up all the different cloud functions 
  */
+
+/*
 import * as functions from 'firebase-functions';
 import * as funcs from "./funcs" 
 // import * as events from './events';
@@ -15,4 +19,5 @@ module.exports.scheduledEventXPDistribution = functions.pubsub.schedule(('every 
     funcs.scheduledEventXPDistribution
 });
 // module.exports.userCreateAddInfo = functions.https.onCall(funcs.userCreateAddInfo);  
-// module.exports.userDeleteTrigger = functions.auth.user().onDelete(funcs.onUserDelete); 
+// module.exports.userDeleteTrigger = functions.auth.user().onDelete(funcs.onUserDelete);
+*/
