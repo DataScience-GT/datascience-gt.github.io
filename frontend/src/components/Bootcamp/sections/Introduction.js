@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import { FaFileExcel } from "react-icons/fa";
 //import CardDeck from 'react-bootstrap/CardDeck';
 //import portrait from '../assets/portrait.png';
+import Schedule from '../assets/Bootcamp Spring 2021 Calendar.pdf';
 
 var divPadding = {
   padding: "4em 0 4em 0",

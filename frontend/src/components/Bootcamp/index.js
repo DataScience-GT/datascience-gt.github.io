@@ -5,6 +5,15 @@ import Footer from '../Footer';
 
 import Timeline from './sections/Timeline';
 import Introduction from './sections/Introduction';
+import PastBootcampMaterial from './sections/PastBootcampMaterial';
+import Apply from './sections/Apply';
+import Resources from './sections/Resources';
+import FAQ from './sections/FAQ';
+import Contact from './sections/Contact';
+import PhotoGallery from './sections/PhotoGallery';
+
+
+
 
 let divPadding = {
   padding: "4em 0 8em 0",
@@ -20,6 +29,12 @@ export default class Bootcamp extends React.Component {
     return (
       <div style={divPadding}>
       <Introduction />
+      <PastBootcampMaterial />
+      <Apply />
+      <Resources />
+      <FAQ />
+      <Contact />
+      <PhotoGallery />
       </div>
     );
   }
