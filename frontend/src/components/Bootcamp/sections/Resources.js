@@ -45,7 +45,7 @@ export default class Resources extends React.Component {
       <h3>Resources</h3>
       <Container  className="d-flex">
       <Text style={{color: 'blue'}}
-          onPress={() => Linking.openURL('https://dsgt-bootcamp-site.herokuapp.com/')}>
+          onPress={() => Linking.openURL('https://dsgtbootcamp.netlify.app/')}>
         <br />DSGT Bootcamp Website<br />
       </Text>
       <a href="https://www.udemy.com/course/dsgt-bootcamp/learn/lecture/27690524?utm_campaign=email&utm_medium=email&utm_source=sendgrid.com#overview" style={divPadding2}  resizeMode='contain'>
