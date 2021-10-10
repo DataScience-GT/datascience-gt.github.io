@@ -294,8 +294,8 @@ export default class LandingPage extends React.Component {
                 <WhatWeDo />
                 <MeetTeam />
                 {/*<GetInvolved />*/}
-                <Future />
-                <Opportunity />
+                {/*<Future />*/}
+                {/*<Opportunity />*/}
                 <Footer /> 
             </React.Fragment>
             
