@@ -119,12 +119,12 @@ class Navigation extends React.Component {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse>
-            <Nav.Link href={ROUTES.OUR_TEAM} className="links">
+            {/*<Nav.Link href={ROUTES.OUR_TEAM} className="links">
               Our Team
             </Nav.Link>
             <Nav.Link href={ROUTES.OUR_WORK} className="links">
               Our Work
-            </Nav.Link>
+            </Nav.Link>*/}
             <Nav.Link href={ROUTES.BOOTCAMP} className="links">
               Bootcamp
             </Nav.Link>
