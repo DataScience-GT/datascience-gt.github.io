@@ -125,8 +125,11 @@ class Navigation extends React.Component {
             <Nav.Link href={ROUTES.OUR_WORK} className="links">
               Our Work
             </Nav.Link>*/}
-            <Nav.Link href={ROUTES.BOOTCAMP} className="links">
+            <Nav.Link href={"https://dsgtbootcamp.netlify.app/"}className="links">
               Bootcamp
+            </Nav.Link>
+            <Nav.Link href={"https://hacklytics.io/"}className="links">
+              Hacklytics 
             </Nav.Link>
             <Nav.Link href={ROUTES.PROJECTS} className="links">
               Projects
