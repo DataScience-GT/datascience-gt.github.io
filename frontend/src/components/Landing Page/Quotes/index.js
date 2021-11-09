@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { Thumbs } from "react-responsive-carousel";
 import * as ROUTES from "../../../config/routes";
 import quotepic from './quote.png';
 
@@ -53,6 +54,11 @@ export default class WhatWeDo extends React.Component {
   }  
 
   render() {
+    if(this.state.loading){
+      return (
+        <h1>loading...</h1>
+      )
+    }
 
     const {
       img
