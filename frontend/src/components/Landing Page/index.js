@@ -5,6 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Hero from './Hero';
 import WhatWeDo from './WhatWeDo';
+import Quotes from './Quotes';
 import MeetTeam from './MeetTeam';
 import GetInvolved from './GetInvolved'; 
 import Future from './Future';
@@ -293,6 +294,7 @@ export default class LandingPage extends React.Component {
                 <Hero />
                 <WhatWeDo />
                 <MeetTeam />
+                <Quotes />
                 {/*<GetInvolved />*/}
                 {/*<Future />*/}
                 {/*<Opportunity />*/}
