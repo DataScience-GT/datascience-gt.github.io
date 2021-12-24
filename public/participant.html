@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hacklytics 2021</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/hacklytics/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="assets/images/hacklytics/favicon.ico"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/hacklytics/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/hacklytics/favicon-16x16.png">
+    <link rel="manifest" href="assets/site.webmanifest">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Other stylesheets -->
+    <link rel="stylesheet" href="assets/stylesheets/main.css" />
+    <link rel="stylesheet" href="assets/stylesheets/participant.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/0af4e04c21.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- JS files-->
+    <script src="assets/scripts/waitlist.js"></script>
+    <script src="assets/scripts/schedule.js"></script>
+    <script src="assets/scripts/dataset.js"></script>
+</head>
+
+<body onload="mobileCheck()">
+    <script src="assets/scripts/mobile.js">
+    </script>
+    <a id="mlh-trust-badge" style="display:block;max-width:100px;min-width:60px;position:fixed;right:50px;top:0;width:10%;z-index:10000" href="https://mlh.io/seasons/2021/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2021-season&utm_content=black" target="_blank"><img src="https://s3.amazonaws.com/logged-assets/trust-badge/2021/mlh-trust-badge-2021-black.svg" alt="Major League Hacking 2021 Hackathon Season" style="width:100%"></a>
+    <div class="topnav" id="myTopnav">
+        <a href="index.html" class="logo"><img class="navb" src="assets/images/hacklytics/square-logo.png" width="62" height="62"></a>
+        <a href="index.html" class="text">Back to Homepage</a>
+        <a href="#Schedule" class="text">Schedule</a>
+        <a href="#Challenges" class="text">Challenges</a>
+        <a href="#Data-sets" class="text">Data Sets</a>
+        <a href="#Data-cleaner" class="text">Data Cleaner</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
+    <div id="desktopDIV">
+        <div id="wrap" class="form-group">
+          <!-- <div class="fade-in"> -->
+              <img class="desktop" src="assets/images/hacklytics/newplaceholder-removebg.png">   
+              <h1 class= heading>Hacklytics <em>2021</em></h1>
+              <br>
+              <h3>February 5-7</h3>
+              <br>
+              <a href="#Schedule" class="button">Schedule</a>
+              <a href="#Challenges" class="button">Challenges</a>
+              <a href="#Data-sets" class="button">Data Sets</a>
+              <a href="#Data-cleaner" class="button">Data Cleaner</a>
+          <!-- </div> -->
+          <p></p>
+        </div>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script><script  src="assets/scripts/script.js"></script>
+    </div>
+  
+    <div class="mobile" id="mobileDIV">
+        <div class="vertical-center">
+          <img class="mobile" src="assets/images/hacklytics/newplaceholder-removebg.png">
+          <h1 class= "heading">Hacklytics <em>2021</em></h1>
+          <br>
+          <h3>February 5-7</h3>
+          <br>
+          <a href="#Schedule" class="button">Schedule</a>
+          <a href="#Challenges" class="button">Challenges</a>
+          <a href="#Data-sets" class="button">Data Sets</a>
+          <a href="#Data-cleaner" class="button">Data Cleaner</a>
+        </div>
+    </div>
+
+    <div id="Schedule" style="position:relative">
+        <div class="bgimg-2">
+        </div>
+        <div class="caption">
+            <span class="border2">Schedule</span>
+        </div>
+    </div>
+    <div class="section3">
+        <div class="schedule-nav row justify-content-between">
+            <div onclick="friday_toggle()" id="friday_button" class="col-12 col-md-3 my-3">
+                Friday
+            </div>
+            <div onclick="saturday_toggle()" id="saturday_button" class="col-12 col-md-3 my-3">
+                Saturday
+            </div>
+            <div onclick="sunday_toggle()" id="sunday_button" class="col-12 col-md-3 my-3">
+                Sunday
+            </div>
+        </div>
+        <div class="friday_schedule" id="friday_schedule">
+            <table id="friday_schedule_table" class="container"></table>
+        </div>
+        <div class="saturday_schedule" id="saturday_schedule">
+            <table id="saturday_schedule_table" class="container"></table>
+        </div>
+        <div class="sunday_schedule" id="sunday_schedule">
+            <table id="sunday_schedule_table" class="container"></table>
+        </div>
+        <div class="timezone-notice">
+            <p>* All events are in EST time zone</p>
+        </div>
+    </div>
+
+    <div id="Challenges" style="position:relative">
+        <div class="bgimg-7">
+        </div>
+        <div class="caption">
+            <span class="border3">Challenges</span>
+        </div>
+    </div>
+    <div class="section1 challenges" style="padding-left: 1em; padding-right: 1em;">
+        <div class="anthem">
+            <div>
+                <div><img class="icon" src="assets/images/hacklytics/heathcare_icon.png"></div>
+                <span>Healthcare</span>
+            </div>
+            <div class="challenge-description">
+                This year, we will give the "Best Healthcare Hack" award to the team that tackles the current COVID-19 pandemic. If you’re looking for a place to start, some ideas include:
+                <ul>
+                    <li>Visualizing and track hospital bed utilization rates by county using Public COVID-19 data on AWS</li>
+                    <li>Visualizing COVID-19 infection rates by county using Public COVID-19 data on AWS</li>
+                </ul> 
+            </div>
+            <div class="sponsors">
+                <span>Sponsored By</span>
+                <div><img class="anthem-icon" src="assets/images/sponsors/anthem.png"></div>
+            </div>
+        </div>
+        <div class="citadel">
+            <div>
+                <div><img class="icon" src="assets/images/hacklytics/financial_icon.png"></div>
+                <span>Finance</span>
+            </div>
+            <div class="challenge-description">In this track, we encourage hackers to design a solution that will build a better financial future for our world. How will you reimagine finance? A few ideas to get you started include:
+                <ul>
+                    <li>Visualizing different trends between socioeconomic groups and healthcare</li>
+                    <li>Predicting economic outcomes based on posts made on twitter</li>
+                </ul> 
+            </div>
+            <div class="sponsors">
+                <span>Sponsored By</span>
+                <div><img class="citadel-icon" src="assets/images/sponsors/citadel.png"></div>
+            </div>
+        </div>
+        <div class="gtAthletics">
+            <div>
+                <div><img class="icon" src="assets/images/hacklytics/sports_icon.png"></div>
+                <span>Sports</span>
+            </div>
+            <div class="challenge-description">This year, GT Athletics offers 3 challenges: football, tennis, and softball.
+                <ul>
+                    <li>Football: Leverage social media for recruitment and character evaluation.</li>
+                    <li>Tennis: Recruiting assistant platform/algorithm to help coaches identify tennis prospects.</li>
+                    <li>Track: Data collection tool that helps track athletes train</li>
+                </ul> 
+            </div>
+            <div class="sponsors">
+                <span>Sponsored By</span>
+                <div><img class="gtAthletics-icon" src="assets/images/sponsors/gtAthletics.png"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Data-sets" style="position:relative">
+        <div class="bgimg-6"></div>
+        <div class="caption">
+            <span class="border1">Data Sets</span>
+        </div>
+    </div>
+    <div class="section2" style="background-color: #EEEEEE;">
+        <table id="dataset-table" class="container">
+            <tr class="row">
+                <th class="col-12 col-md-3">Name</th>
+                <th class="col-12 col-md-1 d-none d-md-table-cell">Type</th>
+                <th class="col-12 col-md-8 d-none d-md-table-cell">Description</th>
+            </tr>
+        </table>
+    </div>
+
+    <div id="Data-cleaner" style="position:relative">
+        <div class="bgimg-5"></div>
+        <div class="caption">
+            <span class="border2">Data Cleaner</span>
+        </div>
+    </div>
+    <div class="section3">
+        <h3 style="color: #ecae58">What is it?</h3>
+        <br>
+        <p>The data cleaner is a web application that allows users to upload csv and excel files that they want to be cleaned. It allows users to drop null values and apply certain types of interpolation. Please note, you must have Python installed to use it.</p>
+        <h3 style="color: #ecae58">How to Use It:</h3>
+        <ol>
+            <li>Clone the repo from Github <a href="https://github.com/DataScience-GT/2021-Hacklytics-DataCleaning.git" target="_blank">here</a>!</li>
+            <li>Navigate to the project folder in Command Prompt/Terminal.</li>
+            <li>Make sure you have all dependencies installed: namely Pandas and Flask</li>
+            <li>Run the python file app.py (you can use command python app.py)</li>
+            <li>Navigate to <a href="http://localhost:5000/">http://localhost:5000/</a>.</li>
+            <li>Upload your csv or excel file, decide if you want to remove null values, and select the interpolation type.</li>
+        </ol>
+        <p>This is a rudimentary web app, so feel free to build on top of it!</p>
+    </div>
+
+    <div id="Footer" class="footer">
+        <h2>Connect with Us</h2>
+        <ul class="icons">
+            <li><a  href="https://www.linkedin.com/company/dsgt/" class="fab fa-linkedin" target="_blank"></a></li>
+            <li><a  href="https://www.facebook.com/datasciencegt/" class="fab fa-facebook" target="_blank"></a></li>
+            <li><a  href="https://datasciencegt.org/" class="fas fa-globe" target="_blank"></a></li>
+            <li><a  href="mailto:hello@hacklytics.io" class="fas fa-envelope" target="_blank"></a></li>
+        </ul>
+        <ul class="copyright">
+            <li>&copy; <a href="https://datasciencegt.org/">Data Science at Georgia Tech 2020.</a> All rights reserved.</li>
+        </ul>
+    </div>
+    <script>
+        // load schedule
+        schedule_populate();
+        // load dataset
+        dataset_populate();
+    </script>
+    <!-- Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+</body>

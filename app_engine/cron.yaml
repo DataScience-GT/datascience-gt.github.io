@@ -1,5 +1,0 @@
-cron:
-- description: "Daily Cloud Firestore Export"
-  url: /cloud-firestore-export?outputUriPrefix=gs://dsgt-website-firestore-backup&collections=users,usergroups
-  target: cloud-firestore-admin
-  schedule: every 1 hours

@@ -1,0 +1,242 @@
+.navbar-custom {
+    padding: 0.4em 1em;
+    background-color: #ECE9E1;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: #20A39E;
+    opacity: 0.8;
+    font-family: "Red Hat Text";
+    font-weight: 600;
+    font-size: 1.25em;
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+    color: #20A39E;
+    opacity: 1;
+}
+
+.navbar-custom .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(32,163,158, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.navbar-custom .navbar-toggler {
+    border-color: #20A39E;
+}
+
+.header {
+    font-family: "Red Hat Text";
+}
+
+.header h1 {
+    color: #ECAE58;
+    padding: 1em;
+    text-align: center;
+}
+
+.schedule-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.schedule-nav > div {
+    flex: 0 1 auto;
+    border: 1px solid #ECAE58;
+    width: 200px;
+    text-align: center;
+    border-radius: 25px;
+    padding: 18px 0;
+    text-transform: regular;
+    font-size: 1.5em;
+    font-weight: 600;
+    line-height: 1.35em;
+    font-family: 'Red Hat Text';
+}
+
+.schedule-nav > div:hover {
+    cursor: pointer;
+}
+
+#friday_button {
+    box-shadow: 0px 0px 10px #ECAE58;
+}
+
+#saturday_button {
+    box-shadow: 0px 0px 0px #ECAE58;
+}
+
+#sunday_button {
+    box-shadow: 0px 0px 0px #ECAE58;
+}
+
+.friday_schedule, .saturday_schedule, .sunday_schedule {
+    margin: 50px 0px;
+    font-size: 1.3em;
+    font-weight: 400;
+    line-height: 1.35em;
+    font-family: 'Open Sans';   
+}
+
+.friday_schedule {
+    display: block;
+}
+
+.saturday_schedule {
+    display: None;
+}
+
+.sunday_schedule {
+    display: None;
+}
+
+table td {
+    padding: 0.5em 5em 0.5em 0;
+    white-space: nowrap;
+}
+
+.timezone-notice {
+    font-style: italic;
+    font-size: 0.8em;
+    font-weight: 400;
+    line-height: 1.2em;
+    font-family: 'Open Sans';
+}
+
+.challenges {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.anthem, .citadel, .scheller, .gtAthletics {
+    flex: 0 1 auto;
+    max-width: 17em;
+    height: 27em;
+    border: 2px solid #20A39e;
+    margin: 1em 0.2em;
+    border-radius: 25px;
+    /* Content layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 1em;
+    /* Font layout */
+    text-transform: regular;
+    font-size: 1.25em;
+    font-weight: 600;
+    line-height: 1.35em;
+    font-family: 'Red Hat Text';
+    text-align: center;
+}
+
+.icon {
+    width: 3.0em;
+}
+
+.sponsors > div {
+    padding-top: 0.5em;
+}
+
+.anthem-icon, .citadel-icon {
+    width: 10.0em;
+}
+
+.scheller-icon {
+    height: 2.5em;
+}
+
+.gtAthletics-icon {
+    width: 10.0em;
+}
+
+.challenge-description {
+    text-transform: regular;
+    font-size: 0.8em;
+    font-weight: 400;
+    line-height: 1.5em;
+    font-family: 'Open Sans';
+    padding: 1em 0;
+    text-align: left;
+}
+
+#dataset-table {
+    border-collapse: collapse;
+    background-color: #ECE9E1;
+    color: rgb(72, 52, 52);
+    margin: 2em 0;
+    font-size: 0.9em;
+    font-family: "Open Sans";
+    line-height: 1.35em;
+}
+
+#dataset-table th {
+    background-color: #C74138;
+    color: #ECE9E1;
+    text-align: left;
+    font-weight: 600;
+    padding: 1em 1em;
+    font-size: 1.3em;
+}
+
+#dataset-table tr {
+    border-bottom: 0.1em solid #C74138;
+}
+
+#dataset-table tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
+
+#dataset-table tr:last-of-type {
+    border-bottom: 0.3em solid #C74138;
+}
+
+#dataset-table td {
+    padding: 0.5em 1em;
+}
+
+#dataset-table th:nth-child(3), #dataset-table td:nth-child(3) {
+    white-space: pre-wrap;
+}
+
+#dataset-table tr:hover {
+    color: #C74138;
+}
+
+ol {
+    font-family: 'Open Sans';
+    font-size: 1.4em;
+    line-height: 1.35;
+    /* margin: 0 0 2em 0; */
+    list-style-type: decimal;
+    list-style-position: inside;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+
+li::before {
+    content: "";
+    width: 20px;
+    display: inline-block;
+  }
+
+
+ul {
+    list-style-type: circle;
+    list-style-position: inside;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+
